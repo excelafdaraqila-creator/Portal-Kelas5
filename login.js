@@ -22,7 +22,6 @@ function login(){
     window.location.href="index.html";
     return;
 }
-    }
 
     // =========================
     // LOGIN SISWA
