@@ -12,13 +12,16 @@ function login(){
 
     if(username==="guru" && password==="12345"){
 
-        localStorage.setItem("login","true");
-localStorage.setItem("role","guru");
-localStorage.removeItem("namaSiswa");
-localStorage.setItem("namaGuru","Gr. Asep Jamhur, S.Pd., M.M.");
+    localStorage.setItem("login","true");
+    localStorage.setItem("role","guru");
 
-        window.location.href="index.html";
-        return;
+    localStorage.removeItem("namaSiswa");   // Tambahkan di sini
+
+    localStorage.setItem("namaGuru","Gr. Asep Jamhur, S.Pd., M.M.");
+
+    window.location.href="index.html";
+    return;
+}
     }
 
     // =========================
