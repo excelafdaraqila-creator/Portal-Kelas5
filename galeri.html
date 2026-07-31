@@ -39,6 +39,7 @@ cursor:pointer;
 .card h3{
 padding:15px 15px 5px;
 color:#1565c0;
+font-size:18px;
 }
 
 .card p{
@@ -64,6 +65,13 @@ z-index:9999;
 max-width:90%;
 max-height:90%;
 border-radius:15px;
+}
+
+.loading{
+text-align:center;
+font-size:18px;
+padding:40px;
+color:#666;
 }
 
 </style>
@@ -94,19 +102,10 @@ border-radius:15px;
 
 <p>Dokumentasi kegiatan belajar siswa SDN Cijember Tahun Ajaran 2026/2027.</p>
 
-<div class="gallery">
+<div class="gallery" id="gallery">
 
-<div class="card">
-
-<img src="assets/images/galery/foto1.jpg" onclick="lihat(this.src)">
-
-<h3>📸 Dokumentasi Kegiatan</h3>
-
-<p>
-Foto kegiatan siswa Kelas 5 SDN Cijember.
-Klik gambar untuk melihat ukuran penuh.
-</p>
-
+<div class="loading">
+⏳ Memuat dokumentasi...
 </div>
 
 </div>
@@ -123,20 +122,68 @@ Kembali ke Beranda
 </div>
 
 <div class="lightbox" id="lightbox" onclick="tutup()">
-
 <img id="gambarbesar">
-
 </div>
 
 <script>
 
+const API="https://script.google.com/macros/s/AKfycbwhs1u7hnFJu646XR29ikxJ3GRV6s_Tqr64ijyCB4DcDSJpA-6SrTVEKYD9RTJ9KprmAQ/exec";
+
+fetch(API)
+.then(res=>res.json())
+.then(data=>{
+
+let html="";
+
+if(data.length===0){
+
+html="<div class='loading'>Belum ada foto.</div>";
+
+}else{
+
+data.forEach(foto=>{
+
+html+=`
+<div class="card">
+
+<img src="${foto.foto}" onclick="lihat('${foto.foto}')">
+
+<h3>${foto.nama}</h3>
+
+<p>
+Dokumentasi kegiatan Kelas 5 SDN Cijember.
+</p>
+
+</div>
+`;
+
+});
+
+}
+
+document.getElementById("gallery").innerHTML=html;
+
+})
+.catch(error=>{
+
+document.getElementById("gallery").innerHTML=
+"<div class='loading'>❌ Gagal mengambil data dari Google Drive.</div>";
+
+console.log(error);
+
+});
+
 function lihat(src){
-document.getElementById("gambarbesar").src = src;
-document.getElementById("lightbox").style.display = "flex";
+
+document.getElementById("gambarbesar").src=src;
+document.getElementById("lightbox").style.display="flex";
+
 }
 
 function tutup(){
-document.getElementById("lightbox").style.display = "none";
+
+document.getElementById("lightbox").style.display="none";
+
 }
 
 </script>
