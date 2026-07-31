@@ -12,16 +12,14 @@ function login(){
 
     if(username==="guru" && password==="12345"){
 
-    localStorage.setItem("login","true");
-    localStorage.setItem("role","guru");
+        localStorage.setItem("login","true");
+        localStorage.setItem("role","guru");
+        localStorage.removeItem("namaSiswa");
+        localStorage.setItem("namaGuru","Gr. Asep Jamhur, S.Pd., M.M.");
 
-    localStorage.removeItem("namaSiswa");   // Tambahkan di sini
-
-    localStorage.setItem("namaGuru","Gr. Asep Jamhur, S.Pd., M.M.");
-
-    window.location.href="index.html";
-    return;
-}
+        window.location.href="index.html";
+        return;
+    }
 
     // =========================
     // LOGIN SISWA
@@ -34,20 +32,17 @@ function login(){
 
     });
 
-   if(siswa){
+    if(siswa){
 
-    localStorage.setItem("login","true");
-    localStorage.setItem("role","siswa");
+        localStorage.setItem("login","true");
+        localStorage.setItem("role","siswa");
+        localStorage.removeItem("namaGuru");
+        localStorage.setItem("namaSiswa",siswa.nama);
+        localStorage.setItem("nisn",siswa.nisn);
 
-    localStorage.removeItem("namaGuru");   // Tambahkan di sini
-
-    localStorage.setItem("namaSiswa",siswa.nama);
-    localStorage.setItem("nisn",siswa.nisn);
-
-    window.location.href="index.html";
-
-    return;
-}
+        window.location.href="index.html";
+        return;
+    }
 
     // =========================
 
@@ -58,9 +53,7 @@ function login(){
 document.addEventListener("keypress",function(e){
 
     if(e.key==="Enter"){
-
         login();
-
     }
 
 });
