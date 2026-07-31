@@ -35,19 +35,20 @@ function login(){
 
     });
 
-    if(siswa){
+   if(siswa){
 
-       localStorage.setItem("login","true");
-localStorage.setItem("role","siswa");
-localStorage.removeItem("namaGuru");
-localStorage.setItem("namaSiswa", siswa.nama);
-localStorage.setItem("nisn", siswa.nisn);
+    localStorage.setItem("login","true");
+    localStorage.setItem("role","siswa");
 
-        window.location.href="index.html";
+    localStorage.removeItem("namaGuru");   // Tambahkan di sini
 
-        return;
+    localStorage.setItem("namaSiswa",siswa.nama);
+    localStorage.setItem("nisn",siswa.nisn);
 
-    }
+    window.location.href="index.html";
+
+    return;
+}
 
     // =========================
 
