@@ -13,8 +13,9 @@ function login(){
     if(username==="guru" && password==="12345"){
 
         localStorage.setItem("login","true");
-        localStorage.setItem("role","guru");
-        localStorage.setItem("namaGuru","Gr. Asep Jamhur, S.Pd., M.M.");
+localStorage.setItem("role","guru");
+localStorage.removeItem("namaSiswa");
+localStorage.setItem("namaGuru","Gr. Asep Jamhur, S.Pd., M.M.");
 
         window.location.href="index.html";
         return;
@@ -33,10 +34,11 @@ function login(){
 
     if(siswa){
 
-        localStorage.setItem("login","true");
-        localStorage.setItem("role","siswa");
-        localStorage.setItem("namaSiswa",siswa.nama);
-        localStorage.setItem("nisn",siswa.nisn);
+       localStorage.setItem("login","true");
+localStorage.setItem("role","siswa");
+localStorage.removeItem("namaGuru");
+localStorage.setItem("namaSiswa", siswa.nama);
+localStorage.setItem("nisn", siswa.nisn);
 
         window.location.href="index.html";
 
