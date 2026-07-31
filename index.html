@@ -86,8 +86,17 @@ function logout(){
 </nav>
 
 <script>
-const nama=localStorage.getItem("namaGuru")||localStorage.getItem("namaSiswa")||"Pengguna";
-document.getElementById("namaGuru").textContent=nama;
+const role = localStorage.getItem("role");
+
+if (role === "guru") {
+    document.getElementById("namaGuru").textContent =
+        localStorage.getItem("namaGuru");
+} else if (role === "siswa") {
+    document.getElementById("namaGuru").textContent =
+        localStorage.getItem("namaSiswa");
+} else {
+    document.getElementById("namaGuru").textContent = "Pengguna";
+}
 function updateJam(){
  const d=new Date();
  document.getElementById("jam").textContent=d.toLocaleTimeString("id-ID");
