@@ -744,3 +744,19 @@ padding-bottom:90px;
     }
 
 }
+.logout-btn{
+    background:#e53935;
+    color:#fff;
+    border:none;
+    padding:10px 16px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:bold;
+    margin-left:10px;
+    transition:.3s;
+}
+
+.logout-btn:hover{
+    background:#c62828;
+}
