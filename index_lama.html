@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Portal Digital Kelas 5 SDN Cijember</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<script>
+if(localStorage.getItem("login")!="true"){
+    window.location.href="login.html";
+}
+</script>
+
+<div class="sidebar modern-sidebar"></div>
+
+<h2>🏫 KELAS 5</h2>
+
+<a class="active" href="index.html">
+<i class="fa fa-house"></i> Beranda
+</a>
+
+<a href="pengumuman.html">
+<i class="fa fa-bullhorn"></i> Pengumuman
+</a>
+
+<a href="jadwal.html">
+<i class="fa fa-calendar"></i> Jadwal
+</a>
+
+<a href="tugas.html">
+<i class="fa fa-book"></i> Tugas
+</a>
+
+<a href="materi.html">
+<i class="fa fa-folder-open"></i> Materi
+</a>
+
+<a href="nilai.html">
+<i class="fa fa-award"></i> Nilai
+</a>
+
+<a href="datasiswa.html">
+<i class="fa fa-users"></i> Data Siswa
+</a>
+
+<a href="absensi.html">
+<i class="fa fa-chart-column"></i> Absensi
+</a>
+
+<a href="galeri.html">
+<i class="fa fa-image"></i> Galeri
+</a>
+
+<a href="#" onclick="logout()">
+<i class="fa fa-right-from-bracket"></i> Logout
+</a>
+
+</div>
+
+<div class="content">
+
+<!-- Header -->
+<div class="topbar">
+
+<div class="header-left">
+
+<h1>🏫 Portal Digital</h1>
+
+<p>Kelas 5 SDN Cijember</p>
+
+</div>
+
+<div class="header-right">
+
+<input
+type="text"
+placeholder="🔍 Cari menu..."
+class="search-box">
+
+</div>
+
+</div>
+
+<!-- Banner -->
+
+<div class="banner-card">
+
+<img
+src="assets/images/banner.png"
+class="banner-img">
+
+<div class="overlay">
+
+<h2>Selamat Datang 👋</h2>
+
+<h3 id="namaGuru"></h3>
+
+<p>Tahun Pelajaran 2026 / 2027</p>
+
+</div>
+
+</div>
+
+<!-- Dashboard -->
+
+<div class="dashboard-grid">
+
+<div class="dashboard-card">
+
+<div class="icon">👨‍🎓</div>
+
+<h2>50</h2>
+
+<p>Siswa</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<div class="icon">📖</div>
+
+<h2>10</h2>
+
+<p>Mapel</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<div class="icon">📢</div>
+
+<h2>6</h2>
+
+<p>Pengumuman</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<div class="icon">📝</div>
+
+<h2>8</h2>
+
+<p>Tugas</p>
+
+</div>
+
+</div>
+
+<!-- Menu -->
+
+<h2 class="judul-menu">
+
+Menu Portal
+
+</h2>
+
+<div class="menu-grid">
+
+<a href="datasiswa.html" class="menu-item">
+👨‍🎓
+<span>Data Siswa</span>
+</a>
+
+<a href="nilai.html" class="menu-item">
+🏆
+<span>Nilai</span>
+</a>
+
+<a href="materi.html" class="menu-item">
+📚
+<span>Materi</span>
+</a>
+
+<a href="tugas.html" class="menu-item">
+📝
+<span>Tugas</span>
+</a>
+
+<a href="jadwal.html" class="menu-item">
+📅
+<span>Jadwal</span>
+</a>
+
+<a href="pengumuman.html" class="menu-item">
+📢
+<span>Info</span>
+</a>
+
+<a href="galeri.html" class="menu-item">
+🖼️
+<span>Galeri</span>
+</a>
+
+<a href="absensi.html" class="menu-item">
+📊
+<span>Absensi</span>
+</a>
+
+</div>
+
+<!-- Informasi -->
+
+<div class="panel">
+
+<h2>📢 Informasi Terbaru</h2>
+
+<ul>
+
+<li>Selamat datang di Portal Digital Kelas 5.</li>
+
+<li>Kerjakan tugas sebelum hari Jumat.</li>
+
+<li>Jadwal piket dapat dilihat pada menu Jadwal.</li>
+
+</ul>
+
+</div>
+
+<!-- Jam -->
+
+<div class="panel">
+
+<h2>🕒 Jam Digital</h2>
+
+<h1 id="jam"></h1>
+
+</div>
+</script>
+<!-- Bottom Navigation -->
+<nav class="bottom-nav">
+
+<a href="index.html" class="active">
+🏠
+<span>Home</span>
+</a>
+
+<a href="materi.html">
+📚
+<span>Materi</span>
+</a>
+
+<a href="nilai.html">
+🏆
+<span>Nilai</span>
+</a>
+
+<a href="pengumuman.html">
+📢
+<span>Info</span>
+</a>
+
+<a href="galeri.html">
+🖼️
+<span>Galeri</span>
+</a>
+
+</nav>
+
+<!-- Floating Button -->
+
+<a href="login.html" class="fab">
+
+👤
+
+</a>
+</body>
+</html>

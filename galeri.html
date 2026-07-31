@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galeri Kegiatan - Kelas 5 SDN Cijember</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:25px;
+margin-top:25px;
+}
+
+.card{
+background:#fff;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 8px 20px rgba(0,0,0,.15);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card img{
+width:100%;
+height:260px;
+object-fit:cover;
+cursor:pointer;
+}
+
+.card h3{
+padding:15px 15px 5px;
+color:#1565c0;
+}
+
+.card p{
+padding:0 15px 20px;
+color:#555;
+line-height:1.6;
+}
+
+.lightbox{
+display:none;
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.9);
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.lightbox img{
+max-width:90%;
+max-height:90%;
+border-radius:15px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>🏫 KELAS 5</h2>
+
+<a href="index.html"><i class="fa-solid fa-house"></i> Beranda</a>
+<a href="pengumuman.html"><i class="fa-solid fa-bullhorn"></i> Pengumuman</a>
+<a href="jadwal.html"><i class="fa-solid fa-calendar"></i> Jadwal</a>
+<a href="tugas.html"><i class="fa-solid fa-book"></i> Tugas</a>
+<a href="datasiswa.html"><i class="fa-solid fa-users"></i> Data Siswa</a>
+<a href="galeri.html"><i class="fa-solid fa-image"></i> Galeri</a>
+<a href="absensi.html"><i class="fa-solid fa-chart-column"></i> Absensi</a>
+
+</div>
+
+<div class="content">
+
+<div class="box">
+
+<h1>📷 GALERI KEGIATAN KELAS 5</h1>
+
+<p>Dokumentasi kegiatan belajar siswa SDN Cijember Tahun Ajaran 2026/2027.</p>
+
+<div class="gallery">
+
+<div class="card">
+
+<img src="assets/images/galery/foto1.jpg" onclick="lihat(this.src)">
+
+<h3>📸 Dokumentasi Kegiatan</h3>
+
+<p>
+Foto kegiatan siswa Kelas 5 SDN Cijember.
+Klik gambar untuk melihat ukuran penuh.
+</p>
+
+</div>
+
+</div>
+
+<br>
+
+<a href="index.html" class="menu-card" style="display:inline-block;text-decoration:none;padding:12px 20px;">
+<i class="fa-solid fa-arrow-left"></i>
+Kembali ke Beranda
+</a>
+
+</div>
+
+</div>
+
+<div class="lightbox" id="lightbox" onclick="tutup()">
+
+<img id="gambarbesar">
+
+</div>
+
+<script>
+
+function lihat(src){
+document.getElementById("gambarbesar").src = src;
+document.getElementById("lightbox").style.display = "flex";
+}
+
+function tutup(){
+document.getElementById("lightbox").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>

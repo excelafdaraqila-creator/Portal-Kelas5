@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Digital Kelas 5 SDN Cijember</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+
+<script>
+if(localStorage.getItem("login")!="true"){
+    location.href="login.html";
+}
+function logout(){
+    localStorage.clear();
+    location.href="login.html";
+}
+</script>
+
+
+<div class="content">
+
+<div class="topbar">
+<div class="header-left">
+<h1>🏫 Portal Digital</h1>
+<p>Kelas 5 SDN Cijember</p>
+</div>
+<div class="header-right">
+<input type="text" class="search-box" placeholder="🔍 Cari menu...">
+</div>
+</div>
+
+<div class="banner-card">
+<img src="assets/images/banner.png" class="banner-img" onerror="this.style.display='none'">
+<div class="overlay">
+<h2>Selamat Datang 👋</h2>
+<h3 id="namaGuru"></h3>
+<p>Tahun Pelajaran 2026 / 2027</p>
+</div>
+</div>
+
+<div class="dashboard-grid">
+<div class="dashboard-card"><div class="icon">👨‍🎓</div><h2>50</h2><p>Siswa</p></div>
+<div class="dashboard-card"><div class="icon">📚</div><h2>10</h2><p>Mata Pelajaran</p></div>
+<div class="dashboard-card"><div class="icon">📝</div><h2>8</h2><p>Tugas</p></div>
+<div class="dashboard-card"><div class="icon">📢</div><h2>6</h2><p>Pengumuman</p></div>
+</div>
+
+<h2 class="judul-menu">Menu Portal</h2>
+
+<div class="menu-grid">
+<a class="menu-item" href="datasiswa.html">👨‍🎓<span>Data Siswa</span></a>
+<a class="menu-item" href="nilai.html">🏆<span>Nilai</span></a>
+<a class="menu-item" href="materi.html">📚<span>Materi</span></a>
+<a class="menu-item" href="tugas.html">📝<span>Tugas</span></a>
+<a class="menu-item" href="jadwal.html">📅<span>Jadwal</span></a>
+<a class="menu-item" href="pengumuman.html">📢<span>Pengumuman</span></a>
+<a class="menu-item" href="galeri.html">🖼️<span>Galeri</span></a>
+<a class="menu-item" href="absensi.html">📊<span>Absensi</span></a>
+</div>
+
+<div class="panel">
+<h2>📢 Informasi Terbaru</h2>
+<ul>
+<li>Selamat datang di Portal Digital Kelas 5 SDN Cijember.</li>
+<li>Silakan cek menu tugas untuk pekerjaan terbaru.</li>
+<li>Portal siap diakses melalui GitHub Pages.</li>
+</ul>
+</div>
+
+<div class="panel">
+<h2>🕒 Jam Digital</h2>
+<h1 id="jam"></h1>
+</div>
+
+</div>
+
+<nav class="bottom-nav">
+<a class="active" href="index.html">🏠<span>Home</span></a>
+<a href="materi.html">📚<span>Materi</span></a>
+<a href="nilai.html">🏆<span>Nilai</span></a>
+<a href="pengumuman.html">📢<span>Info</span></a>
+<a href="galeri.html">🖼️<span>Galeri</span></a>
+</nav>
+
+<script>
+const nama=localStorage.getItem("namaGuru")||localStorage.getItem("namaSiswa")||"Pengguna";
+document.getElementById("namaGuru").textContent=nama;
+function updateJam(){
+ const d=new Date();
+ document.getElementById("jam").textContent=d.toLocaleTimeString("id-ID");
+}
+updateJam();
+setInterval(updateJam,1000);
+</script>
+
+</body>
+</html>

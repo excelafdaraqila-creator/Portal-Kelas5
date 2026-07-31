@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nilai Siswa Kelas 5 SDN Cijember</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<script>
+
+// Cek Login
+if(localStorage.getItem("login")!="true"){
+    window.location.href="login.html";
+}
+
+const role=localStorage.getItem("role");
+
+</script>
+
+<!-- ===================== SIDEBAR ===================== -->
+
+<div class="sidebar">
+
+<h2>🏫 KELAS 5</h2>
+
+<a href="#" id="menuBeranda">
+<i class="fa-solid fa-house"></i>
+Beranda
+</a>
+
+<a href="pengumuman.html">
+<i class="fa-solid fa-bullhorn"></i>
+Pengumuman
+</a>
+
+<a href="jadwal.html">
+<i class="fa-solid fa-calendar"></i>
+Jadwal
+</a>
+
+<a href="tugas.html">
+<i class="fa-solid fa-book"></i>
+Tugas
+</a>
+
+<a href="materi.html">
+<i class="fa-solid fa-folder-open"></i>
+Materi
+</a>
+
+<a href="nilai.html" class="active">
+<i class="fa-solid fa-award"></i>
+<span id="judulMenu">Nilai</span>
+</a>
+
+<a href="datasiswa.html" id="menuData">
+<i class="fa-solid fa-users"></i>
+Data Siswa
+</a>
+
+<a href="galeri.html">
+<i class="fa-solid fa-image"></i>
+Galeri
+</a>
+
+<a href="absensi.html">
+<i class="fa-solid fa-chart-column"></i>
+<span id="judulAbsensi">Absensi</span>
+</a>
+
+<a href="#" onclick="logout()">
+<i class="fa-solid fa-right-from-bracket"></i>
+Logout
+</a>
+
+</div>
+
+<!-- ===================== CONTENT ===================== -->
+
+<div class="content">
+
+<h1 id="judulHalaman">
+📊 Nilai Siswa Kelas 5 SDN Cijember
+</h1>
+
+<p id="namaLogin"
+style="font-size:18px;font-weight:bold;margin-bottom:20px;">
+</p>
+
+<input
+type="text"
+id="cari"
+placeholder="🔍 Cari nama siswa..."
+style="width:100%;
+padding:12px;
+border-radius:10px;
+margin-bottom:20px;">
+
+<div style="overflow-x:auto;">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Ranking</th>
+<th>Nama</th>
+<th>NISN</th>
+<th>MTK</th>
+<th>Pancasila</th>
+<th>IPAS</th>
+<th>Indonesia</th>
+<th>Sunda</th>
+<th>PAI</th>
+<th>Seni</th>
+<th>Inggris</th>
+<th>KKA</th>
+<th>PJOK</th>
+<th>Rata-rata</th>
+<th>Predikat</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tabelNilai">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+// ========================
+// MENU LOGIN
+// ========================
+
+if(role=="guru"){
+
+document.getElementById("menuBeranda").href="index.html";
+
+document.getElementById("namaLogin").innerHTML=
+"👨‍🏫 "+localStorage.getItem("namaGuru");
+
+}else{
+
+document.getElementById("menuBeranda").href="dashboard-siswa.html";
+
+document.getElementById("judulMenu").innerHTML="Nilai Saya";
+
+document.getElementById("judulAbsensi").innerHTML="Absensi Saya";
+
+document.getElementById("menuData").style.display="none";
+
+document.getElementById("judulHalaman").innerHTML="📊 Nilai Saya";
+
+document.getElementById("namaLogin").innerHTML=
+"👨‍🎓 "+localStorage.getItem("namaSiswa");
+
+// siswa tidak perlu pencarian
+document.getElementById("cari").style.display="none";
+
+}
+
+// ========================
+// LOGOUT
+// ========================
+
+function logout(){
+
+if(confirm("Yakin ingin logout?")){
+
+localStorage.clear();
+
+window.location.href="login.html";
+
+}
+
+}
+
+</script>
+
+<script src="nilai.js"></script>
+
+</body>
+
+</html>
