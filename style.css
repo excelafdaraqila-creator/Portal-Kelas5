@@ -327,11 +327,10 @@ body{
     padding:20px;
 }
 
-.topbar{
+..topbar{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    flex-wrap:wrap;
     margin-bottom:20px;
 }
 
@@ -345,6 +344,29 @@ body{
     color:#777;
 }
 
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.search-box{
+    width:250px;
+    padding:10px 15px;
+}
+
+.logout-btn{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:8px;
+    background:#e53935;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+}
 .search-box{
     width:280px;
     max-width:100%;
