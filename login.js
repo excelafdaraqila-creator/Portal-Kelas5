@@ -38,7 +38,7 @@ function login(){
         localStorage.setItem("namaSiswa",siswa.nama);
         localStorage.setItem("nisn",siswa.nisn);
 
-        window.location.href="dashboard-siswa.html";
+        window.location.href="index.html";
 
         return;
 
