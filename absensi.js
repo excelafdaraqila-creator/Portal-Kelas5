@@ -159,21 +159,21 @@ async function simpanAbsensi(){
 
     }
 
-    const semuaStatus = document.querySelectorAll(".status");
+    const semuaStatus=document.querySelectorAll(".status");
 
-    let data = [];
+    let data=[];
 
     semuaStatus.forEach(function(item){
 
         data.push({
 
-            tanggal : tanggal,
+            tanggal:tanggal,
 
-            nama : item.dataset.nama,
+            nama:item.dataset.nama,
 
-            nisn : item.dataset.nisn,
+            nisn:item.dataset.nisn,
 
-            status : item.value
+            status:item.value
 
         });
 
@@ -181,21 +181,15 @@ async function simpanAbsensi(){
 
     try{
 
+        const formData = new FormData();
+
+        formData.append("data",JSON.stringify(data));
+
         const response = await fetch(URL_API,{
 
             method:"POST",
 
-            headers:{
-                "Content-Type":"application/json"
-            },
-
-            body:JSON.stringify({
-
-                action:"simpanAbsensi",
-
-                data:data
-
-            })
+            body:formData
 
         });
 
@@ -203,6 +197,25 @@ async function simpanAbsensi(){
 
         if(hasil.status){
 
+            alert("✅ Absensi berhasil disimpan.");
+
+        }else{
+
+            alert("❌ "+hasil.pesan);
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert("❌ "+error);
+
+    }
+
+}
             alert("✅ Absensi berhasil disimpan.");
 
         }else{
