@@ -11,7 +11,6 @@
 
 // Ganti dengan URL Web App Google Apps Script
 const URL_API = "https://script.google.com/macros/s/AKfycbxNtenvfcjjFNTCtpi2B-d7cLHMfZYk0-z8W36YvoULqOc6w5r6QZGzchJ2KQfCK9Gv/exec";
-
 //====================================================
 // LOGIN
 //====================================================
