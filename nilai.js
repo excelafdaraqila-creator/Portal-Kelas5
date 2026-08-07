@@ -97,6 +97,7 @@ async function loadData(){
         }
 
         const json = await response.json();
+        console.log(json[0]);
 
         console.log("Data dari Spreadsheet :",json);
 
