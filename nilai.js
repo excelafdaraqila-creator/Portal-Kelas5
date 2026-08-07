@@ -15,7 +15,7 @@ const URL_API = "https://script.google.com/macros/s/AKfycbxNtenvfcjjFNTCtpi2B-d7
 // LOGIN
 //====================================================
 
-const role = localStorage.getItem("role") || "";
+var role = localStorage.getItem("role") || "";
 
 const nisnLogin = String(localStorage.getItem("nisn") || "").trim();
 
