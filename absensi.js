@@ -101,20 +101,27 @@ console.log("================================");
 
 async function loadDataSiswa(){
 
-    const tbody = document.getElementById("tabelAbsensi");
+    console.log("1. Mulai loadDataSiswa");
 
-    if(tbody){
+    try{
 
-        tbody.innerHTML=`
-        <tr>
-            <td colspan="4" style="text-align:center;padding:30px;">
-                ⏳ Memuat data siswa...
-            </td>
-        </tr>
-        `;
+        console.log("2. Sebelum fetch");
+
+        const response = await fetch(URL_API);
+
+        console.log("3. Fetch selesai");
+
+        const json = await response.json();
+
+        console.log("4. JSON diterima", json);
+
+    }catch(error){
+
+        console.error("ERROR :", error);
 
     }
 
+}
     try{
 
         const response = await fetch(URL_API);
