@@ -101,13 +101,16 @@ async function loadData(){
 
         dataNilai = [];
 
-        json.forEach(function(item){
+        json.forEach(function(item){ console.log("NISN Login :", nisnLogin);
+console.log("NISN Pertama :", dataNilai[0].nisn);
+console.log(typeof nisnLogin);
+console.log(typeof dataNilai[0].nisn);
 
             let siswa = {
 
                 nama : item["NAMA"] || "",
 
-                nisn : item["NISN"] || "",
+                nisn : String(item["NISN"]).trim(),
 
                 pancasila : angka(item["PKN"]),
 
@@ -136,7 +139,10 @@ async function loadData(){
         });
 
         console.log("Data Spreadsheet :",dataNilai);
-
+console.log("NISN Login :", nisnLogin);
+console.log("NISN Spreadsheet :", dataNilai[0].nisn);
+console.log("Tipe Login :", typeof nisnLogin);
+console.log("Tipe Spreadsheet :", typeof dataNilai[0].nisn);
         hitungNilai();
 
     }
@@ -211,17 +217,17 @@ function hitungNilai(){
     // Tentukan data yang ditampilkan
     if(role==="guru"){
 
-        dataTampil = dataNilai;
+    dataTampil = dataNilai;
 
-    }else{
+}else{
 
-        dataTampil = dataNilai.filter(function(siswa){
+    dataTampil = dataNilai.filter(function(siswa){
 
-            return siswa.nisn === nisnLogin;
+        return String(siswa.nisn).trim() === String(nisnLogin).trim();
 
-        });
+    });
 
-    }
+}
 
     console.log("Data Tampil :",dataTampil);
 
