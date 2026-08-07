@@ -8,8 +8,7 @@
 // LOGIN
 // ===============================
 
-const role = localStorage.getItem("role");
-const nisnLogin = localStorage.getItem("nisn");
+let nisnLogin = localStorage.getItem("nisn");
 
 // ===============================
 // URL GOOGLE APPS SCRIPT
