@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Absensi Kelas 5 SDN Cijember</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<script>
+
+// Cek Login
+if(localStorage.getItem("login")!="true"){
+
+    window.location.href="login.html";
+
+}
+
+const role = localStorage.getItem("role");
+
+</script>
+
+<!-- ================= SIDEBAR ================= -->
+
+<div class="sidebar">
+
+<h2>🏫 KELAS 5</h2>
+
+<a href="#" id="menuBeranda">
+<i class="fa-solid fa-house"></i>
+Beranda
+</a>
+
+<a href="pengumuman.html">
+<i class="fa-solid fa-bullhorn"></i>
+Pengumuman
+</a>
+
+<a href="jadwal.html">
+<i class="fa-solid fa-calendar"></i>
+Jadwal
+</a>
+
+<a href="tugas.html">
+<i class="fa-solid fa-book"></i>
+Tugas
+</a>
+
+<a href="materi.html">
+<i class="fa-solid fa-folder-open"></i>
+Materi
+</a>
+
+<a href="nilai.html">
+<i class="fa-solid fa-award"></i>
+Nilai
+</a>
+
+<a href="absensi.html" class="active">
+<i class="fa-solid fa-calendar-check"></i>
+<span id="judulAbsensi">Absensi</span>
+</a>
+
+<a href="datasiswa.html" id="menuData">
+<i class="fa-solid fa-users"></i>
+Data Siswa
+</a>
+
+<a href="galeri.html">
+<i class="fa-solid fa-image"></i>
+Galeri
+</a>
+
+<a href="#" onclick="logout()">
+<i class="fa-solid fa-right-from-bracket"></i>
+Logout
+</a>
+
+</div>
+
+<!-- ================= CONTENT ================= -->
+
+<div class="content">
+
+<h1 id="judulHalaman">
+📅 Absensi Kelas 5 SDN Cijember
+</h1>
+
+<p id="namaLogin"
+style="font-size:18px;font-weight:bold;margin-bottom:20px;">
+</p>
+
+<label><b>Tanggal Absensi</b></label>
+
+<input
+type="date"
+id="tanggal"
+style="
+width:250px;
+padding:10px;
+margin:15px 0 20px;
+border-radius:10px;
+">
+
+<div style="overflow-x:auto">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>No</th>
+<th>Nama Siswa</th>
+<th>NISN</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tabelAbsensi">
+
+</tbody>
+
+</table>
+
+</div>
+
+<br>
+
+<button id="btnSimpan">
+💾 Simpan Absensi
+</button>
+
+</div>
+
+<script>
+
+if(role=="guru"){
+
+    document.getElementById("menuBeranda").href="index.html";
+
+    document.getElementById("namaLogin").innerHTML=
+    "👨‍🏫 "+localStorage.getItem("namaGuru");
+
+}else{
+
+    document.getElementById("menuBeranda").href="dashboard-siswa.html";
+
+    document.getElementById("judulHalaman").innerHTML=
+    "📅 Absensi Saya";
+
+    document.getElementById("judulAbsensi").innerHTML=
+    "Absensi Saya";
+
+    document.getElementById("menuData").style.display="none";
+
+    document.getElementById("namaLogin").innerHTML=
+    "👨‍🎓 "+localStorage.getItem("namaSiswa");
+
+}
+
+function logout(){
+
+    if(confirm("Yakin ingin logout?")){
+
+        localStorage.clear();
+
+        window.location.href="login.html";
+
+    }
+
+}
+
+</script>
+
+<script src="absensi.js"></script>
+
+</body>
+
+</html>
