@@ -259,7 +259,6 @@ function hitungNilai(){
     // TAMPILKAN KE TABEL
     // ==========================
 
-    renderTabel(dataTampil);
     console.log(dataTampil);
 
 renderTabel(dataTampil);
