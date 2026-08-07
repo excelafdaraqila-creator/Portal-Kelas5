@@ -10,6 +10,18 @@
 const role = localStorage.getItem("role");
 const nisnLogin = localStorage.getItem("nisn");
 
+const URL_API = "https://script.google.com/macros/s/AKfycbxNtenvfcjjFNTCtpi2B-d7cLHMfZYk0-z8W36YvoULqOc6w5r6QZGzchJ2KQfCK9Gv/exec";
+async function ambilNilaiDariSpreadsheet(){
+
+    const response = await fetch(URL_API);
+
+    const data = await response.json();
+
+    console.log(data);
+
+}
+ambilNilaiDariSpreadsheet();
+
 // ===========================
 // DATA NILAI SISWA
 // ===========================
