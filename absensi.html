@@ -4,9 +4,10 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Absensi Kelas 5 SDN Cijember</title>
+<title>Absensi Siswa Kelas 5 SDN Cijember</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -19,18 +20,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <script>
 
-// Cek Login
+//======================================
+// CEK LOGIN
+//======================================
+
 if(localStorage.getItem("login")!="true"){
 
     window.location.href="login.html";
 
 }
 
-const roleLogin = localStorage.getItem("role");
-
 </script>
 
-<!-- ================= SIDEBAR ================= -->
+<!-- ===================================== -->
+<!-- SIDEBAR -->
+<!-- ===================================== -->
 
 <div class="sidebar">
 
@@ -63,12 +67,7 @@ Materi
 
 <a href="nilai.html">
 <i class="fa-solid fa-award"></i>
-Nilai
-</a>
-
-<a href="absensi.html" class="active">
-<i class="fa-solid fa-calendar-check"></i>
-<span id="judulAbsensi">Absensi</span>
+<span id="judulNilai">Nilai</span>
 </a>
 
 <a href="datasiswa.html" id="menuData">
@@ -81,6 +80,11 @@ Data Siswa
 Galeri
 </a>
 
+<a href="absensi.html" class="active">
+<i class="fa-solid fa-calendar-check"></i>
+<span id="judulAbsensi">Absensi</span>
+</a>
+
 <a href="#" onclick="logout()">
 <i class="fa-solid fa-right-from-bracket"></i>
 Logout
@@ -88,42 +92,136 @@ Logout
 
 </div>
 
-<!-- ================= CONTENT ================= -->
+<!-- ===================================== -->
+<!-- CONTENT -->
+<!-- ===================================== -->
 
 <div class="content">
 
 <h1 id="judulHalaman">
-📅 Absensi Kelas 5 SDN Cijember
+
+📅 Absensi Siswa Kelas 5 SDN Cijember
+
 </h1>
 
 <p id="namaLogin"
-style="font-size:18px;font-weight:bold;margin-bottom:20px;">
-</p>
+style="font-size:18px;
+font-weight:bold;
+margin-bottom:20px;">
 
-<label><b>Tanggal Absensi</b></label>
+</p>
+<!-- ===================================== -->
+<!-- FORM ABSENSI -->
+<!-- ===================================== -->
+
+<div class="card">
+
+<div style="display:flex;
+flex-wrap:wrap;
+gap:15px;
+align-items:end;
+margin-bottom:20px;">
+
+<div>
+
+<label style="font-weight:bold;">
+📅 Tanggal
+</label>
+
+<br>
 
 <input
 type="date"
 id="tanggal"
 style="
-width:250px;
 padding:10px;
-margin:15px 0 20px;
-border-radius:10px;
-">
+border-radius:8px;
+border:1px solid #ccc;
+margin-top:5px;">
 
-<div style="overflow-x:auto">
+</div>
 
-<table>
+<div>
+
+<button
+id="btnSimpan"
+style="
+background:#16a34a;
+color:white;
+border:none;
+padding:11px 25px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;">
+
+💾 Simpan Absensi
+
+</button>
+
+</div>
+
+<div>
+
+<button
+id="btnRefresh"
+style="
+background:#2563eb;
+color:white;
+border:none;
+padding:11px 25px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;">
+
+🔄 Refresh
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===================================== -->
+<!-- INFORMASI -->
+<!-- ===================================== -->
+
+<div class="card">
+
+<div id="infoAbsensi"
+style="font-size:17px;
+font-weight:bold;
+color:#2563eb;">
+
+Memuat data siswa...
+
+</div>
+
+</div>
+
+<br>
+<!-- ===================================== -->
+<!-- TABEL ABSENSI -->
+<!-- ===================================== -->
+
+<div class="card">
+
+<div style="overflow-x:auto;">
+
+<table id="tableAbsensi" width="100%">
 
 <thead>
 
 <tr>
 
-<th>No</th>
+<th width="60">No</th>
+
 <th>Nama Siswa</th>
-<th>NISN</th>
-<th>Status</th>
+
+<th width="180">NISN</th>
+
+<th width="220">Status Kehadiran</th>
 
 </tr>
 
@@ -131,7 +229,76 @@ border-radius:10px;
 
 <tbody id="tabelAbsensi">
 
+<tr>
+
+<td colspan="4"
+style="
+padding:30px;
+text-align:center;
+color:#666;
+font-style:italic;">
+
+⏳ Sedang memuat data siswa...
+
+</td>
+
+</tr>
+
 </tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<br>
+
+<!-- ===================================== -->
+<!-- KETERANGAN -->
+<!-- ===================================== -->
+
+<div class="card">
+
+<h3 style="margin-bottom:15px;">
+
+📖 Keterangan Status Absensi
+
+</h3>
+
+<table width="100%">
+
+<tr>
+
+<td width="120">✅ H</td>
+
+<td>Hadir</td>
+
+</tr>
+
+<tr>
+
+<td>🤒 S</td>
+
+<td>Sakit</td>
+
+</tr>
+
+<tr>
+
+<td>📝 I</td>
+
+<td>Izin</td>
+
+</tr>
+
+<tr>
+
+<td>❌ A</td>
+
+<td>Alfa</td>
+
+</tr>
 
 </table>
 
@@ -139,15 +306,72 @@ border-radius:10px;
 
 <br>
 
-<button id="btnSimpan">
-💾 Simpan Absensi
-</button>
+<!-- ===================================== -->
+<!-- STATISTIK HARI INI -->
+<!-- ===================================== -->
+
+<div class="card">
+
+<h3 style="margin-bottom:15px;">
+
+📊 Statistik Hari Ini
+
+</h3>
+
+<div
+style="
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;">
+
+<div class="dashboard-card">
+
+<h2 id="jmlHadir">0</h2>
+
+<p>✅ Hadir</p>
 
 </div>
 
+<div class="dashboard-card">
+
+<h2 id="jmlSakit">0</h2>
+
+<p>🤒 Sakit</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<h2 id="jmlIzin">0</h2>
+
+<p>📝 Izin</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<h2 id="jmlAlfa">0</h2>
+
+<p>❌ Alfa</p>
+
+</div>
+
+</div>
+
+</div>
+<!-- ===================================== -->
+<!-- SCRIPT MENU LOGIN -->
+<!-- ===================================== -->
+
 <script>
 
-if(roleLogin=="guru"){
+const role = localStorage.getItem("role") || "";
+
+//======================================
+// MENU GURU / SISWA
+//======================================
+
+if(role==="guru"){
 
     document.getElementById("menuBeranda").href="index.html";
 
@@ -161,6 +385,9 @@ if(roleLogin=="guru"){
     document.getElementById("judulHalaman").innerHTML=
     "📅 Absensi Saya";
 
+    document.getElementById("judulNilai").innerHTML=
+    "Nilai Saya";
+
     document.getElementById("judulAbsensi").innerHTML=
     "Absensi Saya";
 
@@ -169,7 +396,21 @@ if(roleLogin=="guru"){
     document.getElementById("namaLogin").innerHTML=
     "👨‍🎓 "+localStorage.getItem("namaSiswa");
 
+    // siswa tidak boleh mengubah absensi
+    document.getElementById("btnSimpan").style.display="none";
+
 }
+
+document.getElementById("btnRefresh").addEventListener("click",function(){
+
+    location.reload();
+
+});
+
+
+//======================================
+// LOGOUT
+//======================================
 
 function logout(){
 
@@ -177,13 +418,18 @@ function logout(){
 
         localStorage.clear();
 
-        window.location.href="login.html";
+        location.href="login.html";
 
     }
 
 }
 
 </script>
+
+
+<!-- ===================================== -->
+<!-- JAVASCRIPT -->
+<!-- ===================================== -->
 
 <script src="absensi.js"></script>
 
