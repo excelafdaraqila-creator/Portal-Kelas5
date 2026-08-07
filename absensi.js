@@ -197,27 +197,7 @@ async function simpanAbsensi(){
 
         if(hasil.status){
 
-            alert("✅ Absensi berhasil disimpan.");
-
-        }else{
-
-            alert("❌ "+hasil.pesan);
-
-        }
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-        alert("❌ "+error);
-
-    }
-
-}
-            alert("✅ Absensi berhasil disimpan.");
-
+            
         }else{
 
             alert("❌ Gagal menyimpan absensi.");
