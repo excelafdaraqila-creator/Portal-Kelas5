@@ -803,3 +803,29 @@ main {
     margin-left: 0 !important;
     width: 100% !important;
 }
+/* TOMBOL ABSENSI */
+.tombol-absensi {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Hilangkan tombol kosong/duplikat */
+.tombol-absensi button:empty {
+    display: none !important;
+}
+
+/* Tombol kembali */
+.btn-kembali {
+    background: #6c757d !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 18px !important;
+    border-radius: 6px !important;
+    cursor: pointer;
+}
+
+.btn-kembali:hover {
+    background: #545b62 !important;
+}
