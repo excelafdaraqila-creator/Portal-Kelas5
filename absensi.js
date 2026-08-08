@@ -3,9 +3,7 @@
 // PORTAL DIGITAL KELAS 5 SDN CIJEMBER
 // ====================================================
 
-const API_URL =
-"https://script.google.com/macros/s/AKfycbxNtenvfcjjFNTCtpi2B-d7cLHMfZYk0-z8W36YvoULqOc6w5r6QZGzchJ2KQfCK9Gv/exec";
-
+const API_URL = "https://script.google.com/macros/s/AKfycbxNtenvfcjjFNTCtpi2B-d7cLHMfZYk0-z8W36YvoULqOc6w5r6QZGzchJ2KQfCK9Gv/exec";
 
 // ====================================================
 // LOGIN
