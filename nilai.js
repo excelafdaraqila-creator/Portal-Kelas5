@@ -1,38 +1,44 @@
 //====================================================
 // PORTAL DIGITAL KELAS 5 SDN CIJEMBER
-// nilai.js VERSI 4.0
+// nilai.js VERSI 5.0
 // Developer : Asep Jamhur
 //====================================================
 
 
 //====================================================
-// KONFIGURASI
+// KONFIGURASI API
 //====================================================
 
-// Ganti dengan URL Web App Google Apps Script
-const URL_API = "https://script.google.com/macros/s/AKfycbxNtenvfcjjFNTCtpi2B-d7cLHMfZYk0-z8W36YvoULqOc6w5r6QZGzchJ2KQfCK9Gv/exec";
+const URL_API =
+"https://script.google.com/macros/s/AKfycbxNtenvfcjjFNTCtpi2B-d7cLHMfZYk0-z8W36YvoULqOc6w5r6QZGzchJ2KQfCK9Gv/exec";
+
+
 //====================================================
-// LOGIN
+// DATA LOGIN
 //====================================================
 
-var role = localStorage.getItem("role") || "";
+const role =
+    String(localStorage.getItem("role") || "").trim();
 
-const nisnLogin = String(localStorage.getItem("nisn") || "").trim();
+const nisnLogin =
+    String(localStorage.getItem("nisn") || "").trim();
 
-const namaGuru = localStorage.getItem("namaGuru") || "";
+const namaGuru =
+    String(localStorage.getItem("namaGuru") || "").trim();
 
-const namaSiswa = localStorage.getItem("namaSiswa") || "";
+const namaSiswa =
+    String(localStorage.getItem("namaSiswa") || "").trim();
 
 
 //====================================================
 // CEK LOGIN
 //====================================================
 
-if(localStorage.getItem("login")!=="true"){
+if (localStorage.getItem("login") !== "true") {
 
     alert("Silakan login terlebih dahulu.");
 
-    location.href="login.html";
+    window.location.href = "login.html";
 
 }
 
@@ -47,21 +53,29 @@ let dataTampil = [];
 
 
 //====================================================
+// DEBUG
+//====================================================
+
+console.log("======================================");
+console.log("PORTAL DIGITAL KELAS 5 SDN CIJEMBER");
+console.log("nilai.js VERSI 5.0");
+console.log("Role :", role);
+console.log("NISN Login :", nisnLogin);
+console.log("======================================");
+//====================================================
 // FUNGSI KONVERSI ANGKA
 //====================================================
 
-function angka(nilai){
+function angka(nilai) {
 
     if (nilai === null || nilai === undefined) {
         return 0;
     }
 
-    // Jika angka langsung
     if (typeof nilai === "number") {
         return nilai;
     }
 
-    // Jika berupa teks
     const teks = String(nilai).trim();
 
     if (teks === "") {
@@ -70,157 +84,312 @@ function angka(nilai){
 
     const hasil = Number(teks);
 
-    return isNaN(hasil) ? 0 : hasil;
+    if (Number.isNaN(hasil)) {
+        return 0;
+    }
 
+    return hasil;
 }
 
 
 //====================================================
-// DEBUG
+// AMBIL DATA NILAI DARI GOOGLE APPS SCRIPT
 //====================================================
 
-console.log("======================================");
+async function loadData() {
 
-console.log("Portal Digital Kelas 5");
+    const tbody =
+        document.getElementById("tabelNilai");
 
-console.log("Versi 4.0");
+    try {
 
-console.log("Role :",role);
+        // Tampilkan loading
+        if (tbody) {
 
-console.log("NISN Login :",nisnLogin);
-
-console.log("======================================");
-//====================================================
-// BAGIAN 2
-// AMBIL DATA DARI GOOGLE SPREADSHEET
-//====================================================
-
-async function loadData(){
-
-    try{
-
-        const response = await fetch(URL_API + "?action=nilai");
-
-        if(!response.ok){
-
-            throw new Error("Status : " + response.status);
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="15"
+                        style="
+                        text-align:center;
+                        padding:30px;
+                        color:#2563eb;
+                        font-weight:bold;
+                        ">
+                        ⏳ Memuat data nilai...
+                    </td>
+                </tr>
+            `;
 
         }
 
-        const json = await response.json();
-        console.log(json[0]);
 
-        console.log("Data dari Spreadsheet :",json);
+        console.log("Mengambil data dari API...");
 
-        dataNilai=[];
 
-        json.forEach(function(item){
+        const response =
+            await fetch(
+                URL_API + "?action=nilai&v=" + Date.now()
+            );
 
-            dataNilai.push({
-function angka(nilai){
 
-    if(nilai===null) return 0;
+        if (!response.ok) {
 
-    if(nilai==="") return 0;
+            throw new Error(
+                "HTTP Error " + response.status
+            );
 
-    if(nilai===undefined) return 0;
+        }
 
-    return Number(nilai);
 
-}
-                nama : String(item["NAMA"] || "").trim(),
+        const json =
+            await response.json();
 
-                nisn : String(item["NISN"] || "").trim(),
 
-                pancasila : angka(item["PKN"]),
+        console.log(
+            "Data API diterima:",
+            json
+        );
 
-                indo : angka(item["B.IND"]),
 
-                mtk : angka(item["MTK"]),
+        //================================================
+        // CEK DATA API
+        //================================================
 
-                ipas : angka(item["IPAS"]),
+        if (!Array.isArray(json)) {
 
-                sunda : angka(item["B. SUNDA"]),
+            throw new Error(
+                "Format data API tidak berupa Array."
+            );
 
-                inggris : angka(item["B. INGGRIS"]),
+        }
 
-                kka : angka(item["KKA"]),
 
-                seni : angka(item["SENI RUPA"]),
+        if (json.length === 0) {
 
-                pai : angka(item["PAI"]),
+            if (tbody) {
 
-                pjok : angka(item["PJOK"])
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="15"
+                            style="
+                            text-align:center;
+                            padding:30px;
+                            color:red;
+                            ">
+                            Data nilai masih kosong.
+                        </td>
+                    </tr>
+                `;
 
-            });
-
-        });
-
-        console.log("Jumlah Data :",dataNilai.length);
-
-        if(dataNilai.length===0){
-
-            alert("Data nilai masih kosong.");
+            }
 
             return;
 
         }
 
+
+        //================================================
+        // BERSIHKAN DATA LAMA
+        //================================================
+
+        dataNilai = [];
+
+
+        //================================================
+        // MASUKKAN DATA BARU
+        //================================================
+
+        json.forEach(function(item) {
+
+            const siswa = {
+
+                nama:
+                    String(
+                        item["NAMA"] || ""
+                    ).trim(),
+
+                nisn:
+                    String(
+                        item["NISN"] || ""
+                    ).trim(),
+
+
+                // PKN
+                pancasila:
+                    angka(item["PKN"]),
+
+
+                // Bahasa Indonesia
+                indo:
+                    angka(item["B.IND"]),
+
+
+                // Matematika
+                mtk:
+                    angka(item["MTK"]),
+
+
+                // IPAS
+                ipas:
+                    angka(item["IPAS"]),
+
+
+                // Bahasa Sunda
+                sunda:
+                    angka(item["B. SUNDA"]),
+
+
+                // Bahasa Inggris
+                inggris:
+                    angka(item["B. INGGRIS"]),
+
+
+                // KKA
+                kka:
+                    angka(item["KKA"]),
+
+
+                // Seni Rupa
+                seni:
+                    angka(item["SENI RUPA"]),
+
+
+                // PAI
+                pai:
+                    angka(item["PAI"]),
+
+
+                // PJOK
+                pjok:
+                    angka(item["PJOK"])
+
+            };
+
+
+            dataNilai.push(siswa);
+
+        });
+
+
+        console.log(
+            "Jumlah data siswa:",
+            dataNilai.length
+        );
+
+
+        //================================================
+        // CEK DATA SISWA PERTAMA
+        //================================================
+
+        console.log(
+            "Contoh data siswa:",
+            dataNilai[0]
+        );
+
+
+        //================================================
+        // HITUNG NILAI
+        //================================================
+
         hitungNilai();
 
+
     }
+    catch (error) {
 
-    catch(error){
+        console.error(
+            "ERROR LOAD DATA:",
+            error
+        );
 
-        console.error(error);
 
-        alert("❌ Gagal mengambil data dari Google Spreadsheet.");
+        if (tbody) {
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="15"
+                        style="
+                        text-align:center;
+                        padding:30px;
+                        color:red;
+                        ">
+                        ❌ Gagal memuat data nilai.
+                        <br>
+                        Silakan refresh halaman.
+                    </td>
+                </tr>
+            `;
+
+        }
 
     }
 
 }
 //====================================================
-// BAGIAN 3
-// HITUNG TOTAL, RATA-RATA, PREDIKAT DAN RANKING
+// HITUNG NILAI
 //====================================================
 
-function hitungNilai(){
+function hitungNilai() {
 
-    // ==========================
+    //==================================================
     // HITUNG TOTAL DAN RATA-RATA
-    // ==========================
+    //==================================================
 
-    dataNilai.forEach(function(siswa){
+    dataNilai.forEach(function(siswa) {
 
         siswa.total =
+
             siswa.mtk +
+
             siswa.pancasila +
+
             siswa.ipas +
+
             siswa.indo +
+
             siswa.sunda +
+
             siswa.pai +
+
             siswa.seni +
+
             siswa.inggris +
+
             siswa.kka +
+
             siswa.pjok;
 
-        siswa.rata = Number((siswa.total / 10).toFixed(2));
 
-        // Predikat
+        // 10 mata pelajaran
 
-        if(siswa.rata >= 90){
+        siswa.rata =
+            Number(
+                (
+                    siswa.total / 10
+                ).toFixed(2)
+            );
+
+
+        //================================================
+        // PREDIKAT
+        //================================================
+
+        if (siswa.rata >= 90) {
 
             siswa.predikat = "A";
 
-        }else if(siswa.rata >= 80){
+        }
+        else if (siswa.rata >= 80) {
 
             siswa.predikat = "B";
 
-        }else if(siswa.rata >= 70){
+        }
+        else if (siswa.rata >= 70) {
 
             siswa.predikat = "C";
 
-        }else{
+        }
+        else {
 
             siswa.predikat = "D";
 
@@ -229,292 +398,442 @@ function hitungNilai(){
     });
 
 
-    // ==========================
-    // URUTKAN BERDASARKAN RATA-RATA
-    // ==========================
+    //==================================================
+    // URUTKAN DARI NILAI TERTINGGI
+    //==================================================
 
-    dataNilai.sort(function(a,b){
+    dataNilai.sort(function(a, b) {
 
         return b.rata - a.rata;
 
     });
 
 
-    // ==========================
-    // BUAT RANKING
-    // ==========================
+    //==================================================
+    // RANKING
+    //==================================================
 
-    dataNilai.forEach(function(siswa,index){
+    dataNilai.forEach(function(siswa, index) {
 
-        siswa.ranking = index + 1;
+        siswa.ranking =
+            index + 1;
 
     });
 
 
-    // ==========================
-    // CEK ROLE LOGIN
-    // ==========================
+    //==================================================
+    // FILTER SESUAI ROLE
+    //==================================================
 
-    if(role==="guru"){
+    if (role === "guru") {
 
-        dataTampil = dataNilai;
+        dataTampil =
+            dataNilai.slice();
 
-    }else{
+    }
+    else {
 
-        dataTampil = dataNilai.filter(function(siswa){
+        dataTampil =
+            dataNilai.filter(function(siswa) {
 
-            return String(siswa.nisn).trim() === String(nisnLogin).trim();
+                return (
+                    String(siswa.nisn).trim()
+                    ===
+                    String(nisnLogin).trim()
+                );
 
-        });
+            });
 
     }
 
 
-    console.log("Role :",role);
+    console.log(
+        "Jumlah data tampil:",
+        dataTampil.length
+    );
 
-    console.log("NISN Login :",nisnLogin);
 
-    console.log("Jumlah Data Tampil :",dataTampil.length);
+    //==================================================
+    // TAMPILKAN TABEL
+    //==================================================
+
+    renderTabel(dataTampil);
 
 
-    // ==========================
-    // TAMPILKAN KE TABEL
-    // ==========================
+    //==================================================
+    // INFO DATA
+    //==================================================
 
-    console.log(dataTampil);
+    updateInfo(
+        dataTampil.length
+    );
 
-renderTabel(dataTampil);
+}
 
-    updateInfo(dataTampil.length);
+
+//====================================================
+// INFO JUMLAH SISWA
+//====================================================
+
+function updateInfo(jumlah) {
+
+    let info =
+        document.getElementById("infoData");
+
+
+    if (!info) {
+
+        info =
+            document.createElement("p");
+
+        info.id =
+            "infoData";
+
+        info.style.margin =
+            "10px 0";
+
+        info.style.fontWeight =
+            "bold";
+
+        info.style.color =
+            "#2563eb";
+
+
+        const tabel =
+            document.querySelector("table");
+
+
+        if (tabel) {
+
+            tabel.parentNode.insertBefore(
+                info,
+                tabel
+            );
+
+        }
+
+    }
+
+
+    if (role === "guru") {
+
+        info.innerHTML =
+            "Jumlah siswa : <b>" +
+            jumlah +
+            "</b>";
+
+    }
+    else {
+
+        info.innerHTML =
+            "📊 Data Nilai Saya";
+
+    }
 
 }
 //====================================================
-// BAGIAN 4
-// TAMPILKAN DATA KE TABEL
+// RENDER TABEL
 //====================================================
 
-function renderTabel(data){
+function renderTabel(data) {
 
-    const tbody = document.getElementById("tabelNilai");
+    const tbody =
+        document.getElementById(
+            "tabelNilai"
+        );
 
-    if(!tbody) return;
 
-    tbody.innerHTML="";
+    if (!tbody) {
 
-    if(data.length===0){
+        console.error(
+            "Element #tabelNilai tidak ditemukan."
+        );
 
-        tbody.innerHTML=`
-        <tr>
-            <td colspan="15" style="padding:25px;text-align:center;color:red;">
-                Data nilai tidak ditemukan.
-            </td>
-        </tr>
+        return;
+
+    }
+
+
+    tbody.innerHTML = "";
+
+
+    //==================================================
+    // JIKA TIDAK ADA DATA
+    //==================================================
+
+    if (
+        !Array.isArray(data) ||
+        data.length === 0
+    ) {
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="15"
+                    style="
+                    text-align:center;
+                    padding:30px;
+                    color:red;
+                    ">
+                    Data nilai tidak ditemukan.
+                </td>
+            </tr>
         `;
 
         return;
 
     }
 
-    data.forEach(function(siswa){
 
-        let medal="";
+    //==================================================
+    // TAMPILKAN DATA
+    //==================================================
 
-        if(siswa.ranking===1){
-            medal="🥇";
-        }else if(siswa.ranking===2){
-            medal="🥈";
-        }else if(siswa.ranking===3){
-            medal="🥉";
+    data.forEach(function(siswa) {
+
+
+        // Medali ranking
+
+        let medal = "";
+
+
+        if (siswa.ranking === 1) {
+
+            medal = "🥇";
+
+        }
+        else if (siswa.ranking === 2) {
+
+            medal = "🥈";
+
+        }
+        else if (siswa.ranking === 3) {
+
+            medal = "🥉";
+
         }
 
-        let warna="#dc2626";
 
-        if(siswa.predikat==="A"){
-            warna="#16a34a";
-        }else if(siswa.predikat==="B"){
-            warna="#2563eb";
-        }else if(siswa.predikat==="C"){
-            warna="#ea580c";
+        // Warna predikat
+
+        let warna =
+            "#dc2626";
+
+
+        if (siswa.predikat === "A") {
+
+            warna =
+                "#16a34a";
+
+        }
+        else if (siswa.predikat === "B") {
+
+            warna =
+                "#2563eb";
+
+        }
+        else if (siswa.predikat === "C") {
+
+            warna =
+                "#ea580c";
+
         }
 
-        tbody.innerHTML += `
-        <tr>
+
+        //================================================
+        // BARIS TABEL
+        //================================================
+
+        const tr =
+            document.createElement("tr");
+
+
+        tr.innerHTML = `
 
             <td style="text-align:center;">
                 ${medal} ${siswa.ranking}
             </td>
 
-            <td>${siswa.nama}</td>
+            <td>
+                ${siswa.nama}
+            </td>
 
-            <td>${siswa.nisn}</td>
+            <td>
+                ${siswa.nisn}
+            </td>
 
-            <td align="center">${siswa.mtk}</td>
+            <td style="text-align:center;">
+                ${siswa.mtk}
+            </td>
 
-            <td align="center">${siswa.pancasila}</td>
+            <td style="text-align:center;">
+                ${siswa.pancasila}
+            </td>
 
-            <td align="center">${siswa.ipas}</td>
+            <td style="text-align:center;">
+                ${siswa.ipas}
+            </td>
 
-            <td align="center">${siswa.indo}</td>
+            <td style="text-align:center;">
+                ${siswa.indo}
+            </td>
 
-            <td align="center">${siswa.sunda}</td>
+            <td style="text-align:center;">
+                ${siswa.sunda}
+            </td>
 
-            <td align="center">${siswa.pai}</td>
+            <td style="text-align:center;">
+                ${siswa.pai}
+            </td>
 
-            <td align="center">${siswa.seni}</td>
+            <td style="text-align:center;">
+                ${siswa.seni}
+            </td>
 
-            <td align="center">${siswa.inggris}</td>
+            <td style="text-align:center;">
+                ${siswa.inggris}
+            </td>
 
-            <td align="center">${siswa.kka}</td>
+            <td style="text-align:center;">
+                ${siswa.kka}
+            </td>
 
-            <td align="center">${siswa.pjok}</td>
+            <td style="text-align:center;">
+                ${siswa.pjok}
+            </td>
 
-            <td align="center">
+            <td style="text-align:center;">
                 <b>${siswa.rata}</b>
             </td>
 
-            <td align="center"
-                style="font-weight:bold;color:${warna};">
+            <td style="
+                text-align:center;
+                font-weight:bold;
+                color:${warna};
+            ">
                 ${siswa.predikat}
             </td>
 
-        </tr>
         `;
+
+
+        tbody.appendChild(tr);
 
     });
 
 }
 //====================================================
-// BAGIAN 5
-// INFO DATA
+// PENCARIAN SISWA
 //====================================================
 
-function updateInfo(jumlah){
+function aktifkanPencarian() {
 
-    let info=document.getElementById("infoData");
+    const cari =
+        document.getElementById("cari");
 
-    if(!info){
 
-        info=document.createElement("p");
+    if (!cari) {
+        return;
+    }
 
-        info.id="infoData";
 
-        info.style.margin="10px 0";
-        info.style.fontWeight="bold";
-        info.style.color="#2563eb";
+    if (role !== "guru") {
 
-        const tabel=document.querySelector("table");
+        cari.style.display =
+            "none";
 
-        if(tabel){
-
-            tabel.parentNode.insertBefore(info,tabel);
-
-        }
+        return;
 
     }
 
-    if(role==="guru"){
 
-        info.innerHTML="Jumlah siswa : <b>"+jumlah+"</b>";
+    cari.addEventListener(
+        "input",
+        function() {
 
-    }else{
+            const keyword =
+                String(
+                    this.value || ""
+                )
+                .toLowerCase()
+                .trim();
 
-        info.innerHTML="Data Nilai Saya";
 
-    }
+            const hasil =
+                dataNilai.filter(
+                    function(siswa) {
 
-}
+                        return (
 
-//====================================================
-// PENCARIAN
-//====================================================
+                            siswa.nama
+                                .toLowerCase()
+                                .includes(keyword)
 
-const cari=document.getElementById("cari");
+                            ||
 
-if(cari){
+                            siswa.nisn
+                                .includes(keyword)
 
-    if(role==="guru"){
+                        );
 
-        cari.addEventListener("keyup",function(){
+                    }
+                );
 
-            const keyword=this.value.toLowerCase().trim();
-
-            const hasil=dataNilai.filter(function(siswa){
-
-                return siswa.nama.toLowerCase().includes(keyword) ||
-                       siswa.nisn.includes(keyword);
-
-            });
 
             renderTabel(hasil);
 
-            updateInfo(hasil.length);
 
-        });
+            updateInfo(
+                hasil.length
+            );
 
-    }else{
+        }
+    );
 
-        cari.style.display="none";
+}
+
+
+//====================================================
+// NAMA LOGIN
+//====================================================
+
+function tampilkanNamaLogin() {
+
+    const namaLogin =
+        document.getElementById(
+            "namaLogin"
+        );
+
+
+    if (!namaLogin) {
+        return;
+    }
+
+
+    if (role === "guru") {
+
+        namaLogin.innerHTML =
+            "👨‍🏫 " +
+            (namaGuru || "Gr. Asep Jamhur, S.Pd., M.M.");
+
+    }
+    else {
+
+        namaLogin.innerHTML =
+            "👨‍🎓 " +
+            namaSiswa;
 
     }
 
 }
 
-//====================================================
-// TAMPILKAN NAMA LOGIN
-//====================================================
-
-const namaLogin=document.getElementById("namaLogin");
-
-if(namaLogin){
-
-    if(role==="guru"){
-
-        namaLogin.innerHTML="👨‍🏫 "+namaGuru;
-
-    }else{
-
-        namaLogin.innerHTML="👨‍🎓 "+namaSiswa;
-
-    }
-
-}
 
 //====================================================
-// LOAD DATA
-//====================================================
-
-loadData();
-//====================================================
-// BAGIAN 6
 // TOMBOL CETAK
 //====================================================
 
-function cetakNilai(){
+function cetakNilai() {
 
     window.print();
-
-}
-
-const judul=document.getElementById("judulHalaman");
-
-if(judul){
-
-    const btnCetak=document.createElement("button");
-
-    btnCetak.innerHTML="🖨️ Cetak Nilai";
-
-    btnCetak.style.background="#2563eb";
-    btnCetak.style.color="#fff";
-    btnCetak.style.border="none";
-    btnCetak.style.padding="10px 18px";
-    btnCetak.style.borderRadius="8px";
-    btnCetak.style.cursor="pointer";
-    btnCetak.style.marginRight="10px";
-    btnCetak.style.fontWeight="bold";
-
-    btnCetak.onclick=cetakNilai;
-
-    judul.insertAdjacentElement("afterend",btnCetak);
 
 }
 
@@ -523,120 +842,276 @@ if(judul){
 // TOMBOL KEMBALI
 //====================================================
 
-const btnKembali=document.createElement("button");
+function buatTombolNavigasi() {
 
-btnKembali.innerHTML="⬅ Kembali";
+    const judul =
+        document.getElementById(
+            "judulHalaman"
+        );
 
-btnKembali.style.background="#16a34a";
-btnKembali.style.color="#fff";
-btnKembali.style.border="none";
-btnKembali.style.padding="10px 18px";
-btnKembali.style.borderRadius="8px";
-btnKembali.style.cursor="pointer";
-btnKembali.style.fontWeight="bold";
 
-btnKembali.onclick=function(){
-
-    if(role==="guru"){
-
-        location.href="index.html";
-
-    }else{
-
-        location.href="dashboard-siswa.html";
-
+    if (!judul) {
+        return;
     }
 
-};
 
-if(judul){
+    //================================================
+    // TOMBOL KEMBALI
+    //================================================
 
-    judul.insertAdjacentElement("afterend",btnKembali);
+    const btnKembali =
+        document.createElement(
+            "button"
+        );
+
+
+    btnKembali.innerHTML =
+        "⬅ Kembali";
+
+
+    btnKembali.style.background =
+        "#16a34a";
+
+    btnKembali.style.color =
+        "#fff";
+
+    btnKembali.style.border =
+        "none";
+
+    btnKembali.style.padding =
+        "10px 18px";
+
+    btnKembali.style.borderRadius =
+        "8px";
+
+    btnKembali.style.cursor =
+        "pointer";
+
+    btnKembali.style.fontWeight =
+        "bold";
+
+    btnKembali.style.marginRight =
+        "10px";
+
+
+    btnKembali.onclick =
+        function() {
+
+            if (role === "guru") {
+
+                window.location.href =
+                    "index.html";
+
+            }
+            else {
+
+                window.location.href =
+                    "dashboard-siswa.html";
+
+            }
+
+        };
+
+
+    judul.insertAdjacentElement(
+        "afterend",
+        btnKembali
+    );
+
+
+    //================================================
+    // TOMBOL CETAK
+    //================================================
+
+    const btnCetak =
+        document.createElement(
+            "button"
+        );
+
+
+    btnCetak.innerHTML =
+        "🖨️ Cetak Nilai";
+
+
+    btnCetak.style.background =
+        "#2563eb";
+
+    btnCetak.style.color =
+        "#fff";
+
+    btnCetak.style.border =
+        "none";
+
+    btnCetak.style.padding =
+        "10px 18px";
+
+    btnCetak.style.borderRadius =
+        "8px";
+
+    btnCetak.style.cursor =
+        "pointer";
+
+    btnCetak.style.fontWeight =
+        "bold";
+
+
+    btnCetak.onclick =
+        cetakNilai;
+
+
+    btnKembali.insertAdjacentElement(
+        "afterend",
+        btnCetak
+    );
 
 }
-
-
-//====================================================
-// CSS PRINT
-//====================================================
-
-const css=document.createElement("style");
-
-css.innerHTML=`
-
-@media print{
-
-.sidebar{
-display:none;
-}
-
-button{
-display:none;
-}
-
-input{
-display:none;
-}
-
-body{
-margin:10px;
-}
-
-.content{
-margin:0;
-padding:0;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-}
-
-table th,
-table td{
-
-border:1px solid #000;
-padding:5px;
-font-size:12px;
-
-}
-
-}
-
-`;
-
-document.head.appendChild(css);
 
 
 //====================================================
 // LOGOUT
 //====================================================
 
-function logout(){
+function logout() {
 
-    if(confirm("Yakin ingin logout ?")){
+    if (
+        confirm(
+            "Yakin ingin logout?"
+        )
+    ) {
 
         localStorage.clear();
 
-        location.href="login.html";
+        window.location.href =
+            "login.html";
 
     }
+
+}
+//====================================================
+// CSS CETAK
+//====================================================
+
+function pasangCSSPrint() {
+
+    const css =
+        document.createElement(
+            "style"
+        );
+
+
+    css.innerHTML = `
+
+        @media print {
+
+            .sidebar {
+                display: none !important;
+            }
+
+            button {
+                display: none !important;
+            }
+
+            input {
+                display: none !important;
+            }
+
+            #cari {
+                display: none !important;
+            }
+
+            body {
+                margin: 10px;
+                background: white !important;
+            }
+
+            .content {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+            }
+
+            table th,
+            table td {
+                border: 1px solid #000 !important;
+                padding: 5px !important;
+                font-size: 11px !important;
+            }
+
+        }
+
+    `;
+
+
+    document.head.appendChild(
+        css
+    );
 
 }
 
 
 //====================================================
-// DEBUG
+// MULAI APLIKASI
 //====================================================
 
-console.log("==============================");
+function mulaiAplikasi() {
 
-console.log("Portal Digital Kelas 5");
+    console.log(
+        "Memulai aplikasi nilai..."
+    );
 
-console.log("Versi 4.0 FINAL");
 
-console.log("Role :",role);
+    // Nama login
+    tampilkanNamaLogin();
 
-console.log("Jumlah Data :",dataNilai.length);
 
-console.log("==============================");
+    // Tombol
+    buatTombolNavigasi();
+
+
+    // Pencarian
+    aktifkanPencarian();
+
+
+    // CSS cetak
+    pasangCSSPrint();
+
+
+    // Ambil data
+    loadData();
+
+}
+
+
+//====================================================
+// TUNGGU HTML SELESAI DIMUAT
+//====================================================
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        mulaiAplikasi
+    );
+
+}
+else {
+
+    mulaiAplikasi();
+
+}
+
+
+//====================================================
+// SELESAI
+//====================================================
+
+console.log(
+    "nilai.js VERSI 5.0 siap."
+);
