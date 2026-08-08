@@ -52,13 +52,25 @@ let dataTampil = [];
 
 function angka(nilai){
 
-    if(nilai===null) return 0;
+    if (nilai === null || nilai === undefined) {
+        return 0;
+    }
 
-    if(nilai==="") return 0;
+    // Jika angka langsung
+    if (typeof nilai === "number") {
+        return nilai;
+    }
 
-    if(nilai===undefined) return 0;
+    // Jika berupa teks
+    const teks = String(nilai).trim();
 
-    return Number(nilai);
+    if (teks === "") {
+        return 0;
+    }
+
+    const hasil = Number(teks);
+
+    return isNaN(hasil) ? 0 : hasil;
 
 }
 
@@ -105,7 +117,13 @@ async function loadData(){
         json.forEach(function(item){
 
             dataNilai.push({
-
+console.log(
+    "CEK NILAI:",
+    item["NAMA"],
+    "MTK =", item["MTK"],
+    "PKN =", item["PKN"],
+    "IPAS =", item["IPAS"]
+);
                 nama : String(item["NAMA"] || "").trim(),
 
                 nisn : String(item["NISN"] || "").trim(),
