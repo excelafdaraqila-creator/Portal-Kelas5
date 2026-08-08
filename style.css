@@ -770,3 +770,36 @@ padding-bottom:90px;
     align-items:center;
     cursor:pointer;
 }
+/* =====================================================
+   ABSENSI - SEMBUNYIKAN SIDEBAR
+   ===================================================== */
+
+.sidebar {
+    display: none !important;
+}
+
+/* Membuat area utama melebar setelah sidebar hilang */
+.main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Jika menggunakan content sebagai area utama */
+.content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Header juga dibuat penuh */
+header {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
+/* Area utama halaman */
+main {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
