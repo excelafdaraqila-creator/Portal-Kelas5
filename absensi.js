@@ -1,1 +1,1 @@
-alert("ABSENSI.JS BARU TERBACA");
+alert("ABSENSI JS TERBACA");
