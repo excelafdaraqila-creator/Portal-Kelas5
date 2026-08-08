@@ -697,6 +697,142 @@ async function simpanAbsensi(){
 
 }
 // ====================================================
+// FUNGSI SIMPAN ABSENSI
+// ====================================================
+
+async function simpanAbsensi() {
+
+    console.log("🟢 simpanAbsensi dijalankan");
+
+    const tanggalElement =
+        document.getElementById("tanggal");
+
+    if (!tanggalElement) {
+        alert("❌ Kolom tanggal tidak ditemukan.");
+        return;
+    }
+
+    const tanggal = tanggalElement.value;
+
+    if (!tanggal) {
+        alert("⚠️ Silakan pilih tanggal terlebih dahulu.");
+        return;
+    }
+
+    const siswa =
+        document.querySelectorAll(".status-absensi");
+
+    console.log("Jumlah data siswa:", siswa.length);
+
+    if (siswa.length === 0) {
+        alert("❌ Data siswa belum ditemukan.");
+        return;
+    }
+
+    const konfirmasi = confirm(
+        "Simpan absensi untuk " +
+        siswa.length +
+        " siswa pada tanggal " +
+        tanggal +
+        "?"
+    );
+
+    if (!konfirmasi) {
+        return;
+    }
+
+    const data = [];
+
+    siswa.forEach(function(select) {
+
+        data.push({
+            tanggal: tanggal,
+            nisn: select.dataset.nisn || "",
+            nama: select.dataset.nama || "",
+            status: select.value || "H"
+        });
+
+    });
+
+    console.log("Data absensi:", data);
+
+    const tombol =
+        document.getElementById("btnSimpan");
+
+    if (tombol) {
+        tombol.disabled = true;
+        tombol.innerHTML = "⏳ Menyimpan...";
+    }
+
+    try {
+
+        const response = await fetch(
+            API_URL,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                    "text/plain;charset=utf-8"
+                },
+
+                body: JSON.stringify({
+                    action: "simpanAbsensi",
+                    data: data
+                })
+            }
+        );
+
+        const hasilText =
+            await response.text();
+
+        console.log(
+            "Response Google Apps Script:",
+            hasilText
+        );
+
+        const hasil =
+            JSON.parse(hasilText);
+
+        if (hasil.status !== true) {
+
+            throw new Error(
+                hasil.pesan ||
+                "Absensi gagal disimpan."
+            );
+
+        }
+
+        alert(
+            "✅ Absensi berhasil disimpan!\n\n" +
+            "Tanggal: " + tanggal +
+            "\nJumlah siswa: " + data.length
+        );
+
+    } catch (error) {
+
+        console.error(
+            "❌ Gagal menyimpan:",
+            error
+        );
+
+        alert(
+            "❌ Gagal menyimpan absensi.\n\n" +
+            error.message
+        );
+
+    } finally {
+
+        if (tombol) {
+            tombol.disabled = false;
+            tombol.innerHTML =
+                "💾 Simpan Absensi";
+        }
+
+    }
+
+}
+// ====================================================
 // HUBUNGKAN TOMBOL SIMPAN ABSENSI
 // ====================================================
 
