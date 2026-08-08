@@ -696,3 +696,30 @@ async function simpanAbsensi(){
     }
 
 }
+// ====================================================
+// TES TOMBOL SIMPAN
+// ====================================================
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const tombol = document.getElementById("btnSimpan");
+
+    if(!tombol){
+
+        console.error("❌ btnSimpan tidak ditemukan");
+
+        return;
+
+    }
+
+    console.log("✅ btnSimpan ditemukan");
+
+    tombol.addEventListener("click", function(){
+
+        console.log("🟢 TOMBOL SIMPAN DIKLIK");
+
+        alert("TOMBOL SIMPAN TERBACA");
+
+    });
+
+});
