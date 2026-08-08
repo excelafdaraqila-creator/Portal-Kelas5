@@ -87,7 +87,7 @@ async function loadData(){
 
     try{
 
-        const response = await fetch(URL_API);
+        const response = await fetch(URL_API + "?action=nilai");
 
         if(!response.ok){
 
