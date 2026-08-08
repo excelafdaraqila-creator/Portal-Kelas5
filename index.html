@@ -1,500 +1,91 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Portal Digital Kelas 5 SDN Cijember</title>
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f1f5f9;
-            color: #1e293b;
-        }
-
-        header {
-            background: #2563eb;
-            color: white;
-            padding: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .judul {
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .search-box {
-            width: 280px;
-            max-width: 100%;
-            padding: 11px 15px;
-            border: none;
-            border-radius: 8px;
-            outline: none;
-        }
-
-        .logout-btn {
-            border: none;
-            background: #dc2626;
-            color: white;
-            padding: 11px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .logout-btn:hover {
-            background: #b91c1c;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 25px auto;
-            padding: 0 15px;
-        }
-
-        .selamat {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,.08);
-        }
-
-        .selamat h2 {
-            margin-top: 0;
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-            gap: 15px;
-        }
-
-        .menu-card {
-            display: block;
-            text-decoration: none;
-            background: white;
-            color: #1e293b;
-            padding: 25px 15px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,.08);
-            transition: .2s;
-        }
-
-        .menu-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,.15);
-        }
-
-        .menu-card i {
-            font-size: 32px;
-            margin-bottom: 10px;
-            color: #2563eb;
-        }
-
-        .menu-card strong {
-            display: block;
-            font-size: 16px;
-        }
-
-        .guru-only {
-            display: none;
-        }
-
-        footer {
-            text-align: center;
-            padding: 25px;
-            color: #64748b;
-        }
-
-        @media (max-width: 600px) {
-
-            header {
-                justify-content: center;
-            }
-
-            .judul {
-                width: 100%;
-                text-align: center;
-            }
-
-            .search-box {
-                width: 100%;
-            }
-
-            .logout-btn {
-                width: 100%;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Digital Kelas 5 SDN Cijember</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
-
 <body>
 
-<header>
+<script>
+if(localStorage.getItem("login")!="true"){
+    location.href="login.html";
+}
+function logout(){
+    localStorage.clear();
+    location.href="login.html";
+}
+</script>
 
-    <div class="judul">
-        📚 Portal Digital Kelas 5 SDN Cijember
-    </div>
 
-    <input
-        type="text"
-        id="searchMenu"
-        class="search-box"
-        placeholder="🔍 Cari menu..."
-    >
+<div class="content">
 
-    <button
-        class="logout-btn"
-        onclick="logout()"
-    >
+<div class="topbar">
+<div class="header-left">
+<h1>🏫 Portal Digital</h1>
+<p>Kelas 5 SDN Cijember</p>
+</div>
+<div class="header-right">
+
+    <input type="text" class="search-box" placeholder="🔍 Cari menu...">
+
+    <button class="logout-btn" onclick="logout()">
         <i class="fa-solid fa-right-from-bracket"></i>
-        Keluar
     </button>
 
-</header>
+</div>
 
+</div>
 
-<main class="container">
+<div class="banner-card">
+    <img src="assets/images/banner.png" class="banner-img" onerror="this.style.display='none'">
+    <div class="overlay">
+    </div>
+</div>
 
-    <section class="selamat">
+<h2 class="judul-menu">Menu Portal</h2>
 
-        <h2 id="sapaan">
-            Selamat Datang
-        </h2>
+<div class="menu-grid">
+<a class="menu-item" href="datasiswa.html">👨‍🎓<span>Data Siswa</span></a>
+<a class="menu-item" href="nilai.html">🏆<span>Nilai</span></a>
+<a class="menu-item" href="materi.html">📚<span>Materi</span></a>
+<a class="menu-item" href="tugas.html">📝<span>Tugas</span></a>
+<a class="menu-item" href="jadwal.html">📅<span>Jadwal</span></a>
+<a class="menu-item" href="pengumuman.html">📢<span>Pengumuman</span></a>
+<a class="menu-item" href="galeri.html">🖼️<span>Galeri</span></a>
+<a class="menu-item" href="absensi.html">📊<span>Absensi</span></a>
+</div>
 
-        <p id="infoLogin">
-            Portal Digital Kelas 5 SDN Cijember
-        </p>
+</div>
 
-    </section>
-
-
-    <section class="menu-grid" id="menuGrid">
-
-
-        <!-- ================================= -->
-        <!-- MENU ABSENSI -->
-        <!-- ================================= -->
-
-        <a
-            href="absensi.html"
-            class="menu-card"
-            data-menu="absensi"
-        >
-
-            <i class="fa-solid fa-calendar-check"></i>
-
-            <strong>
-                📅 Absensi
-            </strong>
-
-            <span>
-                Kehadiran siswa
-            </span>
-
-        </a>
-
-
-        <!-- ================================= -->
-        <!-- REKAP ABSENSI KHUSUS GURU -->
-        <!-- ================================= -->
-
-        <a
-            href="rekap-absensi.html"
-            class="menu-card guru-only"
-            id="menuRekapAbsensi"
-            data-menu="rekap absensi"
-        >
-
-            <i class="fa-solid fa-chart-column"></i>
-
-            <strong>
-                📊 Rekap Absensi
-            </strong>
-
-            <span>
-                Rekap kehadiran kelas
-            </span>
-
-        </a>
-
-
-        <!-- ================================= -->
-        <!-- NILAI -->
-        <!-- ================================= -->
-
-        <a
-            href="nilai.html"
-            class="menu-card"
-            data-menu="nilai"
-        >
-
-            <i class="fa-solid fa-pen-to-square"></i>
-
-            <strong>
-                📝 Nilai
-            </strong>
-
-            <span>
-                Data nilai siswa
-            </span>
-
-        </a>
-
-
-        <!-- ================================= -->
-        <!-- MATERI -->
-        <!-- ================================= -->
-
-        <a
-            href="materi.html"
-            class="menu-card"
-            data-menu="materi"
-        >
-
-            <i class="fa-solid fa-book-open"></i>
-
-            <strong>
-                📚 Materi
-            </strong>
-
-            <span>
-                Materi pembelajaran
-            </span>
-
-        </a>
-
-
-        <!-- ================================= -->
-        <!-- TUGAS -->
-        <!-- ================================= -->
-
-        <a
-            href="tugas.html"
-            class="menu-card"
-            data-menu="tugas"
-        >
-
-            <i class="fa-solid fa-list-check"></i>
-
-            <strong>
-                📋 Tugas
-            </strong>
-
-            <span>
-                Tugas pembelajaran
-            </span>
-
-        </a>
-
-
-        <!-- ================================= -->
-        <!-- DATA SISWA KHUSUS GURU -->
-        <!-- ================================= -->
-
-        <a
-            href="data-siswa.html"
-            class="menu-card guru-only"
-            id="menuDataSiswa"
-            data-menu="data siswa"
-        >
-
-            <i class="fa-solid fa-users"></i>
-
-            <strong>
-                👨‍🎓 Data Siswa
-            </strong>
-
-            <span>
-                Daftar siswa kelas 5
-            </span>
-
-        </a>
-
-
-    </section>
-
-</main>
-
-
-<footer>
-
-    SDN Cijember<br>
-    Kelas 5 Tahun Pelajaran 2026/2027
-
-</footer>
-
+<nav class="bottom-nav">
+<a class="active" href="index.html">🏠<span>Home</span></a>
+<a href="materi.html">📚<span>Materi</span></a>
+<a href="nilai.html">🏆<span>Nilai</span></a>
+<a href="pengumuman.html">📢<span>Info</span></a>
+<a href="galeri.html">🖼️<span>Galeri</span></a>
+</nav>
 
 <script>
+const role = localStorage.getItem("role");
 
-    // =====================================================
-    // CEK LOGIN
-    // =====================================================
-
-    const login =
-        localStorage.getItem("login");
-
-    const role =
-        localStorage.getItem("role");
-
-    const namaSiswa =
-        localStorage.getItem("namaSiswa");
-
-    const namaGuru =
+if (role === "guru") {
+    document.getElementById("namaGuru").textContent =
         localStorage.getItem("namaGuru");
-
-
-    // =====================================================
-    // JIKA BELUM LOGIN
-    // =====================================================
-
-    if (login !== "true") {
-
-        window.location.href = "login.html";
-
-    }
-
-
-    // =====================================================
-    // TAMPILKAN INFORMASI LOGIN
-    // =====================================================
-
-    const sapaan =
-        document.getElementById("sapaan");
-
-    const infoLogin =
-        document.getElementById("infoLogin");
-
-
-    if (role === "guru") {
-
-        sapaan.innerHTML =
-            "👨‍🏫 Selamat Datang, Guru";
-
-        infoLogin.innerHTML =
-            namaGuru ||
-            "Gr. Asep Jamhur, S.Pd., M.M.";
-
-        // Tampilkan menu khusus Guru
-        document
-            .querySelectorAll(".guru-only")
-            .forEach(function(menu) {
-
-                menu.style.display = "block";
-
-            });
-
-    }
-
-
-    else if (role === "siswa") {
-
-        sapaan.innerHTML =
-            "👨‍🎓 Selamat Datang, " +
-            (namaSiswa || "Siswa");
-
-        infoLogin.innerHTML =
-            "Portal Digital Kelas 5 SDN Cijember";
-
-        // Pastikan menu Guru disembunyikan
-        document
-            .querySelectorAll(".guru-only")
-            .forEach(function(menu) {
-
-                menu.style.display = "none";
-
-            });
-
-    }
-
-
-    // =====================================================
-    // PENCARIAN MENU
-    // =====================================================
-
-    const search =
-        document.getElementById("searchMenu");
-
-
-    search.addEventListener(
-        "input",
-        function() {
-
-            const kata =
-                search.value
-                    .toLowerCase()
-                    .trim();
-
-
-            document
-                .querySelectorAll(".menu-card")
-                .forEach(function(menu) {
-
-                    const teks =
-                        menu.innerText
-                            .toLowerCase();
-
-
-                    if (
-                        teks.includes(kata)
-                    ) {
-
-                        menu.style.display =
-                            (menu.classList.contains("guru-only")
-                            && role !== "guru")
-                            ? "none"
-                            : "block";
-
-                    }
-
-                    else {
-
-                        menu.style.display =
-                            "none";
-
-                    }
-
-                });
-
-        }
-    );
-
-
-    // =====================================================
-    // LOGOUT
-    // =====================================================
-
-    function logout() {
-
-        localStorage.removeItem("login");
-        localStorage.removeItem("role");
-        localStorage.removeItem("namaSiswa");
-        localStorage.removeItem("namaGuru");
-        localStorage.removeItem("nisn");
-
-        window.location.href =
-            "login.html";
-
-    }
-
+} else if (role === "siswa") {
+    document.getElementById("namaGuru").textContent =
+        localStorage.getItem("namaSiswa");
+} else {
+    document.getElementById("namaGuru").textContent = "Pengguna";
+}
+function updateJam(){
+ const d=new Date();
+ document.getElementById("jam").textContent=d.toLocaleTimeString("id-ID");
+}
+updateJam();
+setInterval(updateJam,1000);
 </script>
 
 </body>
