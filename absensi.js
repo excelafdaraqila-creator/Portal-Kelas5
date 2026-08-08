@@ -419,3 +419,280 @@ else{
     jalankanAbsensi();
 
 }
+// ====================================================
+// SIMPAN ABSENSI
+// ====================================================
+
+if(btnSimpan){
+
+    btnSimpan.addEventListener(
+        "click",
+        simpanAbsensi
+    );
+
+}
+
+
+// ====================================================
+// FUNGSI SIMPAN ABSENSI
+// ====================================================
+
+async function simpanAbsensi(){
+
+    // -----------------------------------------------
+    // CEGAH KLIK BERULANG
+    // -----------------------------------------------
+
+    if(sedangMenyimpan){
+
+        return;
+
+    }
+
+
+    // -----------------------------------------------
+    // CEK TANGGAL
+    // -----------------------------------------------
+
+    const tanggal =
+        tanggalInput ?
+        tanggalInput.value :
+        "";
+
+
+    if(!tanggal){
+
+        alert(
+            "⚠️ Silakan pilih tanggal absensi terlebih dahulu."
+        );
+
+        return;
+
+    }
+
+
+    // -----------------------------------------------
+    // AMBIL SEMUA STATUS
+    // -----------------------------------------------
+
+    const semua =
+        document.querySelectorAll(
+            ".status-absensi"
+        );
+
+
+    if(semua.length === 0){
+
+        alert(
+            "❌ Data siswa belum tersedia."
+        );
+
+        return;
+
+    }
+
+
+    // -----------------------------------------------
+    // KONFIRMASI
+    // -----------------------------------------------
+
+    const yakin =
+        confirm(
+            "Simpan absensi untuk " +
+            semua.length +
+            " siswa pada tanggal " +
+            tanggal +
+            "?"
+        );
+
+
+    if(!yakin){
+
+        return;
+
+    }
+
+
+    sedangMenyimpan = true;
+
+
+    // -----------------------------------------------
+    // UBAH TOMBOL
+    // -----------------------------------------------
+
+    const teksLama =
+        btnSimpan.innerHTML;
+
+
+    btnSimpan.disabled = true;
+
+    btnSimpan.innerHTML =
+        "⏳ Menyimpan...";
+
+
+    try{
+
+        // -------------------------------------------
+        // BENTUK DATA
+        // -------------------------------------------
+
+        const data = [];
+
+
+        semua.forEach(
+            function(select){
+
+                data.push({
+
+                    tanggal:
+                        tanggal,
+
+                    nisn:
+                        select.dataset.nisn || "",
+
+                    nama:
+                        select.dataset.nama || "",
+
+                    status:
+                        select.value || "H"
+
+                });
+
+            }
+        );
+
+
+        console.log(
+            "DATA YANG AKAN DISIMPAN:",
+            data
+        );
+
+
+        // -------------------------------------------
+        // KIRIM KE GOOGLE APPS SCRIPT
+        // -------------------------------------------
+
+        const response =
+            await fetch(
+                API_URL,
+                {
+
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                        "text/plain;charset=utf-8"
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            action:
+                                "simpanAbsensi",
+
+                            data:
+                                data
+
+                        })
+
+                }
+            );
+
+
+        console.log(
+            "STATUS SIMPAN:",
+            response.status
+        );
+
+
+        const text =
+            await response.text();
+
+
+        console.log(
+            "RESPONSE SIMPAN:",
+            text
+        );
+
+
+        let hasil;
+
+
+        try{
+
+            hasil =
+                JSON.parse(text);
+
+        }
+
+        catch(error){
+
+            throw new Error(
+                "Response dari server tidak valid."
+            );
+
+        }
+
+
+        // -------------------------------------------
+        // CEK HASIL
+        // -------------------------------------------
+
+        if(
+            hasil.status !== true
+        ){
+
+            throw new Error(
+                hasil.pesan ||
+                "Absensi gagal disimpan."
+            );
+
+        }
+
+
+        // -------------------------------------------
+        // BERHASIL
+        // -------------------------------------------
+
+        alert(
+            "✅ Absensi berhasil disimpan!\n\n" +
+            "Tanggal: " + tanggal +
+            "\nJumlah siswa: " +
+            data.length
+        );
+
+
+        console.log(
+            "ABSENSI BERHASIL DISIMPAN"
+        );
+
+
+    }
+
+    catch(error){
+
+        console.error(
+            "ERROR SIMPAN ABSENSI:",
+            error
+        );
+
+
+        alert(
+            "❌ Gagal menyimpan absensi.\n\n" +
+            error.message
+        );
+
+    }
+
+    finally{
+
+        sedangMenyimpan = false;
+
+        btnSimpan.disabled = false;
+
+        btnSimpan.innerHTML =
+            teksLama;
+
+    }
+
+}
