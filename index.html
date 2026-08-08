@@ -1,92 +1,520 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Portal Digital Kelas 5 SDN Cijember</title>
+
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+>
+
 </head>
+
+
 <body>
 
+
 <script>
-if(localStorage.getItem("login")!="true"){
-    location.href="login.html";
+
+/* =====================================================
+   CEK LOGIN
+===================================================== */
+
+if(localStorage.getItem("login") !== "true"){
+
+    location.href = "login.html";
+
 }
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
 function logout(){
+
     localStorage.clear();
-    location.href="login.html";
+
+    location.href = "login.html";
+
 }
+
 </script>
+
 
 
 <div class="content">
 
+
+<!-- =====================================================
+     TOPBAR
+===================================================== -->
+
 <div class="topbar">
+
+
 <div class="header-left">
+
 <h1>🏫 Portal Digital</h1>
+
 <p>Kelas 5 SDN Cijember</p>
+
 </div>
+
+
+
 <div class="header-right">
 
-    <input type="text" class="search-box" placeholder="🔍 Cari menu...">
 
-    <button class="logout-btn" onclick="logout()">
-        <i class="fa-solid fa-right-from-bracket"></i>
-    </button>
+<!-- NAMA PENGGUNA -->
+
+<span
+id="namaGuru"
+style="
+font-weight:bold;
+margin-right:10px;
+"
+>
+Pengguna
+</span>
+
+
+<!-- SEARCH -->
+
+<input
+type="text"
+class="search-box"
+placeholder="🔍 Cari menu..."
+>
+
+
+<!-- LOGOUT -->
+
+<button
+class="logout-btn"
+onclick="logout()"
+>
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+</button>
+
 
 </div>
 
 </div>
+
+
+
+<!-- =====================================================
+     BANNER
+===================================================== -->
 
 <div class="banner-card">
-    <img src="assets/images/banner.png" class="banner-img" onerror="this.style.display='none'">
-    <div class="overlay">
-    </div>
+
+<img
+src="assets/images/banner.png"
+class="banner-img"
+onerror="this.style.display='none'"
+>
+
+<div class="overlay">
+
 </div>
 
-<h2 class="judul-menu">Menu Portal</h2>
+</div>
+
+
+
+<!-- =====================================================
+     MENU PORTAL
+===================================================== -->
+
+<h2 class="judul-menu">
+Menu Portal
+</h2>
+
+
 
 <div class="menu-grid">
-<a class="menu-item" href="datasiswa.html">👨‍🎓<span>Data Siswa</span></a>
-<a class="menu-item" href="nilai.html">🏆<span>Nilai</span></a>
-<a class="menu-item" href="materi.html">📚<span>Materi</span></a>
-<a class="menu-item" href="tugas.html">📝<span>Tugas</span></a>
-<a class="menu-item" href="jadwal.html">📅<span>Jadwal</span></a>
-<a class="menu-item" href="pengumuman.html">📢<span>Pengumuman</span></a>
-<a class="menu-item" href="galeri.html">🖼️<span>Galeri</span></a>
-<a class="menu-item" href="absensi.html">📊<span>Absensi</span></a>
-</div>
+
+
+<!-- DATA SISWA -->
+
+<a
+class="menu-item"
+href="datasiswa.html"
+>
+👨‍🎓
+<span>Data Siswa</span>
+</a>
+
+
+
+<!-- NILAI -->
+
+<a
+class="menu-item"
+href="nilai.html"
+>
+🏆
+<span>Nilai</span>
+</a>
+
+
+
+<!-- MATERI -->
+
+<a
+class="menu-item"
+href="materi.html"
+>
+📚
+<span>Materi</span>
+</a>
+
+
+
+<!-- TUGAS -->
+
+<a
+class="menu-item"
+href="tugas.html"
+>
+📝
+<span>Tugas</span>
+</a>
+
+
+
+<!-- JADWAL -->
+
+<a
+class="menu-item"
+href="jadwal.html"
+>
+📅
+<span>Jadwal</span>
+</a>
+
+
+
+<!-- PENGUMUMAN -->
+
+<a
+class="menu-item"
+href="pengumuman.html"
+>
+📢
+<span>Pengumuman</span>
+</a>
+
+
+
+<!-- GALERI -->
+
+<a
+class="menu-item"
+href="galeri.html"
+>
+🖼️
+<span>Galeri</span>
+</a>
+
+
+
+<!-- ABSENSI -->
+
+<a
+class="menu-item"
+href="absensi.html"
+>
+📊
+<span>Absensi</span>
+</a>
+
+
+
+<!-- =====================================================
+     REKAP ABSENSI
+     KHUSUS GURU
+===================================================== -->
+
+<a
+class="menu-item"
+href="rekap-absensi.html"
+id="menuRekapAbsensi"
+style="display:none;"
+>
+📈
+<span>Rekap Absensi</span>
+</a>
+
 
 </div>
+
+
+
+</div>
+
+
+
+<!-- =====================================================
+     BOTTOM NAVIGATION
+===================================================== -->
 
 <nav class="bottom-nav">
-<a class="active" href="index.html">🏠<span>Home</span></a>
-<a href="materi.html">📚<span>Materi</span></a>
-<a href="nilai.html">🏆<span>Nilai</span></a>
-<a href="pengumuman.html">📢<span>Info</span></a>
-<a href="galeri.html">🖼️<span>Galeri</span></a>
+
+
+<a
+class="active"
+href="index.html"
+>
+🏠
+<span>Home</span>
+</a>
+
+
+<a
+href="materi.html"
+>
+📚
+<span>Materi</span>
+</a>
+
+
+<a
+href="nilai.html"
+>
+🏆
+<span>Nilai</span>
+</a>
+
+
+<a
+href="pengumuman.html"
+>
+📢
+<span>Info</span>
+</a>
+
+
+<a
+href="galeri.html"
+>
+🖼️
+<span>Galeri</span>
+</a>
+
+
 </nav>
 
-<script>
-const role = localStorage.getItem("role");
 
-if (role === "guru") {
-    document.getElementById("namaGuru").textContent =
-        localStorage.getItem("namaGuru");
-} else if (role === "siswa") {
-    document.getElementById("namaGuru").textContent =
-        localStorage.getItem("namaSiswa");
-} else {
-    document.getElementById("namaGuru").textContent = "Pengguna";
+
+<script>
+
+/* =====================================================
+   ROLE LOGIN
+===================================================== */
+
+const role =
+localStorage.getItem("role");
+
+
+/* =====================================================
+   NAMA PENGGUNA
+===================================================== */
+
+const namaPengguna =
+document.getElementById("namaGuru");
+
+
+/* =====================================================
+   GURU
+===================================================== */
+
+if(role === "guru"){
+
+    namaPengguna.textContent =
+        localStorage.getItem("namaGuru")
+        || "Gr. Asep Jamhur, S.Pd., M.M.";
+
+
+    /* ---------------------------------------------
+       TAMPILKAN REKAP ABSENSI
+    --------------------------------------------- */
+
+    const menuRekap =
+        document.getElementById("menuRekapAbsensi");
+
+
+    if(menuRekap){
+
+        menuRekap.style.display = "flex";
+
+    }
+
 }
+
+
+/* =====================================================
+   SISWA
+===================================================== */
+
+else if(role === "siswa"){
+
+    namaPengguna.textContent =
+        localStorage.getItem("namaSiswa")
+        || "Siswa";
+
+
+    /* ---------------------------------------------
+       PASTIKAN REKAP ABSENSI TERSEMBUNYI
+    --------------------------------------------- */
+
+    const menuRekap =
+        document.getElementById("menuRekapAbsensi");
+
+
+    if(menuRekap){
+
+        menuRekap.style.display = "none";
+
+    }
+
+}
+
+
+/* =====================================================
+   ROLE TIDAK DIKENAL
+===================================================== */
+
+else{
+
+    namaPengguna.textContent =
+        "Pengguna";
+
+}
+
+
+
+/* =====================================================
+   JAM
+===================================================== */
+
 function updateJam(){
- const d=new Date();
- document.getElementById("jam").textContent=d.toLocaleTimeString("id-ID");
+
+    const d = new Date();
+
+    const jam =
+        document.getElementById("jam");
+
+
+    if(jam){
+
+        jam.textContent =
+            d.toLocaleTimeString("id-ID");
+
+    }
+
 }
+
+
 updateJam();
+
 setInterval(updateJam,1000);
+
+
+
+/* =====================================================
+   PENCARIAN MENU
+===================================================== */
+
+const searchBox =
+document.querySelector(".search-box");
+
+
+if(searchBox){
+
+    searchBox.addEventListener(
+        "input",
+        function(){
+
+            const keyword =
+                this.value
+                .toLowerCase()
+                .trim();
+
+
+            const menus =
+                document.querySelectorAll(
+                    ".menu-item"
+                );
+
+
+            menus.forEach(function(menu){
+
+                const text =
+                    menu.textContent
+                    .toLowerCase();
+
+
+                if(
+                    keyword === ""
+                    ||
+                    text.includes(keyword)
+                ){
+
+                    /* --------------------------------
+                       REKAP TETAP KHUSUS GURU
+                    -------------------------------- */
+
+                    if(
+                        menu.id ===
+                        "menuRekapAbsensi"
+                        &&
+                        role !== "guru"
+                    ){
+
+                        menu.style.display =
+                            "none";
+
+                    }
+
+                    else{
+
+                        menu.style.display =
+                            "flex";
+
+                    }
+
+                }
+
+                else{
+
+                    menu.style.display =
+                        "none";
+
+                }
+
+            });
+
+        }
+    );
+
+}
+
 </script>
 
+
 </body>
+
 </html>
