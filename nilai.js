@@ -117,13 +117,17 @@ async function loadData(){
         json.forEach(function(item){
 
             dataNilai.push({
-console.log(
-    "CEK NILAI:",
-    item["NAMA"],
-    "MTK =", item["MTK"],
-    "PKN =", item["PKN"],
-    "IPAS =", item["IPAS"]
-);
+function angka(nilai){
+
+    if(nilai===null) return 0;
+
+    if(nilai==="") return 0;
+
+    if(nilai===undefined) return 0;
+
+    return Number(nilai);
+
+}
                 nama : String(item["NAMA"] || "").trim(),
 
                 nisn : String(item["NISN"] || "").trim(),
