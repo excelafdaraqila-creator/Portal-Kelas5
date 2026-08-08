@@ -16,16 +16,16 @@ console.log("======================================");
 // DATA LOGIN
 // ====================================================
 
-const role =
+const absensiRole =
     localStorage.getItem("role") || "";
 
-const nisnLogin =
+const absensiNisnLogin =
     String(localStorage.getItem("nisn") || "").trim();
 
-const namaSiswa =
+const absensiNamaSiswa =
     localStorage.getItem("namaSiswa") || "";
 
-const namaGuru =
+const absensiNamaGuru =
     localStorage.getItem("namaGuru") || "";
 
 console.log("ROLE LOGIN:", role);
