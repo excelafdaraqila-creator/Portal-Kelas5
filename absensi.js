@@ -697,29 +697,38 @@ async function simpanAbsensi(){
 
 }
 // ====================================================
-// TES TOMBOL SIMPAN
+// HUBUNGKAN TOMBOL SIMPAN ABSENSI
 // ====================================================
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
 
-    const tombol = document.getElementById("btnSimpan");
+    const tombolSimpan =
+        document.getElementById("btnSimpan");
 
-    if(!tombol){
+    if (!tombolSimpan) {
 
-        console.error("❌ btnSimpan tidak ditemukan");
+        console.error(
+            "❌ Tombol btnSimpan tidak ditemukan!"
+        );
 
         return;
-
     }
 
-    console.log("✅ btnSimpan ditemukan");
+    console.log(
+        "✅ Tombol Simpan Absensi ditemukan."
+    );
 
-    tombol.addEventListener("click", function(){
 
-        console.log("🟢 TOMBOL SIMPAN DIKLIK");
+    tombolSimpan.onclick = function (event) {
 
-        alert("TOMBOL SIMPAN TERBACA");
+        event.preventDefault();
 
-    });
+        console.log(
+            "🟢 TOMBOL SIMPAN DIKLIK"
+        );
+
+        simpanAbsensi();
+
+    };
 
 });
