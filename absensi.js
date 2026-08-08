@@ -1,11 +1,6 @@
 // ============================================================
-// ABSENSI.JS
+// ABSENSI.JS FINAL
 // PORTAL DIGITAL KELAS 5 SDN CIJEMBER
-// VERSI FINAL
-// ============================================================
-
-// ============================================================
-// API GOOGLE APPS SCRIPT
 // ============================================================
 
 const API_URL =
@@ -17,195 +12,279 @@ const API_URL =
 // ============================================================
 
 const role =
-    localStorage.getItem("role") || "";
+localStorage.getItem("role") || "guru";
 
 const nisnLogin =
-    String(localStorage.getItem("nisn") || "").trim();
+String(localStorage.getItem("nisn") || "").trim();
 
 const namaSiswa =
-    localStorage.getItem("namaSiswa") || "";
+localStorage.getItem("namaSiswa") || "";
 
 const namaGuru =
-    localStorage.getItem("namaGuru") || "";
+localStorage.getItem("namaGuru") || "";
 
 
 // ============================================================
-// DEBUG
+// ELEMENT
 // ============================================================
 
-console.log("====================================");
-console.log("ABSENSI.JS VERSI FINAL");
-console.log("Role :", role);
-console.log("NISN Login :", nisnLogin);
-console.log("Nama Siswa :", namaSiswa);
-console.log("====================================");
+let tabel;
+let info;
+let tanggalInput;
+let btnSimpan;
 
 
 // ============================================================
-// CEK LOGIN
+// MULAI
 // ============================================================
 
-if (localStorage.getItem("login") !== "true") {
+document.addEventListener("DOMContentLoaded", function () {
 
-    alert("Silakan login terlebih dahulu.");
+    console.log("====================================");
+    console.log("ABSENSI.JS FINAL");
+    console.log("Role :", role);
+    console.log("NISN Login :", nisnLogin);
+    console.log("API :", API_URL);
+    console.log("====================================");
 
-    window.location.href = "login.html";
+    tabel =
+        document.getElementById("tabelAbsensi");
 
-}
+    info =
+        document.getElementById("infoAbsensi");
 
+    tanggalInput =
+        document.getElementById("tanggal");
 
-// ============================================================
-// VARIABEL
-// ============================================================
-
-let dataSiswa = [];
-let dataAbsensi = [];
-
-
-// ============================================================
-// ELEMENT HTML
-// ============================================================
-
-const tabel =
-    document.getElementById("tabelAbsensi");
-
-const info =
-    document.getElementById("infoAbsensi");
-
-const tanggalInput =
-    document.getElementById("tanggal");
-
-const btnSimpan =
-    document.getElementById("btnSimpan");
+    btnSimpan =
+        document.getElementById("btnSimpan");
 
 
-// ============================================================
-// TAMPILKAN NAMA LOGIN
-// ============================================================
+    // --------------------------------------------------------
+    // NAMA LOGIN
+    // --------------------------------------------------------
 
-function tampilkanNamaLogin() {
-
-    const nama =
+    const namaLogin =
         document.getElementById("namaLogin");
 
-    if (!nama) return;
+    if (namaLogin) {
 
-    if (role === "guru") {
+        if (role === "guru") {
 
-        nama.innerHTML =
-            "👨‍🏫 " + namaGuru;
+            namaLogin.innerHTML =
+                "👨‍🏫 " + namaGuru;
 
-    } else {
+        } else {
 
-        nama.innerHTML =
-            "👨‍🎓 " + namaSiswa;
+            namaLogin.innerHTML =
+                "👨‍🎓 " + namaSiswa;
+
+        }
 
     }
 
-}
+
+    // --------------------------------------------------------
+    // TANGGAL OTOMATIS
+    // --------------------------------------------------------
+
+    if (tanggalInput) {
+
+        const sekarang =
+            new Date();
+
+        const tahun =
+            sekarang.getFullYear();
+
+        const bulan =
+            String(
+                sekarang.getMonth() + 1
+            ).padStart(2, "0");
+
+        const hari =
+            String(
+                sekarang.getDate()
+            ).padStart(2, "0");
+
+        tanggalInput.value =
+            tahun + "-" + bulan + "-" + hari;
+
+    }
+
+
+    // --------------------------------------------------------
+    // TOMBOL SIMPAN
+    // --------------------------------------------------------
+
+    if (btnSimpan) {
+
+        btnSimpan.addEventListener(
+            "click",
+            simpanAbsensi
+        );
+
+    }
+
+
+    // --------------------------------------------------------
+    // LOAD DATA
+    // --------------------------------------------------------
+
+    loadDataSiswa();
+
+});
 
 
 // ============================================================
-// PESAN LOADING
+// LOAD SISWA
 // ============================================================
 
-function loadingPesan() {
+async function loadDataSiswa() {
+
+    if (!tabel) {
+
+        console.error(
+            "❌ tabelAbsensi tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+
+    tabel.innerHTML = `
+        <tr>
+            <td colspan="4"
+                style="padding:30px;text-align:center;">
+                ⏳ Sedang memuat data siswa...
+            </td>
+        </tr>
+    `;
+
 
     if (info) {
 
         info.innerHTML =
-            "⏳ Sedang memuat data siswa...";
+            "⏳ Menghubungkan ke database...";
 
     }
 
-    if (tabel) {
 
-        tabel.innerHTML = `
-            <tr>
-                <td colspan="4"
-                    style="
-                    text-align:center;
-                    padding:30px;
-                    color:#2563eb;
-                    font-weight:bold;
-                    ">
-                    ⏳ Sedang memuat data siswa...
-                </td>
-            </tr>
-        `;
-
-    }
-
-}
+    const url =
+        API_URL +
+        "?action=siswa&t=" +
+        Date.now();
 
 
-// ============================================================
-// LOAD DATA SISWA
-// ============================================================
+    console.log(
+        "MENGAMBIL DATA DARI:",
+        url
+    );
 
-async function loadSiswa() {
 
     try {
 
-        console.log("Mengambil data siswa...");
+        const controller =
+            new AbortController();
 
-        const url =
-            API_URL +
-            "?action=siswa&_=" +
-            Date.now();
+        const timeout =
+            setTimeout(
+                function () {
 
-        console.log("API SISWA:", url);
+                    controller.abort();
+
+                },
+                15000
+            );
+
 
         const response =
-            await fetch(url);
+            await fetch(
+                url,
+                {
+                    method: "GET",
+                    cache: "no-store",
+                    signal: controller.signal
+                }
+            );
+
+
+        clearTimeout(timeout);
+
+
+        console.log(
+            "STATUS API:",
+            response.status
+        );
+
+
+        const text =
+            await response.text();
+
+
+        console.log(
+            "RESPONSE API:",
+            text
+        );
+
 
         if (!response.ok) {
 
             throw new Error(
-                "Server error " +
+                "HTTP Error " +
                 response.status
             );
 
         }
 
-        const text =
-            await response.text();
 
-        console.log(
-            "Response siswa:",
-            text
-        );
-
-        let data;
-
-        try {
-
-            data = JSON.parse(text);
-
-        } catch (e) {
+        if (!text) {
 
             throw new Error(
-                "Response Google Apps Script bukan JSON."
+                "Server mengirim data kosong."
             );
 
         }
+
+
+        let data;
+
+
+        try {
+
+            data =
+                JSON.parse(text);
+
+        } catch (e) {
+
+            console.error(
+                "RESPON BUKAN JSON:",
+                text
+            );
+
+            throw new Error(
+                "Response Apps Script bukan JSON."
+            );
+
+        }
+
+
+        console.log(
+            "DATA SISWA:",
+            data
+        );
+
 
         if (!Array.isArray(data)) {
 
             throw new Error(
-                "Data siswa bukan array."
+                "Format data siswa tidak benar."
             );
 
         }
 
-        dataSiswa = data;
 
-        console.log(
-            "Jumlah siswa:",
-            dataSiswa.length
-        );
-
-        if (dataSiswa.length === 0) {
+        if (data.length === 0) {
 
             throw new Error(
                 "Data siswa kosong."
@@ -213,91 +292,163 @@ async function loadSiswa() {
 
         }
 
-        // ====================================================
-        // JIKA SISWA
-        // HANYA TAMPILKAN SISWA YANG LOGIN
-        // ====================================================
 
-        if (role !== "guru") {
+        // ----------------------------------------------------
+        // FILTER DATA
+        // ----------------------------------------------------
 
-            const siswaSaya =
-                dataSiswa.filter(function (siswa) {
+        let dataTampil = data;
 
-                    const nisn =
-                        String(
-                            siswa.NISN ||
-                            siswa.nisn ||
-                            ""
-                        ).trim();
 
-                    return nisn === nisnLogin;
-
-                });
-
-            console.log(
-                "Data siswa login:",
-                siswaSaya
-            );
-
-            if (siswaSaya.length === 0) {
-
-                throw new Error(
-                    "NISN login tidak ditemukan pada data siswa."
-                );
-
-            }
-
-            dataSiswa = siswaSaya;
-
-        }
-
-        // ====================================================
-        // TAMPILKAN SESUAI ROLE
-        // ====================================================
+        // Guru melihat semua siswa
 
         if (role === "guru") {
 
-            tampilkanFormGuru();
-
-        } else {
-
-            await loadAbsensiSiswa();
+            dataTampil = data;
 
         }
+
+        // Siswa hanya melihat dirinya sendiri
+
+        else {
+
+            dataTampil =
+                data.filter(
+                    function (siswa) {
+
+                        const nisn =
+                            String(
+                                siswa.NISN ||
+                                siswa.nisn ||
+                                ""
+                            ).trim();
+
+                        return (
+                            nisn === nisnLogin
+                        );
+
+                    }
+                );
+
+        }
+
+
+        console.log(
+            "DATA TAMPIL:",
+            dataTampil
+        );
+
+
+        if (dataTampil.length === 0) {
+
+            tabel.innerHTML = `
+                <tr>
+                    <td colspan="4"
+                        style="
+                        padding:30px;
+                        text-align:center;
+                        color:red;
+                        font-weight:bold;
+                        ">
+                        ❌ Data siswa tidak ditemukan.
+                    </td>
+                </tr>
+            `;
+
+            if (info) {
+
+                info.innerHTML =
+                    "❌ NISN login tidak ditemukan.";
+
+            }
+
+            return;
+
+        }
+
+
+        // ----------------------------------------------------
+        // TAMPILKAN
+        // ----------------------------------------------------
+
+        renderSiswa(dataTampil);
+
+
+        if (info) {
+
+            if (role === "guru") {
+
+                info.innerHTML =
+                    "✅ Berhasil memuat " +
+                    dataTampil.length +
+                    " siswa.";
+
+            } else {
+
+                info.innerHTML =
+                    "✅ Menampilkan absensi Anda.";
+
+            }
+
+        }
+
 
     }
 
     catch (error) {
 
         console.error(
-            "ERROR LOAD SISWA:",
+            "❌ ERROR LOAD SISWA:",
             error
         );
+
+
+        let pesan =
+            error.message;
+
+
+        if (
+            error.name ===
+            "AbortError"
+        ) {
+
+            pesan =
+                "Koneksi ke Apps Script terlalu lama (timeout 15 detik).";
+
+        }
+
+
+        tabel.innerHTML = `
+            <tr>
+                <td colspan="4"
+                    style="
+                    padding:30px;
+                    text-align:center;
+                    color:red;
+                    font-weight:bold;
+                    ">
+
+                    ❌ GAGAL MEMUAT DATA SISWA
+
+                    <br><br>
+
+                    ${pesan}
+
+                    <br><br>
+
+                    <small>
+                    Buka Console (F12) untuk melihat detail.
+                    </small>
+
+                </td>
+            </tr>
+        `;
+
 
         if (info) {
 
             info.innerHTML =
-                "❌ " + error.message;
-
-        }
-
-        if (tabel) {
-
-            tabel.innerHTML = `
-                <tr>
-                    <td colspan="4"
-                        style="
-                        text-align:center;
-                        padding:30px;
-                        color:red;
-                        font-weight:bold;
-                        ">
-                        ❌ Gagal memuat data siswa
-                        <br><br>
-                        ${error.message}
-                    </td>
-                </tr>
-            `;
+                "❌ " + pesan;
 
         }
 
@@ -307,95 +458,86 @@ async function loadSiswa() {
 
 
 // ============================================================
-// TAMPILKAN FORM ABSENSI GURU
+// RENDER SISWA
 // ============================================================
 
-function tampilkanFormGuru() {
-
-    if (!tabel) return;
+function renderSiswa(data) {
 
     tabel.innerHTML = "";
 
-    dataSiswa.forEach(function (siswa, index) {
 
-        const nisn =
-            String(
-                siswa.NISN ||
-                siswa.nisn ||
-                ""
-            ).trim();
+    data.forEach(
+        function (siswa, index) {
 
-        const nama =
-            String(
-                siswa.NAMA ||
-                siswa.nama ||
-                ""
-            ).trim();
+            const nisn =
+                String(
+                    siswa.NISN ||
+                    siswa.nisn ||
+                    ""
+                ).trim();
 
-        const tr =
-            document.createElement("tr");
 
-        tr.innerHTML = `
+            const nama =
+                String(
+                    siswa.NAMA ||
+                    siswa.nama ||
+                    ""
+                ).trim();
 
-            <td style="text-align:center;">
-                ${index + 1}
-            </td>
 
-            <td style="font-weight:bold;">
-                ${nama}
-            </td>
+            const tr =
+                document.createElement("tr");
 
-            <td>
-                ${nisn}
-            </td>
 
-            <td>
+            tr.innerHTML = `
 
-                <select
-                    class="status-absensi"
-                    data-nisn="${nisn}"
-                    data-nama="${nama}">
+                <td style="text-align:center;">
+                    ${index + 1}
+                </td>
 
-                    <option value="H">
-                        H - Hadir
-                    </option>
+                <td>
+                    <b>${nama}</b>
+                </td>
 
-                    <option value="S">
-                        S - Sakit
-                    </option>
+                <td>
+                    ${nisn}
+                </td>
 
-                    <option value="I">
-                        I - Izin
-                    </option>
+                <td>
 
-                    <option value="A">
-                        A - Alfa
-                    </option>
+                    <select
+                        class="status-absensi"
+                        data-nisn="${nisn}"
+                        data-nama="${nama}">
 
-                </select>
+                        <option value="H">
+                            H - Hadir
+                        </option>
 
-            </td>
+                        <option value="S">
+                            S - Sakit
+                        </option>
 
-        `;
+                        <option value="I">
+                            I - Izin
+                        </option>
 
-        tabel.appendChild(tr);
+                        <option value="A">
+                            A - Alfa
+                        </option>
 
-    });
+                    </select>
 
-    if (info) {
+                </td>
 
-        info.innerHTML =
-            "✅ Menampilkan " +
-            dataSiswa.length +
-            " siswa.";
+            `;
 
-    }
 
-    if (btnSimpan) {
+            tabel.appendChild(tr);
 
-        btnSimpan.style.display = "inline-block";
+        }
+    );
 
-    }
 
     hitungStatistik();
 
@@ -403,282 +545,7 @@ function tampilkanFormGuru() {
 
 
 // ============================================================
-// LOAD ABSENSI SISWA
-// ============================================================
-
-async function loadAbsensiSiswa() {
-
-    try {
-
-        const nisn =
-            nisnLogin;
-
-        if (!nisn) {
-
-            throw new Error(
-                "NISN login tidak ditemukan."
-            );
-
-        }
-
-        const url =
-            API_URL +
-            "?action=absensi&nisn=" +
-            encodeURIComponent(nisn) +
-            "&_=" +
-            Date.now();
-
-        console.log(
-            "API ABSENSI SISWA:",
-            url
-        );
-
-        const response =
-            await fetch(url);
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Server error " +
-                response.status
-            );
-
-        }
-
-        const text =
-            await response.text();
-
-        console.log(
-            "Response absensi:",
-            text
-        );
-
-        let data;
-
-        try {
-
-            data = JSON.parse(text);
-
-        } catch (e) {
-
-            throw new Error(
-                "Data absensi bukan JSON."
-            );
-
-        }
-
-        if (!Array.isArray(data)) {
-
-            throw new Error(
-                "Format data absensi tidak benar."
-            );
-
-        }
-
-        dataAbsensi = data;
-
-        tampilkanAbsensiSiswa();
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "ERROR ABSENSI SISWA:",
-            error
-        );
-
-        if (info) {
-
-            info.innerHTML =
-                "❌ " + error.message;
-
-        }
-
-        if (tabel) {
-
-            tabel.innerHTML = `
-                <tr>
-                    <td colspan="4"
-                        style="
-                        text-align:center;
-                        padding:30px;
-                        color:red;
-                        ">
-                        ❌ Gagal mengambil data absensi
-                        <br><br>
-                        ${error.message}
-                    </td>
-                </tr>
-            `;
-
-        }
-
-    }
-
-}
-
-
-// ============================================================
-// TAMPILKAN ABSENSI SISWA
-// ============================================================
-
-function tampilkanAbsensiSiswa() {
-
-    if (!tabel) return;
-
-    tabel.innerHTML = "";
-
-    // --------------------------------------------------------
-    // JIKA BELUM ADA ABSENSI
-    // --------------------------------------------------------
-
-    if (dataAbsensi.length === 0) {
-
-        tabel.innerHTML = `
-            <tr>
-                <td colspan="4"
-                    style="
-                    text-align:center;
-                    padding:30px;
-                    ">
-                    📭 Belum ada data absensi.
-                </td>
-            </tr>
-        `;
-
-        if (info) {
-
-            info.innerHTML =
-                "📭 Belum ada riwayat absensi.";
-
-        }
-
-        return;
-
-    }
-
-
-    // --------------------------------------------------------
-    // TAMPILKAN DATA
-    // --------------------------------------------------------
-
-    dataAbsensi.forEach(function (item, index) {
-
-        const tanggal =
-            item.TANGGAL ||
-            item.tanggal ||
-            "-";
-
-        const nama =
-            item.NAMA ||
-            item.nama ||
-            namaSiswa;
-
-        const nisn =
-            item.NISN ||
-            item.nisn ||
-            nisnLogin;
-
-        const status =
-            item.STATUS ||
-            item.status ||
-            "H";
-
-        let statusText =
-            "H - Hadir";
-
-        let icon =
-            "🟢";
-
-        if (status === "S") {
-
-            statusText =
-                "S - Sakit";
-
-            icon =
-                "🟡";
-
-        }
-
-        else if (status === "I") {
-
-            statusText =
-                "I - Izin";
-
-            icon =
-                "📄";
-
-        }
-
-        else if (status === "A") {
-
-            statusText =
-                "A - Alfa";
-
-            icon =
-                "❌";
-
-        }
-
-        const tr =
-            document.createElement("tr");
-
-        tr.innerHTML = `
-
-            <td style="text-align:center;">
-                ${index + 1}
-            </td>
-
-            <td>
-                ${tanggal}
-            </td>
-
-            <td>
-                ${nama}
-                <br>
-                <small>${nisn}</small>
-            </td>
-
-            <td style="font-weight:bold;">
-                ${icon} ${statusText}
-            </td>
-
-        `;
-
-        tabel.appendChild(tr);
-
-    });
-
-
-    if (info) {
-
-        info.innerHTML =
-            "✅ Menampilkan " +
-            dataAbsensi.length +
-            " data absensi untuk " +
-            namaSiswa +
-            ".";
-
-    }
-
-
-    // Untuk siswa tidak perlu tombol simpan
-    if (btnSimpan) {
-
-        btnSimpan.style.display =
-            "none";
-
-    }
-
-
-    hitungStatistikSiswa();
-
-}
-
-
-// ============================================================
-// STATISTIK GURU
+// STATISTIK
 // ============================================================
 
 function hitungStatistik() {
@@ -688,119 +555,70 @@ function hitungStatistik() {
             ".status-absensi"
         );
 
-    let hadir = 0;
-    let sakit = 0;
-    let izin = 0;
-    let alfa = 0;
-
-    semua.forEach(function (select) {
-
-        if (select.value === "H")
-            hadir++;
-
-        if (select.value === "S")
-            sakit++;
-
-        if (select.value === "I")
-            izin++;
-
-        if (select.value === "A")
-            alfa++;
-
-    });
-
-    setStatistik(
-        hadir,
-        sakit,
-        izin,
-        alfa
-    );
-
-}
-
-
-// ============================================================
-// STATISTIK SISWA
-// ============================================================
-
-function hitungStatistikSiswa() {
 
     let hadir = 0;
     let sakit = 0;
     let izin = 0;
     let alfa = 0;
 
-    dataAbsensi.forEach(function (item) {
 
-        const status =
-            item.STATUS ||
-            item.status ||
-            "";
+    semua.forEach(
+        function (select) {
 
-        if (status === "H")
-            hadir++;
+            if (select.value === "H")
+                hadir++;
 
-        if (status === "S")
-            sakit++;
+            if (select.value === "S")
+                sakit++;
 
-        if (status === "I")
-            izin++;
+            if (select.value === "I")
+                izin++;
 
-        if (status === "A")
-            alfa++;
+            if (select.value === "A")
+                alfa++;
 
-    });
-
-    setStatistik(
-        hadir,
-        sakit,
-        izin,
-        alfa
+        }
     );
 
-}
+
+    const jmlHadir =
+        document.getElementById(
+            "jmlHadir"
+        );
+
+    const jmlSakit =
+        document.getElementById(
+            "jmlSakit"
+        );
+
+    const jmlIzin =
+        document.getElementById(
+            "jmlIzin"
+        );
+
+    const jmlAlfa =
+        document.getElementById(
+            "jmlAlfa"
+        );
 
 
-// ============================================================
-// SET STATISTIK KE HTML
-// ============================================================
+    if (jmlHadir)
+        jmlHadir.innerText = hadir;
 
-function setStatistik(
-    hadir,
-    sakit,
-    izin,
-    alfa
-) {
+    if (jmlSakit)
+        jmlSakit.innerText = sakit;
 
-    const h =
-        document.getElementById("jmlHadir");
+    if (jmlIzin)
+        jmlIzin.innerText = izin;
 
-    const s =
-        document.getElementById("jmlSakit");
-
-    const i =
-        document.getElementById("jmlIzin");
-
-    const a =
-        document.getElementById("jmlAlfa");
-
-    if (h)
-        h.innerText = hadir;
-
-    if (s)
-        s.innerText = sakit;
-
-    if (i)
-        i.innerText = izin;
-
-    if (a)
-        a.innerText = alfa;
+    if (jmlAlfa)
+        jmlAlfa.innerText = alfa;
 
 }
 
 
 // ============================================================
-// PERUBAHAN STATUS GURU
+// PERUBAHAN STATUS
 // ============================================================
 
 document.addEventListener(
@@ -822,93 +640,93 @@ document.addEventListener(
 
 
 // ============================================================
-// SIMPAN ABSENSI GURU
+// SIMPAN ABSENSI
 // ============================================================
 
 async function simpanAbsensi() {
 
-    if (role !== "guru") {
-
-        alert(
-            "❌ Hanya guru yang dapat menyimpan absensi."
-        );
-
-        return;
-
-    }
-
     if (!tanggalInput) {
 
         alert(
-            "❌ Kolom tanggal tidak ditemukan."
+            "❌ Input tanggal tidak ditemukan."
         );
 
         return;
 
     }
+
 
     const tanggal =
         tanggalInput.value;
 
+
     if (!tanggal) {
 
         alert(
-            "⚠️ Silakan pilih tanggal terlebih dahulu."
+            "⚠️ Pilih tanggal terlebih dahulu."
         );
 
         return;
 
     }
+
 
     const semua =
         document.querySelectorAll(
             ".status-absensi"
         );
 
+
     if (semua.length === 0) {
 
         alert(
-            "❌ Data siswa belum tersedia."
+            "❌ Tidak ada data siswa."
         );
 
         return;
 
     }
 
-    const yakin =
-        confirm(
-            "Simpan absensi untuk " +
-            semua.length +
-            " siswa pada tanggal " +
-            tanggal +
-            "?"
-        );
-
-    if (!yakin)
-        return;
-
 
     const data = [];
 
-    semua.forEach(function (select) {
 
-        data.push({
+    semua.forEach(
+        function (select) {
 
-            tanggal:
-                tanggal,
+            data.push({
 
-            nisn:
-                select.dataset.nisn,
+                tanggal:
+                    tanggal,
 
-            nama:
-                select.dataset.nama,
+                nisn:
+                    select.dataset.nisn,
 
-            status:
-                select.value
+                nama:
+                    select.dataset.nama,
 
-        });
+                status:
+                    select.value
 
-    });
+            });
+
+        }
+    );
+
+
+    const yakin =
+        confirm(
+            "Simpan absensi " +
+            data.length +
+            " siswa?"
+        );
+
+
+    if (!yakin) {
+
+        return;
+
+    }
 
 
     if (btnSimpan) {
@@ -932,7 +750,7 @@ async function simpanAbsensi() {
 
                     headers: {
                         "Content-Type":
-                            "text/plain;charset=utf-8"
+                        "text/plain;charset=utf-8"
                     },
 
                     body:
@@ -953,8 +771,9 @@ async function simpanAbsensi() {
         const text =
             await response.text();
 
+
         console.log(
-            "Response simpan:",
+            "HASIL SIMPAN:",
             text
         );
 
@@ -969,14 +788,14 @@ async function simpanAbsensi() {
 
             throw new Error(
                 hasil.pesan ||
-                "Absensi gagal disimpan."
+                "Gagal menyimpan."
             );
 
         }
 
 
         alert(
-            "✅ Absensi berhasil disimpan!"
+            "✅ Absensi berhasil disimpan."
         );
 
 
@@ -985,7 +804,6 @@ async function simpanAbsensi() {
     catch (error) {
 
         console.error(
-            "ERROR SIMPAN:",
             error
         );
 
@@ -995,6 +813,7 @@ async function simpanAbsensi() {
         );
 
     }
+
 
     finally {
 
@@ -1008,122 +827,5 @@ async function simpanAbsensi() {
         }
 
     }
-
-}
-
-
-// ============================================================
-// HUBUNGKAN TOMBOL SIMPAN
-// ============================================================
-
-if (btnSimpan) {
-
-    btnSimpan.addEventListener(
-        "click",
-        simpanAbsensi
-    );
-
-}
-
-
-// ============================================================
-// REFRESH
-// ============================================================
-
-const btnRefresh =
-    document.getElementById(
-        "btnRefresh"
-    );
-
-if (btnRefresh) {
-
-    btnRefresh.addEventListener(
-        "click",
-        function () {
-
-            location.reload();
-
-        }
-    );
-
-}
-
-
-// ============================================================
-// TANGGAL DEFAULT UNTUK GURU
-// ============================================================
-
-function setTanggalHariIni() {
-
-    if (
-        !tanggalInput ||
-        role !== "guru"
-    )
-        return;
-
-    const sekarang =
-        new Date();
-
-    const tahun =
-        sekarang.getFullYear();
-
-    const bulan =
-        String(
-            sekarang.getMonth() + 1
-        ).padStart(2, "0");
-
-    const hari =
-        String(
-            sekarang.getDate()
-        ).padStart(2, "0");
-
-    tanggalInput.value =
-        tahun +
-        "-" +
-        bulan +
-        "-" +
-        hari;
-
-}
-
-
-// ============================================================
-// MULAI
-// ============================================================
-
-function mulaiAbsensi() {
-
-    console.log(
-        "🚀 ABSENSI DIMULAI"
-    );
-
-    tampilkanNamaLogin();
-
-    loadingPesan();
-
-    setTanggalHariIni();
-
-    loadSiswa();
-
-}
-
-
-// ============================================================
-// DOM READY
-// ============================================================
-
-if (
-    document.readyState ===
-    "loading"
-) {
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        mulaiAbsensi
-    );
-
-} else {
-
-    mulaiAbsensi();
 
 }
