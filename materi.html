@@ -4,1136 +4,773 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Materi Pembelajaran Kelas 5</title>
+<title>Materi Matematika Kelas 5 - SDN Cijember</title>
 
 <style>
-
 *{
     box-sizing:border-box;
 }
 
 body{
     margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#eef5fb;
+    font-family:Arial, sans-serif;
+    background:#f4f7fb;
     color:#1f2937;
 }
-
-/* ==============================
-   HEADER
-============================== */
-
-.header{
-    background:linear-gradient(135deg,#1976d2,#42a5f5);
-    color:white;
-    padding:25px 15px;
-    text-align:center;
-    box-shadow:0 4px 15px rgba(0,0,0,.15);
-}
-
-.header h1{
-    margin:0;
-    font-size:30px;
-}
-
-.header p{
-    margin:8px 0 0;
-    font-size:16px;
-}
-
-/* ==============================
-   CONTAINER
-============================== */
 
 .container{
     max-width:1100px;
     margin:auto;
-    padding:25px 15px 100px;
+    padding:20px;
 }
 
+/* HEADER */
+.header{
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    padding:30px 20px;
+    border-radius:0 0 25px 25px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+.header h1{
+    margin:0 0 8px;
+    font-size:30px;
+}
+
+.header p{
+    margin:0;
+    font-size:16px;
+}
+
+/* TOMBOL KEMBALI */
+.btn-kembali{
+    display:inline-block;
+    margin:20px 0;
+    padding:11px 18px;
+    background:#374151;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.btn-kembali:hover{
+    background:#111827;
+}
+
+/* DAFTAR BAB */
 .judul{
     text-align:center;
-    margin:10px 0 25px;
-    color:#1565c0;
+    margin:15px 0 20px;
 }
 
-/* ==============================
-   GRID 9 MAPEL
-============================== */
-
-.mapel-grid{
+.grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:20px;
+    gap:18px;
 }
 
-/* ==============================
-   KARTU MAPEL
-============================== */
-
-.mapel-card{
+.card{
     background:white;
-    border-radius:20px;
-    padding:25px 15px;
-    text-align:center;
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
     cursor:pointer;
-    box-shadow:0 5px 18px rgba(0,0,0,.10);
     transition:.25s;
     border:2px solid transparent;
 }
 
-.mapel-card:hover{
-    transform:translateY(-5px);
-    border-color:#42a5f5;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
+.card:hover{
+    transform:translateY(-4px);
+    border-color:#2563eb;
 }
 
-.mapel-icon{
-    font-size:52px;
+.nomor{
+    width:45px;
+    height:45px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#2563eb;
+    color:white;
+    border-radius:50%;
+    font-size:20px;
+    font-weight:bold;
     margin-bottom:12px;
 }
 
-.mapel-card h3{
-    margin:5px 0;
-    color:#1565c0;
-    font-size:20px;
+.card h3{
+    margin:5px 0 10px;
 }
 
-.mapel-card p{
-    margin:8px 0 0;
-    color:#666;
-    font-size:14px;
+.card p{
+    margin:0;
+    color:#6b7280;
+    line-height:1.5;
 }
 
-/* ==============================
-   HALAMAN MATERI
-============================== */
-
-.materi-halaman{
+/* MATERI */
+.materi{
     display:none;
+    background:white;
+    margin-top:25px;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
 }
 
-.materi-halaman.aktif{
+.materi.active{
     display:block;
 }
 
-.tombol-kembali{
-    border:none;
-    background:#1565c0;
-    color:white;
-    padding:11px 18px;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:15px;
-    margin-bottom:20px;
+.materi h2{
+    color:#2563eb;
+    border-bottom:2px solid #e5e7eb;
+    padding-bottom:10px;
 }
 
-.tombol-kembali:hover{
-    background:#0d47a1;
+.materi h3{
+    color:#374151;
+    margin-top:25px;
 }
 
-.judul-mapel{
-    background:white;
-    border-radius:18px;
-    padding:20px;
-    text-align:center;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
-    margin-bottom:20px;
-}
-
-.judul-mapel h2{
-    margin:0;
-    color:#1565c0;
-}
-
-.judul-mapel p{
-    margin:8px 0 0;
-    color:#666;
-}
-
-/* ==============================
-   KARTU BAB
-============================== */
-
-.bab{
-    background:white;
-    margin-bottom:18px;
-    border-radius:18px;
-    padding:20px;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
-}
-
-.bab h3{
-    color:#1565c0;
-    margin-top:0;
-}
-
-.bab h4{
-    color:#333;
-    margin-bottom:8px;
-}
-
-.bab p{
+.materi p,
+.materi li{
     line-height:1.7;
 }
 
-.bab ul{
-    line-height:1.8;
-}
-
-/* ==============================
-   BOX CONTOH
-============================== */
-
 .contoh{
-    background:#e3f2fd;
-    border-left:5px solid #1976d2;
+    background:#eff6ff;
+    border-left:5px solid #2563eb;
     padding:15px;
     border-radius:10px;
-    margin-top:12px;
+    margin:15px 0;
 }
-
-/* ==============================
-   TOMBOL LATIHAN
-============================== */
 
 .latihan{
-    background:#fff8e1;
-    border-left:5px solid #ffb300;
-    padding:15px;
-    border-radius:10px;
-    margin-top:15px;
+    background:#f9fafb;
+    padding:18px;
+    border-radius:12px;
+    margin-top:20px;
 }
 
-/* ==============================
-   RESPONSIVE HP
-============================== */
+.btn-tutup{
+    background:#ef4444;
+    color:white;
+    border:0;
+    padding:10px 16px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
 
+/* RESPONSIVE */
 @media(max-width:800px){
-
-    .mapel-grid{
+    .grid{
         grid-template-columns:repeat(2,1fr);
-        gap:14px;
     }
-
-    .mapel-card{
-        padding:20px 10px;
-    }
-
-    .mapel-icon{
-        font-size:42px;
-    }
-
-    .mapel-card h3{
-        font-size:17px;
-    }
-
 }
 
-@media(max-width:500px){
+@media(max-width:550px){
+    .container{
+        padding:12px;
+    }
 
     .header h1{
         font-size:23px;
     }
 
-    .mapel-grid{
-        grid-template-columns:repeat(2,1fr);
+    .grid{
+        grid-template-columns:1fr;
     }
 
-    .mapel-icon{
-        font-size:38px;
+    .card{
+        padding:18px;
     }
 
-    .mapel-card h3{
-        font-size:15px;
+    .materi{
+        padding:18px;
     }
-
-    .mapel-card p{
-        font-size:12px;
-    }
-
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
+<!-- HEADER -->
 <div class="header">
-
-    <h1>📚 Materi Pembelajaran</h1>
-
-    <p>
-        Kelas 5 SDN Cijember
-    </p>
-
-    <p>
-        Tahun Pelajaran 2026/2027
-    </p>
-
+    <h1>📐 Matematika Kelas 5</h1>
+    <p>Portal Digital Kelas 5 SDN Cijember</p>
 </div>
-
 
 <div class="container">
 
-
-<!-- =====================================================
-     HALAMAN UTAMA 9 MAPEL
-===================================================== -->
-
-<div id="halamanMapel">
-
-    <h2 class="judul">
-        📖 Pilih Mata Pelajaran
-    </h2>
-
-    <div class="mapel-grid">
-
-
-        <!-- PAI -->
-
-        <div class="mapel-card"
-             onclick="bukaMateri('pai')">
-
-            <div class="mapel-icon">
-                🕌
-            </div>
-
-            <h3>
-                Pendidikan Agama Islam
-            </h3>
-
-            <p>
-                Materi PAI Kelas 5
-            </p>
-
-        </div>
-
-
-        <!-- PANCASILA -->
-
-        <div class="mapel-card"
-             onclick="bukaMateri('pancasila')">
-
-            <div class="mapel-icon">
-                🇮🇩
-            </div>
-
-            <h3>
-                Pendidikan Pancasila
-            </h3>
-
-            <p>
-                Materi Pendidikan Pancasila
-            </p>
-
-        </div>
-
-
-        <!-- MATEMATIKA -->
-
-        <div class="mapel-card"
-             onclick="bukaMateri('matematika')">
-
-            <div class="mapel-icon">
-                🔢
-            </div>
-
-            <h3>
-                Matematika
-            </h3>
-
-            <p>
-                Materi Matematika Kelas 5
-            </p>
-
-        </div>
-
-
-        <!-- BAHASA INDONESIA -->
-
-        <div class="mapel-card"
-             onclick="bukaMateri('indonesia')">
-
-            <div class="mapel-icon">
-                📖
-            </div>
-
-            <h3>
-                Bahasa Indonesia
-            </h3>
-
-            <p>
-                Materi Bahasa Indonesia
-            </p>
-
-        </div>
-
-
-        <!-- BAHASA INGGRIS -->
-
-        <div class="mapel-card"
-             onclick="bukaMateri('inggris')">
-
-            <div class="mapel-icon">
-                🇬🇧
-            </div>
-
-            <h3>
-                Bahasa Inggris
-            </h3>
-
-            <p>
-                English for Grade 5
-            </p>
-
-        </div>
-
-
-        <!-- BAHASA SUNDA -->
-
-        <div class="mapel-card"
-             onclick="bukaMateri('sunda')">
-
-            <div class="mapel-icon">
-                🌿
-            </div>
-
-            <h3>
-                Bahasa Sunda
-            </h3>
-
-            <p>
-                Materi Bahasa Sunda
-            </p>
-
-        </div>
-
-
-        <!-- KKA -->
-
-        <div class="mapel-card"
-             onclick="bukaMateri('kka')">
-
-            <div class="mapel-icon">
-                💻
-            </div>
-
-            <h3>
-                KKA
-            </h3>
-
-            <p>
-                Koding dan Kecerdasan Artifisial
-            </p>
-
-        </div>
-
-
-        <!-- SENI RUPA -->
-
-        <div class="mapel-card"
-             onclick="bukaMateri('seni')">
-
-            <div class="mapel-icon">
-                🎨
-            </div>
-
-            <h3>
-                Seni Rupa
-            </h3>
-
-            <p>
-                Materi Seni Rupa Kelas 5
-            </p>
-
-        </div>
-
-
-        <!-- PJOK -->
-
-        <div class="mapel-card"
-             onclick="bukaMateri('pjok')">
-
-            <div class="mapel-icon">
-                🏃
-            </div>
-
-            <h3>
-                PJOK
-            </h3>
-
-            <p>
-                Pendidikan Jasmani, Olahraga dan Kesehatan
-            </p>
-
-        </div>
-
-
+<a href="javascript:history.back()" class="btn-kembali">
+    ← Kembali ke Materi
+</a>
+
+<h2 class="judul">📚 Pilih Materi Pembelajaran</h2>
+
+<!-- ===================================================== -->
+<!-- DAFTAR BAB -->
+<!-- ===================================================== -->
+
+<div class="grid">
+
+    <div class="card" onclick="bukaMateri('bab1')">
+        <div class="nomor">1</div>
+        <h3>🔢 Bilangan Cacah</h3>
+        <p>Membaca, menulis, membandingkan, mengurutkan, dan operasi bilangan sampai 100.000.</p>
+    </div>
+
+    <div class="card" onclick="bukaMateri('bab2')">
+        <div class="nomor">2</div>
+        <h3>🧮 KPK dan FPB</h3>
+        <p>Mengenal faktor, kelipatan, KPK, FPB, dan penerapannya.</p>
+    </div>
+
+    <div class="card" onclick="bukaMateri('bab3')">
+        <div class="nomor">3</div>
+        <h3>🍕 Pecahan</h3>
+        <p>Mengenal dan melakukan operasi hitung pecahan.</p>
+    </div>
+
+    <div class="card" onclick="bukaMateri('bab4')">
+        <div class="nomor">4</div>
+        <h3>💯 Desimal dan Persen</h3>
+        <p>Mengenal hubungan pecahan, desimal, dan persen.</p>
+    </div>
+
+    <div class="card" onclick="bukaMateri('bab5')">
+        <div class="nomor">5</div>
+        <h3>📏 Pengukuran</h3>
+        <p>Panjang, berat, waktu, dan konversi satuan.</p>
+    </div>
+
+    <div class="card" onclick="bukaMateri('bab6')">
+        <div class="nomor">6</div>
+        <h3>📐 Keliling dan Luas</h3>
+        <p>Menghitung keliling dan luas berbagai bangun datar.</p>
+    </div>
+
+    <div class="card" onclick="bukaMateri('bab7')">
+        <div class="nomor">7</div>
+        <h3>🧊 Bangun Ruang</h3>
+        <p>Mengenal kubus, balok, jaring-jaring, dan volume.</p>
+    </div>
+
+    <div class="card" onclick="bukaMateri('bab8')">
+        <div class="nomor">8</div>
+        <h3>📊 Data</h3>
+        <p>Membaca tabel dan menyajikan data dalam diagram.</p>
+    </div>
+
+    <div class="card" onclick="bukaMateri('bab9')">
+        <div class="nomor">9</div>
+        <h3>🔁 Pola Bilangan</h3>
+        <p>Mengenal, melanjutkan, dan menentukan aturan pola.</p>
     </div>
 
 </div>
 
 
-<!-- =====================================================
-     PAI
-===================================================== -->
+<!-- ===================================================== -->
+<!-- BAB 1 -->
+<!-- ===================================================== -->
 
-<div id="pai" class="materi-halaman">
+<div id="bab1" class="materi">
 
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
+<h2>🔢 Bab 1 — Bilangan Cacah sampai 100.000</h2>
 
-<div class="judul-mapel">
-
-<h2>🕌 Pendidikan Agama Islam</h2>
-
-<p>Materi Pembelajaran PAI Kelas 5</p>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 1 — Al-Qur'an dan Hadis</h3>
+<h3>📖 Apa itu bilangan cacah?</h3>
 
 <p>
-Mengenal Al-Qur'an sebagai kitab suci umat Islam
-dan hadis sebagai sumber ajaran Islam.
+Bilangan cacah adalah bilangan yang dimulai dari 0, 1, 2, 3, dan seterusnya.
 </p>
 
-<h4>Materi</h4>
-
-<ul>
-<li>Pengertian Al-Qur'an</li>
-<li>Pengertian hadis</li>
-<li>Fungsi Al-Qur'an</li>
-<li>Adab membaca Al-Qur'an</li>
-</ul>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 2 — Akhlak Terpuji</h3>
+<h3>📌 Nilai Tempat</h3>
 
 <p>
-Membiasakan perilaku jujur, disiplin, bertanggung jawab,
-sopan, dan menghormati orang lain.
-</p>
-
-<div class="contoh">
-<b>Contoh:</b> berkata jujur kepada guru dan orang tua,
-menepati janji, serta membantu teman.
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     PANCASILA
-===================================================== -->
-
-<div id="pancasila" class="materi-halaman">
-
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
-
-<div class="judul-mapel">
-
-<h2>🇮🇩 Pendidikan Pancasila</h2>
-
-<p>Materi Pendidikan Pancasila Kelas 5</p>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 1 — Pancasila dalam Kehidupan</h3>
-
-<p>
-Pancasila merupakan dasar negara dan pedoman dalam
-kehidupan bermasyarakat, berbangsa, dan bernegara.
+Pada bilangan <b>45.327</b>:
 </p>
 
 <ul>
-<li>Makna sila-sila Pancasila</li>
-<li>Contoh perilaku sesuai Pancasila</li>
-<li>Menghargai perbedaan</li>
-<li>Gotong royong</li>
-</ul>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 2 — Hak dan Kewajiban</h3>
-
-<p>
-Hak adalah sesuatu yang seharusnya kita terima,
-sedangkan kewajiban adalah sesuatu yang harus kita lakukan.
-</p>
-
-<div class="contoh">
-<b>Contoh:</b> siswa memiliki hak mendapatkan pembelajaran
-dan kewajiban mengikuti pembelajaran dengan tertib.
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     MATEMATIKA
-===================================================== -->
-
-<div id="matematika" class="materi-halaman">
-
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
-
-<div class="judul-mapel">
-
-<h2>🔢 Matematika</h2>
-
-<p>Materi Matematika Kelas 5</p>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 1 — Bilangan</h3>
-
-<p>
-Mengenal bilangan, nilai tempat, membaca,
-menulis, membandingkan, dan mengurutkan bilangan.
-</p>
-
-<ul>
-<li>Bilangan cacah</li>
-<li>Nilai tempat</li>
-<li>Membaca bilangan</li>
-<li>Menulis bilangan</li>
-<li>Membandingkan bilangan</li>
-<li>Mengurutkan bilangan</li>
+<li>4 = puluh ribuan</li>
+<li>5 = ribuan</li>
+<li>3 = ratusan</li>
+<li>2 = puluhan</li>
+<li>7 = satuan</li>
 </ul>
 
 <div class="contoh">
-
-<b>Contoh:</b>
-
+<b>Contoh:</b><br>
+Bilangan 72.405 dibaca:
 <br><br>
-
-Bilangan 45.327 dibaca:
-
-<br>
-
-<b>Empat puluh lima ribu tiga ratus dua puluh tujuh.</b>
-
-<br><br>
-
-Nilai tempat angka 5 adalah <b>ribuan</b>.
-
+<strong>tujuh puluh dua ribu empat ratus lima.</strong>
 </div>
 
-<div class="latihan">
+<h3>✏️ Membandingkan Bilangan</h3>
 
-<b>Latihan:</b>
-
-<br><br>
-
-Tentukan nilai tempat angka 7 pada bilangan
-27.345.
-
-</div>
-
-</div>
-
-
-<div class="bab">
-
-<h3>📘 Bab 2 — Operasi Hitung Bilangan</h3>
+<p>
+Gunakan tanda:
+</p>
 
 <ul>
-<li>Penjumlahan</li>
-<li>Pengurangan</li>
-<li>Perkalian</li>
-<li>Pembagian</li>
-<li>Operasi hitung campuran</li>
+<li>&gt; lebih besar dari</li>
+<li>&lt; lebih kecil dari</li>
+<li>= sama dengan</li>
 </ul>
 
 <div class="contoh">
+Contoh:<br>
+45.000 &gt; 35.000
+</div>
 
-<b>Contoh:</b>
+<h3>📝 Latihan</h3>
 
+<ol>
+<li>Berapa nilai tempat angka 6 pada bilangan 46.250?</li>
+<li>Bagaimana cara membaca 83.215?</li>
+<li>Manakah yang lebih besar: 72.500 atau 75.200?</li>
+</ol>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- BAB 2 -->
+<!-- ===================================================== -->
+
+<div id="bab2" class="materi">
+
+<h2>🧮 Bab 2 — KPK dan FPB</h2>
+
+<h3>📖 Faktor</h3>
+
+<p>
+Faktor adalah bilangan yang dapat membagi suatu bilangan sampai habis.
+</p>
+
+<div class="contoh">
+Faktor dari 12 adalah:
+<br>
+<strong>1, 2, 3, 4, 6, dan 12.</strong>
+</div>
+
+<h3>📖 Kelipatan</h3>
+
+<p>
+Kelipatan adalah hasil perkalian suatu bilangan dengan bilangan cacah.
+</p>
+
+<div class="contoh">
+Kelipatan 5:
+<br>
+5, 10, 15, 20, 25, 30, ...
+</div>
+
+<h3>📌 KPK</h3>
+
+<p>
+KPK adalah Kelipatan Persekutuan Terkecil.
+</p>
+
+<div class="contoh">
+KPK dari 4 dan 6 adalah <strong>12</strong>.
+</div>
+
+<h3>📌 FPB</h3>
+
+<p>
+FPB adalah Faktor Persekutuan Terbesar.
+</p>
+
+<div class="contoh">
+FPB dari 12 dan 18 adalah <strong>6</strong>.
+</div>
+
+<h3>📝 Latihan</h3>
+
+<ol>
+<li>Tentukan KPK dari 6 dan 8.</li>
+<li>Tentukan FPB dari 18 dan 24.</li>
+<li>Tuliskan faktor dari 20.</li>
+</ol>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- BAB 3 -->
+<!-- ===================================================== -->
+
+<div id="bab3" class="materi">
+
+<h2>🍕 Bab 3 — Pecahan</h2>
+
+<h3>📖 Pecahan Biasa</h3>
+
+<p>
+Pecahan terdiri dari pembilang dan penyebut.
+</p>
+
+<div class="contoh">
+Pada pecahan <strong>3/5</strong>:
+<br>
+3 = pembilang
+<br>
+5 = penyebut
+</div>
+
+<h3>📌 Pecahan Senilai</h3>
+
+<p>
+Pecahan senilai adalah pecahan yang mempunyai nilai sama meskipun bentuknya berbeda.
+</p>
+
+<div class="contoh">
+1/2 = 2/4 = 3/6 = 4/8
+</div>
+
+<h3>➕ Penjumlahan Pecahan</h3>
+
+<p>
+Jika penyebut sama, jumlahkan pembilangnya.
+</p>
+
+<div class="contoh">
+2/7 + 3/7 = 5/7
+</div>
+
+<h3>➖ Pengurangan Pecahan</h3>
+
+<div class="contoh">
+6/8 − 2/8 = 4/8 = 1/2
+</div>
+
+<h3>📝 Latihan</h3>
+
+<ol>
+<li>2/5 + 1/5 = ...</li>
+<li>7/9 − 3/9 = ...</li>
+<li>Tentukan pecahan yang senilai dengan 1/3.</li>
+</ol>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- BAB 4 -->
+<!-- ===================================================== -->
+
+<div id="bab4" class="materi">
+
+<h2>💯 Bab 4 — Desimal dan Persen</h2>
+
+<h3>📖 Bilangan Desimal</h3>
+
+<p>
+Bilangan desimal menggunakan tanda koma untuk memisahkan bilangan bulat dan bagian pecahan.
+</p>
+
+<div class="contoh">
+1/2 = 0,5
+<br>
+1/4 = 0,25
+</div>
+
+<h3>📌 Persen</h3>
+
+<p>
+Persen berarti per seratus.
+</p>
+
+<div class="contoh">
+50% = 50/100 = 1/2 = 0,5
+</div>
+
+<h3>🔄 Hubungan Pecahan, Desimal, dan Persen</h3>
+
+<div class="contoh">
+1/2 = 0,5 = 50%
 <br><br>
+1/4 = 0,25 = 25%
+<br><br>
+3/4 = 0,75 = 75%
+</div>
 
-125 × 4 = <b>500</b>
+<h3>📝 Latihan</h3>
 
+<ol>
+<li>Ubahlah 1/2 menjadi desimal.</li>
+<li>Ubahlah 0,25 menjadi persen.</li>
+<li>Ubahlah 75% menjadi pecahan.</li>
+</ol>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- BAB 5 -->
+<!-- ===================================================== -->
+
+<div id="bab5" class="materi">
+
+<h2>📏 Bab 5 — Pengukuran</h2>
+
+<h3>📐 Satuan Panjang</h3>
+
+<ul>
+<li>1 km = 1.000 m</li>
+<li>1 m = 100 cm</li>
+<li>1 cm = 10 mm</li>
+</ul>
+
+<h3>⚖️ Satuan Berat</h3>
+
+<ul>
+<li>1 kg = 1.000 gram</li>
+<li>1 gram = 1.000 mg</li>
+</ul>
+
+<h3>⏰ Satuan Waktu</h3>
+
+<ul>
+<li>1 jam = 60 menit</li>
+<li>1 menit = 60 detik</li>
+<li>1 hari = 24 jam</li>
+</ul>
+
+<div class="contoh">
+2 meter = 200 cm
 <br>
-
-800 : 10 = <b>80</b>
-
+3 kg = 3.000 gram
 </div>
 
-</div>
+<h3>📝 Latihan</h3>
 
-
-<div class="bab">
-
-<h3>📘 Bab 3 — Pecahan</h3>
-
-<ul>
-<li>Pecahan biasa</li>
-<li>Pecahan campuran</li>
-<li>Pecahan senilai</li>
-<li>Membandingkan pecahan</li>
-<li>Penjumlahan pecahan</li>
-<li>Pengurangan pecahan</li>
-</ul>
-
-</div>
+<ol>
+<li>5 meter = ... cm</li>
+<li>4 kg = ... gram</li>
+<li>2 jam = ... menit</li>
+</ol>
 
 </div>
 
 
-<!-- =====================================================
-     BAHASA INDONESIA
-===================================================== -->
+<!-- ===================================================== -->
+<!-- BAB 6 -->
+<!-- ===================================================== -->
 
-<div id="indonesia" class="materi-halaman">
+<div id="bab6" class="materi">
 
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
+<h2>📐 Bab 6 — Keliling dan Luas</h2>
 
-<div class="judul-mapel">
-
-<h2>📖 Bahasa Indonesia</h2>
-
-<p>Materi Bahasa Indonesia Kelas 5</p>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 1 — Membaca dan Memahami Teks</h3>
-
-<ul>
-<li>Menentukan ide pokok</li>
-<li>Menentukan informasi penting</li>
-<li>Menyimpulkan bacaan</li>
-<li>Menjawab pertanyaan berdasarkan teks</li>
-</ul>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 2 — Puisi</h3>
-
-<ul>
-<li>Pengertian puisi</li>
-<li>Unsur puisi</li>
-<li>Makna puisi</li>
-<li>Puisi akrostik</li>
-<li>Membuat puisi sederhana</li>
-</ul>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAHASA INGGRIS
-===================================================== -->
-
-<div id="inggris" class="materi-halaman">
-
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
-
-<div class="judul-mapel">
-
-<h2>🇬🇧 Bahasa Inggris</h2>
-
-<p>English for Grade 5</p>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Chapter 1 — Greetings</h3>
+<h3>⬜ Persegi</h3>
 
 <p>
-Mengenal ungkapan salam dan perkenalan sederhana.
+Keliling persegi:
 </p>
 
 <div class="contoh">
-
-Hello = Halo
-
-<br>
-
-Good morning = Selamat pagi
-
-<br>
-
-Good afternoon = Selamat siang
-
-<br>
-
-How are you? = Apa kabar?
-
+K = 4 × sisi
 </div>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Chapter 2 — Numbers</h3>
 
 <p>
-Mengenal angka dalam bahasa Inggris.
+Luas persegi:
 </p>
 
 <div class="contoh">
+L = sisi × sisi
+</div>
 
-One = 1
+<h3>▭ Persegi Panjang</h3>
 
+<div class="contoh">
+Keliling = 2 × (panjang + lebar)
+<br><br>
+Luas = panjang × lebar
+</div>
+
+<h3>🔺 Segitiga</h3>
+
+<div class="contoh">
+Luas = 1/2 × alas × tinggi
+</div>
+
+<h3>📝 Latihan</h3>
+
+<ol>
+<li>Sebuah persegi mempunyai sisi 8 cm. Berapa luasnya?</li>
+<li>Sebuah persegi panjang panjangnya 10 cm dan lebarnya 5 cm. Berapa luasnya?</li>
+<li>Segitiga memiliki alas 12 cm dan tinggi 8 cm. Berapa luasnya?</li>
+</ol>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- BAB 7 -->
+<!-- ===================================================== -->
+
+<div id="bab7" class="materi">
+
+<h2>🧊 Bab 7 — Bangun Ruang</h2>
+
+<h3>📦 Kubus</h3>
+
+<p>
+Kubus mempunyai 6 sisi berbentuk persegi, 12 rusuk, dan 8 titik sudut.
+</p>
+
+<div class="contoh">
+Volume kubus:
 <br>
-Two = 2
+<strong>V = sisi × sisi × sisi</strong>
+</div>
 
+<h3>📦 Balok</h3>
+
+<p>
+Balok memiliki sisi berbentuk persegi panjang.
+</p>
+
+<div class="contoh">
+Volume balok:
 <br>
-Three = 3
+<strong>V = panjang × lebar × tinggi</strong>
+</div>
 
+<h3>📝 Latihan</h3>
+
+<ol>
+<li>Kubus memiliki sisi 5 cm. Berapa volumenya?</li>
+<li>Balok berukuran panjang 10 cm, lebar 5 cm, dan tinggi 4 cm. Berapa volumenya?</li>
+</ol>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- BAB 8 -->
+<!-- ===================================================== -->
+
+<div id="bab8" class="materi">
+
+<h2>📊 Bab 8 — Data</h2>
+
+<h3>📖 Apa itu data?</h3>
+
+<p>
+Data adalah kumpulan informasi yang dapat digunakan untuk mengetahui suatu keadaan.
+</p>
+
+<h3>📋 Tabel</h3>
+
+<p>
+Data dapat disajikan dalam bentuk tabel agar lebih mudah dibaca.
+</p>
+
+<div class="contoh">
+Contoh data jumlah buku yang dibaca siswa:
+<br><br>
+Andi = 5 buku
 <br>
-Four = 4
-
+Budi = 3 buku
 <br>
-Five = 5
-
+Citra = 7 buku
 </div>
 
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAHASA SUNDA
-===================================================== -->
-
-<div id="sunda" class="materi-halaman">
-
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
-
-<div class="judul-mapel">
-
-<h2>🌿 Bahasa Sunda</h2>
-
-<p>Materi Bahasa Sunda Kelas 5</p>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 1 — Paguneman</h3>
+<h3>📊 Diagram Batang</h3>
 
 <p>
-Paguneman nyaéta komunikasi atawa obrolan antara dua jalma
-atawa leuwih.
+Diagram batang digunakan untuk membandingkan data menggunakan batang dengan ukuran yang berbeda.
 </p>
 
-<ul>
-<li>Ngagunakeun basa anu sopan</li>
-<li>Ngalakukeun paguneman jeung babaturan</li>
-<li>Ngalakukeun paguneman jeung guru</li>
-</ul>
+<h3>📝 Latihan</h3>
+
+<ol>
+<li>Apa yang dimaksud dengan data?</li>
+<li>Sebutkan salah satu cara menyajikan data.</li>
+<li>Mengapa data dapat disajikan dalam bentuk diagram?</li>
+</ol>
 
 </div>
 
-<div class="bab">
 
-<h3>📘 Bab 2 — Kecap jeung Kalimah</h3>
+<!-- ===================================================== -->
+<!-- BAB 9 -->
+<!-- ===================================================== -->
+
+<div id="bab9" class="materi">
+
+<h2>🔁 Bab 9 — Pola Bilangan</h2>
+
+<h3>📖 Pengertian Pola</h3>
 
 <p>
-Diajar ngagunakeun kecap jeung kalimah basa Sunda
-dina kahirupan sapopoe.
+Pola adalah susunan bilangan atau gambar yang memiliki aturan tertentu.
 </p>
 
+<div class="contoh">
+Contoh:
+<br><br>
+2, 4, 6, 8, 10, ...
+<br><br>
+Polanya bertambah <strong>2</strong>.
 </div>
 
+<div class="contoh">
+Contoh lain:
+<br><br>
+5, 10, 15, 20, 25, ...
+<br><br>
+Polanya bertambah <strong>5</strong>.
 </div>
 
+<h3>📝 Latihan</h3>
 
-<!-- =====================================================
-     KKA
-===================================================== -->
-
-<div id="kka" class="materi-halaman">
-
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
-
-<div class="judul-mapel">
-
-<h2>💻 KKA</h2>
-
-<p>Koding dan Kecerdasan Artifisial</p>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 1 — Berpikir Komputasional</h3>
-
-<p>
-Berpikir komputasional adalah cara menyelesaikan masalah
-secara terstruktur dan logis.
-</p>
-
-<ul>
-<li>Dekomposisi</li>
-<li>Pengenalan pola</li>
-<li>Abstraksi</li>
-<li>Algoritma</li>
-</ul>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 2 — Pengenalan Kecerdasan Artifisial</h3>
-
-<p>
-Mengenal kecerdasan artifisial dan contoh penggunaannya
-dalam kehidupan sehari-hari.
-</p>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     SENI RUPA
-===================================================== -->
-
-<div id="seni" class="materi-halaman">
-
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
-
-<div class="judul-mapel">
-
-<h2>🎨 Seni Rupa</h2>
-
-<p>Materi Seni Rupa Kelas 5</p>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 1 — Unsur Seni Rupa</h3>
-
-<ul>
-<li>Titik</li>
-<li>Garis</li>
-<li>Bentuk</li>
-<li>Warna</li>
-<li>Tekstur</li>
-<li>Ruang</li>
-</ul>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 2 — Menggambar</h3>
-
-<p>
-Mengembangkan kemampuan menggambar melalui pengamatan
-lingkungan sekitar.
-</p>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     PJOK
-===================================================== -->
-
-<div id="pjok" class="materi-halaman">
-
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
-
-<div class="judul-mapel">
-
-<h2>🏃 PJOK</h2>
-
-<p>Pendidikan Jasmani, Olahraga dan Kesehatan</p>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 1 — Permainan Bola Besar</h3>
-
-<ul>
-<li>Sepak bola</li>
-<li>Bola voli</li>
-<li>Bola basket</li>
-<li>Teknik dasar permainan</li>
-</ul>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 2 — Kebugaran Jasmani</h3>
-
-<ul>
-<li>Kekuatan</li>
-<li>Kelenturan</li>
-<li>Kecepatan</li>
-<li>Daya tahan</li>
-<li>Keseimbangan</li>
-</ul>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 3 — Hidup Sehat</h3>
-
-<p>
-Menjaga kesehatan tubuh melalui pola makan sehat,
-olahraga teratur, istirahat cukup, dan kebersihan diri.
-</p>
-
-</div>
+<ol>
+<li>Lengkapi: 2, 4, 6, 8, ..., ...</li>
+<li>Lengkapi: 5, 10, 15, 20, ..., ...</li>
+<li>Tentukan aturan pola: 10, 20, 30, 40, ...</li>
+</ol>
 
 </div>
 
 
 </div>
 
-
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
 
 <script>
 
-/*
-===========================================================
-FUNGSI MEMBUKA MATERI
-===========================================================
-*/
-
 function bukaMateri(id){
 
-    // sembunyikan halaman 9 mapel
-
-    document.getElementById(
-        "halamanMapel"
-    ).style.display = "none";
-
-
     // sembunyikan semua materi
-
     const semua =
-        document.querySelectorAll(
-            ".materi-halaman"
-        );
+        document.querySelectorAll(".materi");
 
     semua.forEach(function(item){
-
-        item.classList.remove("aktif");
-
+        item.classList.remove("active");
     });
-
 
     // tampilkan materi yang dipilih
-
-    const halaman =
+    const materi =
         document.getElementById(id);
 
+    if(materi){
+        materi.classList.add("active");
 
-    if(halaman){
-
-        halaman.classList.add("aktif");
-
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
-
+        // scroll ke materi
+        setTimeout(function(){
+            materi.scrollIntoView({
+                behavior:"smooth",
+                block:"start"
+            });
+        },100);
     }
-
-}
-
-
-/*
-===========================================================
-KEMBALI KE 9 MAPEL
-===========================================================
-*/
-
-function kembaliMapel(){
-
-    const semua =
-        document.querySelectorAll(
-            ".materi-halaman"
-        );
-
-
-    semua.forEach(function(item){
-
-        item.classList.remove("aktif");
-
-    });
-
-
-    document.getElementById(
-        "halamanMapel"
-    ).style.display = "block";
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
 }
 
 </script>
