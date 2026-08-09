@@ -3,148 +3,1505 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Materi Pembelajaran</title>
 
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<title>Materi Kelas 5 - SDN Cijember</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 
-.mapel{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
-margin-top:25px;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-.card{
-background:white;
-border-radius:15px;
-padding:25px;
-box-shadow:0 5px 15px rgba(0,0,0,.15);
-transition:.3s;
-text-align:center;
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f4f7fb;
+    color:#1f2937;
+    min-height:100vh;
 }
 
-.card:hover{
-transform:translateY(-8px);
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    color:white;
+    padding:25px 20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.12);
 }
 
-.card i{
-font-size:50px;
-color:#1565c0;
-margin-bottom:15px;
+.header-inner{
+    max-width:1100px;
+    margin:auto;
 }
 
-.card h3{
-margin-bottom:10px;
-color:#1565c0;
+.back-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:white;
+    text-decoration:none;
+    background:rgba(255,255,255,.15);
+    padding:9px 15px;
+    border-radius:10px;
+    font-size:14px;
+    margin-bottom:20px;
+    transition:.2s;
 }
 
-.card p{
-color:#555;
-margin-bottom:20px;
+.back-btn:hover{
+    background:rgba(255,255,255,.25);
 }
 
-.btn{
-display:inline-block;
-padding:12px 22px;
-background:#1565c0;
-color:white;
-text-decoration:none;
-border-radius:10px;
-font-weight:bold;
-transition:.3s;
+.header h1{
+    font-size:28px;
+    font-weight:800;
 }
 
-.btn:hover{
-background:#0d47a1;
+.header p{
+    margin-top:5px;
+    opacity:.9;
+    font-size:14px;
+}
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container{
+    width:calc(100% - 30px);
+    max-width:1100px;
+    margin:30px auto 50px;
+}
+
+/* =====================================================
+   JUDUL
+===================================================== */
+
+.section-title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.section-title h2{
+    font-size:24px;
+    color:#1e3a8a;
+    font-weight:800;
+}
+
+.section-title p{
+    color:#64748b;
+    font-size:14px;
+    margin-top:5px;
+}
+
+/* =====================================================
+   GRID MAPEL
+===================================================== */
+
+.mapel-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+/* =====================================================
+   CARD MAPEL
+===================================================== */
+
+.mapel-card{
+    background:white;
+    border-radius:18px;
+    padding:22px;
+    min-height:190px;
+    box-shadow:0 5px 18px rgba(15,23,42,.08);
+    border:1px solid #e5e7eb;
+    cursor:pointer;
+    transition:.25s;
+    position:relative;
+    overflow:hidden;
+}
+
+.mapel-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 25px rgba(15,23,42,.14);
+}
+
+.mapel-icon{
+    width:58px;
+    height:58px;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+    margin-bottom:15px;
+}
+
+.mapel-card h3{
+    font-size:17px;
+    color:#111827;
+    margin-bottom:5px;
+}
+
+.mapel-card p{
+    font-size:12px;
+    color:#64748b;
+    line-height:1.5;
+}
+
+.lihat{
+    position:absolute;
+    bottom:18px;
+    right:20px;
+    font-size:12px;
+    color:#2563eb;
+    font-weight:600;
+}
+
+/* WARNA ICON */
+
+.pai .mapel-icon{
+    background:#dcfce7;
+}
+
+.pancasila .mapel-icon{
+    background:#fee2e2;
+}
+
+.matematika .mapel-icon{
+    background:#dbeafe;
+}
+
+.indonesia .mapel-icon{
+    background:#fef3c7;
+}
+
+.inggris .mapel-icon{
+    background:#e0e7ff;
+}
+
+.sunda .mapel-icon{
+    background:#fce7f3;
+}
+
+.kka .mapel-icon{
+    background:#ede9fe;
+}
+
+.seni .mapel-icon{
+    background:#ffedd5;
+}
+
+.pjok .mapel-icon{
+    background:#cffafe;
+}
+
+/* =====================================================
+   MODAL MATERI
+===================================================== */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.65);
+    z-index:9999;
+    padding:20px;
+    overflow-y:auto;
+}
+
+.modal.active{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.modal-box{
+    background:white;
+    width:100%;
+    max-width:850px;
+    max-height:90vh;
+    overflow-y:auto;
+    border-radius:20px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+    animation:muncul .2s ease;
+}
+
+@keyframes muncul{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.modal-header{
+    padding:22px;
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    color:white;
+    position:relative;
+}
+
+.modal-header h2{
+    font-size:21px;
+    padding-right:45px;
+}
+
+.modal-header p{
+    font-size:12px;
+    opacity:.9;
+    margin-top:4px;
+}
+
+.close-btn{
+    position:absolute;
+    right:18px;
+    top:18px;
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.18);
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.modal-content{
+    padding:22px;
+}
+
+/* =====================================================
+   SEMESTER
+===================================================== */
+
+.semester{
+    margin-bottom:25px;
+}
+
+.semester-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:13px;
+    padding-bottom:9px;
+    border-bottom:2px solid #e5e7eb;
+}
+
+.semester-title h3{
+    font-size:17px;
+    color:#1e3a8a;
+}
+
+.materi-list{
+    display:grid;
+    gap:10px;
+}
+
+.materi-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    padding:13px 15px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.materi-item:hover{
+    background:#eff6ff;
+    border-color:#93c5fd;
+    transform:translateX(3px);
+}
+
+.nomor{
+    width:32px;
+    height:32px;
+    min-width:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:9px;
+    background:#dbeafe;
+    color:#1d4ed8;
+    font-size:13px;
+    font-weight:700;
+}
+
+.materi-info{
+    flex:1;
+}
+
+.materi-info strong{
+    display:block;
+    font-size:13px;
+    color:#1f2937;
+}
+
+.materi-info span{
+    font-size:11px;
+    color:#64748b;
+}
+
+.materi-arrow{
+    color:#2563eb;
+}
+
+/* =====================================================
+   DETAIL MATERI
+===================================================== */
+
+.detail{
+    display:none;
+}
+
+.detail.active{
+    display:block;
+}
+
+.back-materi{
+    border:none;
+    background:#eff6ff;
+    color:#1d4ed8;
+    padding:9px 13px;
+    border-radius:9px;
+    cursor:pointer;
+    margin-bottom:18px;
+    font-family:inherit;
+    font-size:12px;
+    font-weight:600;
+}
+
+.detail-box{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:15px;
+    padding:20px;
+}
+
+.detail-box h3{
+    color:#1e3a8a;
+    font-size:19px;
+    margin-bottom:12px;
+}
+
+.detail-box p{
+    font-size:13px;
+    line-height:1.8;
+    color:#475569;
+}
+
+.info-box{
+    margin-top:18px;
+    padding:15px;
+    background:#eff6ff;
+    border-left:4px solid #2563eb;
+    border-radius:8px;
+}
+
+.info-box strong{
+    font-size:13px;
+    color:#1e3a8a;
+}
+
+.info-box p{
+    margin-top:5px;
+    font-size:12px;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+    text-align:center;
+    color:#64748b;
+    font-size:11px;
+    padding:25px 15px;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:850px){
+
+    .mapel-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:550px){
+
+    .header{
+        padding:20px 15px;
+    }
+
+    .header h1{
+        font-size:21px;
+    }
+
+    .container{
+        width:calc(100% - 20px);
+        margin-top:20px;
+    }
+
+    .section-title h2{
+        font-size:20px;
+    }
+
+    .mapel-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .mapel-card{
+        min-height:170px;
+        padding:16px;
+        border-radius:15px;
+    }
+
+    .mapel-icon{
+        width:48px;
+        height:48px;
+        font-size:22px;
+        border-radius:12px;
+        margin-bottom:12px;
+    }
+
+    .mapel-card h3{
+        font-size:14px;
+    }
+
+    .mapel-card p{
+        font-size:10px;
+    }
+
+    .lihat{
+        font-size:10px;
+        bottom:14px;
+        right:15px;
+    }
+
+    .modal{
+        padding:10px;
+    }
+
+    .modal-box{
+        max-height:94vh;
+        border-radius:16px;
+    }
+
+    .modal-header{
+        padding:18px;
+    }
+
+    .modal-header h2{
+        font-size:18px;
+    }
+
+    .modal-content{
+        padding:15px;
+    }
+
+    .materi-info strong{
+        font-size:12px;
+    }
+
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div class="sidebar">
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-<h2>🏫 KELAS 5</h2>
+<header class="header">
 
-<a href="index.html"><i class="fa-solid fa-house"></i> Beranda</a>
-<a href="pengumuman.html"><i class="fa-solid fa-bullhorn"></i> Pengumuman</a>
-<a href="jadwal.html"><i class="fa-solid fa-calendar"></i> Jadwal</a>
-<a href="tugas.html"><i class="fa-solid fa-book"></i> Tugas</a>
-<a href="materi.html"><i class="fa-solid fa-folder-open"></i> Materi</a>
-<a href="datasiswa.html"><i class="fa-solid fa-users"></i> Data Siswa</a>
-<a href="galeri.html"><i class="fa-solid fa-image"></i> Galeri</a>
-<a href="absensi.html"><i class="fa-solid fa-chart-column"></i> Absensi</a>
+    <div class="header-inner">
+
+        <a href="index.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Kembali ke Portal
+        </a>
+
+        <h1>
+            📚 Materi Pembelajaran Kelas 5
+        </h1>
+
+        <p>
+            SDN Cijember • Tahun Pelajaran 2026/2027
+        </p>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     CONTENT
+===================================================== -->
+
+<main class="container">
+
+    <div class="section-title">
+
+        <h2>
+            📖 Pilih Mata Pelajaran
+        </h2>
+
+        <p>
+            Silakan pilih mata pelajaran untuk melihat materi pembelajaran.
+        </p>
+
+    </div>
+
+
+    <div class="mapel-grid">
+
+        <!-- PAI -->
+
+        <div class="mapel-card pai"
+             onclick="bukaMapel('pai')">
+
+            <div class="mapel-icon">
+                🕌
+            </div>
+
+            <h3>PAI</h3>
+
+            <p>
+                Pendidikan Agama Islam
+            </p>
+
+            <div class="lihat">
+                Lihat Materi →
+            </div>
+
+        </div>
+
+
+        <!-- PANCASILA -->
+
+        <div class="mapel-card pancasila"
+             onclick="bukaMapel('pancasila')">
+
+            <div class="mapel-icon">
+                🇮🇩
+            </div>
+
+            <h3>Pendidikan Pancasila</h3>
+
+            <p>
+                Pendidikan Pancasila dan kewarganegaraan
+            </p>
+
+            <div class="lihat">
+                Lihat Materi →
+            </div>
+
+        </div>
+
+
+        <!-- MATEMATIKA -->
+
+        <div class="mapel-card matematika"
+             onclick="bukaMapel('matematika')">
+
+            <div class="mapel-icon">
+                🔢
+            </div>
+
+            <h3>Matematika</h3>
+
+            <p>
+                Bilangan, geometri, pengukuran dan data
+            </p>
+
+            <div class="lihat">
+                Lihat Materi →
+            </div>
+
+        </div>
+
+
+        <!-- BAHASA INDONESIA -->
+
+        <div class="mapel-card indonesia"
+             onclick="bukaMapel('indonesia')">
+
+            <div class="mapel-icon">
+                📖
+            </div>
+
+            <h3>Bahasa Indonesia</h3>
+
+            <p>
+                Membaca, menulis, berbicara dan menyimak
+            </p>
+
+            <div class="lihat">
+                Lihat Materi →
+            </div>
+
+        </div>
+
+
+        <!-- BAHASA INGGRIS -->
+
+        <div class="mapel-card inggris"
+             onclick="bukaMapel('inggris')">
+
+            <div class="mapel-icon">
+                🇬🇧
+            </div>
+
+            <h3>Bahasa Inggris</h3>
+
+            <p>
+                Vocabulary, conversation dan expressions
+            </p>
+
+            <div class="lihat">
+                Lihat Materi →
+            </div>
+
+        </div>
+
+
+        <!-- BAHASA SUNDA -->
+
+        <div class="mapel-card sunda"
+             onclick="bukaMapel('sunda')">
+
+            <div class="mapel-icon">
+                🌿
+            </div>
+
+            <h3>Bahasa Sunda</h3>
+
+            <p>
+                Basa, sastra jeung budaya Sunda
+            </p>
+
+            <div class="lihat">
+                Lihat Materi →
+            </div>
+
+        </div>
+
+
+        <!-- KKA -->
+
+        <div class="mapel-card kka"
+             onclick="bukaMapel('kka')">
+
+            <div class="mapel-icon">
+                💻
+            </div>
+
+            <h3>KKA</h3>
+
+            <p>
+                Koding dan Kecerdasan Artifisial
+            </p>
+
+            <div class="lihat">
+                Lihat Materi →
+            </div>
+
+        </div>
+
+
+        <!-- SENI RUPA -->
+
+        <div class="mapel-card seni"
+             onclick="bukaMapel('seni')">
+
+            <div class="mapel-icon">
+                🎨
+            </div>
+
+            <h3>Seni Rupa</h3>
+
+            <p>
+                Menggambar, berkarya dan apresiasi seni
+            </p>
+
+            <div class="lihat">
+                Lihat Materi →
+            </div>
+
+        </div>
+
+
+        <!-- PJOK -->
+
+        <div class="mapel-card pjok"
+             onclick="bukaMapel('pjok')">
+
+            <div class="mapel-icon">
+                🏃
+            </div>
+
+            <h3>PJOK</h3>
+
+            <p>
+                Pendidikan Jasmani, Olahraga dan Kesehatan
+            </p>
+
+            <div class="lihat">
+                Lihat Materi →
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- =====================================================
+     MODAL
+===================================================== -->
+
+<div class="modal" id="modalMateri">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <button
+                class="close-btn"
+                onclick="tutupModal()">
+                ×
+            </button>
+
+            <h2 id="judulMapel">
+                Materi
+            </h2>
+
+            <p id="subjudulMapel">
+                Kelas 5 SDN Cijember
+            </p>
+
+        </div>
+
+
+        <div class="modal-content">
+
+            <!-- DAFTAR -->
+
+            <div id="daftarMateri">
+
+                <div class="semester">
+
+                    <div class="semester-title">
+
+                        <span>📘</span>
+
+                        <h3>
+                            Semester 1
+                        </h3>
+
+                    </div>
+
+                    <div
+                        class="materi-list"
+                        id="semester1">
+                    </div>
+
+                </div>
+
+
+                <div class="semester">
+
+                    <div class="semester-title">
+
+                        <span>📗</span>
+
+                        <h3>
+                            Semester 2
+                        </h3>
+
+                    </div>
+
+                    <div
+                        class="materi-list"
+                        id="semester2">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DETAIL -->
+
+            <div
+                class="detail"
+                id="detailMateri">
+
+                <button
+                    class="back-materi"
+                    onclick="kembaliKeDaftar()">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Kembali ke daftar materi
+
+                </button>
+
+                <div class="detail-box">
+
+                    <h3 id="judulDetail">
+                        Materi
+                    </h3>
+
+                    <p id="isiDetail">
+                    </p>
+
+                    <div class="info-box">
+
+                        <strong>
+                            💡 Catatan Pembelajaran
+                        </strong>
+
+                        <p>
+                            Materi lengkap, gambar,
+                            video pembelajaran,
+                            LKPD, dan latihan soal
+                            dapat ditambahkan pada
+                            bagian ini.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
-<div class="content">
 
-<div class="box">
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
-<h1>📚 MATERI PEMBELAJARAN</h1>
+<footer class="footer">
 
-<p>Silakan unduh materi sesuai mata pelajaran.</p>
+    © 2026 Portal Digital Kelas 5 SDN Cijember
 
-<div class="mapel">
+</footer>
 
-<div class="card">
-<i class="fa-solid fa-book-open"></i>
-<h3>Bahasa Indonesia</h3>
-<p>Materi Semester 1</p>
-<a href="assets/materi/bahasa-indonesia.pdf" class="btn">Download</a>
-</div>
 
-<div class="card">
-<i class="fa-solid fa-calculator"></i>
-<h3>Matematika</h3>
-<p>Materi Semester 1</p>
-<a href="assets/materi/matematika.pdf" class="btn">Download</a>
-</div>
+<script>
 
-<div class="card">
-<i class="fa-solid fa-flask"></i>
-<h3>IPAS</h3>
-<p>Materi Semester 1</p>
-<a href="assets/materi/ipas.pdf" class="btn">Download</a>
-</div>
+/* =====================================================
+   DATA MATERI
+===================================================== */
 
-<div class="card">
-<i class="fa-solid fa-laptop-code"></i>
-<h3>Koding & AI</h3>
-<p>Materi Semester 1</p>
-<a href="assets/materi/kka.pdf" class="btn">Download</a>
-</div>
+const dataMateri = {
 
-<div class="card">
-<i class="fa-solid fa-palette"></i>
-<h3>Seni Budaya</h3>
-<p>Materi Semester 1</p>
-<a href="assets/materi/seni.pdf" class="btn">Download</a>
-</div>
+    pai: {
 
-<div class="card">
-<i class="fa-solid fa-mosque"></i>
-<h3>Pendidikan Agama</h3>
-<p>Materi Semester 1</p>
-<a href="assets/materi/agama.pdf" class="btn">Download</a>
-</div>
+        judul:"🕌 Pendidikan Agama Islam",
 
-</div>
+        semester1:[
 
-<br>
+            "Mengenal Allah melalui Asmaul Husna",
 
-<a href="index.html" class="btn">
-<i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda
-</a>
+            "Kitab-kitab Allah",
 
-</div>
+            "Rasul dan keteladanan",
 
-</div>
+            "Akhlak terpuji dalam kehidupan",
+
+            "Salat dan ibadah",
+
+            "Kisah keteladanan Nabi"
+
+        ],
+
+        semester2:[
+
+            "Iman kepada hari akhir",
+
+            "Akhlak kepada orang tua dan guru",
+
+            "Kerukunan dan toleransi",
+
+            "Zakat, infak dan sedekah",
+
+            "Puasa dan hikmahnya",
+
+            "Kisah tokoh Islam"
+
+        ]
+
+    },
+
+
+    pancasila: {
+
+        judul:"🇮🇩 Pendidikan Pancasila",
+
+        semester1:[
+
+            "Pancasila sebagai dasar negara",
+
+            "Makna nilai-nilai Pancasila",
+
+            "Penerapan Pancasila dalam kehidupan",
+
+            "Norma dan aturan",
+
+            "Hak dan kewajiban",
+
+            "Tanggung jawab"
+
+        ],
+
+        semester2:[
+
+            "Keberagaman Indonesia",
+
+            "Menghargai perbedaan",
+
+            "Persatuan dan kesatuan",
+
+            "Gotong royong",
+
+            "Musyawarah",
+
+            "Menjadi warga negara yang baik"
+
+        ]
+
+    },
+
+
+    matematika: {
+
+        judul:"🔢 Matematika",
+
+        semester1:[
+
+            "Bilangan cacah sampai 100.000",
+
+            "Nilai tempat",
+
+            "Membandingkan dan mengurutkan bilangan",
+
+            "Operasi penjumlahan dan pengurangan",
+
+            "Operasi perkalian dan pembagian",
+
+            "Pecahan"
+
+        ],
+
+        semester2:[
+
+            "Desimal dan persen",
+
+            "KPK dan FPB",
+
+            "Pengukuran",
+
+            "Bangun datar",
+
+            "Bangun ruang",
+
+            "Data dan diagram"
+
+        ]
+
+    },
+
+
+    indonesia: {
+
+        judul:"📖 Bahasa Indonesia",
+
+        semester1:[
+
+            "Membaca dan memahami teks",
+
+            "Ide pokok dan informasi penting",
+
+            "Kosakata dan makna kata",
+
+            "Teks deskripsi",
+
+            "Teks narasi",
+
+            "Puisi dan puisi akrostik"
+
+        ],
+
+        semester2:[
+
+            "Iklan dan informasi",
+
+            "Surat",
+
+            "Teks prosedur",
+
+            "Meringkas teks",
+
+            "Presentasi",
+
+            "Berbicara dan berdiskusi"
+
+        ]
+
+    },
+
+
+    inggris: {
+
+        judul:"🇬🇧 Bahasa Inggris",
+
+        semester1:[
+
+            "Greetings and Introduction",
+
+            "Numbers",
+
+            "Days and Months",
+
+            "Family",
+
+            "School Activities",
+
+            "Things Around Us"
+
+        ],
+
+        semester2:[
+
+            "Daily Activities",
+
+            "Hobbies",
+
+            "Food and Drinks",
+
+            "Describing People",
+
+            "Describing Things",
+
+            "Simple Conversation"
+
+        ]
+
+    },
+
+
+    sunda: {
+
+        judul:"🌿 Bahasa Sunda",
+
+        semester1:[
+
+            "Paguneman",
+
+            "Undak-usuk basa Sunda",
+
+            "Maca jeung maham bacaan",
+
+            "Nulis basa Sunda",
+
+            "Kecap jeung hartina",
+
+            "Sastra Sunda"
+
+        ],
+
+        semester2:[
+
+            "Carita pondok",
+
+            "Sisindiran",
+
+            "Sajak Sunda",
+
+            "Aksara Sunda",
+
+            "Kabudayaan Sunda",
+
+            "Ngagunakeun basa Sunda dina kahirupan"
+
+        ]
+
+    },
+
+
+    kka: {
+
+        judul:"💻 KKA – Koding dan Kecerdasan Artifisial",
+
+        semester1:[
+
+            "Berpikir komputasional",
+
+            "Pola dan pengelompokan",
+
+            "Algoritma sederhana",
+
+            "Urutan langkah",
+
+            "Pemecahan masalah",
+
+            "Koding visual"
+
+        ],
+
+        semester2:[
+
+            "Pengenalan kecerdasan artifisial",
+
+            "Cara kerja AI secara sederhana",
+
+            "Pemanfaatan AI untuk belajar",
+
+            "Etika menggunakan AI",
+
+            "Keamanan dan privasi digital",
+
+            "Membuat proyek sederhana"
+
+        ]
+
+    },
+
+
+    seni: {
+
+        judul:"🎨 Seni Rupa",
+
+        semester1:[
+
+            "Unsur-unsur seni rupa",
+
+            "Garis dan bentuk",
+
+            "Warna",
+
+            "Komposisi",
+
+            "Menggambar objek",
+
+            "Menggambar ekspresif"
+
+        ],
+
+        semester2:[
+
+            "Poster",
+
+            "Ilustrasi",
+
+            "Kolase",
+
+            "Karya dekoratif",
+
+            "Karya tiga dimensi",
+
+            "Apresiasi karya seni rupa"
+
+        ]
+
+    },
+
+
+    pjok: {
+
+        judul:"🏃 PJOK",
+
+        semester1:[
+
+            "Gerak dasar lokomotor",
+
+            "Gerak dasar nonlokomotor",
+
+            "Permainan bola besar",
+
+            "Permainan bola kecil",
+
+            "Atletik",
+
+            "Kebugaran jasmani"
+
+        ],
+
+        semester2:[
+
+            "Bulu tangkis",
+
+            "Senam",
+
+            "Aktivitas ritmik",
+
+            "Permainan tradisional",
+
+            "Pola hidup sehat",
+
+            "Keselamatan dalam aktivitas olahraga"
+
+        ]
+
+    }
+
+};
+
+
+/* =====================================================
+   BUKA MAPEL
+===================================================== */
+
+function bukaMapel(kode){
+
+    const data =
+        dataMateri[kode];
+
+    if(!data) return;
+
+    document.getElementById(
+        "judulMapel"
+    ).textContent =
+        data.judul;
+
+    document.getElementById(
+        "subjudulMapel"
+    ).textContent =
+        "Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027";
+
+
+    buatDaftar(
+        "semester1",
+        data.semester1
+    );
+
+    buatDaftar(
+        "semester2",
+        data.semester2
+    );
+
+
+    document.getElementById(
+        "daftarMateri"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "detailMateri"
+    ).classList.remove("active");
+
+
+    document.getElementById(
+        "modalMateri"
+    ).classList.add("active");
+
+}
+
+
+/* =====================================================
+   BUAT DAFTAR
+===================================================== */
+
+function buatDaftar(id,data){
+
+    const container =
+        document.getElementById(id);
+
+    container.innerHTML="";
+
+    data.forEach(
+        function(nama,index){
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "materi-item";
+
+            item.innerHTML = `
+
+                <div class="nomor">
+                    ${index + 1}
+                </div>
+
+                <div class="materi-info">
+
+                    <strong>
+                        ${nama}
+                    </strong>
+
+                    <span>
+                        Klik untuk melihat materi
+                    </span>
+
+                </div>
+
+                <div class="materi-arrow">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+
+            `;
+
+            item.onclick =
+                function(){
+
+                    bukaDetail(nama);
+
+                };
+
+            container.appendChild(item);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   DETAIL
+===================================================== */
+
+function bukaDetail(nama){
+
+    document.getElementById(
+        "judulDetail"
+    ).textContent =
+        nama;
+
+
+    document.getElementById(
+        "isiDetail"
+    ).innerHTML =
+
+        "Pada bagian ini dapat ditampilkan " +
+        "materi pembelajaran <strong>" +
+        nama +
+        "</strong> secara lengkap. " +
+
+        "<br><br>" +
+
+        "Guru dapat menambahkan ringkasan " +
+        "materi, contoh, gambar, video " +
+        "pembelajaran, LKPD, maupun latihan soal.";
+
+
+    document.getElementById(
+        "daftarMateri"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "detailMateri"
+    ).classList.add("active");
+
+}
+
+
+/* =====================================================
+   KEMBALI KE DAFTAR
+===================================================== */
+
+function kembaliKeDaftar(){
+
+    document.getElementById(
+        "detailMateri"
+    ).classList.remove("active");
+
+    document.getElementById(
+        "daftarMateri"
+    ).style.display =
+        "block";
+
+}
+
+
+/* =====================================================
+   TUTUP MODAL
+===================================================== */
+
+function tutupModal(){
+
+    document.getElementById(
+        "modalMateri"
+    ).classList.remove("active");
+
+}
+
+
+/* =====================================================
+   KLIK LUAR MODAL
+===================================================== */
+
+document.getElementById(
+    "modalMateri"
+).addEventListener(
+    "click",
+    function(e){
+
+        if(
+            e.target === this
+        ){
+
+            tutupModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   ESC
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(
+            e.key === "Escape"
+        ){
+
+            tutupModal();
+
+        }
+
+    }
+);
+
+</script>
 
 </body>
 </html>
