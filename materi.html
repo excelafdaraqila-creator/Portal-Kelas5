@@ -336,22 +336,785 @@ body{
 
         <!-- MATEMATIKA -->
 
-        <div class="mapel-card"
-             onclick="bukaMateri('matematika')">
+        <!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-            <div class="mapel-icon">
-                🔢
-            </div>
+<title>Materi Matematika Kelas 5 - SDN Cijember</title>
 
-            <h3>
-                Matematika
-            </h3>
+<style>
+*{
+    box-sizing:border-box;
+}
 
-            <p>
-                Materi Matematika Kelas 5
-            </p>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f7fb;
+    color:#1f2937;
+}
 
-        </div>
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+
+/* HEADER */
+.header{
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    padding:30px 20px;
+    border-radius:0 0 25px 25px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+.header h1{
+    margin:0 0 8px;
+    font-size:30px;
+}
+
+.header p{
+    margin:0;
+    font-size:16px;
+}
+
+/* TOMBOL KEMBALI */
+.btn-kembali{
+    display:inline-block;
+    margin:20px 0;
+    padding:11px 18px;
+    background:#374151;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.btn-kembali:hover{
+    background:#111827;
+}
+
+/* DAFTAR BAB */
+.judul{
+    text-align:center;
+    margin:15px 0 20px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    cursor:pointer;
+    transition:.25s;
+    border:2px solid transparent;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+    border-color:#2563eb;
+}
+
+.nomor{
+    width:45px;
+    height:45px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#2563eb;
+    color:white;
+    border-radius:50%;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.card h3{
+    margin:5px 0 10px;
+}
+
+.card p{
+    margin:0;
+    color:#6b7280;
+    line-height:1.5;
+}
+
+/* MATERI */
+.materi{
+    display:none;
+    background:white;
+    margin-top:25px;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.materi.active{
+    display:block;
+}
+
+.materi h2{
+    color:#2563eb;
+    border-bottom:2px solid #e5e7eb;
+    padding-bottom:10px;
+}
+
+.materi h3{
+    color:#374151;
+    margin-top:25px;
+}
+
+.materi p,
+.materi li{
+    line-height:1.7;
+}
+
+.contoh{
+    background:#eff6ff;
+    border-left:5px solid #2563eb;
+    padding:15px;
+    border-radius:10px;
+    margin:15px 0;
+}
+
+.latihan{
+    background:#f9fafb;
+    padding:18px;
+    border-radius:12px;
+    margin-top:20px;
+}
+
+.btn-tutup{
+    background:#ef4444;
+    color:white;
+    border:0;
+    padding:10px 16px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:550px){
+    .container{
+        padding:12px;
+    }
+
+    .header h1{
+        font-size:23px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    .materi{
+        padding:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h1>📐 Matematika Kelas 5</h1>
+    <p>Portal Digital Kelas 5 SDN Cijember</p>
+</div>
+
+<div class="container">
+
+<a href="javascript:history.back()" class="btn-kembali">
+    ← Kembali ke Materi
+</a>
+
+<h2 class="judul">📚 Pilih Materi Pembelajaran</h2>
+
+<!-- ===================================================== -->
+<!-- DAFTAR BAB -->
+<!-- ===================================================== -->
+
+<div class="grid">
+
+    <div class="card" onclick="bukaMateri('bab1')">
+        <div class="nomor">1</div>
+        <h3>🔢 Bilangan Cacah</h3>
+        <p>Membaca, menulis, membandingkan, mengurutkan, dan operasi bilangan sampai 100.000.</p>
+    </div>
+
+    <div class="card" onclick="bukaMateri('bab2')">
+        <div class="nomor">2</div>
+        <h3>🧮 KPK dan FPB</h3>
+        <p>Mengenal faktor, kelipatan, KPK, FPB, dan penerapannya.</p>
+    </div>
+
+    <div class="card" onclick="bukaMateri('bab3')">
+        <div class="nomor">3</div>
+        <h3>🍕 Pecahan</h3>
+        <p>Mengenal dan melakukan operasi hitung pecahan.</p>
+    </div>
+
+    <div class="card" onclick="bukaMateri('bab4')">
+        <div class="nomor">4</div>
+        <h3>💯 Desimal dan Persen</h3>
+        <p>Mengenal hubungan pecahan, desimal, dan persen.</p>
+    </div>
+
+    <div class="card" onclick="bukaMateri('bab5')">
+        <div class="nomor">5</div>
+        <h3>📏 Pengukuran</h3>
+        <p>Panjang, berat, waktu, dan konversi satuan.</p>
+    </div>
+
+    <div class="card" onclick="bukaMateri('bab6')">
+        <div class="nomor">6</div>
+        <h3>📐 Keliling dan Luas</h3>
+        <p>Menghitung keliling dan luas berbagai bangun datar.</p>
+    </div>
+
+    <div class="card" onclick="bukaMateri('bab7')">
+        <div class="nomor">7</div>
+        <h3>🧊 Bangun Ruang</h3>
+        <p>Mengenal kubus, balok, jaring-jaring, dan volume.</p>
+    </div>
+
+    <div class="card" onclick="bukaMateri('bab8')">
+        <div class="nomor">8</div>
+        <h3>📊 Data</h3>
+        <p>Membaca tabel dan menyajikan data dalam diagram.</p>
+    </div>
+
+    <div class="card" onclick="bukaMateri('bab9')">
+        <div class="nomor">9</div>
+        <h3>🔁 Pola Bilangan</h3>
+        <p>Mengenal, melanjutkan, dan menentukan aturan pola.</p>
+    </div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- BAB 1 -->
+<!-- ===================================================== -->
+
+<div id="bab1" class="materi">
+
+<h2>🔢 Bab 1 — Bilangan Cacah sampai 100.000</h2>
+
+<h3>📖 Apa itu bilangan cacah?</h3>
+
+<p>
+Bilangan cacah adalah bilangan yang dimulai dari 0, 1, 2, 3, dan seterusnya.
+</p>
+
+<h3>📌 Nilai Tempat</h3>
+
+<p>
+Pada bilangan <b>45.327</b>:
+</p>
+
+<ul>
+<li>4 = puluh ribuan</li>
+<li>5 = ribuan</li>
+<li>3 = ratusan</li>
+<li>2 = puluhan</li>
+<li>7 = satuan</li>
+</ul>
+
+<div class="contoh">
+<b>Contoh:</b><br>
+Bilangan 72.405 dibaca:
+<br><br>
+<strong>tujuh puluh dua ribu empat ratus lima.</strong>
+</div>
+
+<h3>✏️ Membandingkan Bilangan</h3>
+
+<p>
+Gunakan tanda:
+</p>
+
+<ul>
+<li>&gt; lebih besar dari</li>
+<li>&lt; lebih kecil dari</li>
+<li>= sama dengan</li>
+</ul>
+
+<div class="contoh">
+Contoh:<br>
+45.000 &gt; 35.000
+</div>
+
+<h3>📝 Latihan</h3>
+
+<ol>
+<li>Berapa nilai tempat angka 6 pada bilangan 46.250?</li>
+<li>Bagaimana cara membaca 83.215?</li>
+<li>Manakah yang lebih besar: 72.500 atau 75.200?</li>
+</ol>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- BAB 2 -->
+<!-- ===================================================== -->
+
+<div id="bab2" class="materi">
+
+<h2>🧮 Bab 2 — KPK dan FPB</h2>
+
+<h3>📖 Faktor</h3>
+
+<p>
+Faktor adalah bilangan yang dapat membagi suatu bilangan sampai habis.
+</p>
+
+<div class="contoh">
+Faktor dari 12 adalah:
+<br>
+<strong>1, 2, 3, 4, 6, dan 12.</strong>
+</div>
+
+<h3>📖 Kelipatan</h3>
+
+<p>
+Kelipatan adalah hasil perkalian suatu bilangan dengan bilangan cacah.
+</p>
+
+<div class="contoh">
+Kelipatan 5:
+<br>
+5, 10, 15, 20, 25, 30, ...
+</div>
+
+<h3>📌 KPK</h3>
+
+<p>
+KPK adalah Kelipatan Persekutuan Terkecil.
+</p>
+
+<div class="contoh">
+KPK dari 4 dan 6 adalah <strong>12</strong>.
+</div>
+
+<h3>📌 FPB</h3>
+
+<p>
+FPB adalah Faktor Persekutuan Terbesar.
+</p>
+
+<div class="contoh">
+FPB dari 12 dan 18 adalah <strong>6</strong>.
+</div>
+
+<h3>📝 Latihan</h3>
+
+<ol>
+<li>Tentukan KPK dari 6 dan 8.</li>
+<li>Tentukan FPB dari 18 dan 24.</li>
+<li>Tuliskan faktor dari 20.</li>
+</ol>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- BAB 3 -->
+<!-- ===================================================== -->
+
+<div id="bab3" class="materi">
+
+<h2>🍕 Bab 3 — Pecahan</h2>
+
+<h3>📖 Pecahan Biasa</h3>
+
+<p>
+Pecahan terdiri dari pembilang dan penyebut.
+</p>
+
+<div class="contoh">
+Pada pecahan <strong>3/5</strong>:
+<br>
+3 = pembilang
+<br>
+5 = penyebut
+</div>
+
+<h3>📌 Pecahan Senilai</h3>
+
+<p>
+Pecahan senilai adalah pecahan yang mempunyai nilai sama meskipun bentuknya berbeda.
+</p>
+
+<div class="contoh">
+1/2 = 2/4 = 3/6 = 4/8
+</div>
+
+<h3>➕ Penjumlahan Pecahan</h3>
+
+<p>
+Jika penyebut sama, jumlahkan pembilangnya.
+</p>
+
+<div class="contoh">
+2/7 + 3/7 = 5/7
+</div>
+
+<h3>➖ Pengurangan Pecahan</h3>
+
+<div class="contoh">
+6/8 − 2/8 = 4/8 = 1/2
+</div>
+
+<h3>📝 Latihan</h3>
+
+<ol>
+<li>2/5 + 1/5 = ...</li>
+<li>7/9 − 3/9 = ...</li>
+<li>Tentukan pecahan yang senilai dengan 1/3.</li>
+</ol>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- BAB 4 -->
+<!-- ===================================================== -->
+
+<div id="bab4" class="materi">
+
+<h2>💯 Bab 4 — Desimal dan Persen</h2>
+
+<h3>📖 Bilangan Desimal</h3>
+
+<p>
+Bilangan desimal menggunakan tanda koma untuk memisahkan bilangan bulat dan bagian pecahan.
+</p>
+
+<div class="contoh">
+1/2 = 0,5
+<br>
+1/4 = 0,25
+</div>
+
+<h3>📌 Persen</h3>
+
+<p>
+Persen berarti per seratus.
+</p>
+
+<div class="contoh">
+50% = 50/100 = 1/2 = 0,5
+</div>
+
+<h3>🔄 Hubungan Pecahan, Desimal, dan Persen</h3>
+
+<div class="contoh">
+1/2 = 0,5 = 50%
+<br><br>
+1/4 = 0,25 = 25%
+<br><br>
+3/4 = 0,75 = 75%
+</div>
+
+<h3>📝 Latihan</h3>
+
+<ol>
+<li>Ubahlah 1/2 menjadi desimal.</li>
+<li>Ubahlah 0,25 menjadi persen.</li>
+<li>Ubahlah 75% menjadi pecahan.</li>
+</ol>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- BAB 5 -->
+<!-- ===================================================== -->
+
+<div id="bab5" class="materi">
+
+<h2>📏 Bab 5 — Pengukuran</h2>
+
+<h3>📐 Satuan Panjang</h3>
+
+<ul>
+<li>1 km = 1.000 m</li>
+<li>1 m = 100 cm</li>
+<li>1 cm = 10 mm</li>
+</ul>
+
+<h3>⚖️ Satuan Berat</h3>
+
+<ul>
+<li>1 kg = 1.000 gram</li>
+<li>1 gram = 1.000 mg</li>
+</ul>
+
+<h3>⏰ Satuan Waktu</h3>
+
+<ul>
+<li>1 jam = 60 menit</li>
+<li>1 menit = 60 detik</li>
+<li>1 hari = 24 jam</li>
+</ul>
+
+<div class="contoh">
+2 meter = 200 cm
+<br>
+3 kg = 3.000 gram
+</div>
+
+<h3>📝 Latihan</h3>
+
+<ol>
+<li>5 meter = ... cm</li>
+<li>4 kg = ... gram</li>
+<li>2 jam = ... menit</li>
+</ol>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- BAB 6 -->
+<!-- ===================================================== -->
+
+<div id="bab6" class="materi">
+
+<h2>📐 Bab 6 — Keliling dan Luas</h2>
+
+<h3>⬜ Persegi</h3>
+
+<p>
+Keliling persegi:
+</p>
+
+<div class="contoh">
+K = 4 × sisi
+</div>
+
+<p>
+Luas persegi:
+</p>
+
+<div class="contoh">
+L = sisi × sisi
+</div>
+
+<h3>▭ Persegi Panjang</h3>
+
+<div class="contoh">
+Keliling = 2 × (panjang + lebar)
+<br><br>
+Luas = panjang × lebar
+</div>
+
+<h3>🔺 Segitiga</h3>
+
+<div class="contoh">
+Luas = 1/2 × alas × tinggi
+</div>
+
+<h3>📝 Latihan</h3>
+
+<ol>
+<li>Sebuah persegi mempunyai sisi 8 cm. Berapa luasnya?</li>
+<li>Sebuah persegi panjang panjangnya 10 cm dan lebarnya 5 cm. Berapa luasnya?</li>
+<li>Segitiga memiliki alas 12 cm dan tinggi 8 cm. Berapa luasnya?</li>
+</ol>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- BAB 7 -->
+<!-- ===================================================== -->
+
+<div id="bab7" class="materi">
+
+<h2>🧊 Bab 7 — Bangun Ruang</h2>
+
+<h3>📦 Kubus</h3>
+
+<p>
+Kubus mempunyai 6 sisi berbentuk persegi, 12 rusuk, dan 8 titik sudut.
+</p>
+
+<div class="contoh">
+Volume kubus:
+<br>
+<strong>V = sisi × sisi × sisi</strong>
+</div>
+
+<h3>📦 Balok</h3>
+
+<p>
+Balok memiliki sisi berbentuk persegi panjang.
+</p>
+
+<div class="contoh">
+Volume balok:
+<br>
+<strong>V = panjang × lebar × tinggi</strong>
+</div>
+
+<h3>📝 Latihan</h3>
+
+<ol>
+<li>Kubus memiliki sisi 5 cm. Berapa volumenya?</li>
+<li>Balok berukuran panjang 10 cm, lebar 5 cm, dan tinggi 4 cm. Berapa volumenya?</li>
+</ol>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- BAB 8 -->
+<!-- ===================================================== -->
+
+<div id="bab8" class="materi">
+
+<h2>📊 Bab 8 — Data</h2>
+
+<h3>📖 Apa itu data?</h3>
+
+<p>
+Data adalah kumpulan informasi yang dapat digunakan untuk mengetahui suatu keadaan.
+</p>
+
+<h3>📋 Tabel</h3>
+
+<p>
+Data dapat disajikan dalam bentuk tabel agar lebih mudah dibaca.
+</p>
+
+<div class="contoh">
+Contoh data jumlah buku yang dibaca siswa:
+<br><br>
+Andi = 5 buku
+<br>
+Budi = 3 buku
+<br>
+Citra = 7 buku
+</div>
+
+<h3>📊 Diagram Batang</h3>
+
+<p>
+Diagram batang digunakan untuk membandingkan data menggunakan batang dengan ukuran yang berbeda.
+</p>
+
+<h3>📝 Latihan</h3>
+
+<ol>
+<li>Apa yang dimaksud dengan data?</li>
+<li>Sebutkan salah satu cara menyajikan data.</li>
+<li>Mengapa data dapat disajikan dalam bentuk diagram?</li>
+</ol>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- BAB 9 -->
+<!-- ===================================================== -->
+
+<div id="bab9" class="materi">
+
+<h2>🔁 Bab 9 — Pola Bilangan</h2>
+
+<h3>📖 Pengertian Pola</h3>
+
+<p>
+Pola adalah susunan bilangan atau gambar yang memiliki aturan tertentu.
+</p>
+
+<div class="contoh">
+Contoh:
+<br><br>
+2, 4, 6, 8, 10, ...
+<br><br>
+Polanya bertambah <strong>2</strong>.
+</div>
+
+<div class="contoh">
+Contoh lain:
+<br><br>
+5, 10, 15, 20, 25, ...
+<br><br>
+Polanya bertambah <strong>5</strong>.
+</div>
+
+<h3>📝 Latihan</h3>
+
+<ol>
+<li>Lengkapi: 2, 4, 6, 8, ..., ...</li>
+<li>Lengkapi: 5, 10, 15, 20, ..., ...</li>
+<li>Tentukan aturan pola: 10, 20, 30, 40, ...</li>
+</ol>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+function bukaMateri(id){
+
+    // sembunyikan semua materi
+    const semua =
+        document.querySelectorAll(".materi");
+
+    semua.forEach(function(item){
+        item.classList.remove("active");
+    });
+
+    // tampilkan materi yang dipilih
+    const materi =
+        document.getElementById(id);
+
+    if(materi){
+        materi.classList.add("active");
+
+        // scroll ke materi
+        setTimeout(function(){
+            materi.scrollIntoView({
+                behavior:"smooth",
+                block:"start"
+            });
+        },100);
+    }
+}
+
+</script>
+
+</body>
+</html>
 
 
         <!-- BAHASA INDONESIA -->
