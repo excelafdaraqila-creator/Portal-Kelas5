@@ -4,529 +4,284 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Materi Kelas 5 - SDN Cijember</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<title>Materi Matematika Kelas 5 - SDN Cijember</title>
 
 <style>
-
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
 }
 
 body{
-    font-family:'Poppins',sans-serif;
-    background:#f4f7fb;
-    color:#1f2937;
-    min-height:100vh;
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#eef5fb;
+    color:#263238;
 }
 
-/* =====================================================
-   HEADER
-===================================================== */
+/* ================= HEADER ================= */
 
 .header{
-    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    background:linear-gradient(135deg,#1976d2,#42a5f5);
     color:white;
-    padding:25px 20px;
-    box-shadow:0 4px 15px rgba(0,0,0,.12);
-}
-
-.header-inner{
-    max-width:1100px;
-    margin:auto;
-}
-
-.back-btn{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    color:white;
-    text-decoration:none;
-    background:rgba(255,255,255,.15);
-    padding:9px 15px;
-    border-radius:10px;
-    font-size:14px;
-    margin-bottom:20px;
-    transition:.2s;
-}
-
-.back-btn:hover{
-    background:rgba(255,255,255,.25);
+    padding:25px 18px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
 }
 
 .header h1{
+    margin:0;
     font-size:28px;
-    font-weight:800;
 }
 
 .header p{
-    margin-top:5px;
-    opacity:.9;
-    font-size:14px;
+    margin:8px 0 0;
+    font-size:15px;
 }
 
-/* =====================================================
-   CONTAINER
-===================================================== */
+/* ================= CONTAINER ================= */
 
 .container{
-    width:calc(100% - 30px);
+    width:94%;
     max-width:1100px;
-    margin:30px auto 50px;
+    margin:25px auto 100px;
 }
 
-/* =====================================================
-   JUDUL
-===================================================== */
+/* ================= SEARCH ================= */
 
-.section-title{
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.section-title h2{
-    font-size:24px;
-    color:#1e3a8a;
-    font-weight:800;
-}
-
-.section-title p{
-    color:#64748b;
-    font-size:14px;
-    margin-top:5px;
-}
-
-/* =====================================================
-   GRID MAPEL
-===================================================== */
-
-.mapel-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-/* =====================================================
-   CARD MAPEL
-===================================================== */
-
-.mapel-card{
-    background:white;
-    border-radius:18px;
-    padding:22px;
-    min-height:190px;
-    box-shadow:0 5px 18px rgba(15,23,42,.08);
-    border:1px solid #e5e7eb;
-    cursor:pointer;
-    transition:.25s;
-    position:relative;
-    overflow:hidden;
-}
-
-.mapel-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 10px 25px rgba(15,23,42,.14);
-}
-
-.mapel-icon{
-    width:58px;
-    height:58px;
-    border-radius:15px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:27px;
-    margin-bottom:15px;
-}
-
-.mapel-card h3{
-    font-size:17px;
-    color:#111827;
-    margin-bottom:5px;
-}
-
-.mapel-card p{
-    font-size:12px;
-    color:#64748b;
-    line-height:1.5;
-}
-
-.lihat{
-    position:absolute;
-    bottom:18px;
-    right:20px;
-    font-size:12px;
-    color:#2563eb;
-    font-weight:600;
-}
-
-/* WARNA ICON */
-
-.pai .mapel-icon{
-    background:#dcfce7;
-}
-
-.pancasila .mapel-icon{
-    background:#fee2e2;
-}
-
-.matematika .mapel-icon{
-    background:#dbeafe;
-}
-
-.indonesia .mapel-icon{
-    background:#fef3c7;
-}
-
-.inggris .mapel-icon{
-    background:#e0e7ff;
-}
-
-.sunda .mapel-icon{
-    background:#fce7f3;
-}
-
-.kka .mapel-icon{
-    background:#ede9fe;
-}
-
-.seni .mapel-icon{
-    background:#ffedd5;
-}
-
-.pjok .mapel-icon{
-    background:#cffafe;
-}
-
-/* =====================================================
-   MODAL MATERI
-===================================================== */
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(15,23,42,.65);
-    z-index:9999;
-    padding:20px;
-    overflow-y:auto;
-}
-
-.modal.active{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.modal-box{
-    background:white;
+.search-box{
     width:100%;
-    max-width:850px;
-    max-height:90vh;
-    overflow-y:auto;
-    border-radius:20px;
-    box-shadow:0 20px 60px rgba(0,0,0,.25);
-    animation:muncul .2s ease;
-}
-
-@keyframes muncul{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-.modal-header{
-    padding:22px;
-    background:linear-gradient(135deg,#2563eb,#1d4ed8);
-    color:white;
-    position:relative;
-}
-
-.modal-header h2{
-    font-size:21px;
-    padding-right:45px;
-}
-
-.modal-header p{
-    font-size:12px;
-    opacity:.9;
-    margin-top:4px;
-}
-
-.close-btn{
-    position:absolute;
-    right:18px;
-    top:18px;
-    width:38px;
-    height:38px;
+    padding:15px 18px;
     border:none;
-    border-radius:50%;
-    background:rgba(255,255,255,.18);
-    color:white;
-    font-size:18px;
-    cursor:pointer;
-}
-
-.modal-content{
-    padding:22px;
-}
-
-/* =====================================================
-   SEMESTER
-===================================================== */
-
-.semester{
-    margin-bottom:25px;
-}
-
-.semester-title{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:13px;
-    padding-bottom:9px;
-    border-bottom:2px solid #e5e7eb;
-}
-
-.semester-title h3{
-    font-size:17px;
-    color:#1e3a8a;
-}
-
-.materi-list{
-    display:grid;
-    gap:10px;
-}
-
-.materi-item{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    background:#f8fafc;
-    border:1px solid #e2e8f0;
-    border-radius:12px;
-    padding:13px 15px;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.materi-item:hover{
-    background:#eff6ff;
-    border-color:#93c5fd;
-    transform:translateX(3px);
-}
-
-.nomor{
-    width:32px;
-    height:32px;
-    min-width:32px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:9px;
-    background:#dbeafe;
-    color:#1d4ed8;
-    font-size:13px;
-    font-weight:700;
-}
-
-.materi-info{
-    flex:1;
-}
-
-.materi-info strong{
-    display:block;
-    font-size:13px;
-    color:#1f2937;
-}
-
-.materi-info span{
-    font-size:11px;
-    color:#64748b;
-}
-
-.materi-arrow{
-    color:#2563eb;
-}
-
-/* =====================================================
-   DETAIL MATERI
-===================================================== */
-
-.detail{
-    display:none;
-}
-
-.detail.active{
-    display:block;
-}
-
-.back-materi{
-    border:none;
-    background:#eff6ff;
-    color:#1d4ed8;
-    padding:9px 13px;
-    border-radius:9px;
-    cursor:pointer;
-    margin-bottom:18px;
-    font-family:inherit;
-    font-size:12px;
-    font-weight:600;
-}
-
-.detail-box{
-    background:#f8fafc;
-    border:1px solid #e2e8f0;
     border-radius:15px;
-    padding:20px;
+    font-size:16px;
+    box-shadow:0 3px 12px rgba(0,0,0,.12);
+    outline:none;
+    margin-bottom:20px;
 }
 
-.detail-box h3{
-    color:#1e3a8a;
-    font-size:19px;
-    margin-bottom:12px;
+.search-box:focus{
+    box-shadow:0 0 0 3px rgba(33,150,243,.2);
 }
 
-.detail-box p{
-    font-size:13px;
-    line-height:1.8;
-    color:#475569;
-}
+/* ================= INFO ================= */
 
 .info-box{
+    background:white;
+    padding:18px;
+    border-radius:16px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.info-box h2{
+    margin-top:0;
+    color:#1565c0;
+}
+
+/* ================= BAB ================= */
+
+.bab{
+    background:white;
+    border-radius:18px;
+    margin-bottom:18px;
+    overflow:hidden;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.bab-header{
+    padding:18px 20px;
+    background:linear-gradient(135deg,#1565c0,#42a5f5);
+    color:white;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.bab-header h2{
+    margin:0;
+    font-size:20px;
+}
+
+.arrow{
+    font-size:22px;
+    transition:.3s;
+}
+
+.bab-content{
+    display:none;
+    padding:20px;
+}
+
+.bab.active .bab-content{
+    display:block;
+}
+
+.bab.active .arrow{
+    transform:rotate(180deg);
+}
+
+/* ================= SUBMATERI ================= */
+
+.submateri{
+    background:#f8fbff;
+    border-left:5px solid #2196f3;
+    padding:16px;
+    margin:14px 0;
+    border-radius:10px;
+}
+
+.submateri h3{
+    color:#1565c0;
+    margin-top:0;
+}
+
+.rumus{
+    background:#fff8e1;
+    border-left:5px solid #ffb300;
+    padding:13px;
+    border-radius:8px;
+    margin:12px 0;
+}
+
+.contoh{
+    background:#e8f5e9;
+    border-left:5px solid #43a047;
+    padding:13px;
+    border-radius:8px;
+    margin:12px 0;
+}
+
+.penting{
+    background:#ffebee;
+    border-left:5px solid #e53935;
+    padding:13px;
+    border-radius:8px;
+    margin:12px 0;
+}
+
+ul,ol{
+    line-height:1.7;
+}
+
+p{
+    line-height:1.7;
+}
+
+/* ================= TABEL ================= */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:15px 0;
+    background:white;
+}
+
+th,td{
+    border:1px solid #cfd8dc;
+    padding:10px;
+    text-align:center;
+}
+
+th{
+    background:#e3f2fd;
+    color:#0d47a1;
+}
+
+/* ================= LATIHAN ================= */
+
+.latihan{
+    background:#f3e5f5;
+    border-left:5px solid #8e24aa;
+    padding:16px;
+    border-radius:10px;
     margin-top:18px;
-    padding:15px;
-    background:#eff6ff;
-    border-left:4px solid #2563eb;
+}
+
+.jawaban{
+    margin-top:10px;
+}
+
+.btn-jawaban{
+    border:none;
+    background:#8e24aa;
+    color:white;
+    padding:9px 15px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.kunci{
+    display:none;
+    background:white;
+    padding:12px;
+    margin-top:10px;
     border-radius:8px;
 }
 
-.info-box strong{
-    font-size:13px;
-    color:#1e3a8a;
+/* ================= RINGKASAN ================= */
+
+.ringkasan{
+    background:#e0f7fa;
+    border-left:5px solid #00838f;
+    padding:15px;
+    border-radius:10px;
 }
 
-.info-box p{
-    margin-top:5px;
-    font-size:12px;
-}
-
-/* =====================================================
-   FOOTER
-===================================================== */
+/* ================= FOOTER ================= */
 
 .footer{
+    background:#1565c0;
+    color:white;
     text-align:center;
-    color:#64748b;
-    font-size:11px;
-    padding:25px 15px;
+    padding:20px;
+    margin-top:30px;
 }
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+/* ================= NAV BOTTOM ================= */
 
-@media(max-width:850px){
-
-    .mapel-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:white;
+    height:65px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow:0 -3px 15px rgba(0,0,0,.15);
+    z-index:99;
 }
 
-@media(max-width:550px){
+.bottom-nav a{
+    text-decoration:none;
+    color:#1565c0;
+    font-weight:bold;
+    padding:10px 20px;
+}
 
-    .header{
-        padding:20px 15px;
-    }
+@media(max-width:600px){
 
     .header h1{
-        font-size:21px;
+        font-size:22px;
+    }
+
+    .bab-header h2{
+        font-size:17px;
     }
 
     .container{
-        width:calc(100% - 20px);
-        margin-top:20px;
+        width:95%;
     }
 
-    .section-title h2{
-        font-size:20px;
-    }
-
-    .mapel-grid{
-        grid-template-columns:1fr 1fr;
-        gap:10px;
-    }
-
-    .mapel-card{
-        min-height:170px;
-        padding:16px;
-        border-radius:15px;
-    }
-
-    .mapel-icon{
-        width:48px;
-        height:48px;
-        font-size:22px;
-        border-radius:12px;
-        margin-bottom:12px;
-    }
-
-    .mapel-card h3{
-        font-size:14px;
-    }
-
-    .mapel-card p{
-        font-size:10px;
-    }
-
-    .lihat{
-        font-size:10px;
-        bottom:14px;
-        right:15px;
-    }
-
-    .modal{
-        padding:10px;
-    }
-
-    .modal-box{
-        max-height:94vh;
-        border-radius:16px;
-    }
-
-    .modal-header{
-        padding:18px;
-    }
-
-    .modal-header h2{
-        font-size:18px;
-    }
-
-    .modal-content{
-        padding:15px;
-    }
-
-    .materi-info strong{
-        font-size:12px;
+    th,td{
+        font-size:13px;
+        padding:7px;
     }
 
 }
-
 </style>
 </head>
 
@@ -536,373 +291,1687 @@ body{
      HEADER
 ===================================================== -->
 
-<header class="header">
+<div class="header">
 
-    <div class="header-inner">
+    <h1>📚 Materi Matematika Kelas 5</h1>
 
-        <a href="index.html" class="back-btn">
-            <i class="fa-solid fa-arrow-left"></i>
-            Kembali ke Portal
-        </a>
+    <p>
+        Portal Digital Kelas 5 SDN Cijember
+    </p>
 
-        <h1>
-            📚 Materi Pembelajaran Kelas 5
-        </h1>
+    <p>
+        Tahun Pelajaran 2026/2027
+    </p>
 
-        <p>
-            SDN Cijember • Tahun Pelajaran 2026/2027
-        </p>
+</div>
 
-    </div>
 
-</header>
+<div class="container">
+
+<!-- =====================================================
+     SEARCH
+===================================================== -->
+
+<input
+    type="text"
+    id="searchBox"
+    class="search-box"
+    placeholder="🔍 Cari materi, bab, atau kata kunci..."
+>
 
 
 <!-- =====================================================
-     CONTENT
+     INFO
 ===================================================== -->
 
-<main class="container">
+<div class="info-box">
 
-    <div class="section-title">
+    <h2>👋 Selamat Belajar!</h2>
 
-        <h2>
-            📖 Pilih Mata Pelajaran
-        </h2>
+    <p>
+        Selamat datang di materi Matematika Kelas 5.
+        Gunakan menu di bawah untuk mempelajari setiap bab.
+    </p>
 
-        <p>
-            Silakan pilih mata pelajaran untuk melihat materi pembelajaran.
-        </p>
+    <p>
+        Klik judul bab untuk membuka materi.
+    </p>
 
-    </div>
-
-
-    <div class="mapel-grid">
-
-        <!-- PAI -->
-
-        <div class="mapel-card pai"
-             onclick="bukaMapel('pai')">
-
-            <div class="mapel-icon">
-                🕌
-            </div>
-
-            <h3>PAI</h3>
-
-            <p>
-                Pendidikan Agama Islam
-            </p>
-
-            <div class="lihat">
-                Lihat Materi →
-            </div>
-
-        </div>
-
-
-        <!-- PANCASILA -->
-
-        <div class="mapel-card pancasila"
-             onclick="bukaMapel('pancasila')">
-
-            <div class="mapel-icon">
-                🇮🇩
-            </div>
-
-            <h3>Pendidikan Pancasila</h3>
-
-            <p>
-                Pendidikan Pancasila dan kewarganegaraan
-            </p>
-
-            <div class="lihat">
-                Lihat Materi →
-            </div>
-
-        </div>
-
-
-        <!-- MATEMATIKA -->
-
-        <div class="mapel-card matematika"
-             onclick="bukaMapel('matematika')">
-
-            <div class="mapel-icon">
-                🔢
-            </div>
-
-            <h3>Matematika</h3>
-
-            <p>
-                Bilangan, geometri, pengukuran dan data
-            </p>
-
-            <div class="lihat">
-                Lihat Materi →
-            </div>
-
-        </div>
-
-
-        <!-- BAHASA INDONESIA -->
-
-        <div class="mapel-card indonesia"
-             onclick="bukaMapel('indonesia')">
-
-            <div class="mapel-icon">
-                📖
-            </div>
-
-            <h3>Bahasa Indonesia</h3>
-
-            <p>
-                Membaca, menulis, berbicara dan menyimak
-            </p>
-
-            <div class="lihat">
-                Lihat Materi →
-            </div>
-
-        </div>
-
-
-        <!-- BAHASA INGGRIS -->
-
-        <div class="mapel-card inggris"
-             onclick="bukaMapel('inggris')">
-
-            <div class="mapel-icon">
-                🇬🇧
-            </div>
-
-            <h3>Bahasa Inggris</h3>
-
-            <p>
-                Vocabulary, conversation dan expressions
-            </p>
-
-            <div class="lihat">
-                Lihat Materi →
-            </div>
-
-        </div>
-
-
-        <!-- BAHASA SUNDA -->
-
-        <div class="mapel-card sunda"
-             onclick="bukaMapel('sunda')">
-
-            <div class="mapel-icon">
-                🌿
-            </div>
-
-            <h3>Bahasa Sunda</h3>
-
-            <p>
-                Basa, sastra jeung budaya Sunda
-            </p>
-
-            <div class="lihat">
-                Lihat Materi →
-            </div>
-
-        </div>
-
-
-        <!-- KKA -->
-
-        <div class="mapel-card kka"
-             onclick="bukaMapel('kka')">
-
-            <div class="mapel-icon">
-                💻
-            </div>
-
-            <h3>KKA</h3>
-
-            <p>
-                Koding dan Kecerdasan Artifisial
-            </p>
-
-            <div class="lihat">
-                Lihat Materi →
-            </div>
-
-        </div>
-
-
-        <!-- SENI RUPA -->
-
-        <div class="mapel-card seni"
-             onclick="bukaMapel('seni')">
-
-            <div class="mapel-icon">
-                🎨
-            </div>
-
-            <h3>Seni Rupa</h3>
-
-            <p>
-                Menggambar, berkarya dan apresiasi seni
-            </p>
-
-            <div class="lihat">
-                Lihat Materi →
-            </div>
-
-        </div>
-
-
-        <!-- PJOK -->
-
-        <div class="mapel-card pjok"
-             onclick="bukaMapel('pjok')">
-
-            <div class="mapel-icon">
-                🏃
-            </div>
-
-            <h3>PJOK</h3>
-
-            <p>
-                Pendidikan Jasmani, Olahraga dan Kesehatan
-            </p>
-
-            <div class="lihat">
-                Lihat Materi →
-            </div>
-
-        </div>
-
-    </div>
-
-</main>
+</div>
 
 
 <!-- =====================================================
-     MODAL
+     BAB 1
 ===================================================== -->
 
-<div class="modal" id="modalMateri">
+<div class="bab">
 
-    <div class="modal-box">
+<div class="bab-header">
 
-        <div class="modal-header">
+<h2>
+🔢 Bab 1 — Bilangan Cacah Sampai 100.000
+</h2>
 
-            <button
-                class="close-btn"
-                onclick="tutupModal()">
-                ×
-            </button>
+<span class="arrow">▼</span>
 
-            <h2 id="judulMapel">
-                Materi
-            </h2>
-
-            <p id="subjudulMapel">
-                Kelas 5 SDN Cijember
-            </p>
-
-        </div>
+</div>
 
 
-        <div class="modal-content">
-
-            <!-- DAFTAR -->
-
-            <div id="daftarMateri">
-
-                <div class="semester">
-
-                    <div class="semester-title">
-
-                        <span>📘</span>
-
-                        <h3>
-                            Semester 1
-                        </h3>
-
-                    </div>
-
-                    <div
-                        class="materi-list"
-                        id="semester1">
-                    </div>
-
-                </div>
+<div class="bab-content">
 
 
-                <div class="semester">
+<div class="submateri">
 
-                    <div class="semester-title">
+<h3>A. Membaca dan Menulis Bilangan serta Nilai Tempat</h3>
 
-                        <span>📗</span>
+<p>
+Bilangan cacah digunakan untuk menyatakan banyak benda atau jumlah.
+Bilangan cacah dimulai dari 0, 1, 2, 3, dan seterusnya.
+</p>
 
-                        <h3>
-                            Semester 2
-                        </h3>
+<p>
+Pada bilangan sampai 100.000, kita mengenal tempat:
+</p>
 
-                    </div>
+<table>
 
-                    <div
-                        class="materi-list"
-                        id="semester2">
-                    </div>
+<tr>
+<th>Tempat</th>
+<th>Contoh pada 54.321</th>
+</tr>
 
-                </div>
+<tr>
+<td>Puluh ribuan</td>
+<td>5</td>
+</tr>
 
-            </div>
+<tr>
+<td>Ribuan</td>
+<td>4</td>
+</tr>
+
+<tr>
+<td>Ratusan</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td>Puluhan</td>
+<td>2</td>
+</tr>
+
+<tr>
+<td>Satuan</td>
+<td>1</td>
+</tr>
+
+</table>
+
+<div class="contoh">
+
+<b>Contoh:</b>
+
+<p>
+72.405 dibaca:
+<strong>tujuh puluh dua ribu empat ratus lima.</strong>
+</p>
+
+</div>
+
+<div class="penting">
+
+<b>Ingat!</b>
+
+<p>
+Nilai tempat menunjukkan posisi suatu angka,
+sedangkan nilai angka menunjukkan nilai sebenarnya
+berdasarkan tempatnya.
+</p>
+
+</div>
+
+</div>
 
 
-            <!-- DETAIL -->
+<div class="submateri">
 
-            <div
-                class="detail"
-                id="detailMateri">
+<h3>B. Membandingkan dan Mengurutkan Bilangan</h3>
 
-                <button
-                    class="back-materi"
-                    onclick="kembaliKeDaftar()">
+<p>
+Untuk membandingkan dua bilangan, perhatikan jumlah angka terlebih dahulu.
+Jika jumlah angkanya sama, bandingkan dari angka paling kiri.
+</p>
 
-                    <i class="fa-solid fa-arrow-left"></i>
-                    Kembali ke daftar materi
+<div class="contoh">
 
-                </button>
+45.000 < 54.000
 
-                <div class="detail-box">
+<br><br>
 
-                    <h3 id="judulDetail">
-                        Materi
-                    </h3>
+Karena angka puluh ribuan 4 lebih kecil daripada 5.
 
-                    <p id="isiDetail">
-                    </p>
+</div>
 
-                    <div class="info-box">
+<p>
+Simbol yang digunakan:
+</p>
 
-                        <strong>
-                            💡 Catatan Pembelajaran
-                        </strong>
+<ul>
+<li><strong>&gt;</strong> lebih besar dari</li>
+<li><strong>&lt;</strong> lebih kecil dari</li>
+<li><strong>=</strong> sama dengan</li>
+</ul>
 
-                        <p>
-                            Materi lengkap, gambar,
-                            video pembelajaran,
-                            LKPD, dan latihan soal
-                            dapat ditambahkan pada
-                            bagian ini.
-                        </p>
+</div>
 
-                    </div>
 
-                </div>
+<div class="submateri">
 
-            </div>
+<h3>C. Komposisi dan Dekomposisi Bilangan</h3>
 
-        </div>
+<p>
+Komposisi adalah menyusun beberapa nilai tempat menjadi satu bilangan.
+</p>
 
-    </div>
+<p>
+Dekomposisi adalah menguraikan sebuah bilangan berdasarkan nilai tempatnya.
+</p>
+
+<div class="contoh">
+
+<strong>Contoh:</strong>
+
+<p>
+45.326 =
+40.000 + 5.000 + 300 + 20 + 6
+</p>
+
+</div>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>D. Operasi Hitung Bilangan Cacah</h3>
+
+<p>
+Operasi hitung yang dipelajari pada bab ini antara lain penjumlahan
+dan pengurangan bilangan cacah.
+</p>
+
+<div class="contoh">
+
+<strong>Contoh:</strong>
+
+<p>
+23.450 + 12.350 = 35.800
+</p>
+
+<p>
+45.000 − 12.500 = 32.500
+</p>
+
+</div>
+
+</div>
+
+
+<div class="ringkasan">
+
+<strong>📌 Ringkasan Bab 1</strong>
+
+<ul>
+
+<li>Bilangan cacah dimulai dari 0.</li>
+
+<li>Setiap angka memiliki nilai tempat.</li>
+
+<li>Bilangan dapat dibandingkan dan diurutkan.</li>
+
+<li>Bilangan dapat dikomposisi dan didekomposisi.</li>
+
+<li>Penjumlahan dan pengurangan harus memperhatikan nilai tempat.</li>
+
+</ul>
+
+</div>
+
+
+<div class="latihan">
+
+<h3>✏️ Latihan Bab 1</h3>
+
+<ol>
+
+<li>
+Tuliskan cara membaca 34.205.
+</li>
+
+<li>
+Tentukan nilai angka 7 pada bilangan 57.321.
+</li>
+
+<li>
+Manakah yang lebih besar: 45.210 atau 45.120?
+</li>
+
+<li>
+Uraikan 63.421 berdasarkan nilai tempat.
+</li>
+
+<li>
+Hitung 25.300 + 12.450.
+</li>
+
+</ol>
+
+<button
+class="btn-jawaban"
+onclick="toggleJawaban(this)"
+>
+👁️ Lihat Kunci Jawaban
+</button>
+
+<div class="kunci">
+
+1. Tiga puluh empat ribu dua ratus lima.<br>
+2. 7.000.<br>
+3. 45.210.<br>
+4. 60.000 + 3.000 + 400 + 20 + 1.<br>
+5. 37.750.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     BAB 2
+===================================================== -->
+
+<div class="bab">
+
+<div class="bab-header">
+
+<h2>
+🔢 Bab 2 — KPK dan FPB
+</h2>
+
+<span class="arrow">▼</span>
+
+</div>
+
+
+<div class="bab-content">
+
+
+<div class="submateri">
+
+<h3>A. Kelipatan</h3>
+
+<p>
+Kelipatan suatu bilangan diperoleh dengan mengalikan bilangan tersebut
+dengan bilangan cacah.
+</p>
+
+<div class="contoh">
+
+Kelipatan 5:
+
+5, 10, 15, 20, 25, 30, ...
+
+</div>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>B. Kelipatan Persekutuan</h3>
+
+<p>
+Kelipatan persekutuan adalah kelipatan yang dimiliki oleh dua bilangan
+atau lebih.
+</p>
+
+<div class="contoh">
+
+Kelipatan 4:
+
+4, 8, 12, 16, 20, ...
+
+<br><br>
+
+Kelipatan 6:
+
+6, 12, 18, 24, ...
+
+<br><br>
+
+Kelipatan persekutuannya:
+<strong>12, 24, ...</strong>
+
+</div>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>C. Faktor</h3>
+
+<p>
+Faktor adalah bilangan yang dapat membagi suatu bilangan tanpa sisa.
+</p>
+
+<div class="contoh">
+
+Faktor 12:
+
+<strong>1, 2, 3, 4, 6, 12</strong>
+
+</div>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>D. Faktor Persekutuan</h3>
+
+<p>
+Faktor persekutuan adalah faktor yang sama dari dua bilangan atau lebih.
+</p>
+
+<div class="contoh">
+
+Faktor 12:
+
+1, 2, 3, 4, 6, 12
+
+<br><br>
+
+Faktor 18:
+
+1, 2, 3, 6, 9, 18
+
+<br><br>
+
+Faktor persekutuan:
+
+<strong>1, 2, 3, 6</strong>
+
+</div>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>E. KPK dan FPB dengan Faktor Prima</h3>
+
+<p>
+Bilangan prima adalah bilangan yang memiliki tepat dua faktor,
+yaitu 1 dan bilangan itu sendiri.
+</p>
+
+<p>
+Contoh bilangan prima:
+<strong>2, 3, 5, 7, 11, 13, ...</strong>
+</p>
+
+<div class="rumus">
+
+<strong>KPK</strong> digunakan antara lain untuk menentukan
+kapan beberapa kejadian berulang terjadi bersama lagi.
+
+<br><br>
+
+<strong>FPB</strong> dapat digunakan untuk menentukan pembagian
+menjadi kelompok yang sama besar.
+
+</div>
+
+</div>
+
+
+<div class="ringkasan">
+
+<strong>📌 Ringkasan Bab 2</strong>
+
+<ul>
+
+<li>Kelipatan diperoleh melalui perkalian.</li>
+
+<li>Faktor adalah pembagi suatu bilangan tanpa sisa.</li>
+
+<li>KPK adalah kelipatan persekutuan yang paling kecil.</li>
+
+<li>FPB adalah faktor persekutuan yang paling besar.</li>
+
+<li>Bilangan prima mempunyai tepat dua faktor.</li>
+
+</ul>
+
+</div>
+
+
+<div class="latihan">
+
+<h3>✏️ Latihan Bab 2</h3>
+
+<ol>
+
+<li>
+Tuliskan 5 kelipatan pertama dari 6.
+</li>
+
+<li>
+Tuliskan faktor dari 18.
+</li>
+
+<li>
+Tentukan KPK dari 4 dan 6.
+</li>
+
+<li>
+Tentukan FPB dari 12 dan 18.
+</li>
+
+<li>
+Apakah 13 merupakan bilangan prima?
+</li>
+
+</ol>
+
+<button
+class="btn-jawaban"
+onclick="toggleJawaban(this)"
+>
+👁️ Lihat Kunci Jawaban
+</button>
+
+<div class="kunci">
+
+1. 6, 12, 18, 24, 30.<br>
+2. 1, 2, 3, 6, 9, 18.<br>
+3. 12.<br>
+4. 6.<br>
+5. Ya.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     BAB 3
+===================================================== -->
+
+<div class="bab">
+
+<div class="bab-header">
+
+<h2>
+🍕 Bab 3 — Bilangan Pecahan
+</h2>
+
+<span class="arrow">▼</span>
+
+</div>
+
+
+<div class="bab-content">
+
+
+<div class="submateri">
+
+<h3>A. Membandingkan dan Mengurutkan Pecahan</h3>
+
+<p>
+Pecahan menyatakan bagian dari keseluruhan.
+Pecahan terdiri atas pembilang dan penyebut.
+</p>
+
+<div class="contoh">
+
+Pada pecahan:
+
+<strong>3/5</strong>
+
+<br><br>
+
+3 = pembilang
+
+<br>
+
+5 = penyebut
+
+</div>
+
+<p>
+Untuk pecahan dengan penyebut sama,
+pecahan dengan pembilang lebih besar memiliki nilai lebih besar.
+</p>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>B. Penjumlahan Pecahan</h3>
+
+<p>
+Jika penyebut sama, jumlahkan pembilangnya dan pertahankan penyebut.
+</p>
+
+<div class="contoh">
+
+2/7 + 3/7 = 5/7
+
+</div>
+
+<p>
+Jika penyebut berbeda, pecahan perlu disesuaikan agar memiliki
+penyebut yang sama.
+</p>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>C. Pengurangan Pecahan</h3>
+
+<div class="contoh">
+
+5/8 − 2/8 = 3/8
+
+</div>
+
+<p>
+Untuk penyebut berbeda, samakan penyebut terlebih dahulu.
+</p>
+
+</div>
+
+
+<div class="ringkasan">
+
+<strong>📌 Ringkasan Bab 3</strong>
+
+<ul>
+
+<li>Pecahan mempunyai pembilang dan penyebut.</li>
+
+<li>Pecahan dapat dibandingkan dan diurutkan.</li>
+
+<li>Penjumlahan pecahan perlu memperhatikan penyebut.</li>
+
+<li>Pengurangan pecahan juga perlu memperhatikan penyebut.</li>
+
+</ul>
+
+</div>
+
+
+<div class="latihan">
+
+<h3>✏️ Latihan Bab 3</h3>
+
+<ol>
+
+<li>
+Mana yang lebih besar: 3/5 atau 2/5?
+</li>
+
+<li>
+Hitung 2/7 + 3/7.
+</li>
+
+<li>
+Hitung 6/8 − 2/8.
+</li>
+
+<li>
+Sebutkan pembilang dari 5/9.
+</li>
+
+<li>
+Sebutkan penyebut dari 7/10.
+</li>
+
+</ol>
+
+<button
+class="btn-jawaban"
+onclick="toggleJawaban(this)"
+>
+👁️ Lihat Kunci Jawaban
+</button>
+
+<div class="kunci">
+
+1. 3/5.<br>
+2. 5/7.<br>
+3. 4/8 atau 1/2.<br>
+4. 5.<br>
+5. 10.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     BAB 4
+===================================================== -->
+
+<div class="bab">
+
+<div class="bab-header">
+
+<h2>
+📐 Bab 4 — Keliling Bangun Datar
+</h2>
+
+<span class="arrow">▼</span>
+
+</div>
+
+
+<div class="bab-content">
+
+
+<div class="submateri">
+
+<h3>A. Pengertian Keliling</h3>
+
+<p>
+Keliling adalah panjang seluruh sisi yang mengelilingi suatu bangun datar.
+</p>
+
+<div class="rumus">
+
+<strong>Keliling = jumlah seluruh panjang sisi</strong>
+
+</div>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>B. Keliling Segitiga</h3>
+
+<div class="rumus">
+
+K = sisi 1 + sisi 2 + sisi 3
+
+</div>
+
+<div class="contoh">
+
+Jika sisi segitiga adalah 5 cm, 6 cm, dan 7 cm:
+
+K = 5 + 6 + 7
+
+<br>
+
+<strong>K = 18 cm</strong>
+
+</div>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>C. Keliling Segi Empat</h3>
+
+<p>
+Keliling segi empat diperoleh dengan menjumlahkan keempat sisinya.
+</p>
+
+<div class="contoh">
+
+Persegi dengan sisi 8 cm:
+
+K = 4 × 8
+
+<br>
+
+<strong>K = 32 cm</strong>
+
+</div>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>D. Keliling Segi Banyak</h3>
+
+<p>
+Keliling segi banyak diperoleh dengan menjumlahkan seluruh sisinya.
+</p>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>E. Keliling Bangun Gabungan</h3>
+
+<p>
+Untuk bangun gabungan, tentukan sisi luar yang membentuk batas bangun
+kemudian jumlahkan panjang sisi-sisi tersebut.
+</p>
+
+</div>
+
+
+<div class="latihan">
+
+<h3>✏️ Latihan Bab 4</h3>
+
+<ol>
+
+<li>
+Sebuah persegi memiliki sisi 7 cm. Tentukan kelilingnya.
+</li>
+
+<li>
+Segitiga memiliki sisi 5 cm, 6 cm, dan 8 cm. Tentukan kelilingnya.
+</li>
+
+<li>
+Apa yang dimaksud dengan keliling?
+</li>
+
+</ol>
+
+<button
+class="btn-jawaban"
+onclick="toggleJawaban(this)"
+>
+👁️ Lihat Kunci Jawaban
+</button>
+
+<div class="kunci">
+
+1. 28 cm.<br>
+2. 19 cm.<br>
+3. Jumlah seluruh sisi yang mengelilingi bangun.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     BAB 5
+===================================================== -->
+
+<div class="bab">
+
+<div class="bab-header">
+
+<h2>
+📏 Bab 5 — Luas Daerah Bangun Datar
+</h2>
+
+<span class="arrow">▼</span>
+
+</div>
+
+
+<div class="bab-content">
+
+
+<div class="submateri">
+
+<h3>A. Konsep Luas</h3>
+
+<p>
+Luas menunjukkan besar daerah yang ditempati oleh sebuah bangun datar.
+</p>
+
+<p>
+Satuan luas antara lain cm² dan m².
+</p>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>B. Luas Bangun Datar</h3>
+
+<div class="rumus">
+
+<strong>Persegi</strong>
+
+<br>
+
+L = sisi × sisi
+
+<br><br>
+
+<strong>Persegi panjang</strong>
+
+<br>
+
+L = panjang × lebar
+
+<br><br>
+
+<strong>Segitiga</strong>
+
+<br>
+
+L = 1/2 × alas × tinggi
+
+</div>
+
+<div class="contoh">
+
+Persegi panjang:
+
+panjang = 10 cm
+
+<br>
+
+lebar = 5 cm
+
+<br><br>
+
+L = 10 × 5
+
+<br>
+
+<strong>L = 50 cm²</strong>
+
+</div>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>C. Luas Bangun Gabungan</h3>
+
+<p>
+Bangun gabungan dapat dibagi menjadi beberapa bangun sederhana.
+Hitung luas masing-masing bagian kemudian jumlahkan atau kurangkan
+sesuai bentuknya.
+</p>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>D. Hubungan Keliling dan Luas</h3>
+
+<p>
+Keliling dan luas merupakan dua ukuran yang berbeda.
+Keliling mengukur panjang batas bangun, sedangkan luas mengukur
+besar daerah di dalam bangun.
+</p>
+
+</div>
+
+
+<div class="latihan">
+
+<h3>✏️ Latihan Bab 5</h3>
+
+<ol>
+
+<li>
+Hitung luas persegi dengan sisi 8 cm.
+</li>
+
+<li>
+Hitung luas persegi panjang dengan panjang 12 cm dan lebar 5 cm.
+</li>
+
+<li>
+Apa perbedaan keliling dan luas?
+</li>
+
+</ol>
+
+<button
+class="btn-jawaban"
+onclick="toggleJawaban(this)"
+>
+👁️ Lihat Kunci Jawaban
+</button>
+
+<div class="kunci">
+
+1. 64 cm².<br>
+2. 60 cm².<br>
+3. Keliling mengukur batas bangun, luas mengukur daerah di dalam bangun.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     BAB 6
+===================================================== -->
+
+<div class="bab">
+
+<div class="bab-header">
+
+<h2>
+📐 Bab 6 — Sudut
+</h2>
+
+<span class="arrow">▼</span>
+
+</div>
+
+
+<div class="bab-content">
+
+
+<div class="submateri">
+
+<h3>A. Sudut Siku-Siku</h3>
+
+<p>
+Sudut siku-siku memiliki besar <strong>90°</strong>.
+</p>
+
+<p>
+Contohnya dapat ditemukan pada sudut buku, meja,
+pintu, atau sudut persegi.
+</p>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>B. Pengertian Sudut</h3>
+
+<p>
+Sudut terbentuk dari dua sinar garis yang memiliki satu titik pangkal
+yang sama.
+</p>
+
+<p>
+Titik pertemuan tersebut disebut titik sudut.
+</p>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>C. Mengukur dan Membandingkan Sudut</h3>
+
+<p>
+Besar sudut dapat diukur menggunakan busur derajat.
+</p>
+
+<div class="rumus">
+
+<strong>Satuan besar sudut adalah derajat (°).</strong>
+
+</div>
+
+<p>
+Saat menggunakan busur derajat, perhatikan titik pusat busur
+dan garis dasar sudut.
+</p>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>D. Melukis Sudut</h3>
+
+<p>
+Untuk melukis sudut, tentukan titik sudut,
+buat salah satu kaki sudut, kemudian ukur besar sudut
+menggunakan busur derajat dan tarik kaki sudut kedua.
+</p>
+
+</div>
+
+
+<div class="latihan">
+
+<h3>✏️ Latihan Bab 6</h3>
+
+<ol>
+
+<li>
+Berapa besar sudut siku-siku?
+</li>
+
+<li>
+Apa alat untuk mengukur sudut?
+</li>
+
+<li>
+Apa satuan besar sudut?
+</li>
+
+<li>
+Sebutkan contoh benda yang memiliki sudut siku-siku.
+</li>
+
+</ol>
+
+<button
+class="btn-jawaban"
+onclick="toggleJawaban(this)"
+>
+👁️ Lihat Kunci Jawaban
+</button>
+
+<div class="kunci">
+
+1. 90°.<br>
+2. Busur derajat.<br>
+3. Derajat (°).<br>
+4. Contoh: buku atau meja.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     BAB 7
+===================================================== -->
+
+<div class="bab">
+
+<div class="bab-header">
+
+<h2>
+🔺 Bab 7 — Membandingkan Ciri-Ciri Bangun Datar
+</h2>
+
+<span class="arrow">▼</span>
+
+</div>
+
+
+<div class="bab-content">
+
+
+<div class="submateri">
+
+<h3>A. Ciri-Ciri Segitiga</h3>
+
+<p>
+Segitiga merupakan bangun datar yang mempunyai tiga sisi dan tiga sudut.
+</p>
+
+<p>
+Segitiga dapat dibandingkan berdasarkan sisi dan sudutnya.
+</p>
+
+<table>
+
+<tr>
+<th>Bangun</th>
+<th>Ciri Umum</th>
+</tr>
+
+<tr>
+<td>Segitiga</td>
+<td>3 sisi dan 3 sudut</td>
+</tr>
+
+<tr>
+<td>Segitiga sama sisi</td>
+<td>Ketiga sisi sama panjang</td>
+</tr>
+
+<tr>
+<td>Segitiga sama kaki</td>
+<td>Dua sisi sama panjang</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>B. Ciri-Ciri Segi Empat</h3>
+
+<p>
+Segi empat mempunyai empat sisi dan empat sudut.
+</p>
+
+<table>
+
+<tr>
+<th>Bangun</th>
+<th>Ciri</th>
+</tr>
+
+<tr>
+<td>Persegi</td>
+<td>4 sisi sama panjang</td>
+</tr>
+
+<tr>
+<td>Persegi panjang</td>
+<td>Sisi berhadapan sama panjang</td>
+</tr>
+
+<tr>
+<td>Jajar genjang</td>
+<td>Sisi berhadapan sejajar</td>
+</tr>
+
+<tr>
+<td>Trapesium</td>
+<td>Mempunyai pasangan sisi sejajar</td>
+</tr>
+
+</table>
+
+<div class="penting">
+
+<strong>💡 Perhatikan ciri bangun!</strong>
+
+<p>
+Untuk membedakan bangun datar, perhatikan jumlah sisi,
+panjang sisi, hubungan antar sisi, serta sudutnya.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="latihan">
+
+<h3>✏️ Latihan Bab 7</h3>
+
+<ol>
+
+<li>
+Berapa jumlah sisi segitiga?
+</li>
+
+<li>
+Berapa jumlah sisi segi empat?
+</li>
+
+<li>
+Apa ciri utama persegi?
+</li>
+
+<li>
+Apa perbedaan sederhana persegi dan persegi panjang?
+</li>
+
+</ol>
+
+<button
+class="btn-jawaban"
+onclick="toggleJawaban(this)"
+>
+👁️ Lihat Kunci Jawaban
+</button>
+
+<div class="kunci">
+
+1. 3 sisi.<br>
+2. 4 sisi.<br>
+3. Keempat sisinya sama panjang dan memiliki empat sudut siku-siku.<br>
+4. Persegi memiliki empat sisi sama panjang, sedangkan persegi panjang memiliki sisi berhadapan sama panjang.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     BAB 8
+===================================================== -->
+
+<div class="bab">
+
+<div class="bab-header">
+
+<h2>
+📊 Bab 8 — Data
+</h2>
+
+<span class="arrow">▼</span>
+
+</div>
+
+
+<div class="bab-content">
+
+
+<div class="submateri">
+
+<h3>A. Mengumpulkan Data</h3>
+
+<p>
+Data adalah kumpulan informasi yang diperoleh dari pengamatan,
+pengukuran, atau kegiatan lainnya.
+</p>
+
+<p>
+Data sederhana dapat dikumpulkan dari lingkungan sekitar,
+misalnya warna kesukaan siswa, jenis olahraga yang disukai,
+atau jumlah anggota keluarga.
+</p>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>B. Tabel Frekuensi</h3>
+
+<p>
+Data dapat disusun dalam tabel agar lebih mudah dibaca.
+</p>
+
+<table>
+
+<tr>
+<th>Olahraga</th>
+<th>Banyak Siswa</th>
+</tr>
+
+<tr>
+<td>Sepak bola</td>
+<td>10</td>
+</tr>
+
+<tr>
+<td>Bulu tangkis</td>
+<td>7</td>
+</tr>
+
+<tr>
+<td>Bola voli</td>
+<td>5</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>C. Piktogram</h3>
+
+<p>
+Piktogram adalah penyajian data menggunakan gambar atau simbol.
+Setiap gambar dapat mewakili jumlah tertentu.
+</p>
+
+<div class="contoh">
+
+Jika:
+
+⭐ = 2 siswa
+
+maka:
+
+⭐⭐⭐ = 6 siswa
+
+</div>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>D. Diagram Batang</h3>
+
+<p>
+Diagram batang menggunakan batang untuk menunjukkan banyaknya data.
+</p>
+
+<p>
+Diagram batang dapat dibuat secara vertikal maupun horizontal.
+Data juga dapat disajikan dalam diagram batang ganda.
+</p>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>E. Membaca dan Menganalisis Data</h3>
+
+<p>
+Saat membaca data, perhatikan judul, kategori, nilai,
+dan perbandingan antar-data.
+</p>
+
+<div class="contoh">
+
+Jika jumlah siswa yang menyukai:
+
+<br>
+
+Sepak bola = 12
+
+<br>
+
+Bulu tangkis = 8
+
+<br>
+
+Bola voli = 5
+
+<br><br>
+
+Maka olahraga yang paling banyak disukai adalah
+<strong>sepak bola</strong>.
+
+</div>
+
+</div>
+
+
+<div class="latihan">
+
+<h3>✏️ Latihan Bab 8</h3>
+
+<ol>
+
+<li>
+Apa yang dimaksud dengan data?
+</li>
+
+<li>
+Apa fungsi tabel?
+</li>
+
+<li>
+Apa yang dimaksud piktogram?
+</li>
+
+<li>
+Sebutkan salah satu bentuk diagram batang.
+</li>
+
+<li>
+Jika 1 gambar mewakili 5 siswa, maka 4 gambar mewakili berapa siswa?
+</li>
+
+</ol>
+
+<button
+class="btn-jawaban"
+onclick="toggleJawaban(this)"
+>
+👁️ Lihat Kunci Jawaban
+</button>
+
+<div class="kunci">
+
+1. Kumpulan informasi yang diperoleh dari suatu kegiatan pengumpulan data.<br>
+2. Untuk menyajikan data agar lebih mudah dibaca.<br>
+3. Penyajian data menggunakan gambar atau simbol.<br>
+4. Diagram batang vertikal/horizontal.<br>
+5. 20 siswa.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     BAB 9
+===================================================== -->
+
+<div class="bab">
+
+<div class="bab-header">
+
+<h2>
+🔢 Bab 9 — Bilangan Cacah Sampai 1.000.000
+</h2>
+
+<span class="arrow">▼</span>
+
+</div>
+
+
+<div class="bab-content">
+
+
+<div class="submateri">
+
+<h3>A. Membaca dan Menulis Bilangan serta Nilai Tempat</h3>
+
+<p>
+Pada bab ini kita mempelajari bilangan yang lebih besar,
+hingga 1.000.000.
+</p>
+
+<table>
+
+<tr>
+<th>Tempat</th>
+<th>Contoh pada 720.736</th>
+</tr>
+
+<tr>
+<td>Ratus ribuan</td>
+<td>7</td>
+</tr>
+
+<tr>
+<td>Puluh ribuan</td>
+<td>2</td>
+</tr>
+
+<tr>
+<td>Ribuan</td>
+<td>0</td>
+</tr>
+
+<tr>
+<td>Ratusan</td>
+<td>7</td>
+</tr>
+
+<tr>
+<td>Puluhan</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td>Satuan</td>
+<td>6</td>
+</tr>
+
+</table>
+
+<div class="contoh">
+
+720.736 dibaca:
+
+<strong>
+tujuh ratus dua puluh ribu tujuh ratus tiga puluh enam.
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>B. Mengurutkan dan Membandingkan Bilangan</h3>
+
+<p>
+Untuk membandingkan bilangan sampai 1.000.000,
+perhatikan banyak digit dan nilai tempatnya.
+</p>
+
+<div class="contoh">
+
+599.198 > 599.047
+
+<br><br>
+
+Karena setelah bagian yang sama,
+angka pada tempat berikutnya menentukan perbandingan.
+
+</div>
+
+</div>
+
+
+<div class="submateri">
+
+<h3>C. Komposisi dan Dekomposisi Bilangan</h3>
+
+<div class="contoh">
+
+599.198 dapat diuraikan menjadi:
+
+<br><br>
+
+500.000 + 90.000 + 9.000 + 100 + 90 + 8
+
+</div>
+
+<p>
+Sebaliknya, beberapa nilai tempat tersebut dapat disusun kembali
+menjadi bilangan 599.198.
+</p>
+
+</div>
+
+
+<div class="ringkasan">
+
+<strong>📌 Ringkasan Bab 9</strong>
+
+<ul>
+
+<li>Bilangan dapat dibaca berdasarkan nilai tempat.</li>
+
+<li>Bilangan sampai 1.000.000 memiliki tempat ratus ribuan.</li>
+
+<li>Bilangan dapat dibandingkan berdasarkan nilai tempat.</li>
+
+<li>Bilangan dapat diurutkan dari terkecil ke terbesar atau sebaliknya.</li>
+
+<li>Bilangan dapat dikomposisi dan didekomposisi.</li>
+
+</ul>
+
+</div>
+
+
+<div class="latihan">
+
+<h3>✏️ Latihan Bab 9</h3>
+
+<ol>
+
+<li>
+Tuliskan cara membaca 720.736.
+</li>
+
+<li>
+Tentukan nilai angka 7 pada 720.736.
+</li>
+
+<li>
+Mana yang lebih besar: 599.198 atau 599.047?
+</li>
+
+<li>
+Uraikan 456.321 berdasarkan nilai tempat.
+</li>
+
+<li>
+Tuliskan bilangan dari:
+300.000 + 20.000 + 5.000 + 400 + 30 + 2.
+</li>
+
+</ol>
+
+<button
+class="btn-jawaban"
+onclick="toggleJawaban(this)"
+>
+👁️ Lihat Kunci Jawaban
+</button>
+
+<div class="kunci">
+
+1. Tujuh ratus dua puluh ribu tujuh ratus tiga puluh enam.<br>
+2. 700.000.<br>
+3. 599.198.<br>
+4. 400.000 + 50.000 + 6.000 + 300 + 20 + 1.<br>
+5. 325.432.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 
 </div>
 
@@ -911,595 +1980,149 @@ body{
      FOOTER
 ===================================================== -->
 
-<footer class="footer">
+<div class="footer">
 
-    © 2026 Portal Digital Kelas 5 SDN Cijember
+<strong>
+📚 Portal Digital Kelas 5 SDN Cijember
+</strong>
 
-</footer>
+<br>
+
+<span>
+Materi Matematika Kelas 5
+</span>
+
+<br><br>
+
+<span>
+Gr. Asep Jamhur, S.Pd., M.M.
+</span>
+
+</div>
+
+
+<!-- =====================================================
+     NAVIGASI
+===================================================== -->
+
+<div class="bottom-nav">
+
+<a href="index.html">
+🏠 Home
+</a>
+
+<a href="materi.html">
+📚 Materi
+</a>
+
+</div>
 
 
 <script>
 
-/* =====================================================
-   DATA MATERI
-===================================================== */
+/* =========================================================
+   BUKA / TUTUP BAB
+========================================================= */
 
-const dataMateri = {
+document.querySelectorAll(".bab-header")
+.forEach(function(header){
 
-    pai: {
+    header.addEventListener("click",function(){
 
-        judul:"🕌 Pendidikan Agama Islam",
+        const bab =
+            this.parentElement;
 
-        semester1:[
+        bab.classList.toggle("active");
 
-            "Mengenal Allah melalui Asmaul Husna",
+    });
 
-            "Kitab-kitab Allah",
+});
 
-            "Rasul dan keteladanan",
 
-            "Akhlak terpuji dalam kehidupan",
+/* =========================================================
+   KUNCI JAWABAN
+========================================================= */
 
-            "Salat dan ibadah",
+function toggleJawaban(button){
 
-            "Kisah keteladanan Nabi"
+    const kunci =
+        button.nextElementSibling;
 
-        ],
+    if(
+        kunci.style.display === "block"
+    ){
 
-        semester2:[
+        kunci.style.display = "none";
 
-            "Iman kepada hari akhir",
-
-            "Akhlak kepada orang tua dan guru",
-
-            "Kerukunan dan toleransi",
-
-            "Zakat, infak dan sedekah",
-
-            "Puasa dan hikmahnya",
-
-            "Kisah tokoh Islam"
-
-        ]
-
-    },
-
-
-    pancasila: {
-
-        judul:"🇮🇩 Pendidikan Pancasila",
-
-        semester1:[
-
-            "Pancasila sebagai dasar negara",
-
-            "Makna nilai-nilai Pancasila",
-
-            "Penerapan Pancasila dalam kehidupan",
-
-            "Norma dan aturan",
-
-            "Hak dan kewajiban",
-
-            "Tanggung jawab"
-
-        ],
-
-        semester2:[
-
-            "Keberagaman Indonesia",
-
-            "Menghargai perbedaan",
-
-            "Persatuan dan kesatuan",
-
-            "Gotong royong",
-
-            "Musyawarah",
-
-            "Menjadi warga negara yang baik"
-
-        ]
-
-    },
-
-
-    matematika: {
-
-        judul:"🔢 Matematika",
-
-        semester1:[
-
-            "Bilangan cacah sampai 100.000",
-
-            "Nilai tempat",
-
-            "Membandingkan dan mengurutkan bilangan",
-
-            "Operasi penjumlahan dan pengurangan",
-
-            "Operasi perkalian dan pembagian",
-
-            "Pecahan"
-
-        ],
-
-        semester2:[
-
-            "Desimal dan persen",
-
-            "KPK dan FPB",
-
-            "Pengukuran",
-
-            "Bangun datar",
-
-            "Bangun ruang",
-
-            "Data dan diagram"
-
-        ]
-
-    },
-
-
-    indonesia: {
-
-        judul:"📖 Bahasa Indonesia",
-
-        semester1:[
-
-            "Membaca dan memahami teks",
-
-            "Ide pokok dan informasi penting",
-
-            "Kosakata dan makna kata",
-
-            "Teks deskripsi",
-
-            "Teks narasi",
-
-            "Puisi dan puisi akrostik"
-
-        ],
-
-        semester2:[
-
-            "Iklan dan informasi",
-
-            "Surat",
-
-            "Teks prosedur",
-
-            "Meringkas teks",
-
-            "Presentasi",
-
-            "Berbicara dan berdiskusi"
-
-        ]
-
-    },
-
-
-    inggris: {
-
-        judul:"🇬🇧 Bahasa Inggris",
-
-        semester1:[
-
-            "Greetings and Introduction",
-
-            "Numbers",
-
-            "Days and Months",
-
-            "Family",
-
-            "School Activities",
-
-            "Things Around Us"
-
-        ],
-
-        semester2:[
-
-            "Daily Activities",
-
-            "Hobbies",
-
-            "Food and Drinks",
-
-            "Describing People",
-
-            "Describing Things",
-
-            "Simple Conversation"
-
-        ]
-
-    },
-
-
-    sunda: {
-
-        judul:"🌿 Bahasa Sunda",
-
-        semester1:[
-
-            "Paguneman",
-
-            "Undak-usuk basa Sunda",
-
-            "Maca jeung maham bacaan",
-
-            "Nulis basa Sunda",
-
-            "Kecap jeung hartina",
-
-            "Sastra Sunda"
-
-        ],
-
-        semester2:[
-
-            "Carita pondok",
-
-            "Sisindiran",
-
-            "Sajak Sunda",
-
-            "Aksara Sunda",
-
-            "Kabudayaan Sunda",
-
-            "Ngagunakeun basa Sunda dina kahirupan"
-
-        ]
-
-    },
-
-
-    kka: {
-
-        judul:"💻 KKA – Koding dan Kecerdasan Artifisial",
-
-        semester1:[
-
-            "Berpikir komputasional",
-
-            "Pola dan pengelompokan",
-
-            "Algoritma sederhana",
-
-            "Urutan langkah",
-
-            "Pemecahan masalah",
-
-            "Koding visual"
-
-        ],
-
-        semester2:[
-
-            "Pengenalan kecerdasan artifisial",
-
-            "Cara kerja AI secara sederhana",
-
-            "Pemanfaatan AI untuk belajar",
-
-            "Etika menggunakan AI",
-
-            "Keamanan dan privasi digital",
-
-            "Membuat proyek sederhana"
-
-        ]
-
-    },
-
-
-    seni: {
-
-        judul:"🎨 Seni Rupa",
-
-        semester1:[
-
-            "Unsur-unsur seni rupa",
-
-            "Garis dan bentuk",
-
-            "Warna",
-
-            "Komposisi",
-
-            "Menggambar objek",
-
-            "Menggambar ekspresif"
-
-        ],
-
-        semester2:[
-
-            "Poster",
-
-            "Ilustrasi",
-
-            "Kolase",
-
-            "Karya dekoratif",
-
-            "Karya tiga dimensi",
-
-            "Apresiasi karya seni rupa"
-
-        ]
-
-    },
-
-
-    pjok: {
-
-        judul:"🏃 PJOK",
-
-        semester1:[
-
-            "Gerak dasar lokomotor",
-
-            "Gerak dasar nonlokomotor",
-
-            "Permainan bola besar",
-
-            "Permainan bola kecil",
-
-            "Atletik",
-
-            "Kebugaran jasmani"
-
-        ],
-
-        semester2:[
-
-            "Bulu tangkis",
-
-            "Senam",
-
-            "Aktivitas ritmik",
-
-            "Permainan tradisional",
-
-            "Pola hidup sehat",
-
-            "Keselamatan dalam aktivitas olahraga"
-
-        ]
+        button.innerHTML =
+            "👁️ Lihat Kunci Jawaban";
 
     }
 
-};
+    else{
 
+        kunci.style.display = "block";
 
-/* =====================================================
-   BUKA MAPEL
-===================================================== */
+        button.innerHTML =
+            "🙈 Sembunyikan Kunci";
 
-function bukaMapel(kode){
-
-    const data =
-        dataMateri[kode];
-
-    if(!data) return;
-
-    document.getElementById(
-        "judulMapel"
-    ).textContent =
-        data.judul;
-
-    document.getElementById(
-        "subjudulMapel"
-    ).textContent =
-        "Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027";
-
-
-    buatDaftar(
-        "semester1",
-        data.semester1
-    );
-
-    buatDaftar(
-        "semester2",
-        data.semester2
-    );
-
-
-    document.getElementById(
-        "daftarMateri"
-    ).style.display =
-        "block";
-
-    document.getElementById(
-        "detailMateri"
-    ).classList.remove("active");
-
-
-    document.getElementById(
-        "modalMateri"
-    ).classList.add("active");
+    }
 
 }
 
 
-/* =====================================================
-   BUAT DAFTAR
-===================================================== */
+/* =========================================================
+   PENCARIAN MATERI
+========================================================= */
 
-function buatDaftar(id,data){
+document.getElementById("searchBox")
+.addEventListener("input",function(){
 
-    const container =
-        document.getElementById(id);
+    const keyword =
+        this.value
+        .toLowerCase()
+        .trim();
 
-    container.innerHTML="";
+    const semuaBab =
+        document.querySelectorAll(".bab");
 
-    data.forEach(
-        function(nama,index){
+    semuaBab.forEach(function(bab){
 
-            const item =
-                document.createElement("div");
-
-            item.className =
-                "materi-item";
-
-            item.innerHTML = `
-
-                <div class="nomor">
-                    ${index + 1}
-                </div>
-
-                <div class="materi-info">
-
-                    <strong>
-                        ${nama}
-                    </strong>
-
-                    <span>
-                        Klik untuk melihat materi
-                    </span>
-
-                </div>
-
-                <div class="materi-arrow">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
-
-            `;
-
-            item.onclick =
-                function(){
-
-                    bukaDetail(nama);
-
-                };
-
-            container.appendChild(item);
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   DETAIL
-===================================================== */
-
-function bukaDetail(nama){
-
-    document.getElementById(
-        "judulDetail"
-    ).textContent =
-        nama;
-
-
-    document.getElementById(
-        "isiDetail"
-    ).innerHTML =
-
-        "Pada bagian ini dapat ditampilkan " +
-        "materi pembelajaran <strong>" +
-        nama +
-        "</strong> secara lengkap. " +
-
-        "<br><br>" +
-
-        "Guru dapat menambahkan ringkasan " +
-        "materi, contoh, gambar, video " +
-        "pembelajaran, LKPD, maupun latihan soal.";
-
-
-    document.getElementById(
-        "daftarMateri"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "detailMateri"
-    ).classList.add("active");
-
-}
-
-
-/* =====================================================
-   KEMBALI KE DAFTAR
-===================================================== */
-
-function kembaliKeDaftar(){
-
-    document.getElementById(
-        "detailMateri"
-    ).classList.remove("active");
-
-    document.getElementById(
-        "daftarMateri"
-    ).style.display =
-        "block";
-
-}
-
-
-/* =====================================================
-   TUTUP MODAL
-===================================================== */
-
-function tutupModal(){
-
-    document.getElementById(
-        "modalMateri"
-    ).classList.remove("active");
-
-}
-
-
-/* =====================================================
-   KLIK LUAR MODAL
-===================================================== */
-
-document.getElementById(
-    "modalMateri"
-).addEventListener(
-    "click",
-    function(e){
+        const teks =
+            bab.innerText.toLowerCase();
 
         if(
-            e.target === this
+            keyword === "" ||
+            teks.includes(keyword)
         ){
 
-            tutupModal();
+            bab.style.display = "block";
 
         }
 
-    }
-);
+        else{
 
-
-/* =====================================================
-   ESC
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    function(e){
-
-        if(
-            e.key === "Escape"
-        ){
-
-            tutupModal();
+            bab.style.display = "none";
 
         }
 
-    }
-);
+    });
+
+});
+
+
+/* =========================================================
+   BUKA BAB PERTAMA OTOMATIS
+========================================================= */
+
+const babPertama =
+    document.querySelector(".bab");
+
+if(babPertama){
+
+    babPertama.classList.add("active");
+
+}
 
 </script>
 
