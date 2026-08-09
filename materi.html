@@ -1,305 +1,73 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Materi Pembelajaran Kelas 5</title>
-
-<style>
-
-*{
-    box-sizing:border-box;
-}
-
-body{
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#eef5fb;
-    color:#1f2937;
-}
-
-/* ==============================
-   HEADER
-============================== */
-
-.header{
-    background:linear-gradient(135deg,#1976d2,#42a5f5);
-    color:white;
-    padding:25px 15px;
-    text-align:center;
-    box-shadow:0 4px 15px rgba(0,0,0,.15);
-}
-
-.header h1{
-    margin:0;
-    font-size:30px;
-}
-
-.header p{
-    margin:8px 0 0;
-    font-size:16px;
-}
-
-/* ==============================
-   CONTAINER
-============================== */
-
-.container{
-    max-width:1100px;
-    margin:auto;
-    padding:25px 15px 100px;
-}
-
-.judul{
-    text-align:center;
-    margin:10px 0 25px;
-    color:#1565c0;
-}
-
-/* ==============================
-   GRID 9 MAPEL
-============================== */
-
-.mapel-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-/* ==============================
-   KARTU MAPEL
-============================== */
-
-.mapel-card{
-    background:white;
-    border-radius:20px;
-    padding:25px 15px;
-    text-align:center;
-    cursor:pointer;
-    box-shadow:0 5px 18px rgba(0,0,0,.10);
-    transition:.25s;
-    border:2px solid transparent;
-}
-
-.mapel-card:hover{
-    transform:translateY(-5px);
-    border-color:#42a5f5;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
-}
-
-.mapel-icon{
-    font-size:52px;
-    margin-bottom:12px;
-}
-
-.mapel-card h3{
-    margin:5px 0;
-    color:#1565c0;
-    font-size:20px;
-}
-
-.mapel-card p{
-    margin:8px 0 0;
-    color:#666;
-    font-size:14px;
-}
-
-/* ==============================
-   HALAMAN MATERI
-============================== */
-
-.materi-halaman{
-    display:none;
-}
-
-.materi-halaman.aktif{
-    display:block;
-}
-
-.tombol-kembali{
-    border:none;
-    background:#1565c0;
-    color:white;
-    padding:11px 18px;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:15px;
-    margin-bottom:20px;
-}
-
-.tombol-kembali:hover{
-    background:#0d47a1;
-}
-
-.judul-mapel{
-    background:white;
-    border-radius:18px;
-    padding:20px;
-    text-align:center;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
-    margin-bottom:20px;
-}
-
-.judul-mapel h2{
-    margin:0;
-    color:#1565c0;
-}
-
-.judul-mapel p{
-    margin:8px 0 0;
-    color:#666;
-}
-
-/* ==============================
-   KARTU BAB
-============================== */
-
-.bab{
-    background:white;
-    margin-bottom:18px;
-    border-radius:18px;
-    padding:20px;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
-}
-
-.bab h3{
-    color:#1565c0;
-    margin-top:0;
-}
-
-.bab h4{
-    color:#333;
-    margin-bottom:8px;
-}
-
-.bab p{
-    line-height:1.7;
-}
-
-.bab ul{
-    line-height:1.8;
-}
-
-/* ==============================
-   BOX CONTOH
-============================== */
-
-.contoh{
-    background:#e3f2fd;
-    border-left:5px solid #1976d2;
-    padding:15px;
-    border-radius:10px;
-    margin-top:12px;
-}
-
-/* ==============================
-   TOMBOL LATIHAN
-============================== */
-
-.latihan{
-    background:#fff8e1;
-    border-left:5px solid #ffb300;
-    padding:15px;
-    border-radius:10px;
-    margin-top:15px;
-}
-
-/* ==============================
-   RESPONSIVE HP
-============================== */
-
-@media(max-width:800px){
-
-    .mapel-grid{
-        grid-template-columns:repeat(2,1fr);
-        gap:14px;
-    }
-
-    .mapel-card{
-        padding:20px 10px;
-    }
-
-    .mapel-icon{
-        font-size:42px;
-    }
-
-    .mapel-card h3{
-        font-size:17px;
-    }
-
-}
-
-@media(max-width:500px){
-
-    .header h1{
-        font-size:23px;
-    }
-
-    .mapel-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .mapel-icon{
-        font-size:38px;
-    }
-
-    .mapel-card h3{
-        font-size:15px;
-    }
-
-    .mapel-card p{
-        font-size:12px;
-    }
-
-}
-
-</style>
-</head>
-
-<body>
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<div class="header">
-
-    <h1>📚 Materi Pembelajaran</h1>
-
-    <p>
-        Kelas 5 SDN Cijember
-    </p>
-
-    <p>
-        Tahun Pelajaran 2026/2027
-    </p>
-
-</div>
-
-
-<div class="container">
-
-
-<!-- =====================================================
-     HALAMAN UTAMA 9 MAPEL
-===================================================== -->
-
-<div id="halamanMapel">
-
-    <h2 class="judul">
-        📖 Pilih Mata Pelajaran
-    </h2>
-
-    <div class="mapel-grid">
-
-
-        <!-- PAI -->
+<!-- =========================================================
+     MENU MATA PELAJARAN
+     PORTAL DIGITAL KELAS 5 SDN CIJEMBER
+========================================================= -->
+
+<div id="menu-mata-pelajaran">
+
+    <!-- HEADER -->
+    <div style="
+        text-align:center;
+        margin-bottom:30px;
+        padding:28px 20px;
+        background:linear-gradient(135deg,#1565c0,#42a5f5);
+        color:white;
+        border-radius:22px;
+        box-shadow:0 8px 20px rgba(0,0,0,.12);
+    ">
+
+        <div style="font-size:55px;">
+            📚
+        </div>
+
+        <h2 style="
+            margin:8px 0;
+            font-size:30px;
+        ">
+            Mata Pelajaran Kelas 5
+        </h2>
+
+        <p style="
+            margin:6px 0;
+            font-size:16px;
+        ">
+            Portal Digital Kelas 5 SDN Cijember
+        </p>
+
+        <small>
+            Tahun Pelajaran 2026/2027
+        </small>
+
+    </div>
+
+
+    <!-- GRID MAPEL -->
+
+    <div style="
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+        gap:20px;
+    ">
+
+
+        <!-- =================================================
+             1. PAI
+        ================================================== -->
 
         <div class="mapel-card"
-             onclick="bukaMateri('pai')">
+             onclick="bukaMateri('pai')"
+             style="
+                background:linear-gradient(135deg,#16a34a,#4ade80);
+                color:white;
+                padding:25px;
+                border-radius:20px;
+                cursor:pointer;
+                text-align:center;
+                box-shadow:0 7px 18px rgba(0,0,0,.12);
+                transition:.25s;
+             ">
 
-            <div class="mapel-icon">
+            <div style="font-size:55px;">
                 🕌
             </div>
 
@@ -308,34 +76,80 @@ body{
             </h3>
 
             <p>
-                Materi PAI Kelas 5
+                Belajar PAI dengan menyenangkan
             </p>
 
+            <div style="
+                margin-top:15px;
+                background:rgba(255,255,255,.2);
+                padding:8px;
+                border-radius:12px;
+            ">
+                📖 Buka Materi
+            </div>
+
         </div>
-<!-- PENDIDIKAN PANCASILA -->
-    <div class="mapel-card"
-         onclick="bukaMateri('pancasila')">
 
-        <div class="mapel-icon">
-            🇮🇩
-        </div>
 
-        <h3>
-            Pendidikan Pancasila
-        </h3>
-
-        <p>
-            Materi Pendidikan Pancasila Kelas 5
-        </p>
-
-    </div>
-
-        <!-- MATEMATIKA -->
+        <!-- =================================================
+             2. PENDIDIKAN PANCASILA
+        ================================================== -->
 
         <div class="mapel-card"
-             onclick="bukaMateri('matematika')">
+             onclick="bukaMateri('pancasila')"
+             style="
+                background:linear-gradient(135deg,#dc2626,#fb7185);
+                color:white;
+                padding:25px;
+                border-radius:20px;
+                cursor:pointer;
+                text-align:center;
+                box-shadow:0 7px 18px rgba(0,0,0,.12);
+                transition:.25s;
+             ">
 
-            <div class="mapel-icon">
+            <div style="font-size:55px;">
+                🇮🇩
+            </div>
+
+            <h3>
+                Pendidikan Pancasila
+            </h3>
+
+            <p>
+                Belajar nilai-nilai Pancasila
+            </p>
+
+            <div style="
+                margin-top:15px;
+                background:rgba(255,255,255,.2);
+                padding:8px;
+                border-radius:12px;
+            ">
+                📖 Buka Materi
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             3. MATEMATIKA
+        ================================================== -->
+
+        <div class="mapel-card"
+             onclick="bukaMateri('matematika')"
+             style="
+                background:linear-gradient(135deg,#2563eb,#60a5fa);
+                color:white;
+                padding:25px;
+                border-radius:20px;
+                cursor:pointer;
+                text-align:center;
+                box-shadow:0 7px 18px rgba(0,0,0,.12);
+                transition:.25s;
+             ">
+
+            <div style="font-size:55px;">
                 🔢
             </div>
 
@@ -344,19 +158,40 @@ body{
             </h3>
 
             <p>
-                Materi Matematika Kelas 5
+                Belajar berhitung dan memecahkan masalah
             </p>
+
+            <div style="
+                margin-top:15px;
+                background:rgba(255,255,255,.2);
+                padding:8px;
+                border-radius:12px;
+            ">
+                📖 Buka Materi
+            </div>
 
         </div>
 
 
-        <!-- BAHASA INDONESIA -->
+        <!-- =================================================
+             4. BAHASA INDONESIA
+        ================================================== -->
 
         <div class="mapel-card"
-             onclick="bukaMateri('indonesia')">
+             onclick="bukaMateri('indonesia')"
+             style="
+                background:linear-gradient(135deg,#f59e0b,#fbbf24);
+                color:white;
+                padding:25px;
+                border-radius:20px;
+                cursor:pointer;
+                text-align:center;
+                box-shadow:0 7px 18px rgba(0,0,0,.12);
+                transition:.25s;
+             ">
 
-            <div class="mapel-icon">
-                📖
+            <div style="font-size:55px;">
+                📚
             </div>
 
             <h3>
@@ -364,18 +199,39 @@ body{
             </h3>
 
             <p>
-                Materi Bahasa Indonesia
+                Membaca, menulis, berbicara, dan menyimak
             </p>
+
+            <div style="
+                margin-top:15px;
+                background:rgba(255,255,255,.2);
+                padding:8px;
+                border-radius:12px;
+            ">
+                📖 Buka Materi
+            </div>
 
         </div>
 
 
-        <!-- BAHASA INGGRIS -->
+        <!-- =================================================
+             5. BAHASA INGGRIS
+        ================================================== -->
 
         <div class="mapel-card"
-             onclick="bukaMateri('inggris')">
+             onclick="bukaMateri('inggris')"
+             style="
+                background:linear-gradient(135deg,#7c3aed,#a78bfa);
+                color:white;
+                padding:25px;
+                border-radius:20px;
+                cursor:pointer;
+                text-align:center;
+                box-shadow:0 7px 18px rgba(0,0,0,.12);
+                transition:.25s;
+             ">
 
-            <div class="mapel-icon">
+            <div style="font-size:55px;">
                 🇬🇧
             </div>
 
@@ -384,18 +240,39 @@ body{
             </h3>
 
             <p>
-                English for Grade 5
+                Learn English in a fun way
             </p>
+
+            <div style="
+                margin-top:15px;
+                background:rgba(255,255,255,.2);
+                padding:8px;
+                border-radius:12px;
+            ">
+                📖 Buka Materi
+            </div>
 
         </div>
 
 
-        <!-- BAHASA SUNDA -->
+        <!-- =================================================
+             6. BAHASA SUNDA
+        ================================================== -->
 
         <div class="mapel-card"
-             onclick="bukaMateri('sunda')">
+             onclick="bukaMateri('sunda')"
+             style="
+                background:linear-gradient(135deg,#0891b2,#22d3ee);
+                color:white;
+                padding:25px;
+                border-radius:20px;
+                cursor:pointer;
+                text-align:center;
+                box-shadow:0 7px 18px rgba(0,0,0,.12);
+                transition:.25s;
+             ">
 
-            <div class="mapel-icon">
+            <div style="font-size:55px;">
                 🌿
             </div>
 
@@ -404,38 +281,80 @@ body{
             </h3>
 
             <p>
-                Materi Bahasa Sunda
+                Diajar Basa Sunda kalayan pikaresepeun
             </p>
+
+            <div style="
+                margin-top:15px;
+                background:rgba(255,255,255,.2);
+                padding:8px;
+                border-radius:12px;
+            ">
+                📖 Buka Materi
+            </div>
 
         </div>
 
 
-        <!-- KKA -->
+        <!-- =================================================
+             7. KKA
+        ================================================== -->
 
         <div class="mapel-card"
-             onclick="bukaMateri('kka')">
+             onclick="bukaMateri('kka')"
+             style="
+                background:linear-gradient(135deg,#0f766e,#2dd4bf);
+                color:white;
+                padding:25px;
+                border-radius:20px;
+                cursor:pointer;
+                text-align:center;
+                box-shadow:0 7px 18px rgba(0,0,0,.12);
+                transition:.25s;
+             ">
 
-            <div class="mapel-icon">
-                💻
+            <div style="font-size:55px;">
+                🤖
             </div>
 
             <h3>
-                KKA
+                Koding dan Kecerdasan Artifisial
             </h3>
 
             <p>
-                Koding dan Kecerdasan Artifisial
+                Belajar teknologi dan AI secara kreatif
             </p>
+
+            <div style="
+                margin-top:15px;
+                background:rgba(255,255,255,.2);
+                padding:8px;
+                border-radius:12px;
+            ">
+                📖 Buka Materi
+            </div>
 
         </div>
 
 
-        <!-- SENI RUPA -->
+        <!-- =================================================
+             8. SENI
+        ================================================== -->
 
         <div class="mapel-card"
-             onclick="bukaMateri('seni')">
+             onclick="bukaMateri('seni')"
+             style="
+                background:linear-gradient(135deg,#db2777,#f472b6);
+                color:white;
+                padding:25px;
+                border-radius:20px;
+                cursor:pointer;
+                text-align:center;
+                box-shadow:0 7px 18px rgba(0,0,0,.12);
+                transition:.25s;
+             ">
 
-            <div class="mapel-icon">
+            <div style="font-size:55px;">
                 🎨
             </div>
 
@@ -444,19 +363,40 @@ body{
             </h3>
 
             <p>
-                Materi Seni Rupa Kelas 5
+                Berkarya, menggambar, dan berkreasi
             </p>
+
+            <div style="
+                margin-top:15px;
+                background:rgba(255,255,255,.2);
+                padding:8px;
+                border-radius:12px;
+            ">
+                📖 Buka Materi
+            </div>
 
         </div>
 
 
-        <!-- PJOK -->
+        <!-- =================================================
+             9. PJOK
+        ================================================== -->
 
         <div class="mapel-card"
-             onclick="bukaMateri('pjok')">
+             onclick="bukaMateri('pjok')"
+             style="
+                background:linear-gradient(135deg,#ea580c,#fb923c);
+                color:white;
+                padding:25px;
+                border-radius:20px;
+                cursor:pointer;
+                text-align:center;
+                box-shadow:0 7px 18px rgba(0,0,0,.12);
+                transition:.25s;
+             ">
 
-            <div class="mapel-icon">
-                🏃
+            <div style="font-size:55px;">
+                ⚽
             </div>
 
             <h3>
@@ -464,8 +404,17 @@ body{
             </h3>
 
             <p>
-                Pendidikan Jasmani, Olahraga dan Kesehatan
+                Sehat, aktif, kuat, dan sportif
             </p>
+
+            <div style="
+                margin-top:15px;
+                background:rgba(255,255,255,.2);
+                padding:8px;
+                border-radius:12px;
+            ">
+                📖 Buka Materi
+            </div>
 
         </div>
 
@@ -475,3053 +424,343 @@ body{
 </div>
 
 
-<!-- =====================================================
+<!-- =========================================================
+     JAVASCRIPT MENU MATERI
+========================================================= -->
+
+<script>
+
+function bukaMateri(id) {
+
+    /* Sembunyikan menu mata pelajaran */
+    const menu = document.getElementById("menu-mata-pelajaran");
+
+    if (menu) {
+        menu.style.display = "none";
+    }
+
+    /* Sembunyikan semua halaman materi */
+    const semuaMateri =
+        document.querySelectorAll(".materi-halaman");
+
+    semuaMateri.forEach(function(halaman) {
+        halaman.style.display = "none";
+    });
+
+    /* Tampilkan materi yang dipilih */
+    const materi = document.getElementById(id);
+
+    if (materi) {
+
+        materi.style.display = "block";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    } else {
+
+        alert(
+            "Materi " + id +
+            " belum ditemukan. Periksa kode materi."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   KEMBALI KE MENU MATA PELAJARAN
+========================================================= */
+
+function kembaliMapel() {
+
+    /* Sembunyikan semua materi */
+    const semuaMateri =
+        document.querySelectorAll(".materi-halaman");
+
+    semuaMateri.forEach(function(halaman) {
+        halaman.style.display = "none";
+    });
+
+    /* Tampilkan kembali menu */
+    const menu =
+        document.getElementById("menu-mata-pelajaran");
+
+    if (menu) {
+        menu.style.display = "block";
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+    <!-- =====================================================
      PAI
 ===================================================== -->
-
 <div id="pai" class="materi-halaman">
 
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
+<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
 
-<div class="judul-mapel">
-
-<h2>🕌 Pendidikan Agama Islam</h2>
-
-<p>
-Materi Pembelajaran PAI dan Budi Pekerti Kelas 5
-</p>
-
+<div class="judul-mapel" style="background:linear-gradient(135deg,#166534,#22c55e);color:white;padding:28px 20px;border-radius:18px;">
+<div style="font-size:50px;">🕌</div>
+<h2 style="color:white;">PAI dan Budi Pekerti</h2>
+<p>Belajar menjadi anak yang beriman, santun, jujur, dan berakhlak mulia.</p>
+<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
 </div>
 
-
-<!-- =====================================================
-     BAB 1
-===================================================== -->
-
 <div class="bab">
+<h3>🌟 Selamat Belajar PAI!</h3>
+<p>Belajar PAI bukan hanya menghafal. Kita belajar memahami ajaran Islam dan membuktikannya melalui perilaku baik.</p><div class="contoh"><b>🎯 Misi:</b> jujur, disiplin, menjaga kebersihan, menghormati guru dan orang tua, serta menyayangi teman.</div>
 
+</div><div class="bab">
 <h3>📖 Bab 1 — Al-Qur'an sebagai Petunjuk Hidup</h3>
+<p>Al-Qur'an adalah kitab suci umat Islam yang diturunkan Allah Swt. kepada Nabi Muhammad saw. melalui Malaikat Jibril. Al-Qur'an menjadi petunjuk bagi manusia.</p><ul><li>Membaca Al-Qur'an.</li><li>Memahami pesan ayat.</li><li>Mengamalkan ajaran yang baik.</li><li>Menjadikannya pedoman hidup.</li></ul>
+<div class="latihan"><b>🧠 Coba pikirkan:</b> Mengapa membaca Al-Qur'an sebaiknya diikuti dengan mengamalkan ajarannya?</div>
+</div><div class="bab">
+<h3>🤲 Bab 2 — Hidup Bersih dan Sehat</h3>
+<p>Kebersihan perlu dijaga pada diri, pakaian, tempat belajar, rumah, tempat ibadah, dan lingkungan.</p><div class="contoh">🧼 Cuci tangan • 🗑️ Buang sampah pada tempatnya • 🧹 Bersihkan kelas • 👕 Jaga kebersihan pakaian</div>
+<div class="latihan"><b>🎯 Tantangan 7 Hari:</b> ☐ Hari 1 ☐ Hari 2 ☐ Hari 3 ☐ Hari 4 ☐ Hari 5 ☐ Hari 6 ☐ Hari 7</div>
+</div><div class="bab">
+<h3>❤️ Bab 3 — Akhlak Terpuji</h3>
+<div class="contoh"><b>Jujur</b> — berkata sesuai kenyataan.<br><br><b>Amanah</b> — menjaga kepercayaan.<br><br><b>Tanggung jawab</b> — melaksanakan tugas.<br><br><b>Tolong-menolong</b> — membantu dalam kebaikan.<br><br><b>Hormat</b> — menghargai orang lain.</div>
+<div class="latihan"><b>⭐ Refleksi:</b> Akhlak baik apa yang sudah kamu lakukan hari ini?</div>
+</div><div class="bab">
+<h3>🕌 Bab 4 — Salat dan Kedisiplinan</h3>
+<p>Salat merupakan ibadah wajib bagi umat Islam. Melaksanakan salat dengan tertib dapat melatih disiplin dan tanggung jawab.</p><ul><li>Mengetahui waktu salat.</li><li>Berwudu dengan benar.</li><li>Menjaga ketertiban.</li><li>Berusaha tepat waktu.</li></ul>
 
-<p>
-Al-Qur'an adalah kitab suci umat Islam yang diturunkan
-Allah Swt. kepada Nabi Muhammad saw. melalui Malaikat Jibril.
-Al-Qur'an menjadi petunjuk bagi manusia dalam menjalani
-kehidupan.
-</p>
-
-<h4>🌟 Apa yang Perlu Kita Ketahui?</h4>
-
-<ul>
-<li>Al-Qur'an adalah kitab suci umat Islam.</li>
-<li>Al-Qur'an diturunkan kepada Nabi Muhammad saw.</li>
-<li>Al-Qur'an menjadi pedoman dan petunjuk hidup.</li>
-<li>Membaca Al-Qur'an merupakan ibadah.</li>
-<li>Kita harus membaca dan mengamalkan ajaran Al-Qur'an.</li>
-</ul>
-
-<div class="contoh">
-
-<b>💡 Contoh dalam kehidupan sehari-hari:</b>
-
-<p>
-Jika Al-Qur'an mengajarkan kita untuk berkata jujur,
-maka kita harus membiasakan diri berkata jujur kepada
-orang tua, guru, dan teman.
-</p>
+</div><div class="bab">
+<h3>🌈 Bab 5 — Menghargai Sesama</h3>
+<p>Kita perlu menyayangi, menghormati, membantu, dan tidak mengejek sesama.</p><div class="contoh">🤝 Bantu teman • ❤️ Maafkan kesalahan • 🗣️ Jaga perkataan • 🌟 Hargai perbedaan</div>
 
 </div>
-
-<div class="latihan">
-
-<b>✏️ Latihan Cepat</b>
-
-<p>
-1. Siapakah nabi yang menerima wahyu Al-Qur'an?
-</p>
-
-<p>
-2. Apa fungsi Al-Qur'an bagi umat Islam?
-</p>
-
-<p>
-3. Mengapa kita harus mengamalkan isi Al-Qur'an?
-</p>
-
 </div>
 
-</div>
-
-
-<!-- =====================================================
-     BAB 2
-===================================================== -->
-
-<div class="bab">
-
-<h3>🌙 Bab 2 — Mengenal Allah Swt. melalui Asmaul Husna</h3>
-
-<p>
-Asmaul Husna adalah nama-nama Allah Swt. yang indah.
-Dengan mempelajari Asmaul Husna, kita dapat mengenal
-sifat-sifat Allah dan berusaha meneladaninya dalam
-kehidupan sehari-hari.
-</p>
-
-<h4>⭐ Contoh Asmaul Husna</h4>
-
-<ul>
-
-<li>
-<b>Ar-Rahman</b> — Allah Maha Pengasih.
-</li>
-
-<li>
-<b>Ar-Rahim</b> — Allah Maha Penyayang.
-</li>
-
-<li>
-<b>Al-Ghaffar</b> — Allah Maha Pengampun.
-</li>
-
-<li>
-<b>Al-'Adl</b> — Allah Maha Adil.
-</li>
-
-</ul>
-
-<div class="contoh">
-
-<b>💡 Contoh perilaku:</b>
-
-<p>
-Jika kita mengetahui bahwa Allah Maha Pengasih dan
-Maha Penyayang, kita juga harus menyayangi orang tua,
-saudara, teman, hewan, dan lingkungan.
-</p>
-
-</div>
-
-<div class="latihan">
-
-<b>✏️ Latihan Cepat</b>
-
-<p>
-1. Apa yang dimaksud Asmaul Husna?
-</p>
-
-<p>
-2. Apa arti Ar-Rahman?
-</p>
-
-<p>
-3. Sebutkan satu contoh perilaku menyayangi sesama.
-</p>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 3
-===================================================== -->
-
-<div class="bab">
-
-<h3>🤲 Bab 3 — Hidup Rukun dan Saling Menghormati</h3>
-
-<p>
-Islam mengajarkan umatnya untuk hidup rukun,
-saling menghormati, saling membantu, dan menjaga
-hubungan baik dengan sesama.
-</p>
-
-<h4>🌟 Sikap yang Harus Dibiasakan</h4>
-
-<ul>
-
-<li>Menghormati orang tua.</li>
-
-<li>Menghormati guru.</li>
-
-<li>Menyayangi teman.</li>
-
-<li>Membantu orang yang membutuhkan.</li>
-
-<li>Tidak mengejek atau menghina orang lain.</li>
-
-<li>Mau memaafkan kesalahan orang lain.</li>
-
-<li>Menjaga kerukunan.</li>
-
-</ul>
-
-<div class="contoh">
-
-<b>💡 Contoh:</b>
-
-<p>
-Ketika ada teman yang kesulitan memahami pelajaran,
-kita dapat membantunya dengan sabar tanpa mengejeknya.
-</p>
-
-</div>
-
-<div class="latihan">
-
-<b>✏️ Latihan Cepat</b>
-
-<p>
-1. Mengapa kita harus menghormati guru?
-</p>
-
-<p>
-2. Apa yang sebaiknya kita lakukan ketika teman
-mengalami kesulitan?
-</p>
-
-<p>
-3. Mengapa mengejek teman merupakan perbuatan yang
-tidak baik?
-</p>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 4
-===================================================== -->
-
-<div class="bab">
-
-<h3>❤️ Bab 4 — Akhlak Terpuji</h3>
-
-<p>
-Akhlak terpuji adalah perilaku baik yang sesuai dengan
-ajaran Islam. Seorang muslim hendaknya membiasakan
-akhlak terpuji dalam kehidupan sehari-hari.
-</p>
-
-<h4>🌟 Contoh Akhlak Terpuji</h4>
-
-<ul>
-
-<li>Jujur</li>
-
-<li>Amanah</li>
-
-<li>Disiplin</li>
-
-<li>Bertanggung jawab</li>
-
-<li>Sopan santun</li>
-
-<li>Rendah hati</li>
-
-<li>Menolong sesama</li>
-
-<li>Menghormati orang lain</li>
-
-</ul>
-
-<div class="contoh">
-
-<b>💡 Contoh perilaku jujur:</b>
-
-<p>
-Jika kita mendapatkan uang yang bukan milik kita,
-kita tidak mengambilnya. Kita berusaha mencari pemiliknya
-atau menyerahkannya kepada guru/orang yang dapat dipercaya.
-</p>
-
-</div>
-
-<div class="latihan">
-
-<b>✏️ Latihan Cepat</b>
-
-<p>
-1. Apa yang dimaksud dengan jujur?
-</p>
-
-<p>
-2. Sebutkan tiga contoh akhlak terpuji!
-</p>
-
-<p>
-3. Mengapa kita harus bertanggung jawab terhadap
-tugas yang diberikan?
-</p>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 5
-===================================================== -->
-
-<div class="bab">
-
-<h3>🧼 Bab 5 — Hidup Bersih dan Sehat</h3>
-
-<p>
-Kebersihan merupakan bagian penting dalam kehidupan
-seorang muslim. Kita harus menjaga kebersihan diri,
-pakaian, tempat tinggal, sekolah, dan lingkungan.
-</p>
-
-<h4>🌿 Kebiasaan Hidup Bersih</h4>
-
-<ul>
-
-<li>Mandi secara teratur.</li>
-
-<li>Mencuci tangan sebelum makan.</li>
-
-<li>Menggosok gigi.</li>
-
-<li>Memakai pakaian yang bersih.</li>
-
-<li>Membuang sampah pada tempatnya.</li>
-
-<li>Membersihkan kelas.</li>
-
-<li>Menjaga kebersihan lingkungan.</li>
-
-</ul>
-
-<div class="contoh">
-
-<b>💡 Ingat!</b>
-
-<p>
-Lingkungan yang bersih membuat kegiatan belajar menjadi
-lebih nyaman dan membantu menjaga kesehatan tubuh.
-</p>
-
-</div>
-
-<div class="latihan">
-
-<b>✏️ Latihan Cepat</b>
-
-<p>
-1. Sebutkan tiga cara menjaga kebersihan diri!
-</p>
-
-<p>
-2. Mengapa kita harus membuang sampah pada tempatnya?
-</p>
-
-<p>
-3. Apa manfaat menjaga kebersihan kelas?
-</p>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 6
-===================================================== -->
-
-<div class="bab">
-
-<h3>🕌 Bab 6 — Salat sebagai Kewajiban</h3>
-
-<p>
-Salat merupakan salah satu kewajiban utama umat Islam.
-Salat dilakukan sebagai bentuk ibadah dan ketaatan
-kepada Allah Swt.
-</p>
-
-<h4>🕐 Salat Wajib Lima Waktu</h4>
-
-<ul>
-
-<li>Subuh</li>
-
-<li>Zuhur</li>
-
-<li>Asar</li>
-
-<li>Magrib</li>
-
-<li>Isya</li>
-
-</ul>
-
-<div class="contoh">
-
-<b>💡 Sikap setelah salat:</b>
-
-<p>
-Setelah melaksanakan salat, kita hendaknya membiasakan
-diri berdoa, bersyukur kepada Allah Swt., serta berusaha
-melakukan perbuatan baik.
-</p>
-
-</div>
-
-<div class="latihan">
-
-<b>✏️ Latihan Cepat</b>
-
-<p>
-1. Berapa kali salat wajib dilaksanakan dalam sehari?
-</p>
-
-<p>
-2. Sebutkan lima salat wajib!
-</p>
-
-<p>
-3. Mengapa umat Islam wajib melaksanakan salat?
-</p>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 7
-===================================================== -->
-
-<div class="bab">
-
-<h3>📿 Bab 7 — Doa dan Zikir</h3>
-
-<p>
-Doa adalah permohonan seorang hamba kepada Allah Swt.
-Zikir adalah mengingat Allah Swt. dengan menyebut nama-Nya
-dan kalimat-kalimat yang baik.
-</p>
-
-<h4>🌟 Contoh Zikir</h4>
-
-<ul>
-
-<li>Subhanallah</li>
-
-<li>Alhamdulillah</li>
-
-<li>Allahu Akbar</li>
-
-<li>Astaghfirullah</li>
-
-</ul>
-
-<div class="contoh">
-
-<b>💡 Kebiasaan baik:</b>
-
-<p>
-Biasakan berdoa sebelum belajar, setelah belajar,
-sebelum makan, setelah makan, dan ketika akan melakukan
-kegiatan baik lainnya.
-</p>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 8
-===================================================== -->
-
-<div class="bab">
-
-<h3>🤝 Bab 8 — Tolong-Menolong dalam Kebaikan</h3>
-
-<p>
-Islam mengajarkan kita untuk saling membantu dalam
-perbuatan yang baik. Tolong-menolong dapat dilakukan
-di rumah, sekolah, maupun lingkungan masyarakat.
-</p>
-
-<h4>🌟 Contoh</h4>
-
-<ul>
-
-<li>Membantu teman yang kesulitan belajar.</li>
-
-<li>Membantu orang tua di rumah.</li>
-
-<li>Membersihkan lingkungan bersama-sama.</li>
-
-<li>Berbagi dengan orang yang membutuhkan.</li>
-
-<li>Menolong teman yang mengalami kesulitan.</li>
-
-</ul>
-
-<div class="contoh">
-
-<b>💡 Pesan penting:</b>
-
-<p>
-Menolong orang lain dengan ikhlas merupakan salah satu
-bentuk akhlak mulia.
-</p>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     RANGKUMAN
-===================================================== -->
-
-<div class="bab">
-
-<h3>🌟 Rangkuman PAI Kelas 5</h3>
-
-<ul>
-
-<li>
-Al-Qur'an merupakan kitab suci dan pedoman hidup umat Islam.
-</li>
-
-<li>
-Asmaul Husna membantu kita mengenal sifat-sifat Allah Swt.
-</li>
-
-<li>
-Kita harus hidup rukun dan menghormati sesama.
-</li>
-
-<li>
-Akhlak terpuji harus dibiasakan dalam kehidupan sehari-hari.
-</li>
-
-<li>
-Kebersihan diri dan lingkungan harus selalu dijaga.
-</li>
-
-<li>
-Salat lima waktu merupakan kewajiban umat Islam.
-</li>
-
-<li>
-Doa dan zikir merupakan cara mengingat Allah Swt.
-</li>
-
-<li>
-Kita harus senang menolong dalam kebaikan.
-</li>
-
-</ul>
-
-</div>
-
-
-<!-- =====================================================
-     REFLEKSI SISWA
-===================================================== -->
-
-<div class="bab">
-
-<h3>💭 Refleksi Saya</h3>
-
-<p>
-Setelah mempelajari materi PAI, jawablah pertanyaan
-berikut dengan jujur.
-</p>
-
-<div class="latihan">
-
-<p>
-⭐ Apakah saya sudah rajin melaksanakan salat?
-</p>
-
-<p>
-⭐ Apakah saya sudah berkata jujur?
-</p>
-
-<p>
-⭐ Apakah saya sudah menghormati guru dan orang tua?
-</p>
-
-<p>
-⭐ Apakah saya sudah menyayangi dan membantu teman?
-</p>
-
-<p>
-⭐ Apa kebaikan yang akan saya lakukan hari ini?
-</p>
-
-</div>
-
-</div>
-
-</div>
 
 <!-- =====================================================
      PENDIDIKAN PANCASILA
-     KELAS 5 SDN CIJEMBER
 ===================================================== -->
 
+
+<!-- =====================================================
+     PANCASILA
+===================================================== -->
 <div id="pancasila" class="materi-halaman">
 
-<!-- =====================================================
-     TOMBOL KEMBALI
-===================================================== -->
+<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
 
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
-
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<div class="judul-mapel pancasila-header">
-
-    <div class="pp-icon">🇮🇩</div>
-
-    <h2>Pendidikan Pancasila</h2>
-
-    <p>Kelas 5 SDN Cijember</p>
-
-    <small>Tahun Pelajaran 2026/2027</small>
-
+<div class="judul-mapel" style="background:linear-gradient(135deg,#991b1b,#ef4444);color:white;padding:28px 20px;border-radius:18px;">
+<div style="font-size:50px;">🇮🇩</div>
+<h2 style="color:white;">Pendidikan Pancasila</h2>
+<p>Memahami nilai Pancasila dan menerapkannya dalam kehidupan.</p>
+<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
 </div>
-
-
-<!-- =====================================================
-     SAPAAN
-===================================================== -->
-
-<div class="pancasila-welcome">
-
-    <div class="welcome-icon">🌟</div>
-
-    <div>
-        <h3>Selamat Belajar!</h3>
-
-        <p>
-        Yuk belajar Pendidikan Pancasila dengan menyenangkan.
-        Pahami materinya, kerjakan aktivitasnya, dan praktikkan
-        nilai-nilai Pancasila dalam kehidupan sehari-hari.
-        </p>
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     TUJUAN PEMBELAJARAN
-===================================================== -->
-
-<div class="bab tujuan-box">
-
-<h3>🎯 Tujuan Pembelajaran</h3>
-
-<p>
-Setelah mempelajari materi ini, kamu diharapkan mampu
-memahami nilai-nilai Pancasila serta menerapkannya
-dalam kehidupan sehari-hari.
-</p>
-
-<div class="tujuan-grid">
-
-<div class="tujuan-item">
-<div class="tujuan-icon">🌟</div>
-<b>Mandiri</b>
-<p>Belajar dan bertanggung jawab.</p>
-</div>
-
-<div class="tujuan-item">
-<div class="tujuan-icon">🤝</div>
-<b>Gotong Royong</b>
-<p>Bekerja sama dan saling membantu.</p>
-</div>
-
-<div class="tujuan-item">
-<div class="tujuan-icon">💡</div>
-<b>Bernalar Kritis</b>
-<p>Berpikir sebelum bertindak.</p>
-</div>
-
-<div class="tujuan-item">
-<div class="tujuan-icon">🎨</div>
-<b>Kreatif</b>
-<p>Menciptakan solusi yang baik.</p>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     PETA MATERI
-===================================================== -->
 
 <div class="bab">
+<h3>🌟 Selamat Datang, Pelajar Pancasila!</h3>
+<p>Yuk belajar memahami Pancasila, norma, keragaman, musyawarah, hak dan kewajiban, serta hidup bersama dengan rukun.</p>
 
-<h3>🗺️ Peta Materi</h3>
+</div><div class="bab">
+<h3>🇮🇩 Bab 1 — Pancasila dalam Kehidupanku</h3>
+<p>Pancasila merupakan dasar negara Republik Indonesia dan pedoman kehidupan bermasyarakat, berbangsa, dan bernegara.</p><div class="contoh"><b>1. Ketuhanan</b> — beribadah dan menghormati pemeluk agama lain.<br><b>2. Kemanusiaan</b> — menghargai dan suka menolong.<br><b>3. Persatuan</b> — menjaga persatuan.<br><b>4. Kerakyatan</b> — bermusyawarah dan menghargai pendapat.<br><b>5. Keadilan Sosial</b> — bersikap adil dan menghargai hak.</div>
+<div class="latihan"><b>🎯 Tantangan:</b> Sebutkan satu perilaku yang mencerminkan setiap sila di sekolah.</div>
+</div><div class="bab">
+<h3>📜 Bab 2 — Norma dalam Kehidupanku</h3>
+<p>Norma adalah aturan atau pedoman yang membantu manusia menentukan perilaku yang baik dan tepat.</p><div class="contoh"><b>🙏 Agama</b> — bersumber dari ajaran agama.<br><b>❤️ Kesusilaan</b> — berkaitan dengan hati nurani.<br><b>😊 Kesopanan</b> — tata perilaku dalam masyarakat.<br><b>⚖️ Hukum</b> — aturan yang mengatur kehidupan masyarakat.</div><h4>🤝 Musyawarah</h4><p>Dengarkan pendapat, berbicaralah sopan, hargai perbedaan, dan terima keputusan bersama.</p>
 
-<div class="peta-materi">
-
-<div class="peta-item">
-<span>1</span>
-<div>
-<b>Pancasila dalam Kehidupanku</b>
-<small>Sejarah dan nilai Pancasila</small>
-</div>
-</div>
-
-<div class="peta-item">
-<span>2</span>
-<div>
-<b>Norma dalam Kehidupanku</b>
-<small>Aturan dan musyawarah</small>
-</div>
-</div>
-
-<div class="peta-item">
-<span>3</span>
-<div>
-<b>Keragaman Budaya Indonesiaku</b>
-<small>Keragaman dan budaya</small>
-</div>
-</div>
-
-<div class="peta-item">
-<span>4</span>
-<div>
-<b>Aku dan Lingkungan Sekitarku</b>
-<small>Lingkungan dan gotong royong</small>
-</div>
-</div>
+</div><div class="bab">
+<h3>🎭 Bab 3 — Keragaman Budaya Indonesiaku</h3>
+<p>Indonesia memiliki keragaman budaya yang merupakan kekayaan bangsa.</p><ul><li>🍚 Makanan khas</li><li>🏠 Rumah tradisional</li><li>💃 Tarian</li><li>🎵 Alat musik</li><li>👘 Pakaian adat</li><li>🗣️ Bahasa daerah</li></ul>
+<div class="latihan"><b>🕵️ Detektif Budaya:</b> Cari satu budaya Jawa Barat dan jelaskan cara melestarikannya.</div>
+</div><div class="bab">
+<h3>🌱 Bab 4 — Aku dan Lingkungan Sekitarku</h3>
+<p>Kita perlu mengenali lingkungan dan menjaga kebersihan serta kenyamanan bersama.</p><div class="contoh"><b>Gotong royong:</b> pekerjaan lebih ringan, mempererat hubungan, menumbuhkan kepedulian, dan menciptakan lingkungan nyaman.</div>
+<div class="latihan"><b>🎯 Misi:</b> ☐ Membersihkan kelas ☐ Merawat tanaman ☐ Membantu teman ☐ Membersihkan lingkungan</div>
+</div><div class="bab">
+<h3>⚖️ Bab 5 — Hak dan Kewajiban</h3>
+<p><b>Hak</b> adalah sesuatu yang seharusnya kita terima. <b>Kewajiban</b> adalah sesuatu yang harus kita lakukan.</p><div class="contoh"><b>Hak siswa:</b> memperoleh pembelajaran dan perlakuan yang baik.<br><b>Kewajiban:</b> belajar tertib, menaati aturan, menghormati guru dan teman.</div>
+<div class="latihan"><b>🧠 Coba pikirkan:</b> Mengapa hak dan kewajiban harus dilaksanakan secara seimbang?</div>
+</div><div class="bab">
+<h3>🏆 Aku Pelajar Pancasila!</h3>
+<p>🇮🇩 Aku menghargai perbedaan, suka bekerja sama, bertanggung jawab, mematuhi aturan, dan menjaga persatuan.</p>
 
 </div>
-
 </div>
 
 
 <!-- =====================================================
-     BAB 1
+     MATEMATIKA
 ===================================================== -->
-
-<div class="bab bab-pancasila">
-
-<h3>🇮🇩 BAB 1 — Pancasila dalam Kehidupanku</h3>
-
-<div class="info-bab">
-📚 Bab ini membahas sejarah kelahiran Pancasila,
-keteladanan para pendiri bangsa, dan pembiasaan
-perilaku sesuai nilai-nilai Pancasila.
-</div>
-
-
-<h4>📌 A. Sejarah Kelahiran Pancasila</h4>
-
-<p>
-Pancasila merupakan dasar negara Republik Indonesia.
-Pancasila tidak lahir begitu saja, tetapi melalui proses
-sejarah dan pemikiran para pendiri bangsa.
-</p>
-
-<p>
-Dalam mempelajari sejarah kelahiran Pancasila, kita belajar
-memahami proses perumusan dasar negara serta menghargai
-perjuangan para tokoh bangsa.
-</p>
-
-
-<div class="timeline">
-
-<div class="timeline-item">
-
-<div class="timeline-number">1</div>
-
-<div>
-<b>Perumusan Dasar Negara</b>
-
-<p>
-Para pendiri bangsa membahas dasar yang tepat
-bagi negara Indonesia.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="timeline-item">
-
-<div class="timeline-number">2</div>
-
-<div>
-<b>Gagasan tentang Pancasila</b>
-
-<p>
-Muncul berbagai gagasan mengenai dasar negara Indonesia.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="timeline-item">
-
-<div class="timeline-number">3</div>
-
-<div>
-<b>Perumusan dan Penyempurnaan</b>
-
-<p>
-Rumusan dasar negara dibahas dan disempurnakan
-melalui proses yang penuh pertimbangan.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="timeline-item">
-
-<div class="timeline-number">4</div>
-
-<div>
-<b>Pancasila Menjadi Dasar Negara</b>
-
-<p>
-Pancasila menjadi dasar negara Republik Indonesia.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="tahukah">
-
-💡 <b>Tahukah Kamu?</b>
-
-<p>
-Mempelajari sejarah Pancasila membantu kita memahami
-mengapa kita harus menghargai perjuangan dan pemikiran
-para pendiri bangsa.
-</p>
-
-</div>
-
-
-<h4>🌟 B. Meneladani Perilaku Pancasila</h4>
-
-<p>
-Nilai Pancasila tidak cukup hanya diketahui.
-Nilai tersebut perlu diwujudkan melalui perilaku
-dalam kehidupan sehari-hari.
-</p>
-
-
-<div class="nilai-grid">
-
-<div class="nilai-card">
-
-<div class="nilai-icon">🙏</div>
-
-<b>Ketuhanan</b>
-
-<p>
-Beribadah sesuai agama dan menghormati teman
-yang berbeda agama.
-</p>
-
-</div>
-
-
-<div class="nilai-card">
-
-<div class="nilai-icon">❤️</div>
-
-<b>Kemanusiaan</b>
-
-<p>
-Menghargai orang lain, membantu teman,
-dan tidak menyakiti.
-</p>
-
-</div>
-
-
-<div class="nilai-card">
-
-<div class="nilai-icon">🤝</div>
-
-<b>Persatuan</b>
-
-<p>
-Menjaga kerukunan dan tidak membeda-bedakan teman.
-</p>
-
-</div>
-
-
-<div class="nilai-card">
-
-<div class="nilai-icon">🗣️</div>
-
-<b>Musyawarah</b>
-
-<p>
-Mendengarkan pendapat orang lain dan mencari
-keputusan bersama.
-</p>
-
-</div>
-
-
-<div class="nilai-card">
-
-<div class="nilai-icon">⚖️</div>
-
-<b>Keadilan</b>
-
-<p>
-Bersikap adil dan menghargai hak orang lain.
-</p>
-
-</div>
-
-</div>
-
-
-<h4>🌱 C. Membiasakan Perilaku Pancasila</h4>
-
-<p>
-Perilaku sesuai Pancasila perlu dilakukan secara terus-menerus
-agar menjadi kebiasaan baik.
-</p>
-
-
-<div class="contoh">
-
-<b>🌟 Contoh Kebiasaan Sederhana</b>
-
-<ul>
-
-<li>Membereskan tempat tidur setelah bangun.</li>
-
-<li>Berdoa sebelum dan sesudah belajar.</li>
-
-<li>Menghormati orang tua dan guru.</li>
-
-<li>Membantu teman yang mengalami kesulitan.</li>
-
-<li>Menjaga kebersihan kelas.</li>
-
-<li>Mau bekerja sama.</li>
-
-<li>Menghargai perbedaan.</li>
-
-</ul>
-
-</div>
-
-
-<div class="tantangan">
-
-<div class="tantangan-title">
-🎯 Tantangan Pancasila
-</div>
-
-<p>
-Pilih satu perilaku baik yang akan kalian lakukan
-setiap hari selama satu minggu.
-</p>
-
-<div class="target-box">
-
-<label>☐ Hari 1</label>
-<label>☐ Hari 2</label>
-<label>☐ Hari 3</label>
-<label>☐ Hari 4</label>
-<label>☐ Hari 5</label>
-<label>☐ Hari 6</label>
-<label>☐ Hari 7</label>
-
-</div>
-
-</div>
-
-
-<div class="latihan">
-
-<b>🧠 Coba Pikirkan!</b>
-
-<ol>
-
-<li>Mengapa kita harus menghargai sejarah Pancasila?</li>
-
-<li>Sebutkan contoh perilaku sesuai nilai Pancasila
-di sekolah!</li>
-
-<li>Mengapa perilaku baik perlu dibiasakan?</li>
-
-</ol>
-
-</div>
-
-</div>
 
 
 <!-- =====================================================
-     BAB 2
+     MATEMATIKA
 ===================================================== -->
-
-<div class="bab bab-norma">
-
-<h3>📜 BAB 2 — Norma dalam Kehidupanku</h3>
-
-<div class="info-bab">
-
-📚 Norma membantu manusia mengetahui perilaku
-yang baik dan tepat dalam kehidupan bersama.
-
-</div>
-
-
-<h4>📌 A. Macam-Macam Norma</h4>
-
-<p>
-Norma merupakan aturan atau pedoman yang membantu manusia
-berperilaku dalam kehidupan sehari-hari.
-</p>
-
-
-<div class="norma-grid">
-
-<div class="norma-card">
-
-<span>🙏</span>
-
-<h4>Norma Agama</h4>
-
-<p>
-Pedoman yang bersumber dari ajaran agama.
-</p>
-
-</div>
-
-
-<div class="norma-card">
-
-<span>❤️</span>
-
-<h4>Norma Kesusilaan</h4>
-
-<p>
-Pedoman yang berkaitan dengan hati nurani
-dan perilaku baik.
-</p>
-
-</div>
-
-
-<div class="norma-card">
-
-<span>😊</span>
-
-<h4>Norma Kesopanan</h4>
-
-<p>
-Pedoman perilaku yang berlaku dalam kehidupan masyarakat.
-</p>
-
-</div>
-
-
-<div class="norma-card">
-
-<span>⚖️</span>
-
-<h4>Norma Hukum</h4>
-
-<p>
-Aturan yang dibuat untuk mengatur kehidupan masyarakat
-dan harus dipatuhi.
-</p>
-
-</div>
-
-</div>
-
-
-<h4>🏫 B. Penerapan Norma</h4>
-
-<div class="contoh">
-
-<div class="lingkungan-box">
-
-<h4>🏠 Di Rumah</h4>
-
-<ul>
-
-<li>Menghormati orang tua.</li>
-
-<li>Membantu pekerjaan rumah.</li>
-
-<li>Berbicara dengan sopan.</li>
-
-</ul>
-
-</div>
-
-
-<div class="lingkungan-box">
-
-<h4>🏫 Di Sekolah</h4>
-
-<ul>
-
-<li>Datang tepat waktu.</li>
-
-<li>Mematuhi tata tertib.</li>
-
-<li>Menghormati guru.</li>
-
-<li>Tidak mengganggu teman belajar.</li>
-
-</ul>
-
-</div>
-
-
-<div class="lingkungan-box">
-
-<h4>🌳 Di Masyarakat</h4>
-
-<ul>
-
-<li>Menjaga kebersihan lingkungan.</li>
-
-<li>Menghormati tetangga.</li>
-
-<li>Menjaga ketertiban.</li>
-
-</ul>
-
-</div>
-
-</div>
-
-
-<h4>🌎 C. Mempraktikkan Norma</h4>
-
-<p>
-Mematuhi norma bukan hanya dilakukan ketika ada yang
-mengawasi. Kita perlu membiasakannya agar kehidupan
-menjadi tertib, aman, dan harmonis.
-</p>
-
-
-<div class="aktivitas">
-
-<h4>🎯 Aktivitas Pengamatan</h4>
-
-<p>
-Perhatikan lingkungan sekolahmu.
-Tuliskan tiga contoh norma yang kamu temukan.
-</p>
-
-
-<table class="tabel-aktivitas">
-
-<tr>
-
-<th>No.</th>
-
-<th>Norma yang Ditemukan</th>
-
-<th>Contoh Perilaku</th>
-
-</tr>
-
-
-<tr>
-
-<td>1</td>
-
-<td>........................</td>
-
-<td>........................</td>
-
-</tr>
-
-
-<tr>
-
-<td>2</td>
-
-<td>........................</td>
-
-<td>........................</td>
-
-</tr>
-
-
-<tr>
-
-<td>3</td>
-
-<td>........................</td>
-
-<td>........................</td>
-
-</tr>
-
-</table>
-
-</div>
-
-
-<h4>🗣️ D. Musyawarah</h4>
-
-<p>
-Musyawarah merupakan kegiatan membicarakan suatu persoalan
-bersama untuk mencapai keputusan yang dapat diterima
-bersama.
-</p>
-
-
-<div class="musyawarah-box">
-
-<h4>🤝 Sikap yang Baik Saat Musyawarah</h4>
-
-<div class="sikap-list">
-
-<div>👂 Mendengarkan pendapat orang lain</div>
-
-<div>🗣️ Menyampaikan pendapat dengan sopan</div>
-
-<div>❤️ Menghargai perbedaan pendapat</div>
-
-<div>🧠 Memikirkan kepentingan bersama</div>
-
-<div>🤝 Menerima keputusan bersama</div>
-
-</div>
-
-</div>
-
-
-<div class="latihan">
-
-<b>🧠 Tantangan Berpikir</b>
-
-<p>
-Kelasmu akan menentukan kegiatan yang akan dilakukan
-pada hari Jumat. Ada beberapa usulan berbeda.
-</p>
-
-<p>
-<b>Pertanyaan:</b>
-Bagaimana cara kalian menentukan keputusan yang adil?
-</p>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 3
-===================================================== -->
-
-<div class="bab bab-budaya">
-
-<h3>🎭 BAB 3 — Keragaman Budaya Indonesiaku</h3>
-
-<div class="info-bab">
-
-🌏 Indonesia memiliki keragaman budaya yang menjadi
-kekayaan bangsa dan perlu dihargai serta dilestarikan.
-
-</div>
-
-
-<h4>🌺 A. Budaya Daerah Indonesia</h4>
-
-<p>
-Indonesia memiliki berbagai budaya daerah.
-Keragaman tersebut dapat ditemukan dalam berbagai bentuk
-budaya yang ada di masyarakat.
-</p>
-
-
-<div class="budaya-grid">
-
-<div class="budaya-card">
-
-<div>🍚</div>
-
-<b>Makanan Khas</b>
-
-<p>
-Beragam makanan khas dari berbagai daerah.
-</p>
-
-</div>
-
-
-<div class="budaya-card">
-
-<div>🥤</div>
-
-<b>Minuman Khas</b>
-
-<p>
-Berbagai minuman tradisional daerah.
-</p>
-
-</div>
-
-
-<div class="budaya-card">
-
-<div>⚔️</div>
-
-<b>Senjata Tradisional</b>
-
-<p>
-Senjata tradisional yang menjadi bagian
-budaya daerah.
-</p>
-
-</div>
-
-
-<div class="budaya-card">
-
-<div>🏠</div>
-
-<b>Rumah Tradisional</b>
-
-<p>
-Rumah tradisional dengan ciri khas masing-masing.
-</p>
-
-</div>
-
-
-<div class="budaya-card">
-
-<div>💃</div>
-
-<b>Tarian Tradisional</b>
-
-<p>
-Tarian daerah yang diwariskan dari generasi
-ke generasi.
-</p>
-
-</div>
-
-
-<div class="budaya-card">
-
-<div>🎵</div>
-
-<b>Alat Musik</b>
-
-<p>
-Alat musik tradisional dari berbagai daerah Indonesia.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="tahukah">
-
-💡 <b>Indonesia Itu Beragam!</b>
-
-<p>
-Perbedaan budaya bukan alasan untuk saling menjauh.
-Keragaman merupakan kekayaan yang harus kita hargai.
-</p>
-
-</div>
-
-
-<h4>🌱 B. Ayo Lestarikan Budaya Daerah</h4>
-
-<p>
-Budaya daerah perlu dilestarikan agar tetap dikenal
-dan diwariskan kepada generasi berikutnya.
-</p>
-
-
-<div class="lestarikan-grid">
-
-<div>
-
-🎨
-
-<br>
-
-<b>Mengenal</b>
-
-<p>
-Pelajari budaya daerahmu.
-</p>
-
-</div>
-
-
-<div>
-
-📚
-
-<br>
-
-<b>Belajar</b>
-
-<p>
-Pelajari bahasa, seni, dan tradisi.
-</p>
-
-</div>
-
-
-<div>
-
-🤝
-
-<br>
-
-<b>Menghargai</b>
-
-<p>
-Hormati budaya yang berbeda.
-</p>
-
-</div>
-
-
-<div>
-
-🌟
-
-<br>
-
-<b>Melestarikan</b>
-
-<p>
-Ikut menjaga budaya agar tidak hilang.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="aktivitas">
-
-<h4>🎯 Aktivitas Detektif Budaya</h4>
-
-<p>
-Cari informasi tentang budaya dari daerahmu.
-Lengkapi tabel berikut.
-</p>
-
-
-<table class="tabel-aktivitas">
-
-<tr>
-
-<th>Jenis Keragaman</th>
-
-<th>Nama</th>
-
-<th>Asal Provinsi</th>
-
-</tr>
-
-
-<tr>
-
-<td>Makanan khas</td>
-
-<td>................</td>
-
-<td>................</td>
-
-</tr>
-
-
-<tr>
-
-<td>Rumah tradisional</td>
-
-<td>................</td>
-
-<td>................</td>
-
-</tr>
-
-
-<tr>
-
-<td>Tarian tradisional</td>
-
-<td>................</td>
-
-<td>................</td>
-
-</tr>
-
-
-<tr>
-
-<td>Alat musik</td>
-
-<td>................</td>
-
-<td>................</td>
-
-</tr>
-
-</table>
-
-</div>
-
-
-<div class="latihan">
-
-<b>🧠 Coba Pikirkan!</b>
-
-<ol>
-
-<li>Mengapa budaya daerah harus dihargai?</li>
-
-<li>Apa yang dapat kamu lakukan untuk melestarikan budaya?</li>
-
-<li>Bagaimana sikapmu jika teman memiliki budaya
-yang berbeda?</li>
-
-</ol>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 4
-===================================================== -->
-
-<div class="bab bab-lingkungan">
-
-<h3>🌱 BAB 4 — Aku dan Lingkungan Sekitarku</h3>
-
-<div class="info-bab">
-
-🏡 Mengenal lingkungan sekitar membantu kita memahami
-wilayah tempat tinggal dan menumbuhkan kepedulian
-terhadap lingkungan.
-
-</div>
-
-
-<h4>🗺️ A. Mengenal Karakteristik Wilayah</h4>
-
-<p>
-Setiap wilayah memiliki karakteristik yang dapat berbeda.
-Kita dapat mengenali lingkungan melalui berbagai tempat,
-fasilitas, dan kondisi yang ada di sekitar kita.
-</p>
-
-
-<div class="wilayah-grid">
-
-<div>
-
-🏫
-
-<br>
-
-<b>Sekolah</b>
-
-<p>
-Tempat belajar dan berinteraksi.
-</p>
-
-</div>
-
-
-<div>
-
-🏥
-
-<br>
-
-<b>Fasilitas Kesehatan</b>
-
-<p>
-Tempat memperoleh pelayanan kesehatan.
-</p>
-
-</div>
-
-
-<div>
-
-🌳
-
-<br>
-
-<b>Ruang Publik</b>
-
-<p>
-Tempat yang dapat digunakan masyarakat.
-</p>
-
-</div>
-
-
-<div>
-
-🏘️
-
-<br>
-
-<b>Lingkungan Tempat Tinggal</b>
-
-<p>
-Wilayah tempat kita hidup bersama masyarakat.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="aktivitas">
-
-<h4>🎯 Ayo Menggambar!</h4>
-
-<p>
-Pernahkah kamu memperhatikan perjalanan dari rumah
-menuju sekolah?
-</p>
-
-<p>
-Gambarkan rute sederhana dari rumahmu menuju sekolah.
-Tambahkan tempat-tempat penting yang kamu temui.
-</p>
-
-
-<div class="gambar-box">
-
-🏠 Rumah
-
-<br>
-⬇️
-<br>
-
-⬜ ............................
-
-<br>
-⬇️
-<br>
-
-⬜ ............................
-
-<br>
-⬇️
-<br>
-
-🏫 Sekolah
-
-</div>
-
-</div>
-
-
-<h4>🤝 B. Gotong Royong di Lingkungan Sekitar</h4>
-
-<p>
-Gotong royong merupakan kegiatan yang dilakukan bersama
-untuk mencapai tujuan atau menyelesaikan pekerjaan bersama.
-</p>
-
-
-<div class="gotong-box">
-
-<h4>💪 Mengapa Gotong Royong Penting?</h4>
-
-<ul>
-
-<li>Pekerjaan menjadi lebih ringan.</li>
-
-<li>Mempererat hubungan antarwarga.</li>
-
-<li>Menumbuhkan kepedulian.</li>
-
-<li>Membiasakan bekerja sama.</li>
-
-<li>Menciptakan lingkungan yang nyaman.</li>
-
-</ul>
-
-</div>
-
-
-<h4>🌟 C. Praktik Gotong Royong</h4>
-
-
-<div class="praktik-grid">
-
-<div>
-
-🧹
-
-<h4>Membersihkan Lingkungan</h4>
-
-<p>
-Membersihkan kelas, halaman, atau lingkungan sekitar.
-</p>
-
-</div>
-
-
-<div>
-
-🌳
-
-<h4>Merawat Lingkungan</h4>
-
-<p>
-Menjaga kebersihan dan merawat fasilitas bersama.
-</p>
-
-</div>
-
-
-<div>
-
-🤝
-
-<h4>Membantu Sesama</h4>
-
-<p>
-Membantu teman atau warga yang membutuhkan.
-</p>
-
-</div>
-
-
-<div>
-
-🏫
-
-<h4>Kerja Sama di Sekolah</h4>
-
-<p>
-Bekerja sama dalam kegiatan kelas dan sekolah.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="tantangan">
-
-<div class="tantangan-title">
-🎯 Misi Gotong Royong
-</div>
-
-<p>
-Pilih satu kegiatan gotong royong yang dapat kamu lakukan
-minggu ini.
-</p>
-
-<label>☐ Membersihkan kelas</label>
-
-<br>
-
-<label>☐ Membantu teman</label>
-
-<br>
-
-<label>☐ Membersihkan lingkungan</label>
-
-<br>
-
-<label>☐ Merawat tanaman</label>
-
-<br>
-
-<label>☐ Kegiatan lainnya</label>
-
-</div>
-
-
-<div class="latihan">
-
-<b>🧠 Refleksi</b>
-
-<p>
-Setelah mempelajari bab ini, jawab pertanyaan berikut:
-</p>
-
-<ol>
-
-<li>Apa yang kamu ketahui tentang lingkungan sekitarmu?</li>
-
-<li>Mengapa kita perlu bergotong royong?</li>
-
-<li>Apa contoh gotong royong yang pernah kamu lakukan?</li>
-
-</ol>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     RANGKUMAN
-===================================================== -->
-
-<div class="bab rangkuman-pancasila">
-
-<h3>🏆 Rangkuman Pendidikan Pancasila</h3>
-
-
-<div class="ringkasan-item">
-
-🇮🇩 <b>Bab 1:</b>
-
-Pancasila dalam kehidupanku — memahami sejarah,
-meneladani perilaku, dan membiasakan nilai Pancasila.
-
-</div>
-
-
-<div class="ringkasan-item">
-
-📜 <b>Bab 2:</b>
-
-Norma dalam kehidupanku — memahami norma,
-menerapkannya, serta belajar bermusyawarah.
-
-</div>
-
-
-<div class="ringkasan-item">
-
-🎭 <b>Bab 3:</b>
-
-Keragaman budaya Indonesiaku — mengenal dan
-melestarikan keragaman budaya.
-
-</div>
-
-
-<div class="ringkasan-item">
-
-🌱 <b>Bab 4:</b>
-
-Aku dan lingkungan sekitarku — mengenal lingkungan
-dan membangun kebiasaan gotong royong.
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     PESAN PENUTUP
-===================================================== -->
-
-<div class="pesan-pancasila">
-
-<div class="penutup-icon">
-🇮🇩
-</div>
-
-<h2>🌟 Aku Pelajar Pancasila!</h2>
-
-<p>
-Aku bangga menjadi anak Indonesia.
-</p>
-
-<p>
-Aku menghargai perbedaan,
-mau bekerja sama,
-mematuhi aturan,
-menjaga lingkungan,
-dan menerapkan nilai Pancasila
-dalam kehidupan sehari-hari.
-</p>
-
-<div class="semangat">
-
-🇮🇩
-<b>
-Berkarakter • Bergotong Royong • Mandiri
-• Bernalar Kritis • Kreatif
-</b>
-🇮🇩
-
-</div>
-
-</div>
-<!-- =====================================================
-     MATEMATIKA - MATERI LENGKAP
-===================================================== -->
-
 <div id="matematika" class="materi-halaman">
 
-<!-- =====================================================
-     TOMBOL KEMBALI
-===================================================== -->
+<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
 
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
-
-
-<!-- =====================================================
-     HEADER MATEMATIKA
-===================================================== -->
-
-<div class="judul-mapel" style="
-    background:linear-gradient(135deg,#1565c0,#42a5f5);
-    color:white;
-    padding:30px 20px;
-    overflow:hidden;
-    border-radius:20px;
-    text-align:center;
-">
-
-    <div style="
-        font-size:50px;
-        margin-bottom:5px;
-    ">
-        🔢
-    </div>
-
-    <h2 style="
-        color:white;
-        font-size:28px;
-        margin:8px 0;
-    ">
-        Matematika Kelas 5
-    </h2>
-
-    <p style="
-        color:white;
-        margin:5px 0;
-    ">
-        Belajar Matematika dengan Mudah, Menyenangkan, dan Bermakna
-    </p>
-
-    <div style="
-        margin-top:15px;
-        font-size:14px;
-        opacity:.95;
-    ">
-        📚 Portal Digital Kelas 5 SDN Cijember
-    </div>
-
+<div class="judul-mapel" style="background:linear-gradient(135deg,#1565c0,#42a5f5);color:white;padding:28px 20px;border-radius:18px;">
+<div style="font-size:50px;">🔢</div>
+<h2 style="color:white;">Matematika</h2>
+<p>Belajar Matematika dengan Mudah, Menyenangkan, dan Bermakna.</p>
+<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
 </div>
 
-
-<!-- =====================================================
-     PETUNJUK
-===================================================== -->
-
-<div class="bab" style="
-    background:#f0f9ff;
-    border-left:6px solid #0284c7;
-">
-
+<div class="bab">
 <h3>💡 Selamat Belajar!</h3>
+<p>Matematika membantu kita berpikir logis, memecahkan masalah, dan mengambil keputusan dalam kehidupan sehari-hari.</p>
 
-<p>
-Matematika bukan hanya tentang menghitung angka.
-Matematika membantu kita berpikir logis, memecahkan masalah,
-dan mengambil keputusan dalam kehidupan sehari-hari.
-</p>
+</div><div class="bab">
+<h3>🔢 Bab 1 — Bilangan Cacah sampai 100.000</h3>
+<p>Membaca, menulis, menentukan nilai tempat, membandingkan, mengurutkan, komposisi, dekomposisi, serta operasi penjumlahan dan pengurangan.</p><div class="contoh"><b>45.327</b> dibaca empat puluh lima ribu tiga ratus dua puluh tujuh.<br><br>72.405 = 7 puluh ribuan + 2 ribuan + 4 ratusan + 0 puluhan + 5 satuan.</div>
+<div class="latihan"><b>📝 Latihan:</b><ol><li>Mana lebih besar: 45.200 atau 45.020?</li><li>Urutkan 15.000, 12.500, 18.000, 10.500.</li></ol></div>
+</div><div class="bab">
+<h3>🔁 Bab 2 — KPK dan FPB</h3>
+<p>Belajar kelipatan, kelipatan persekutuan, KPK, faktor, faktor persekutuan, FPB, faktor prima, dan penerapannya.</p><div class="contoh"><b>Kelipatan 4:</b> 4, 8, 12, 16, 20, ...<br><b>Faktor 12:</b> 1, 2, 3, 4, 6, 12.</div>
+<div class="latihan"><b>🎯 Tantangan:</b><ol><li>KPK dari 4 dan 6?</li><li>FPB dari 12 dan 18?</li></ol></div>
+</div><div class="bab">
+<h3>🍕 Bab 3 — Bilangan Pecahan</h3>
+<p>Pecahan menyatakan bagian dari keseluruhan atau satuan. Pelajari pembilang, penyebut, membandingkan, mengurutkan, penjumlahan, dan pengurangan.</p><div class="contoh"><b>3/5</b> → 3 pembilang, 5 penyebut.<br>3/8 &lt; 5/8.</div>
+<div class="latihan"><b>📝 Coba:</b> 2/7 + 3/7 = ... &nbsp; | &nbsp; 6/8 − 2/8 = ...</div>
+</div><div class="bab">
+<h3>📏 Bab 4 — Keliling Bangun Datar</h3>
+<div class="contoh"><b>Persegi:</b> K = 4 × sisi.<br><b>Persegi panjang:</b> K = 2 × (panjang + lebar).<br><b>Segitiga:</b> K = jumlah ketiga sisi.</div>
+<div class="latihan"><b>🎯 Tantangan:</b> Persegi sisi 9 cm. Berapa kelilingnya?</div>
+</div><div class="bab">
+<h3>📐 Bab 5 — Luas Daerah Bangun Datar</h3>
+<div class="contoh"><b>Persegi:</b> L = sisi × sisi.<br><b>Persegi panjang:</b> L = panjang × lebar.<br><b>Segitiga:</b> L = 1/2 × alas × tinggi.</div>
+<div class="latihan"><b>🧠 Coba:</b> Persegi panjang panjang 10 cm dan lebar 5 cm. Berapa luasnya?</div>
+</div><div class="bab">
+<h3>📐 Bab 6 — Sudut</h3>
+<p>Sudut ditemukan pada pojok meja, buku, bingkai, jalan, dan benda lain.</p><div class="contoh">🟢 Lancip &lt; 90°<br>🔵 Siku-siku = 90°<br>🟠 Tumpul &gt; 90° dan &lt; 180°<br>🔴 Lurus = 180°</div><p>Gunakan busur derajat untuk mengukur dan menggambar sudut.</p>
 
-<p>
-Pilih materi di bawah ini dan pelajari secara bertahap.
-</p>
+</div><div class="bab">
+<h3>🔷 Bab 7 — Membandingkan Ciri-Ciri Bangun Datar</h3>
+<p>Bandingkan bangun berdasarkan sisi, sudut, bentuk, dan ciri lainnya.</p><div class="contoh"><b>Persegi:</b> 4 sisi sama panjang, 4 sudut siku-siku.<br><b>Persegi panjang:</b> sisi berhadapan sama panjang, 4 sudut siku-siku.<br><b>Segitiga:</b> 3 sisi, 3 sudut.</div>
+<div class="latihan"><b>🔎 Detektif Bentuk:</b> Temukan 5 benda di kelas dan tentukan bentuknya.</div>
+</div><div class="bab">
+<h3>📊 Bab 8 — Data</h3>
+<p>Data adalah kumpulan informasi. Data dapat disajikan dalam tabel dan diagram agar mudah dibaca dan dibandingkan.</p><div class="contoh">Andi = 5 buku • Budi = 3 • Citra = 7 • Deni = 4.</div>
+<div class="latihan"><b>📊 Tantangan:</b> Kumpulkan data buah kesukaan 10 teman dan buat tabelnya.</div>
+</div><div class="bab">
+<h3>🔢 Bab 9 — Bilangan Cacah sampai 1.000.000</h3>
+<p>Belajar membaca, menulis, nilai tempat, membandingkan, mengurutkan, komposisi, dan dekomposisi bilangan sampai 1.000.000.</p><div class="contoh"><b>720.736</b> dibaca tujuh ratus dua puluh ribu tujuh ratus tiga puluh enam.</div>
+<div class="latihan"><b>🏆 Tantangan:</b><ol><li>Baca 598.245.</li><li>Nilai tempat angka 8?</li><li>Mana lebih besar: 599.198 atau 599.047?</li><li>Uraikan 599.198.</li></ol></div>
+</div><div class="bab">
+<h3>🌟 Aku Bisa Matematika!</h3>
+<p>Semakin sering berlatih, semakin mudah memahami Matematika.</p><div style="background:#1565c0;color:white;padding:18px;border-radius:14px;text-align:center;"><b>💪 Jangan takut salah. Terus mencoba!</b></div>
 
 </div>
-
-<!-- =====================================================
-     HEADER MATEMATIKA
-===================================================== -->
-
-<div class="judul-mapel" style="
-    background:linear-gradient(135deg,#1565c0,#42a5f5);
-    color:white;
-    padding:30px 20px;
-    overflow:hidden;
-    text-align:center;
-">
-
-    <div style="
-        font-size:50px;
-        margin-bottom:5px;
-    ">
-        🔢
-    </div>
-
-    <h2 style="
-        color:white;
-        font-size:28px;
-        margin:8px 0;
-    ">
-        Matematika Kelas 5
-    </h2>
-
-    <p style="
-        color:white;
-        margin:5px 0;
-    ">
-        Belajar Matematika dengan Mudah, Menyenangkan, dan Bermakna
-    </p>
-
-    <div style="
-        margin-top:15px;
-        font-size:14px;
-        opacity:.95;
-    ">
-        📚 Portal Digital Kelas 5 SDN Cijember
-    </div>
-
 </div>
 
 
 <!-- =====================================================
-     PETUNJUK
+     INDONESIA
 ===================================================== -->
+<div id="indonesia" class="materi-halaman">
 
-<div class="bab" style="
-    background:#f0f9ff;
-    border-left:6px solid #0284c7;
-">
+<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
 
-<h3>💡 Selamat Belajar!</h3>
-
-<p>
-Matematika bukan hanya tentang menghitung angka.
-Matematika membantu kita berpikir logis, memecahkan masalah,
-dan mengambil keputusan dalam kehidupan sehari-hari.
-</p>
-
-<p>
-Pilih materi di bawah ini dan pelajari secara bertahap.
-</p>
-
+<div class="judul-mapel" style="background:linear-gradient(135deg,#7c2d12,#f97316);color:white;padding:28px 20px;border-radius:18px;">
+<div style="font-size:50px;">📖</div>
+<h2 style="color:white;">Bahasa Indonesia</h2>
+<p>Bergerak Bersama — Kelas 5 SDN Cijember</p>
+<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
 </div>
-
-
-<!-- =====================================================
-     BAB 1
-===================================================== -->
 
 <div class="bab">
+<h3>🌟 Ayo Bergerak Bersama!</h3>
+<p>Bahasa Indonesia membantu kita membaca, memahami informasi, berdiskusi, menulis, dan mempresentasikan gagasan.</p>
 
-<h3>🔢 BAB 1 — Bilangan Cacah sampai 100.000</h3>
+</div><div class="bab">
+<h3>📖 Bab 1 — Membaca dan Memahami Informasi</h3>
+<p>Bacalah dengan teliti, temukan kata kunci, informasi penting, dan ceritakan kembali dengan bahasa sendiri.</p><div class="contoh"><b>Strategi:</b> judul → kata kunci → informasi penting → kesimpulan.</div>
+<div class="latihan"><b>🕵️ Detektif Bacaan:</b> Temukan siapa, apa, kapan, di mana, mengapa, dan bagaimana dari sebuah bacaan.</div>
+</div><div class="bab">
+<h3>📚 Bab 2 — Buku Jendela Dunia</h3>
+<p>Buku dapat membuka wawasan dan mengenalkan tokoh, tempat, peristiwa, serta gagasan. Kita dapat mempresentasikan buku yang disukai.</p><div class="contoh">Judul: ______ • Penulis: ______ • Isi penting: ______ • Hal yang disukai: ______</div>
 
-<h4>📖 Tujuan Pembelajaran</h4>
-
-<ul>
-<li>Membaca dan menulis bilangan sampai 100.000.</li>
-<li>Menentukan nilai tempat suatu angka.</li>
-<li>Membandingkan bilangan.</li>
-<li>Mengurutkan bilangan.</li>
-<li>Menyusun dan menguraikan bilangan.</li>
-</ul>
-
-<h4>📌 1. Membaca Bilangan</h4>
-
-<p>
-Bilangan dapat dibaca berdasarkan nilai tempat setiap angkanya.
-</p>
-
-<div class="contoh">
-
-<b>Contoh:</b>
-
-<br><br>
-
-45.327 dibaca:
-
-<br>
-
-<strong>empat puluh lima ribu tiga ratus dua puluh tujuh.</strong>
-
-</div>
-
-<h4>📌 2. Nilai Tempat</h4>
-
-<p>
-Perhatikan bilangan:
-</p>
-
-<div class="contoh">
-
-<strong>72.405</strong>
-
-<br><br>
-
-7 → puluh ribuan
-
-<br>
-2 → ribuan
-
-<br>
-4 → ratusan
-
-<br>
-0 → puluhan
-
-<br>
-5 → satuan
+</div><div class="bab">
+<h3>🌊 Bab 3 — Cerita dan Keragaman Indonesia</h3>
+<p>Cerita rakyat merupakan bagian dari kekayaan budaya. Saat membaca cerita, perhatikan tokoh, latar, peristiwa, dan pesan.</p>
+<div class="latihan"><b>🎭 Ayo bermain peran:</b> Pilih satu tokoh dari cerita dan peragakan sikapnya.</div>
+</div><div class="bab">
+<h3>✍️ Bab 4 — Menulis Pengalaman</h3>
+<p>Susun pengalaman secara runtut dengan kalimat yang jelas dan tanda baca yang tepat.</p><div class="contoh">Pembukaan → kejadian awal → kejadian berikutnya → kejadian akhir → refleksi.</div>
+<div class="latihan"><b>📝 Misi:</b> Tuliskan pengalaman paling menyenangkan di sekolah dalam 2–3 paragraf.</div>
+</div><div class="bab">
+<h3>❤️ Bab 5 — Cinta Indonesia</h3>
+<p>Mengenal tempat bersejarah, cerita rakyat, tata tertib, etika berkunjung, dan menulis pengalaman. Tempat bersejarah membantu kita mengenal perjalanan bangsa.</p><div class="contoh"><b>Etika:</b> patuhi tata tertib, jaga kebersihan, jangan merusak benda, jangan berisik.</div>
+<div class="latihan"><b>🏛️ Ayo menulis:</b> Ceritakan pengalaman atau rencana kunjungan ke tempat bersejarah.</div>
+</div><div class="bab">
+<h3>🎤 Bab 6 — Berdiskusi dan Mempresentasikan</h3>
+<ul><li>👂 Mendengarkan.</li><li>🗣️ Menyampaikan pendapat dengan jelas.</li><li>🤝 Menghargai perbedaan.</li><li>💡 Memberikan alasan.</li><li>🎤 Mempresentasikan hasil.</li></ul>
+<div class="latihan"><b>🎯 Diskusi:</b> Bagaimana membuat kelas lebih nyaman untuk belajar?</div>
+</div><div class="bab">
+<h3>🏆 Aku Hebat Berbahasa!</h3>
+<p>☐ Rajin membaca ☐ Berani berbicara ☐ Bisa menulis ☐ Bisa menemukan informasi ☐ Menghargai pendapat teman</p>
 
 </div>
-
-<h4>📌 3. Membandingkan Bilangan</h4>
-
-<p>
-Gunakan tanda:
-</p>
-
-<ul>
-<li><strong>&gt;</strong> lebih besar dari</li>
-<li><strong>&lt;</strong> lebih kecil dari</li>
-<li><strong>=</strong> sama dengan</li>
-</ul>
-
-<div class="contoh">
-
-72.500 <strong>&gt;</strong> 67.500
-
-<br><br>
-
-Karena 72.500 lebih besar daripada 67.500.
-
 </div>
 
-<h4>📌 4. Mengurutkan Bilangan</h4>
-
-<div class="contoh">
-
-Urutkan dari terkecil:
-
-<br><br>
-
-25.000, 12.500, 31.000, 18.000
-
-<br><br>
-
-Jawaban:
-
-<br>
-
-<strong>
-12.500 → 18.000 → 25.000 → 31.000
-</strong>
-
-</div>
-
-<div class="latihan">
-
-<b>📝 Latihan Mandiri</b>
-
-<ol>
-<li>Bagaimana cara membaca 56.725?</li>
-<li>Nilai tempat angka 8 pada 38.250 adalah?</li>
-<li>Manakah yang lebih besar: 45.200 atau 45.020?</li>
-<li>Urutkan dari terkecil: 15.000, 12.500, 18.000, 10.500.</li>
-</ol>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 2
-===================================================== -->
-
-<div class="bab">
-
-<h3>➕ BAB 2 — Operasi Hitung Bilangan</h3>
-
-<h4>📖 Materi</h4>
-
-<p>
-Operasi hitung bilangan meliputi penjumlahan, pengurangan,
-perkalian, dan pembagian.
-</p>
-
-<h4>➕ Penjumlahan</h4>
-
-<div class="contoh">
-
-2.345 + 1.250 =
-
-<br><br>
-
-<strong>3.595</strong>
-
-</div>
-
-<h4>➖ Pengurangan</h4>
-
-<div class="contoh">
-
-5.000 − 2.350 =
-
-<br><br>
-
-<strong>2.650</strong>
-
-</div>
-
-<h4>✖️ Perkalian</h4>
-
-<div class="contoh">
-
-125 × 4 =
-
-<br><br>
-
-<strong>500</strong>
-
-</div>
-
-<h4>➗ Pembagian</h4>
-
-<div class="contoh">
-
-800 : 10 =
-
-<br><br>
-
-<strong>80</strong>
-
-</div>
-
-<h4>📌 Operasi Hitung Campuran</h4>
-
-<p>
-Kerjakan perkalian atau pembagian terlebih dahulu,
-kemudian penjumlahan atau pengurangan.
-</p>
-
-<div class="contoh">
-
-10 + 5 × 2
-
-<br><br>
-
-= 10 + 10
-
-<br>
-
-= <strong>20</strong>
-
-</div>
-
-<div class="latihan">
-
-<b>📝 Latihan Mandiri</b>
-
-<ol>
-<li>3.250 + 2.475 = ...</li>
-<li>8.000 − 3.625 = ...</li>
-<li>125 × 8 = ...</li>
-<li>900 : 9 = ...</li>
-<li>20 + 6 × 5 = ...</li>
-</ol>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 3
-===================================================== -->
-
-<div class="bab">
-
-<h3>🍕 BAB 3 — Pecahan</h3>
-
-<h4>📖 Mengenal Pecahan</h4>
-
-<p>
-Pecahan digunakan untuk menyatakan bagian dari keseluruhan.
-Pecahan terdiri atas pembilang dan penyebut.
-</p>
-
-<div class="contoh">
-
-Pada pecahan <strong>3/5</strong>:
-
-<br><br>
-
-3 = pembilang
-
-<br>
-
-5 = penyebut
-
-</div>
-
-<h4>📌 Pecahan Senilai</h4>
-
-<div class="contoh">
-
-1/2 = 2/4 = 3/6 = 4/8
-
-</div>
-
-<h4>📌 Membandingkan Pecahan</h4>
-
-<p>
-Jika penyebutnya sama, pecahan dengan pembilang lebih besar
-memiliki nilai lebih besar.
-</p>
-
-<div class="contoh">
-
-3/8 <strong>&lt;</strong> 5/8
-
-</div>
-
-<h4>➕ Penjumlahan Pecahan</h4>
-
-<div class="contoh">
-
-2/7 + 3/7 =
-
-<br><br>
-
-<strong>5/7</strong>
-
-</div>
-
-<h4>➖ Pengurangan Pecahan</h4>
-
-<div class="contoh">
-
-6/8 − 2/8 =
-
-<br><br>
-
-4/8 = <strong>1/2</strong>
-
-</div>
-
-<div class="latihan">
-
-<b>📝 Latihan Mandiri</b>
-
-<ol>
-<li>2/5 + 1/5 = ...</li>
-<li>7/9 − 3/9 = ...</li>
-<li>Manakah yang lebih besar: 3/7 atau 5/7?</li>
-<li>Tuliskan dua pecahan yang senilai dengan 1/2.</li>
-</ol>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 4
-===================================================== -->
-
-<div class="bab">
-
-<h3>🔢 BAB 4 — Desimal</h3>
-
-<h4>📖 Mengenal Bilangan Desimal</h4>
-
-<p>
-Bilangan desimal merupakan bilangan yang memiliki bagian
-bilangan bulat dan bagian pecahan.
-</p>
-
-<div class="contoh">
-
-1/2 = <strong>0,5</strong>
-
-<br><br>
-
-1/4 = <strong>0,25</strong>
-
-<br><br>
-
-3/4 = <strong>0,75</strong>
-
-</div>
-
-<h4>📌 Hubungan Pecahan dan Desimal</h4>
-
-<div class="contoh">
-
-1/10 = 0,1
-
-<br>
-2/10 = 0,2
-
-<br>
-5/10 = 0,5
-
-<br>
-10/10 = 1
-
-</div>
-
-<h4>📌 Membandingkan Desimal</h4>
-
-<div class="contoh">
-
-0,7 <strong>&gt;</strong> 0,5
-
-<br><br>
-
-0,25 <strong>&lt;</strong> 0,50
-
-</div>
-
-<div class="latihan">
-
-<b>📝 Latihan Mandiri</b>
-
-<ol>
-<li>Ubahlah 1/2 menjadi desimal.</li>
-<li>Ubahlah 1/4 menjadi desimal.</li>
-<li>Manakah yang lebih besar: 0,6 atau 0,8?</li>
-<li>Urutkan 0,2, 0,8, 0,5 dari terkecil.</li>
-</ol>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 5
-===================================================== -->
-
-<div class="bab">
-
-<h3>💯 BAB 5 — Persen</h3>
-
-<h4>📖 Pengertian Persen</h4>
-
-<p>
-Persen berarti bagian dari seratus.
-Simbol persen adalah <strong>%</strong>.
-</p>
-
-<div class="contoh">
-
-50% = 50/100 = 1/2 = 0,5
-
-<br><br>
-
-25% = 25/100 = 1/4 = 0,25
-
-<br><br>
-
-75% = 75/100 = 3/4 = 0,75
-
-</div>
-
-<h4>📌 Pecahan, Desimal, dan Persen</h4>
-
-<div class="contoh">
-
-<strong>1/2 = 0,5 = 50%</strong>
-
-<br><br>
-
-<strong>1/4 = 0,25 = 25%</strong>
-
-<br><br>
-
-<strong>3/4 = 0,75 = 75%</strong>
-
-</div>
-
-<div class="latihan">
-
-<b>📝 Latihan Mandiri</b>
-
-<ol>
-<li>Ubahlah 1/2 menjadi persen.</li>
-<li>Ubahlah 0,25 menjadi persen.</li>
-<li>Ubahlah 75% menjadi pecahan.</li>
-<li>Ubahlah 50% menjadi desimal.</li>
-</ol>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 6
-===================================================== -->
-
-<div class="bab">
-
-<h3>📏 BAB 6 — Pengukuran</h3>
-
-<h4>📐 Satuan Panjang</h4>
-
-<div class="contoh">
-
-1 km = 1.000 m
-
-<br>
-1 m = 100 cm
-
-<br>
-1 cm = 10 mm
-
-</div>
-
-<h4>⚖️ Satuan Berat</h4>
-
-<div class="contoh">
-
-1 kg = 1.000 gram
-
-<br>
-1 gram = 1.000 mg
-
-</div>
-
-<h4>⏰ Satuan Waktu</h4>
-
-<div class="contoh">
-
-1 jam = 60 menit
-
-<br>
-1 menit = 60 detik
-
-<br>
-1 hari = 24 jam
-
-</div>
-
-<h4>📌 Contoh</h4>
-
-<div class="contoh">
-
-3 meter = <strong>300 cm</strong>
-
-<br><br>
-
-5 kg = <strong>5.000 gram</strong>
-
-<br><br>
-
-2 jam = <strong>120 menit</strong>
-
-</div>
-
-<div class="latihan">
-
-<b>📝 Latihan Mandiri</b>
-
-<ol>
-<li>7 meter = ... cm</li>
-<li>4 kg = ... gram</li>
-<li>3 jam = ... menit</li>
-<li>5.000 gram = ... kg</li>
-</ol>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 7
-===================================================== -->
-
-<div class="bab">
-
-<h3>📐 BAB 7 — Keliling dan Luas Bangun Datar</h3>
-
-<h4>⬜ Persegi</h4>
-
-<div class="contoh">
-
-Keliling:
-
-<br>
-
-<strong>K = 4 × sisi</strong>
-
-<br><br>
-
-Luas:
-
-<br>
-
-<strong>L = sisi × sisi</strong>
-
-</div>
-
-<h4>▭ Persegi Panjang</h4>
-
-<div class="contoh">
-
-Keliling:
-
-<br>
-
-<strong>K = 2 × (panjang + lebar)</strong>
-
-<br><br>
-
-Luas:
-
-<br>
-
-<strong>L = panjang × lebar</strong>
-
-</div>
-
-<h4>🔺 Segitiga</h4>
-
-<div class="contoh">
-
-<strong>L = 1/2 × alas × tinggi</strong>
-
-</div>
-
-<h4>⭐ Contoh Soal</h4>
-
-<div class="contoh">
-
-Sebuah persegi memiliki sisi 8 cm.
-
-<br><br>
-
-Luas = 8 × 8
-
-<br>
-
-= <strong>64 cm²</strong>
-
-</div>
-
-<div class="latihan">
-
-<b>📝 Latihan Mandiri</b>
-
-<ol>
-<li>Persegi memiliki sisi 9 cm. Berapa luasnya?</li>
-<li>Persegi memiliki sisi 7 cm. Berapa kelilingnya?</li>
-<li>Persegi panjang panjangnya 10 cm dan lebarnya 5 cm. Berapa luasnya?</li>
-<li>Segitiga memiliki alas 12 cm dan tinggi 8 cm. Berapa luasnya?</li>
-</ol>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 8
-===================================================== -->
-
-<div class="bab">
-
-<h3>🧊 BAB 8 — Bangun Ruang</h3>
-
-<h4>📦 Kubus</h4>
-
-<p>
-Kubus memiliki 6 sisi, 12 rusuk, dan 8 titik sudut.
-</p>
-
-<div class="contoh">
-
-Volume kubus:
-
-<br><br>
-
-<strong>V = sisi × sisi × sisi</strong>
-
-</div>
-
-<h4>📦 Balok</h4>
-
-<p>
-Balok memiliki panjang, lebar, dan tinggi.
-</p>
-
-<div class="contoh">
-
-Volume balok:
-
-<br><br>
-
-<strong>V = panjang × lebar × tinggi</strong>
-
-</div>
-
-<h4>⭐ Contoh</h4>
-
-<div class="contoh">
-
-Kubus memiliki sisi 5 cm.
-
-<br><br>
-
-V = 5 × 5 × 5
-
-<br>
-
-= <strong>125 cm³</strong>
-
-</div>
-
-<div class="latihan">
-
-<b>📝 Latihan Mandiri</b>
-
-<ol>
-<li>Kubus memiliki sisi 4 cm. Berapa volumenya?</li>
-<li>Kubus memiliki sisi 6 cm. Berapa volumenya?</li>
-<li>Balok berukuran 10 cm × 5 cm × 4 cm. Berapa volumenya?</li>
-</ol>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 9
-===================================================== -->
-
-<div class="bab">
-
-<h3>📊 BAB 9 — Data dan Diagram</h3>
-
-<h4>📖 Pengertian Data</h4>
-
-<p>
-Data adalah kumpulan informasi yang dapat digunakan
-untuk mengetahui suatu keadaan.
-</p>
-
-<h4>📋 Penyajian Data</h4>
-
-<p>
-Data dapat disajikan dalam bentuk tabel atau diagram
-agar lebih mudah dibaca.
-</p>
-
-<div class="contoh">
-
-<b>Contoh jumlah buku yang dibaca:</b>
-
-<br><br>
-
-Andi = 5 buku
-
-<br>
-Budi = 3 buku
-
-<br>
-Citra = 7 buku
-
-<br>
-Deni = 4 buku
-
-</div>
-
-<h4>📊 Diagram Batang</h4>
-
-<p>
-Diagram batang digunakan untuk membandingkan beberapa data.
-Panjang atau tinggi batang menunjukkan banyaknya data.
-</p>
-
-<div class="latihan">
-
-<b>📝 Latihan Mandiri</b>
-
-<ol>
-<li>Apa yang dimaksud dengan data?</li>
-<li>Sebutkan dua bentuk penyajian data.</li>
-<li>Siapa yang membaca buku paling banyak pada contoh di atas?</li>
-<li>Berapa jumlah buku yang dibaca Budi?</li>
-</ol>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BAB 10
-===================================================== -->
-
-<div class="bab">
-
-<h3>🔁 BAB 10 — Pola Bilangan</h3>
-
-<h4>📖 Pengertian Pola</h4>
-
-<p>
-Pola bilangan adalah susunan bilangan yang mengikuti
-aturan tertentu.
-</p>
-
-<div class="contoh">
-
-2, 4, 6, 8, 10, ...
-
-<br><br>
-
-Polanya bertambah <strong>2</strong>.
-
-</div>
-
-<div class="contoh">
-
-5, 10, 15, 20, 25, ...
-
-<br><br>
-
-Polanya bertambah <strong>5</strong>.
-
-</div>
-
-<h4>📌 Menentukan Bilangan Berikutnya</h4>
-
-<div class="contoh">
-
-10, 20, 30, 40, ...
-
-<br><br>
-
-Bilangan berikutnya adalah:
-
-<br>
-
-<strong>50</strong>
-
-</div>
-
-<div class="latihan">
-
-<b>📝 Latihan Mandiri</b>
-
-<ol>
-<li>Lengkapi: 2, 4, 6, 8, ..., ...</li>
-<li>Lengkapi: 5, 10, 15, 20, ..., ...</li>
-<li>Lengkapi: 10, 20, 30, 40, ..., ...</li>
-<li>Tentukan aturan pola: 3, 6, 9, 12, ...</li>
-</ol>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     RINGKASAN
-===================================================== -->
-
-<div class="bab" style="
-    background:linear-gradient(135deg,#eff6ff,#ffffff);
-    border:2px solid #90caf9;
-">
-
-<h3>🏆 Ringkasan Materi Matematika</h3>
-
-<p>
-Materi Matematika Kelas 5 yang telah dipelajari:
-</p>
-
-<ul>
-
-<li>🔢 Bilangan cacah sampai 100.000</li>
-
-<li>➕ Operasi hitung bilangan</li>
-
-<li>🍕 Pecahan</li>
-
-<li>🔢 Desimal</li>
-
-<li>💯 Persen</li>
-
-<li>📏 Pengukuran</li>
-
-<li>📐 Keliling dan luas bangun datar</li>
-
-<li>🧊 Bangun ruang</li>
-
-<li>📊 Data dan diagram</li>
-
-<li>🔁 Pola bilangan</li>
-
-</ul>
-
-<div style="
-    background:#1565c0;
-    color:white;
-    padding:18px;
-    border-radius:14px;
-    text-align:center;
-    margin-top:20px;
-">
-
-<strong>
-🌟 Terus Berlatih! 🌟
-</strong>
-
-<br><br>
-
-Semakin sering berlatih,
-semakin mudah memahami Matematika.
-
-<br><br>
-
-<b>
-💪 Aku Bisa Matematika!
-</b>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     PENUTUP MATEMATIKA
-===================================================== -->
-
-</div>
-
-<!-- =====================================================
-     SELESAI MATEMATIKA
-     MATA PELAJARAN BERIKUTNYA DILETAKKAN SETELAH INI
-===================================================== -->
 
 <!-- =====================================================
      BAHASA INGGRIS
 ===================================================== -->
 
+
+<!-- =====================================================
+     INGGRIS
+===================================================== -->
 <div id="inggris" class="materi-halaman">
 
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
+<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
 
-<div class="judul-mapel">
-
-<h2>🇬🇧 Bahasa Inggris</h2>
-
-<p>English for Grade 5</p>
-
+<div class="judul-mapel" style="background:linear-gradient(135deg,#1d4ed8,#60a5fa);color:white;padding:28px 20px;border-radius:18px;">
+<div style="font-size:50px;">🇬🇧</div>
+<h2 style="color:white;">Bahasa Inggris</h2>
+<p>English for Nusantara Kids — Grade 5</p>
+<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
 </div>
 
 <div class="bab">
+<h3>🌟 Let's Learn English!</h3>
+<p>Berani mencoba adalah kunci belajar bahasa Inggris. Speak, listen, read, write, and have fun!</p>
 
-<h3>📘 Chapter 1 — Greetings</h3>
+</div><div class="bab">
+<h3>🥭 Chapter 1 — Buying Some Mangoes and Spinach</h3>
+<p>Belajar menyebutkan buah dan sayuran serta mengungkapkan apa yang ingin dibeli.</p><div class="contoh"><b>What fruit do you want to buy?</b> — Buah apa yang ingin kamu beli?<br><b>I'd like some mangoes.</b> — Saya ingin beberapa mangga.<br><b>I'd like some spinach.</b> — Saya ingin bayam.</div>
+<div class="latihan"><b>🛒 Mini Shop:</b> Buat dialog penjual dan pembeli menggunakan minimal 4 nama buah/sayuran.</div>
+</div><div class="bab">
+<h3>🍳 Chapter 2 — In the Kitchen</h3>
+<p>Belajar menyebutkan kegiatan di dapur.</p><div class="contoh"><b>What is Pipit doing?</b><br><b>She is cooking.</b><br><b>He is washing the dishes.</b></div>
+<div class="latihan"><b>🎭 Guess the Action:</b> Peragakan kegiatan, teman menebak menggunakan “He is...” atau “She is...”.</div>
+</div><div class="bab">
+<h3>🏠 Chapter 3 — Visiting Bara's House</h3>
+<p>Belajar menanyakan lokasi dan arah sederhana.</p><div class="contoh"><b>Where is the grocery store?</b><br><b>It is next to the school.</b><br><b>It is near the park.</b></div>
+<div class="latihan"><b>🗺️ My Map:</b> Gambar peta sederhana dan jelaskan lokasi dalam bahasa Inggris.</div>
+</div><div class="bab">
+<h3>📚 Chapter 4 — At the Library</h3>
+<p>Belajar berbicara tentang buku dan aturan perpustakaan.</p><div class="contoh"><b>I'd like to borrow this book.</b><br><b>I'd like to read this book because...</b><br><b>Be quiet, please.</b></div>
+<div class="latihan"><b>📖 My Favorite Book:</b> Tuliskan judul buku yang ingin dipinjam dan alasannya.</div>
+</div><div class="bab">
+<h3>📖 Chapter 5 — At the Library: Talking About Books</h3>
+<p>Berlatih berbicara tentang buku, meminta sesuatu dengan sopan, dan memahami cerita.</p><div class="contoh"><b>Can I borrow this book, please?</b><br><b>Yes, you can.</b><br><b>Thank you.</b></div>
 
-<p>
-Mengenal ungkapan salam dan perkenalan sederhana.
-</p>
-
-<div class="contoh">
-
-Hello = Halo
-
-<br>
-
-Good morning = Selamat pagi
-
-<br>
-
-Good afternoon = Selamat siang
-
-<br>
-
-How are you? = Apa kabar?
-
-</div>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Chapter 2 — Numbers</h3>
-
-<p>
-Mengenal angka dalam bahasa Inggris.
-</p>
-
-<div class="contoh">
-
-One = 1
-
-<br>
-Two = 2
-
-<br>
-Three = 3
-
-<br>
-Four = 4
-
-<br>
-Five = 5
+</div><div class="bab">
+<h3>🐟 Chapter 6 — Reading a Lot of Stories</h3>
+<p>Belajar memahami cerita imajinatif, mengurutkan gambar, dan menulis ulang cerita.</p><div class="contoh"><b>First</b> → <b>Next</b> → <b>Then</b> → <b>Finally</b></div>
+<div class="latihan"><b>🎬 Story Maker:</b> Buat cerita pendek dengan urutan First, Next, Then, Finally.</div>
+</div><div class="bab">
+<h3>🏆 I Can Do It!</h3>
+<p>☐ I can ask questions. ☐ I can express my ideas. ☐ I can listen. ☐ I can work together. ☐ I can speak English with confidence.</p>
 
 </div>
-
-</div>
-
 </div>
 
 
@@ -3529,100 +768,92 @@ Five = 5
      BAHASA SUNDA
 ===================================================== -->
 
+
+<!-- =====================================================
+     SUNDA
+===================================================== -->
 <div id="sunda" class="materi-halaman">
 
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
+<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
 
-<div class="judul-mapel">
-
-<h2>🌿 Bahasa Sunda</h2>
-
+<div class="judul-mapel" style="background:linear-gradient(135deg,#166534,#65a30d);color:white;padding:28px 20px;border-radius:18px;">
+<div style="font-size:50px;">🌿</div>
+<h2 style="color:white;">Bahasa Sunda</h2>
 <p>Materi Bahasa Sunda Kelas 5</p>
-
+<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
 </div>
 
 <div class="bab">
+<h3>🌟 Wilujeng Diajar!</h3>
+<p>Hayu urang diajar Basa Sunda kalayan pikaresepeun. Basa Sunda dipaké pikeun komunikasi jeung ngajaga budaya Sunda.</p>
 
-<h3>📘 Bab 1 — Paguneman</h3>
+</div><div class="bab">
+<h3>💬 Bab 1 — Paguneman</h3>
+<p>Paguneman nyaéta komunikasi atawa obrolan antara dua jalma atawa leuwih.</p><ul><li>Ngagunakeun basa anu sopan.</li><li>Ngaregepkeun.</li><li>Teu motong omongan.</li><li>Ngahargaan pamadegan.</li></ul><div class="contoh"><b>A:</b> “Wilujeng énjing, Rina.”<br><b>B:</b> “Wilujeng énjing, Deni. Kumaha kabarna?”</div>
+<div class="latihan"><b>🎭 Prakték:</b> Jieun paguneman ngeunaan diajar di sakola.</div>
+</div><div class="bab">
+<h3>📝 Bab 2 — Kecap jeung Kalimah</h3>
+<p>Kecap bisa dirangkay jadi kalimah pikeun nepikeun maksud anu jelas.</p><div class="contoh"><b>Kecap:</b> sakola, diajar, murid.<br><b>Kalimah:</b> “Murid diajar di sakola.”</div>
+<div class="latihan"><b>🎯 Tantangan:</b> Jieun 5 kalimah Basa Sunda ngeunaan sakola.</div>
+</div><div class="bab">
+<h3>🙏 Bab 3 — Basa Hormat jeung Tatakrama</h3>
+<p>Urang kudu nyaluyukeun basa jeung saha anu diajak nyarita.</p><div class="contoh"><b>Ka guru:</b> “Punten, Bu/Pak, abdi badé naros.”</div>
 
-<p>
-Paguneman nyaéta komunikasi atawa obrolan antara dua jalma
-atawa leuwih.
-</p>
-
-<ul>
-<li>Ngagunakeun basa anu sopan</li>
-<li>Ngalakukeun paguneman jeung babaturan</li>
-<li>Ngalakukeun paguneman jeung guru</li>
-</ul>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 2 — Kecap jeung Kalimah</h3>
-
-<p>
-Diajar ngagunakeun kecap jeung kalimah basa Sunda
-dina kahirupan sapopoe.
-</p>
+</div><div class="bab">
+<h3>📖 Bab 4 — Maca jeung Nyangkem Eusi Bacaan</h3>
+<p>Maca kudu dibarengan ku pamahaman. Sanggeus maca, urang bisa nyaritakeun deui eusi bacaan ku kecap sorangan.</p>
+<div class="latihan"><b>🔎 Detektif Bacaan:</b> Tuliskeun judul, tokoh, kajadian penting, jeung amanat.</div>
+</div><div class="bab">
+<h3>🌿 Abdi Resep Basa Sunda!</h3>
+<p>“Basa Sunda téh bagian tina budaya urang. Hayu dipaké kalayan hade tur sopan.”</p>
 
 </div>
-
 </div>
 
 
 <!-- =====================================================
      KKA
 ===================================================== -->
-
 <div id="kka" class="materi-halaman">
 
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
+<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
 
-<div class="judul-mapel">
-
-<h2>💻 KKA</h2>
-
-<p>Koding dan Kecerdasan Artifisial</p>
-
+<div class="judul-mapel" style="background:linear-gradient(135deg,#312e81,#7c3aed);color:white;padding:28px 20px;border-radius:18px;">
+<div style="font-size:50px;">💻</div>
+<h2 style="color:white;">KKA</h2>
+<p>Koding dan Kecerdasan Artifisial — Kelas 5</p>
+<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
 </div>
 
 <div class="bab">
+<h3>🚀 Selamat Datang di Dunia Koding!</h3>
+<p>Koding melatih kita menyusun langkah, menemukan kesalahan, dan membuat solusi.</p>
 
-<h3>📘 Bab 1 — Berpikir Komputasional</h3>
+</div><div class="bab">
+<h3>🧠 Bab 1 — Berpikir Komputasional</h3>
+<p>Berpikir komputasional adalah cara menyelesaikan masalah secara terstruktur dan logis.</p><div class="contoh"><b>Dekomposisi</b> — memecah masalah.<br><b>Pengenalan pola</b> — mencari kesamaan.<br><b>Abstraksi</b> — mengambil informasi penting.<br><b>Algoritma</b> — menyusun langkah.</div>
+<div class="latihan"><b>🎯 Tantangan:</b> Uraikan langkah membuat teh manis menjadi algoritma.</div>
+</div><div class="bab">
+<h3>🧱 Bab 2 — Algoritma dan Urutan</h3>
+<p>Algoritma harus jelas dan berurutan.</p><div class="contoh">Bangun → mandi → berpakaian → sarapan → berangkat sekolah.</div>
+<div class="latihan"><b>🧠 Susun:</b> Buat urutan langkah mencuci tangan.</div>
+</div><div class="bab">
+<h3>🔁 Bab 3 — Pola dan Pengulangan</h3>
+<p>Komputer dapat melakukan perintah berulang. Pola juga dapat ditemukan pada angka, gambar, dan gerakan.</p><div class="contoh">2, 4, 6, 8, ... → bertambah 2.</div>
 
-<p>
-Berpikir komputasional adalah cara menyelesaikan masalah
-secara terstruktur dan logis.
-</p>
-
-<ul>
-<li>Dekomposisi</li>
-<li>Pengenalan pola</li>
-<li>Abstraksi</li>
-<li>Algoritma</li>
-</ul>
+</div><div class="bab">
+<h3>🤖 Bab 4 — Mengenal Kecerdasan Artifisial</h3>
+<p>AI adalah teknologi yang memungkinkan komputer melakukan tugas tertentu yang membutuhkan kemampuan seperti mengenali pola, memahami bahasa, atau membuat prediksi.</p><div class="contoh">Contoh: pengenalan suara, penerjemah, rekomendasi, pencarian, dan alat bantu belajar.</div>
+<div class="latihan"><b>🔍 Detektif AI:</b> Sebutkan 3 contoh AI dan manfaatnya.</div>
+</div><div class="bab">
+<h3>🛡️ Bab 5 — Menggunakan AI dengan Bijak</h3>
+<ul><li>Jangan memasukkan data pribadi sembarangan.</li><li>Periksa informasi AI.</li><li>Gunakan AI untuk belajar, bukan sekadar menyalin.</li><li>Tetap berpikir kritis.</li><li>Hormati karya orang lain.</li></ul>
+<div class="latihan"><b>💡 Mengapa jawaban AI perlu diperiksa?</b></div>
+</div><div class="bab">
+<h3>🏆 KKA Explorer</h3>
+<p>💻 Berani mencoba • 🧠 Berpikir logis • 🔎 Memeriksa informasi • 🤖 Menggunakan AI secara bertanggung jawab.</p>
 
 </div>
-
-<div class="bab">
-
-<h3>📘 Bab 2 — Pengenalan Kecerdasan Artifisial</h3>
-
-<p>
-Mengenal kecerdasan artifisial dan contoh penggunaannya
-dalam kehidupan sehari-hari.
-</p>
-
-</div>
-
 </div>
 
 
@@ -3630,47 +861,46 @@ dalam kehidupan sehari-hari.
      SENI RUPA
 ===================================================== -->
 
+
+<!-- =====================================================
+     SENI
+===================================================== -->
 <div id="seni" class="materi-halaman">
 
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
+<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
 
-<div class="judul-mapel">
-
-<h2>🎨 Seni Rupa</h2>
-
+<div class="judul-mapel" style="background:linear-gradient(135deg,#9d174d,#ec4899);color:white;padding:28px 20px;border-radius:18px;">
+<div style="font-size:50px;">🎨</div>
+<h2 style="color:white;">Seni Rupa</h2>
 <p>Materi Seni Rupa Kelas 5</p>
-
+<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
 </div>
 
 <div class="bab">
+<h3>🌈 Seni Ada di Sekitar Kita!</h3>
+<p>Warna, garis, bentuk, tekstur, dan ruang dapat menjadi bagian dari karya seni.</p>
 
-<h3>📘 Bab 1 — Unsur Seni Rupa</h3>
-
-<ul>
-<li>Titik</li>
-<li>Garis</li>
-<li>Bentuk</li>
-<li>Warna</li>
-<li>Tekstur</li>
-<li>Ruang</li>
-</ul>
+</div><div class="bab">
+<h3>🎨 Bab 1 — Unsur Seni Rupa</h3>
+<ul><li>• Titik</li><li>〰️ Garis</li><li>🔺 Bentuk</li><li>🌈 Warna</li><li>🪵 Tekstur</li><li>📐 Ruang</li></ul>
+<div class="latihan"><b>🔎 Berburu Unsur Seni:</b> Temukan contoh garis, bentuk, dan warna di kelas.</div>
+</div><div class="bab">
+<h3>✏️ Bab 2 — Menggambar dari Pengamatan</h3>
+<p>Perhatikan objek secara langsung lalu tuangkan ke dalam gambar.</p><ol><li>Amati.</li><li>Tentukan bentuk dasar.</li><li>Buat sketsa.</li><li>Tambahkan detail.</li><li>Berikan warna.</li></ol>
+<div class="latihan"><b>🎯 Misi:</b> Gambar satu benda di kelas dengan memperhatikan bentuk dan proporsinya.</div>
+</div><div class="bab">
+<h3>🖍️ Bab 3 — Warna dan Ekspresi</h3>
+<p>Warna dapat membantu memberikan suasana pada karya.</p><div class="contoh"><b>Hangat:</b> merah, jingga, kuning.<br><b>Sejuk:</b> biru, hijau, ungu.</div>
+<div class="latihan"><b>🎨 Tantangan:</b> Buat gambar “sekolah yang menyenangkan”.</div>
+</div><div class="bab">
+<h3>♻️ Bab 4 — Berkarya dengan Bahan di Sekitar</h3>
+<p>Bahan sederhana dapat dimanfaatkan menjadi karya seni dengan tetap menjaga keselamatan dan kebersihan.</p><div class="contoh">Kertas bekas → kolase.<br>Daun kering → karya tempel.<br>Kardus → karya tiga dimensi sederhana.</div>
+<div class="latihan"><b>🌱 Proyek:</b> Buat karya seni dari bahan bekas yang aman dan bersih.</div>
+</div><div class="bab">
+<h3>🏆 Seniman Cilik SDN Cijember</h3>
+<p>“Tidak ada karya yang langsung sempurna. Terus mencoba, mengamati, dan memperbaiki!”</p>
 
 </div>
-
-<div class="bab">
-
-<h3>📘 Bab 2 — Menggambar</h3>
-
-<p>
-Mengembangkan kemampuan menggambar melalui pengamatan
-lingkungan sekitar.
-</p>
-
-</div>
-
 </div>
 
 
@@ -3678,154 +908,51 @@ lingkungan sekitar.
      PJOK
 ===================================================== -->
 
-<div id="pjok" class="materi-halaman">
-
-<button class="tombol-kembali"
-onclick="kembaliMapel()">
-← Kembali ke Mata Pelajaran
-</button>
-
-<div class="judul-mapel">
-
-<h2>🏃 PJOK</h2>
-
-<p>Pendidikan Jasmani, Olahraga dan Kesehatan</p>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 1 — Permainan Bola Besar</h3>
-
-<ul>
-<li>Sepak bola</li>
-<li>Bola voli</li>
-<li>Bola basket</li>
-<li>Teknik dasar permainan</li>
-</ul>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 2 — Kebugaran Jasmani</h3>
-
-<ul>
-<li>Kekuatan</li>
-<li>Kelenturan</li>
-<li>Kecepatan</li>
-<li>Daya tahan</li>
-<li>Keseimbangan</li>
-</ul>
-
-</div>
-
-<div class="bab">
-
-<h3>📘 Bab 3 — Hidup Sehat</h3>
-
-<p>
-Menjaga kesehatan tubuh melalui pola makan sehat,
-olahraga teratur, istirahat cukup, dan kebersihan diri.
-</p>
-
-</div>
-
-</div>
-
-
-</div>
-
 
 <!-- =====================================================
-     JAVASCRIPT
+     PJOK
 ===================================================== -->
+<div id="pjok" class="materi-halaman">
 
-<script>
+<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
 
-/*
-===========================================================
-FUNGSI MEMBUKA MATERI
-===========================================================
-*/
+<div class="judul-mapel" style="background:linear-gradient(135deg,#047857,#10b981);color:white;padding:28px 20px;border-radius:18px;">
+<div style="font-size:50px;">🏃</div>
+<h2 style="color:white;">PJOK</h2>
+<p>Pendidikan Jasmani, Olahraga, dan Kesehatan — Kelas 5</p>
+<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
+</div>
 
-function bukaMateri(id){
+<div class="bab">
+<h3>💪 Tubuh Sehat, Belajar Hebat!</h3>
+<p>Aktivitas fisik membantu menjaga kebugaran. Lakukan pemanasan, gunakan teknik yang benar, dan bersikap sportif.</p>
 
-    // sembunyikan halaman 9 mapel
+</div><div class="bab">
+<h3>⚽ Bab 1 — Permainan Bola Besar</h3>
+<p>Permainan bola besar melatih gerak dasar, kerja sama, dan sportivitas.</p><div class="contoh">Mengoper • menangkap • menggiring • menendang • mengontrol bola.</div>
+<div class="latihan"><b>🤝 Misi Tim:</b> lakukan permainan sederhana yang menekankan kerja sama.</div>
+</div><div class="bab">
+<h3>🏸 Bab 2 — Permainan Bola Kecil</h3>
+<p>Permainan bola kecil melatih koordinasi mata dan tangan, ketepatan, kelincahan, dan konsentrasi.</p><div class="contoh">Lempar-tangkap • memukul bola • permainan target.</div>
 
-    document.getElementById(
-        "halamanMapel"
-    ).style.display = "none";
+</div><div class="bab">
+<h3>🏃 Bab 3 — Atletik</h3>
+<p>Atletik mencakup berjalan, berlari, melompat, dan melempar.</p><ul><li>Pemanasan.</li><li>Gunakan tempat aman.</li><li>Ikuti instruksi guru.</li><li>Jangan memaksakan diri.</li></ul>
+<div class="latihan"><b>🎯 Tantangan:</b> lakukan latihan lari ringan sesuai arahan guru.</div>
+</div><div class="bab">
+<h3>🤸 Bab 4 — Senam dan Gerak Berirama</h3>
+<p>Gerak berirama membutuhkan koordinasi, keseimbangan, kelenturan, dan keberanian.</p>
+<div class="latihan"><b>🎵 Ayo bergerak:</b> buat rangkaian 4 gerakan sederhana mengikuti hitungan 1–8.</div>
+</div><div class="bab">
+<h3>🥗 Bab 5 — Pola Hidup Sehat</h3>
+<ul><li>🥗 Makan bergizi.</li><li>💧 Minum cukup.</li><li>😴 Istirahat cukup.</li><li>🧼 Menjaga kebersihan.</li><li>🏃 Aktif bergerak.</li><li>🧠 Menjaga kesehatan mental dan emosi.</li></ul>
+<div class="latihan"><b>📅 Tantangan Sehat:</b> pilih satu kebiasaan sehat selama seminggu.</div>
+</div><div class="bab">
+<h3>🏆 Aku Anak Sehat!</h3>
+<p>💪 Aktif • 🥗 Sehat • 🤝 Sportif • 😊 Percaya diri • 🧼 Bersih</p>
 
-
-    // sembunyikan semua materi
-
-    const semua =
-        document.querySelectorAll(
-            ".materi-halaman"
-        );
-
-    semua.forEach(function(item){
-
-        item.classList.remove("aktif");
-
-    });
-
-
-    // tampilkan materi yang dipilih
-
-    const halaman =
-        document.getElementById(id);
-
-
-    if(halaman){
-
-        halaman.classList.add("aktif");
-
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
-
-    }
-
-}
-
-
-/*
-===========================================================
-KEMBALI KE 9 MAPEL
-===========================================================
-*/
-
-function kembaliMapel(){
-
-    const semua =
-        document.querySelectorAll(
-            ".materi-halaman"
-        );
-
-
-    semua.forEach(function(item){
-
-        item.classList.remove("aktif");
-
-    });
-
-
-    document.getElementById(
-        "halamanMapel"
-    ).style.display = "block";
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-}
+</div>
+</div>
+    
 
 </script>
-
-</body>
-</html>
