@@ -1,305 +1,345 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Materi Pembelajaran Kelas 5</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#eef5fb;
+    color:#1f2937;
+}
+
+/* ==============================
+   HEADER
+============================== */
+
+.header{
+    background:linear-gradient(135deg,#1976d2,#42a5f5);
+    color:white;
+    padding:25px 15px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
+
+.header h1{
+    margin:0;
+    font-size:30px;
+}
+
+.header p{
+    margin:8px 0 0;
+    font-size:16px;
+}
+
+/* ==============================
+   CONTAINER
+============================== */
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:25px 15px 100px;
+}
+
+.judul{
+    text-align:center;
+    margin:10px 0 25px;
+    color:#1565c0;
+}
+
+/* ==============================
+   GRID 9 MAPEL
+============================== */
+
+.mapel-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+/* ==============================
+   KARTU MAPEL
+============================== */
+
+.mapel-card{
+    background:white;
+    border-radius:20px;
+    padding:25px 15px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 5px 18px rgba(0,0,0,.10);
+    transition:.25s;
+    border:2px solid transparent;
+}
+
+.mapel-card:hover{
+    transform:translateY(-5px);
+    border-color:#42a5f5;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.mapel-icon{
+    font-size:52px;
+    margin-bottom:12px;
+}
+
+.mapel-card h3{
+    margin:5px 0;
+    color:#1565c0;
+    font-size:20px;
+}
+
+.mapel-card p{
+    margin:8px 0 0;
+    color:#666;
+    font-size:14px;
+}
+
+/* ==============================
+   HALAMAN MATERI
+============================== */
+
+.materi-halaman{
+    display:none;
+}
+
+.materi-halaman.aktif{
+    display:block;
+}
+
+.tombol-kembali{
+    border:none;
+    background:#1565c0;
+    color:white;
+    padding:11px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:15px;
+    margin-bottom:20px;
+}
+
+.tombol-kembali:hover{
+    background:#0d47a1;
+}
+
+.judul-mapel{
+    background:white;
+    border-radius:18px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    margin-bottom:20px;
+}
+
+.judul-mapel h2{
+    margin:0;
+    color:#1565c0;
+}
+
+.judul-mapel p{
+    margin:8px 0 0;
+    color:#666;
+}
+
+/* ==============================
+   KARTU BAB
+============================== */
+
+.bab{
+    background:white;
+    margin-bottom:18px;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.bab h3{
+    color:#1565c0;
+    margin-top:0;
+}
+
+.bab h4{
+    color:#333;
+    margin-bottom:8px;
+}
+
+.bab p{
+    line-height:1.7;
+}
+
+.bab ul{
+    line-height:1.8;
+}
+
+/* ==============================
+   BOX CONTOH
+============================== */
+
+.contoh{
+    background:#e3f2fd;
+    border-left:5px solid #1976d2;
+    padding:15px;
+    border-radius:10px;
+    margin-top:12px;
+}
+
+/* ==============================
+   TOMBOL LATIHAN
+============================== */
+
+.latihan{
+    background:#fff8e1;
+    border-left:5px solid #ffb300;
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+/* ==============================
+   RESPONSIVE HP
+============================== */
+
+@media(max-width:800px){
+
+    .mapel-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:14px;
+    }
+
+    .mapel-card{
+        padding:20px 10px;
+    }
+
+    .mapel-icon{
+        font-size:42px;
+    }
+
+    .mapel-card h3{
+        font-size:17px;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .header h1{
+        font-size:23px;
+    }
+
+    .mapel-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .mapel-icon{
+        font-size:38px;
+    }
+
+    .mapel-card h3{
+        font-size:15px;
+    }
+
+    .mapel-card p{
+        font-size:12px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
 <!-- =====================================================
-     MENU MATA PELAJARAN
-     PORTAL DIGITAL KELAS 5 SDN CIJEMBER
+     HEADER
 ===================================================== -->
 
-<div id="menu-mata-pelajaran">
+<div class="header">
 
-    <div style="
-        text-align:center;
-        margin-bottom:30px;
-        padding:30px 20px;
-        background:linear-gradient(135deg,#1565c0,#42a5f5);
-        color:white;
-        border-radius:22px;
-    ">
+    <h1>📚 Materi Pembelajaran</h1>
 
-        <div style="font-size:55px;">📚</div>
+    <p>
+        Kelas 5 SDN Cijember
+    </p>
 
-        <h2 style="margin:8px 0;">
-            Mata Pelajaran Kelas 5
-        </h2>
+    <p>
+        Tahun Pelajaran 2026/2027
+    </p>
 
-        <p>
-            Portal Digital Kelas 5 SDN Cijember
-        </p>
-
-        <small>
-            Tahun Pelajaran 2026/2027
-        </small>
-
-    </div>
+</div>
 
 
-    <div style="
-        display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-        gap:20px;
-    ">
+<div class="container">
+
+
+<!-- =====================================================
+     HALAMAN UTAMA 9 MAPEL
+===================================================== -->
+
+<div id="halamanMapel">
+
+    <h2 class="judul">
+        📖 Pilih Mata Pelajaran
+    </h2>
+
+    <div class="mapel-grid">
 
 
         <!-- PAI -->
 
-        <button type="button"
-            onclick="bukaMateri('pai');"
-            style="
-                width:100%;
-                border:0;
-                padding:25px;
-                border-radius:20px;
-                cursor:pointer;
-                background:linear-gradient(135deg,#16a34a,#4ade80);
-                color:white;
-                text-align:center;
-                box-shadow:0 7px 18px rgba(0,0,0,.15);
-            ">
+        <div class="mapel-card"
+             onclick="bukaMateri('pai')">
 
-            <div style="font-size:55px;">🕌</div>
+            <div class="mapel-icon">
+                🕌
+            </div>
 
-            <h3>Pendidikan Agama Islam</h3>
+            <h3>
+                Pendidikan Agama Islam
+            </h3>
 
-            <p>Belajar PAI dengan menyenangkan</p>
+            <p>
+                Materi PAI Kelas 5
+            </p>
 
-            <strong>📖 Buka Materi</strong>
-
-        </button>
+        </div>
 
 
         <!-- PANCASILA -->
 
-        <button type="button"
-            onclick="bukaMateri('pancasila');"
-            style="
-                width:100%;
-                border:0;
-                padding:25px;
-                border-radius:20px;
-                cursor:pointer;
-                background:linear-gradient(135deg,#dc2626,#fb7185);
-                color:white;
-                text-align:center;
-                box-shadow:0 7px 18px rgba(0,0,0,.15);
-            ">
+        <div class="mapel-card"
+             onclick="bukaMateri('pancasila')">
 
-            <div style="font-size:55px;">🇮🇩</div>
+            <div class="mapel-icon">
+                🇮🇩
+            </div>
 
-            <h3>Pendidikan Pancasila</h3>
+            <h3>
+                Pendidikan Pancasila
+            </h3>
 
-            <p>Belajar nilai-nilai Pancasila</p>
+            <p>
+                Materi Pendidikan Pancasila
+            </p>
 
-            <strong>📖 Buka Materi</strong>
-
-        </button>
+        </div>
 
 
         <!-- MATEMATIKA -->
 
-        <button type="button"
-            onclick="bukaMateri('matematika');"
-            style="
-                width:100%;
-                border:0;
-                padding:25px;
-                border-radius:20px;
-                cursor:pointer;
-                background:linear-gradient(135deg,#2563eb,#60a5fa);
-                color:white;
-                text-align:center;
-                box-shadow:0 7px 18px rgba(0,0,0,.15);
-            ">
-
-            <div style="font-size:55px;">🔢</div>
-
-            <h3>Matematika</h3>
-
-            <p>Belajar berhitung dengan menyenangkan</p>
-
-            <strong>📖 Buka Materi</strong>
-
-        </button>
-
-
-        <!-- BAHASA INDONESIA -->
-
-        <button type="button"
-            onclick="bukaMateri('indonesia');"
-            style="
-                width:100%;
-                border:0;
-                padding:25px;
-                border-radius:20px;
-                cursor:pointer;
-                background:linear-gradient(135deg,#f59e0b,#fbbf24);
-                color:white;
-                text-align:center;
-                box-shadow:0 7px 18px rgba(0,0,0,.15);
-            ">
-
-            <div style="font-size:55px;">📚</div>
-
-            <h3>Bahasa Indonesia</h3>
-
-            <p>Membaca, menulis, berbicara, dan menyimak</p>
-
-            <strong>📖 Buka Materi</strong>
-
-        </button>
-
-
-        <!-- BAHASA INGGRIS -->
-
-        <button type="button"
-            onclick="bukaMateri('inggris');"
-            style="
-                width:100%;
-                border:0;
-                padding:25px;
-                border-radius:20px;
-                cursor:pointer;
-                background:linear-gradient(135deg,#7c3aed,#a78bfa);
-                color:white;
-                text-align:center;
-                box-shadow:0 7px 18px rgba(0,0,0,.15);
-            ">
-
-            <div style="font-size:55px;">🇬🇧</div>
-
-            <h3>Bahasa Inggris</h3>
-
-            <p>Learn English in a fun way</p>
-
-            <strong>📖 Buka Materi</strong>
-
-        </button>
-
-
-        <!-- BAHASA SUNDA -->
-
-        <button type="button"
-            onclick="bukaMateri('sunda');"
-            style="
-                width:100%;
-                border:0;
-                padding:25px;
-                border-radius:20px;
-                cursor:pointer;
-                background:linear-gradient(135deg,#0891b2,#22d3ee);
-                color:white;
-                text-align:center;
-                box-shadow:0 7px 18px rgba(0,0,0,.15);
-            ">
-
-            <div style="font-size:55px;">🌿</div>
-
-            <h3>Bahasa Sunda</h3>
-
-            <p>Diajar Basa Sunda kalayan pikaresepeun</p>
-
-            <strong>📖 Buka Materi</strong>
-
-        </button>
-
-
-        <!-- KKA -->
-
-        <button type="button"
-            onclick="bukaMateri('kka');"
-            style="
-                width:100%;
-                border:0;
-                padding:25px;
-                border-radius:20px;
-                cursor:pointer;
-                background:linear-gradient(135deg,#0f766e,#2dd4bf);
-                color:white;
-                text-align:center;
-                box-shadow:0 7px 18px rgba(0,0,0,.15);
-            ">
-
-            <div style="font-size:55px;">🤖</div>
-
-            <h3>Koding dan Kecerdasan Artifisial</h3>
-
-            <p>Belajar teknologi dan AI secara kreatif</p>
-
-            <strong>📖 Buka Materi</strong>
-
-        </button>
-
-
-        <!-- SENI -->
-
-        <button type="button"
-            onclick="bukaMateri('seni');"
-            style="
-                width:100%;
-                border:0;
-                padding:25px;
-                border-radius:20px;
-                cursor:pointer;
-                background:linear-gradient(135deg,#db2777,#f472b6);
-                color:white;
-                text-align:center;
-                box-shadow:0 7px 18px rgba(0,0,0,.15);
-            ">
-
-            <div style="font-size:55px;">🎨</div>
-
-            <h3>Seni Rupa</h3>
-
-            <p>Berkarya, menggambar, dan berkreasi</p>
-
-            <strong>📖 Buka Materi</strong>
-
-        </button>
-
-
-        <!-- PJOK -->
-
-        <button type="button"
-            onclick="bukaMateri('pjok');"
-            style="
-                width:100%;
-                border:0;
-                padding:25px;
-                border-radius:20px;
-                cursor:pointer;
-                background:linear-gradient(135deg,#ea580c,#fb923c);
-                color:white;
-                text-align:center;
-                box-shadow:0 7px 18px rgba(0,0,0,.15);
-            ">
-
-            <div style="font-size:55px;">⚽</div>
-
-            <h3>PJOK</h3>
-
-            <p>Sehat, aktif, kuat, dan sportif</p>
-
-            <strong>📖 Buka Materi</strong>
-
-        </button>
-
-    </div>
-
-</div>        <!-- =================================================
-             3. MATEMATIKA
-        ================================================== -->
-
         <div class="mapel-card"
-             onclick="bukaMateri('matematika')"
-             style="
-                background:linear-gradient(135deg,#2563eb,#60a5fa);
-                color:white;
-                padding:25px;
-                border-radius:20px;
-                cursor:pointer;
-                text-align:center;
-                box-shadow:0 7px 18px rgba(0,0,0,.12);
-                transition:.25s;
-             ">
+             onclick="bukaMateri('matematika')">
 
-            <div style="font-size:55px;">
+            <div class="mapel-icon">
                 🔢
             </div>
 
@@ -308,40 +348,19 @@
             </h3>
 
             <p>
-                Belajar berhitung dan memecahkan masalah
+                Materi Matematika Kelas 5
             </p>
-
-            <div style="
-                margin-top:15px;
-                background:rgba(255,255,255,.2);
-                padding:8px;
-                border-radius:12px;
-            ">
-                📖 Buka Materi
-            </div>
 
         </div>
 
 
-        <!-- =================================================
-             4. BAHASA INDONESIA
-        ================================================== -->
+        <!-- BAHASA INDONESIA -->
 
         <div class="mapel-card"
-             onclick="bukaMateri('indonesia')"
-             style="
-                background:linear-gradient(135deg,#f59e0b,#fbbf24);
-                color:white;
-                padding:25px;
-                border-radius:20px;
-                cursor:pointer;
-                text-align:center;
-                box-shadow:0 7px 18px rgba(0,0,0,.12);
-                transition:.25s;
-             ">
+             onclick="bukaMateri('indonesia')">
 
-            <div style="font-size:55px;">
-                📚
+            <div class="mapel-icon">
+                📖
             </div>
 
             <h3>
@@ -349,39 +368,18 @@
             </h3>
 
             <p>
-                Membaca, menulis, berbicara, dan menyimak
+                Materi Bahasa Indonesia
             </p>
-
-            <div style="
-                margin-top:15px;
-                background:rgba(255,255,255,.2);
-                padding:8px;
-                border-radius:12px;
-            ">
-                📖 Buka Materi
-            </div>
 
         </div>
 
 
-        <!-- =================================================
-             5. BAHASA INGGRIS
-        ================================================== -->
+        <!-- BAHASA INGGRIS -->
 
         <div class="mapel-card"
-             onclick="bukaMateri('inggris')"
-             style="
-                background:linear-gradient(135deg,#7c3aed,#a78bfa);
-                color:white;
-                padding:25px;
-                border-radius:20px;
-                cursor:pointer;
-                text-align:center;
-                box-shadow:0 7px 18px rgba(0,0,0,.12);
-                transition:.25s;
-             ">
+             onclick="bukaMateri('inggris')">
 
-            <div style="font-size:55px;">
+            <div class="mapel-icon">
                 🇬🇧
             </div>
 
@@ -390,39 +388,18 @@
             </h3>
 
             <p>
-                Learn English in a fun way
+                English for Grade 5
             </p>
-
-            <div style="
-                margin-top:15px;
-                background:rgba(255,255,255,.2);
-                padding:8px;
-                border-radius:12px;
-            ">
-                📖 Buka Materi
-            </div>
 
         </div>
 
 
-        <!-- =================================================
-             6. BAHASA SUNDA
-        ================================================== -->
+        <!-- BAHASA SUNDA -->
 
         <div class="mapel-card"
-             onclick="bukaMateri('sunda')"
-             style="
-                background:linear-gradient(135deg,#0891b2,#22d3ee);
-                color:white;
-                padding:25px;
-                border-radius:20px;
-                cursor:pointer;
-                text-align:center;
-                box-shadow:0 7px 18px rgba(0,0,0,.12);
-                transition:.25s;
-             ">
+             onclick="bukaMateri('sunda')">
 
-            <div style="font-size:55px;">
+            <div class="mapel-icon">
                 🌿
             </div>
 
@@ -431,80 +408,38 @@
             </h3>
 
             <p>
-                Diajar Basa Sunda kalayan pikaresepeun
+                Materi Bahasa Sunda
             </p>
-
-            <div style="
-                margin-top:15px;
-                background:rgba(255,255,255,.2);
-                padding:8px;
-                border-radius:12px;
-            ">
-                📖 Buka Materi
-            </div>
 
         </div>
 
 
-        <!-- =================================================
-             7. KKA
-        ================================================== -->
+        <!-- KKA -->
 
         <div class="mapel-card"
-             onclick="bukaMateri('kka')"
-             style="
-                background:linear-gradient(135deg,#0f766e,#2dd4bf);
-                color:white;
-                padding:25px;
-                border-radius:20px;
-                cursor:pointer;
-                text-align:center;
-                box-shadow:0 7px 18px rgba(0,0,0,.12);
-                transition:.25s;
-             ">
+             onclick="bukaMateri('kka')">
 
-            <div style="font-size:55px;">
-                🤖
+            <div class="mapel-icon">
+                💻
             </div>
 
             <h3>
-                Koding dan Kecerdasan Artifisial
+                KKA
             </h3>
 
             <p>
-                Belajar teknologi dan AI secara kreatif
+                Koding dan Kecerdasan Artifisial
             </p>
-
-            <div style="
-                margin-top:15px;
-                background:rgba(255,255,255,.2);
-                padding:8px;
-                border-radius:12px;
-            ">
-                📖 Buka Materi
-            </div>
 
         </div>
 
 
-        <!-- =================================================
-             8. SENI
-        ================================================== -->
+        <!-- SENI RUPA -->
 
         <div class="mapel-card"
-             onclick="bukaMateri('seni')"
-             style="
-                background:linear-gradient(135deg,#db2777,#f472b6);
-                color:white;
-                padding:25px;
-                border-radius:20px;
-                cursor:pointer;
-                text-align:center;
-                box-shadow:0 7px 18px rgba(0,0,0,.12);
-                transition:.25s;
-             ">
+             onclick="bukaMateri('seni')">
 
-            <div style="font-size:55px;">
+            <div class="mapel-icon">
                 🎨
             </div>
 
@@ -513,40 +448,19 @@
             </h3>
 
             <p>
-                Berkarya, menggambar, dan berkreasi
+                Materi Seni Rupa Kelas 5
             </p>
-
-            <div style="
-                margin-top:15px;
-                background:rgba(255,255,255,.2);
-                padding:8px;
-                border-radius:12px;
-            ">
-                📖 Buka Materi
-            </div>
 
         </div>
 
 
-        <!-- =================================================
-             9. PJOK
-        ================================================== -->
+        <!-- PJOK -->
 
         <div class="mapel-card"
-             onclick="bukaMateri('pjok')"
-             style="
-                background:linear-gradient(135deg,#ea580c,#fb923c);
-                color:white;
-                padding:25px;
-                border-radius:20px;
-                cursor:pointer;
-                text-align:center;
-                box-shadow:0 7px 18px rgba(0,0,0,.12);
-                transition:.25s;
-             ">
+             onclick="bukaMateri('pjok')">
 
-            <div style="font-size:55px;">
-                ⚽
+            <div class="mapel-icon">
+                🏃
             </div>
 
             <h3>
@@ -554,17 +468,8 @@
             </h3>
 
             <p>
-                Sehat, aktif, kuat, dan sportif
+                Pendidikan Jasmani, Olahraga dan Kesehatan
             </p>
-
-            <div style="
-                margin-top:15px;
-                background:rgba(255,255,255,.2);
-                padding:8px;
-                border-radius:12px;
-            ">
-                📖 Buka Materi
-            </div>
 
         </div>
 
@@ -574,171 +479,117 @@
 </div>
 
 
-<!-- =========================================================
-     JAVASCRIPT MENU MATERI
-========================================================= -->
-
-<script>
-
-function bukaMateri(id) {
-
-    /* Sembunyikan menu mata pelajaran */
-    const menu = document.getElementById("menu-mata-pelajaran");
-
-    if (menu) {
-        menu.style.display = "none";
-    }
-
-    /* Sembunyikan semua halaman materi */
-    const semuaMateri =
-        document.querySelectorAll(".materi-halaman");
-
-    semuaMateri.forEach(function(halaman) {
-        halaman.style.display = "none";
-    });
-
-    /* Tampilkan materi yang dipilih */
-    const materi = document.getElementById(id);
-
-    if (materi) {
-
-        materi.style.display = "block";
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    } else {
-
-        alert(
-            "Materi " + id +
-            " belum ditemukan. Periksa kode materi."
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   KEMBALI KE MENU MATA PELAJARAN
-========================================================= */
-
-function kembaliMapel() {
-
-    /* Sembunyikan semua materi */
-    const semuaMateri =
-        document.querySelectorAll(".materi-halaman");
-
-    semuaMateri.forEach(function(halaman) {
-        halaman.style.display = "none";
-    });
-
-    /* Tampilkan kembali menu */
-    const menu =
-        document.getElementById("menu-mata-pelajaran");
-
-    if (menu) {
-        menu.style.display = "block";
-    }
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-}
-    <!-- =====================================================
+<!-- =====================================================
      PAI
 ===================================================== -->
+
 <div id="pai" class="materi-halaman">
 
-<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
+<button class="tombol-kembali"
+onclick="kembaliMapel()">
+← Kembali ke Mata Pelajaran
+</button>
 
-<div class="judul-mapel" style="background:linear-gradient(135deg,#166534,#22c55e);color:white;padding:28px 20px;border-radius:18px;">
-<div style="font-size:50px;">🕌</div>
-<h2 style="color:white;">PAI dan Budi Pekerti</h2>
-<p>Belajar menjadi anak yang beriman, santun, jujur, dan berakhlak mulia.</p>
-<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
+<div class="judul-mapel">
+
+<h2>🕌 Pendidikan Agama Islam</h2>
+
+<p>Materi Pembelajaran PAI Kelas 5</p>
+
 </div>
 
 <div class="bab">
-<h3>🌟 Selamat Belajar PAI!</h3>
-<p>Belajar PAI bukan hanya menghafal. Kita belajar memahami ajaran Islam dan membuktikannya melalui perilaku baik.</p><div class="contoh"><b>🎯 Misi:</b> jujur, disiplin, menjaga kebersihan, menghormati guru dan orang tua, serta menyayangi teman.</div>
 
-</div><div class="bab">
-<h3>📖 Bab 1 — Al-Qur'an sebagai Petunjuk Hidup</h3>
-<p>Al-Qur'an adalah kitab suci umat Islam yang diturunkan Allah Swt. kepada Nabi Muhammad saw. melalui Malaikat Jibril. Al-Qur'an menjadi petunjuk bagi manusia.</p><ul><li>Membaca Al-Qur'an.</li><li>Memahami pesan ayat.</li><li>Mengamalkan ajaran yang baik.</li><li>Menjadikannya pedoman hidup.</li></ul>
-<div class="latihan"><b>🧠 Coba pikirkan:</b> Mengapa membaca Al-Qur'an sebaiknya diikuti dengan mengamalkan ajarannya?</div>
-</div><div class="bab">
-<h3>🤲 Bab 2 — Hidup Bersih dan Sehat</h3>
-<p>Kebersihan perlu dijaga pada diri, pakaian, tempat belajar, rumah, tempat ibadah, dan lingkungan.</p><div class="contoh">🧼 Cuci tangan • 🗑️ Buang sampah pada tempatnya • 🧹 Bersihkan kelas • 👕 Jaga kebersihan pakaian</div>
-<div class="latihan"><b>🎯 Tantangan 7 Hari:</b> ☐ Hari 1 ☐ Hari 2 ☐ Hari 3 ☐ Hari 4 ☐ Hari 5 ☐ Hari 6 ☐ Hari 7</div>
-</div><div class="bab">
-<h3>❤️ Bab 3 — Akhlak Terpuji</h3>
-<div class="contoh"><b>Jujur</b> — berkata sesuai kenyataan.<br><br><b>Amanah</b> — menjaga kepercayaan.<br><br><b>Tanggung jawab</b> — melaksanakan tugas.<br><br><b>Tolong-menolong</b> — membantu dalam kebaikan.<br><br><b>Hormat</b> — menghargai orang lain.</div>
-<div class="latihan"><b>⭐ Refleksi:</b> Akhlak baik apa yang sudah kamu lakukan hari ini?</div>
-</div><div class="bab">
-<h3>🕌 Bab 4 — Salat dan Kedisiplinan</h3>
-<p>Salat merupakan ibadah wajib bagi umat Islam. Melaksanakan salat dengan tertib dapat melatih disiplin dan tanggung jawab.</p><ul><li>Mengetahui waktu salat.</li><li>Berwudu dengan benar.</li><li>Menjaga ketertiban.</li><li>Berusaha tepat waktu.</li></ul>
+<h3>📘 Bab 1 — Al-Qur'an dan Hadis</h3>
 
-</div><div class="bab">
-<h3>🌈 Bab 5 — Menghargai Sesama</h3>
-<p>Kita perlu menyayangi, menghormati, membantu, dan tidak mengejek sesama.</p><div class="contoh">🤝 Bantu teman • ❤️ Maafkan kesalahan • 🗣️ Jaga perkataan • 🌟 Hargai perbedaan</div>
+<p>
+Mengenal Al-Qur'an sebagai kitab suci umat Islam
+dan hadis sebagai sumber ajaran Islam.
+</p>
+
+<h4>Materi</h4>
+
+<ul>
+<li>Pengertian Al-Qur'an</li>
+<li>Pengertian hadis</li>
+<li>Fungsi Al-Qur'an</li>
+<li>Adab membaca Al-Qur'an</li>
+</ul>
 
 </div>
+
+<div class="bab">
+
+<h3>📘 Bab 2 — Akhlak Terpuji</h3>
+
+<p>
+Membiasakan perilaku jujur, disiplin, bertanggung jawab,
+sopan, dan menghormati orang lain.
+</p>
+
+<div class="contoh">
+<b>Contoh:</b> berkata jujur kepada guru dan orang tua,
+menepati janji, serta membantu teman.
 </div>
 
+</div>
 
-<!-- =====================================================
-     PENDIDIKAN PANCASILA
-===================================================== -->
+</div>
 
 
 <!-- =====================================================
      PANCASILA
 ===================================================== -->
+
 <div id="pancasila" class="materi-halaman">
 
-<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
+<button class="tombol-kembali"
+onclick="kembaliMapel()">
+← Kembali ke Mata Pelajaran
+</button>
 
-<div class="judul-mapel" style="background:linear-gradient(135deg,#991b1b,#ef4444);color:white;padding:28px 20px;border-radius:18px;">
-<div style="font-size:50px;">🇮🇩</div>
-<h2 style="color:white;">Pendidikan Pancasila</h2>
-<p>Memahami nilai Pancasila dan menerapkannya dalam kehidupan.</p>
-<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
+<div class="judul-mapel">
+
+<h2>🇮🇩 Pendidikan Pancasila</h2>
+
+<p>Materi Pendidikan Pancasila Kelas 5</p>
+
 </div>
 
 <div class="bab">
-<h3>🌟 Selamat Datang, Pelajar Pancasila!</h3>
-<p>Yuk belajar memahami Pancasila, norma, keragaman, musyawarah, hak dan kewajiban, serta hidup bersama dengan rukun.</p>
 
-</div><div class="bab">
-<h3>🇮🇩 Bab 1 — Pancasila dalam Kehidupanku</h3>
-<p>Pancasila merupakan dasar negara Republik Indonesia dan pedoman kehidupan bermasyarakat, berbangsa, dan bernegara.</p><div class="contoh"><b>1. Ketuhanan</b> — beribadah dan menghormati pemeluk agama lain.<br><b>2. Kemanusiaan</b> — menghargai dan suka menolong.<br><b>3. Persatuan</b> — menjaga persatuan.<br><b>4. Kerakyatan</b> — bermusyawarah dan menghargai pendapat.<br><b>5. Keadilan Sosial</b> — bersikap adil dan menghargai hak.</div>
-<div class="latihan"><b>🎯 Tantangan:</b> Sebutkan satu perilaku yang mencerminkan setiap sila di sekolah.</div>
-</div><div class="bab">
-<h3>📜 Bab 2 — Norma dalam Kehidupanku</h3>
-<p>Norma adalah aturan atau pedoman yang membantu manusia menentukan perilaku yang baik dan tepat.</p><div class="contoh"><b>🙏 Agama</b> — bersumber dari ajaran agama.<br><b>❤️ Kesusilaan</b> — berkaitan dengan hati nurani.<br><b>😊 Kesopanan</b> — tata perilaku dalam masyarakat.<br><b>⚖️ Hukum</b> — aturan yang mengatur kehidupan masyarakat.</div><h4>🤝 Musyawarah</h4><p>Dengarkan pendapat, berbicaralah sopan, hargai perbedaan, dan terima keputusan bersama.</p>
+<h3>📘 Bab 1 — Pancasila dalam Kehidupan</h3>
 
-</div><div class="bab">
-<h3>🎭 Bab 3 — Keragaman Budaya Indonesiaku</h3>
-<p>Indonesia memiliki keragaman budaya yang merupakan kekayaan bangsa.</p><ul><li>🍚 Makanan khas</li><li>🏠 Rumah tradisional</li><li>💃 Tarian</li><li>🎵 Alat musik</li><li>👘 Pakaian adat</li><li>🗣️ Bahasa daerah</li></ul>
-<div class="latihan"><b>🕵️ Detektif Budaya:</b> Cari satu budaya Jawa Barat dan jelaskan cara melestarikannya.</div>
-</div><div class="bab">
-<h3>🌱 Bab 4 — Aku dan Lingkungan Sekitarku</h3>
-<p>Kita perlu mengenali lingkungan dan menjaga kebersihan serta kenyamanan bersama.</p><div class="contoh"><b>Gotong royong:</b> pekerjaan lebih ringan, mempererat hubungan, menumbuhkan kepedulian, dan menciptakan lingkungan nyaman.</div>
-<div class="latihan"><b>🎯 Misi:</b> ☐ Membersihkan kelas ☐ Merawat tanaman ☐ Membantu teman ☐ Membersihkan lingkungan</div>
-</div><div class="bab">
-<h3>⚖️ Bab 5 — Hak dan Kewajiban</h3>
-<p><b>Hak</b> adalah sesuatu yang seharusnya kita terima. <b>Kewajiban</b> adalah sesuatu yang harus kita lakukan.</p><div class="contoh"><b>Hak siswa:</b> memperoleh pembelajaran dan perlakuan yang baik.<br><b>Kewajiban:</b> belajar tertib, menaati aturan, menghormati guru dan teman.</div>
-<div class="latihan"><b>🧠 Coba pikirkan:</b> Mengapa hak dan kewajiban harus dilaksanakan secara seimbang?</div>
-</div><div class="bab">
-<h3>🏆 Aku Pelajar Pancasila!</h3>
-<p>🇮🇩 Aku menghargai perbedaan, suka bekerja sama, bertanggung jawab, mematuhi aturan, dan menjaga persatuan.</p>
+<p>
+Pancasila merupakan dasar negara dan pedoman dalam
+kehidupan bermasyarakat, berbangsa, dan bernegara.
+</p>
+
+<ul>
+<li>Makna sila-sila Pancasila</li>
+<li>Contoh perilaku sesuai Pancasila</li>
+<li>Menghargai perbedaan</li>
+<li>Gotong royong</li>
+</ul>
 
 </div>
+
+<div class="bab">
+
+<h3>📘 Bab 2 — Hak dan Kewajiban</h3>
+
+<p>
+Hak adalah sesuatu yang seharusnya kita terima,
+sedangkan kewajiban adalah sesuatu yang harus kita lakukan.
+</p>
+
+<div class="contoh">
+<b>Contoh:</b> siswa memiliki hak mendapatkan pembelajaran
+dan kewajiban mengikuti pembelajaran dengan tertib.
+</div>
+
+</div>
+
 </div>
 
 
@@ -746,116 +597,164 @@ function kembaliMapel() {
      MATEMATIKA
 ===================================================== -->
 
-
-<!-- =====================================================
-     MATEMATIKA
-===================================================== -->
 <div id="matematika" class="materi-halaman">
 
-<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
+<button class="tombol-kembali"
+onclick="kembaliMapel()">
+← Kembali ke Mata Pelajaran
+</button>
 
-<div class="judul-mapel" style="background:linear-gradient(135deg,#1565c0,#42a5f5);color:white;padding:28px 20px;border-radius:18px;">
-<div style="font-size:50px;">🔢</div>
-<h2 style="color:white;">Matematika</h2>
-<p>Belajar Matematika dengan Mudah, Menyenangkan, dan Bermakna.</p>
-<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
+<div class="judul-mapel">
+
+<h2>🔢 Matematika</h2>
+
+<p>Materi Matematika Kelas 5</p>
+
 </div>
 
 <div class="bab">
-<h3>💡 Selamat Belajar!</h3>
-<p>Matematika membantu kita berpikir logis, memecahkan masalah, dan mengambil keputusan dalam kehidupan sehari-hari.</p>
 
-</div><div class="bab">
-<h3>🔢 Bab 1 — Bilangan Cacah sampai 100.000</h3>
-<p>Membaca, menulis, menentukan nilai tempat, membandingkan, mengurutkan, komposisi, dekomposisi, serta operasi penjumlahan dan pengurangan.</p><div class="contoh"><b>45.327</b> dibaca empat puluh lima ribu tiga ratus dua puluh tujuh.<br><br>72.405 = 7 puluh ribuan + 2 ribuan + 4 ratusan + 0 puluhan + 5 satuan.</div>
-<div class="latihan"><b>📝 Latihan:</b><ol><li>Mana lebih besar: 45.200 atau 45.020?</li><li>Urutkan 15.000, 12.500, 18.000, 10.500.</li></ol></div>
-</div><div class="bab">
-<h3>🔁 Bab 2 — KPK dan FPB</h3>
-<p>Belajar kelipatan, kelipatan persekutuan, KPK, faktor, faktor persekutuan, FPB, faktor prima, dan penerapannya.</p><div class="contoh"><b>Kelipatan 4:</b> 4, 8, 12, 16, 20, ...<br><b>Faktor 12:</b> 1, 2, 3, 4, 6, 12.</div>
-<div class="latihan"><b>🎯 Tantangan:</b><ol><li>KPK dari 4 dan 6?</li><li>FPB dari 12 dan 18?</li></ol></div>
-</div><div class="bab">
-<h3>🍕 Bab 3 — Bilangan Pecahan</h3>
-<p>Pecahan menyatakan bagian dari keseluruhan atau satuan. Pelajari pembilang, penyebut, membandingkan, mengurutkan, penjumlahan, dan pengurangan.</p><div class="contoh"><b>3/5</b> → 3 pembilang, 5 penyebut.<br>3/8 &lt; 5/8.</div>
-<div class="latihan"><b>📝 Coba:</b> 2/7 + 3/7 = ... &nbsp; | &nbsp; 6/8 − 2/8 = ...</div>
-</div><div class="bab">
-<h3>📏 Bab 4 — Keliling Bangun Datar</h3>
-<div class="contoh"><b>Persegi:</b> K = 4 × sisi.<br><b>Persegi panjang:</b> K = 2 × (panjang + lebar).<br><b>Segitiga:</b> K = jumlah ketiga sisi.</div>
-<div class="latihan"><b>🎯 Tantangan:</b> Persegi sisi 9 cm. Berapa kelilingnya?</div>
-</div><div class="bab">
-<h3>📐 Bab 5 — Luas Daerah Bangun Datar</h3>
-<div class="contoh"><b>Persegi:</b> L = sisi × sisi.<br><b>Persegi panjang:</b> L = panjang × lebar.<br><b>Segitiga:</b> L = 1/2 × alas × tinggi.</div>
-<div class="latihan"><b>🧠 Coba:</b> Persegi panjang panjang 10 cm dan lebar 5 cm. Berapa luasnya?</div>
-</div><div class="bab">
-<h3>📐 Bab 6 — Sudut</h3>
-<p>Sudut ditemukan pada pojok meja, buku, bingkai, jalan, dan benda lain.</p><div class="contoh">🟢 Lancip &lt; 90°<br>🔵 Siku-siku = 90°<br>🟠 Tumpul &gt; 90° dan &lt; 180°<br>🔴 Lurus = 180°</div><p>Gunakan busur derajat untuk mengukur dan menggambar sudut.</p>
+<h3>📘 Bab 1 — Bilangan</h3>
 
-</div><div class="bab">
-<h3>🔷 Bab 7 — Membandingkan Ciri-Ciri Bangun Datar</h3>
-<p>Bandingkan bangun berdasarkan sisi, sudut, bentuk, dan ciri lainnya.</p><div class="contoh"><b>Persegi:</b> 4 sisi sama panjang, 4 sudut siku-siku.<br><b>Persegi panjang:</b> sisi berhadapan sama panjang, 4 sudut siku-siku.<br><b>Segitiga:</b> 3 sisi, 3 sudut.</div>
-<div class="latihan"><b>🔎 Detektif Bentuk:</b> Temukan 5 benda di kelas dan tentukan bentuknya.</div>
-</div><div class="bab">
-<h3>📊 Bab 8 — Data</h3>
-<p>Data adalah kumpulan informasi. Data dapat disajikan dalam tabel dan diagram agar mudah dibaca dan dibandingkan.</p><div class="contoh">Andi = 5 buku • Budi = 3 • Citra = 7 • Deni = 4.</div>
-<div class="latihan"><b>📊 Tantangan:</b> Kumpulkan data buah kesukaan 10 teman dan buat tabelnya.</div>
-</div><div class="bab">
-<h3>🔢 Bab 9 — Bilangan Cacah sampai 1.000.000</h3>
-<p>Belajar membaca, menulis, nilai tempat, membandingkan, mengurutkan, komposisi, dan dekomposisi bilangan sampai 1.000.000.</p><div class="contoh"><b>720.736</b> dibaca tujuh ratus dua puluh ribu tujuh ratus tiga puluh enam.</div>
-<div class="latihan"><b>🏆 Tantangan:</b><ol><li>Baca 598.245.</li><li>Nilai tempat angka 8?</li><li>Mana lebih besar: 599.198 atau 599.047?</li><li>Uraikan 599.198.</li></ol></div>
-</div><div class="bab">
-<h3>🌟 Aku Bisa Matematika!</h3>
-<p>Semakin sering berlatih, semakin mudah memahami Matematika.</p><div style="background:#1565c0;color:white;padding:18px;border-radius:14px;text-align:center;"><b>💪 Jangan takut salah. Terus mencoba!</b></div>
+<p>
+Mengenal bilangan, nilai tempat, membaca,
+menulis, membandingkan, dan mengurutkan bilangan.
+</p>
+
+<ul>
+<li>Bilangan cacah</li>
+<li>Nilai tempat</li>
+<li>Membaca bilangan</li>
+<li>Menulis bilangan</li>
+<li>Membandingkan bilangan</li>
+<li>Mengurutkan bilangan</li>
+</ul>
+
+<div class="contoh">
+
+<b>Contoh:</b>
+
+<br><br>
+
+Bilangan 45.327 dibaca:
+
+<br>
+
+<b>Empat puluh lima ribu tiga ratus dua puluh tujuh.</b>
+
+<br><br>
+
+Nilai tempat angka 5 adalah <b>ribuan</b>.
 
 </div>
+
+<div class="latihan">
+
+<b>Latihan:</b>
+
+<br><br>
+
+Tentukan nilai tempat angka 7 pada bilangan
+27.345.
+
+</div>
+
+</div>
+
+
+<div class="bab">
+
+<h3>📘 Bab 2 — Operasi Hitung Bilangan</h3>
+
+<ul>
+<li>Penjumlahan</li>
+<li>Pengurangan</li>
+<li>Perkalian</li>
+<li>Pembagian</li>
+<li>Operasi hitung campuran</li>
+</ul>
+
+<div class="contoh">
+
+<b>Contoh:</b>
+
+<br><br>
+
+125 × 4 = <b>500</b>
+
+<br>
+
+800 : 10 = <b>80</b>
+
+</div>
+
+</div>
+
+
+<div class="bab">
+
+<h3>📘 Bab 3 — Pecahan</h3>
+
+<ul>
+<li>Pecahan biasa</li>
+<li>Pecahan campuran</li>
+<li>Pecahan senilai</li>
+<li>Membandingkan pecahan</li>
+<li>Penjumlahan pecahan</li>
+<li>Pengurangan pecahan</li>
+</ul>
+
+</div>
+
 </div>
 
 
 <!-- =====================================================
-     INDONESIA
+     BAHASA INDONESIA
 ===================================================== -->
+
 <div id="indonesia" class="materi-halaman">
 
-<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
+<button class="tombol-kembali"
+onclick="kembaliMapel()">
+← Kembali ke Mata Pelajaran
+</button>
 
-<div class="judul-mapel" style="background:linear-gradient(135deg,#7c2d12,#f97316);color:white;padding:28px 20px;border-radius:18px;">
-<div style="font-size:50px;">📖</div>
-<h2 style="color:white;">Bahasa Indonesia</h2>
-<p>Bergerak Bersama — Kelas 5 SDN Cijember</p>
-<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
+<div class="judul-mapel">
+
+<h2>📖 Bahasa Indonesia</h2>
+
+<p>Materi Bahasa Indonesia Kelas 5</p>
+
 </div>
 
 <div class="bab">
-<h3>🌟 Ayo Bergerak Bersama!</h3>
-<p>Bahasa Indonesia membantu kita membaca, memahami informasi, berdiskusi, menulis, dan mempresentasikan gagasan.</p>
 
-</div><div class="bab">
-<h3>📖 Bab 1 — Membaca dan Memahami Informasi</h3>
-<p>Bacalah dengan teliti, temukan kata kunci, informasi penting, dan ceritakan kembali dengan bahasa sendiri.</p><div class="contoh"><b>Strategi:</b> judul → kata kunci → informasi penting → kesimpulan.</div>
-<div class="latihan"><b>🕵️ Detektif Bacaan:</b> Temukan siapa, apa, kapan, di mana, mengapa, dan bagaimana dari sebuah bacaan.</div>
-</div><div class="bab">
-<h3>📚 Bab 2 — Buku Jendela Dunia</h3>
-<p>Buku dapat membuka wawasan dan mengenalkan tokoh, tempat, peristiwa, serta gagasan. Kita dapat mempresentasikan buku yang disukai.</p><div class="contoh">Judul: ______ • Penulis: ______ • Isi penting: ______ • Hal yang disukai: ______</div>
+<h3>📘 Bab 1 — Membaca dan Memahami Teks</h3>
 
-</div><div class="bab">
-<h3>🌊 Bab 3 — Cerita dan Keragaman Indonesia</h3>
-<p>Cerita rakyat merupakan bagian dari kekayaan budaya. Saat membaca cerita, perhatikan tokoh, latar, peristiwa, dan pesan.</p>
-<div class="latihan"><b>🎭 Ayo bermain peran:</b> Pilih satu tokoh dari cerita dan peragakan sikapnya.</div>
-</div><div class="bab">
-<h3>✍️ Bab 4 — Menulis Pengalaman</h3>
-<p>Susun pengalaman secara runtut dengan kalimat yang jelas dan tanda baca yang tepat.</p><div class="contoh">Pembukaan → kejadian awal → kejadian berikutnya → kejadian akhir → refleksi.</div>
-<div class="latihan"><b>📝 Misi:</b> Tuliskan pengalaman paling menyenangkan di sekolah dalam 2–3 paragraf.</div>
-</div><div class="bab">
-<h3>❤️ Bab 5 — Cinta Indonesia</h3>
-<p>Mengenal tempat bersejarah, cerita rakyat, tata tertib, etika berkunjung, dan menulis pengalaman. Tempat bersejarah membantu kita mengenal perjalanan bangsa.</p><div class="contoh"><b>Etika:</b> patuhi tata tertib, jaga kebersihan, jangan merusak benda, jangan berisik.</div>
-<div class="latihan"><b>🏛️ Ayo menulis:</b> Ceritakan pengalaman atau rencana kunjungan ke tempat bersejarah.</div>
-</div><div class="bab">
-<h3>🎤 Bab 6 — Berdiskusi dan Mempresentasikan</h3>
-<ul><li>👂 Mendengarkan.</li><li>🗣️ Menyampaikan pendapat dengan jelas.</li><li>🤝 Menghargai perbedaan.</li><li>💡 Memberikan alasan.</li><li>🎤 Mempresentasikan hasil.</li></ul>
-<div class="latihan"><b>🎯 Diskusi:</b> Bagaimana membuat kelas lebih nyaman untuk belajar?</div>
-</div><div class="bab">
-<h3>🏆 Aku Hebat Berbahasa!</h3>
-<p>☐ Rajin membaca ☐ Berani berbicara ☐ Bisa menulis ☐ Bisa menemukan informasi ☐ Menghargai pendapat teman</p>
+<ul>
+<li>Menentukan ide pokok</li>
+<li>Menentukan informasi penting</li>
+<li>Menyimpulkan bacaan</li>
+<li>Menjawab pertanyaan berdasarkan teks</li>
+</ul>
 
 </div>
+
+<div class="bab">
+
+<h3>📘 Bab 2 — Puisi</h3>
+
+<ul>
+<li>Pengertian puisi</li>
+<li>Unsur puisi</li>
+<li>Makna puisi</li>
+<li>Puisi akrostik</li>
+<li>Membuat puisi sederhana</li>
+</ul>
+
+</div>
+
 </div>
 
 
@@ -863,54 +762,77 @@ function kembaliMapel() {
      BAHASA INGGRIS
 ===================================================== -->
 
-
-<!-- =====================================================
-     INGGRIS
-===================================================== -->
 <div id="inggris" class="materi-halaman">
 
-<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
+<button class="tombol-kembali"
+onclick="kembaliMapel()">
+← Kembali ke Mata Pelajaran
+</button>
 
-<div class="judul-mapel" style="background:linear-gradient(135deg,#1d4ed8,#60a5fa);color:white;padding:28px 20px;border-radius:18px;">
-<div style="font-size:50px;">🇬🇧</div>
-<h2 style="color:white;">Bahasa Inggris</h2>
-<p>English for Nusantara Kids — Grade 5</p>
-<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
+<div class="judul-mapel">
+
+<h2>🇬🇧 Bahasa Inggris</h2>
+
+<p>English for Grade 5</p>
+
 </div>
 
 <div class="bab">
-<h3>🌟 Let's Learn English!</h3>
-<p>Berani mencoba adalah kunci belajar bahasa Inggris. Speak, listen, read, write, and have fun!</p>
 
-</div><div class="bab">
-<h3>🥭 Chapter 1 — Buying Some Mangoes and Spinach</h3>
-<p>Belajar menyebutkan buah dan sayuran serta mengungkapkan apa yang ingin dibeli.</p><div class="contoh"><b>What fruit do you want to buy?</b> — Buah apa yang ingin kamu beli?<br><b>I'd like some mangoes.</b> — Saya ingin beberapa mangga.<br><b>I'd like some spinach.</b> — Saya ingin bayam.</div>
-<div class="latihan"><b>🛒 Mini Shop:</b> Buat dialog penjual dan pembeli menggunakan minimal 4 nama buah/sayuran.</div>
-</div><div class="bab">
-<h3>🍳 Chapter 2 — In the Kitchen</h3>
-<p>Belajar menyebutkan kegiatan di dapur.</p><div class="contoh"><b>What is Pipit doing?</b><br><b>She is cooking.</b><br><b>He is washing the dishes.</b></div>
-<div class="latihan"><b>🎭 Guess the Action:</b> Peragakan kegiatan, teman menebak menggunakan “He is...” atau “She is...”.</div>
-</div><div class="bab">
-<h3>🏠 Chapter 3 — Visiting Bara's House</h3>
-<p>Belajar menanyakan lokasi dan arah sederhana.</p><div class="contoh"><b>Where is the grocery store?</b><br><b>It is next to the school.</b><br><b>It is near the park.</b></div>
-<div class="latihan"><b>🗺️ My Map:</b> Gambar peta sederhana dan jelaskan lokasi dalam bahasa Inggris.</div>
-</div><div class="bab">
-<h3>📚 Chapter 4 — At the Library</h3>
-<p>Belajar berbicara tentang buku dan aturan perpustakaan.</p><div class="contoh"><b>I'd like to borrow this book.</b><br><b>I'd like to read this book because...</b><br><b>Be quiet, please.</b></div>
-<div class="latihan"><b>📖 My Favorite Book:</b> Tuliskan judul buku yang ingin dipinjam dan alasannya.</div>
-</div><div class="bab">
-<h3>📖 Chapter 5 — At the Library: Talking About Books</h3>
-<p>Berlatih berbicara tentang buku, meminta sesuatu dengan sopan, dan memahami cerita.</p><div class="contoh"><b>Can I borrow this book, please?</b><br><b>Yes, you can.</b><br><b>Thank you.</b></div>
+<h3>📘 Chapter 1 — Greetings</h3>
 
-</div><div class="bab">
-<h3>🐟 Chapter 6 — Reading a Lot of Stories</h3>
-<p>Belajar memahami cerita imajinatif, mengurutkan gambar, dan menulis ulang cerita.</p><div class="contoh"><b>First</b> → <b>Next</b> → <b>Then</b> → <b>Finally</b></div>
-<div class="latihan"><b>🎬 Story Maker:</b> Buat cerita pendek dengan urutan First, Next, Then, Finally.</div>
-</div><div class="bab">
-<h3>🏆 I Can Do It!</h3>
-<p>☐ I can ask questions. ☐ I can express my ideas. ☐ I can listen. ☐ I can work together. ☐ I can speak English with confidence.</p>
+<p>
+Mengenal ungkapan salam dan perkenalan sederhana.
+</p>
+
+<div class="contoh">
+
+Hello = Halo
+
+<br>
+
+Good morning = Selamat pagi
+
+<br>
+
+Good afternoon = Selamat siang
+
+<br>
+
+How are you? = Apa kabar?
 
 </div>
+
+</div>
+
+<div class="bab">
+
+<h3>📘 Chapter 2 — Numbers</h3>
+
+<p>
+Mengenal angka dalam bahasa Inggris.
+</p>
+
+<div class="contoh">
+
+One = 1
+
+<br>
+Two = 2
+
+<br>
+Three = 3
+
+<br>
+Four = 4
+
+<br>
+Five = 5
+
+</div>
+
+</div>
+
 </div>
 
 
@@ -918,92 +840,100 @@ function kembaliMapel() {
      BAHASA SUNDA
 ===================================================== -->
 
-
-<!-- =====================================================
-     SUNDA
-===================================================== -->
 <div id="sunda" class="materi-halaman">
 
-<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
+<button class="tombol-kembali"
+onclick="kembaliMapel()">
+← Kembali ke Mata Pelajaran
+</button>
 
-<div class="judul-mapel" style="background:linear-gradient(135deg,#166534,#65a30d);color:white;padding:28px 20px;border-radius:18px;">
-<div style="font-size:50px;">🌿</div>
-<h2 style="color:white;">Bahasa Sunda</h2>
+<div class="judul-mapel">
+
+<h2>🌿 Bahasa Sunda</h2>
+
 <p>Materi Bahasa Sunda Kelas 5</p>
-<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
+
 </div>
 
 <div class="bab">
-<h3>🌟 Wilujeng Diajar!</h3>
-<p>Hayu urang diajar Basa Sunda kalayan pikaresepeun. Basa Sunda dipaké pikeun komunikasi jeung ngajaga budaya Sunda.</p>
 
-</div><div class="bab">
-<h3>💬 Bab 1 — Paguneman</h3>
-<p>Paguneman nyaéta komunikasi atawa obrolan antara dua jalma atawa leuwih.</p><ul><li>Ngagunakeun basa anu sopan.</li><li>Ngaregepkeun.</li><li>Teu motong omongan.</li><li>Ngahargaan pamadegan.</li></ul><div class="contoh"><b>A:</b> “Wilujeng énjing, Rina.”<br><b>B:</b> “Wilujeng énjing, Deni. Kumaha kabarna?”</div>
-<div class="latihan"><b>🎭 Prakték:</b> Jieun paguneman ngeunaan diajar di sakola.</div>
-</div><div class="bab">
-<h3>📝 Bab 2 — Kecap jeung Kalimah</h3>
-<p>Kecap bisa dirangkay jadi kalimah pikeun nepikeun maksud anu jelas.</p><div class="contoh"><b>Kecap:</b> sakola, diajar, murid.<br><b>Kalimah:</b> “Murid diajar di sakola.”</div>
-<div class="latihan"><b>🎯 Tantangan:</b> Jieun 5 kalimah Basa Sunda ngeunaan sakola.</div>
-</div><div class="bab">
-<h3>🙏 Bab 3 — Basa Hormat jeung Tatakrama</h3>
-<p>Urang kudu nyaluyukeun basa jeung saha anu diajak nyarita.</p><div class="contoh"><b>Ka guru:</b> “Punten, Bu/Pak, abdi badé naros.”</div>
+<h3>📘 Bab 1 — Paguneman</h3>
 
-</div><div class="bab">
-<h3>📖 Bab 4 — Maca jeung Nyangkem Eusi Bacaan</h3>
-<p>Maca kudu dibarengan ku pamahaman. Sanggeus maca, urang bisa nyaritakeun deui eusi bacaan ku kecap sorangan.</p>
-<div class="latihan"><b>🔎 Detektif Bacaan:</b> Tuliskeun judul, tokoh, kajadian penting, jeung amanat.</div>
-</div><div class="bab">
-<h3>🌿 Abdi Resep Basa Sunda!</h3>
-<p>“Basa Sunda téh bagian tina budaya urang. Hayu dipaké kalayan hade tur sopan.”</p>
+<p>
+Paguneman nyaéta komunikasi atawa obrolan antara dua jalma
+atawa leuwih.
+</p>
+
+<ul>
+<li>Ngagunakeun basa anu sopan</li>
+<li>Ngalakukeun paguneman jeung babaturan</li>
+<li>Ngalakukeun paguneman jeung guru</li>
+</ul>
 
 </div>
+
+<div class="bab">
+
+<h3>📘 Bab 2 — Kecap jeung Kalimah</h3>
+
+<p>
+Diajar ngagunakeun kecap jeung kalimah basa Sunda
+dina kahirupan sapopoe.
+</p>
+
+</div>
+
 </div>
 
 
 <!-- =====================================================
      KKA
 ===================================================== -->
+
 <div id="kka" class="materi-halaman">
 
-<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
+<button class="tombol-kembali"
+onclick="kembaliMapel()">
+← Kembali ke Mata Pelajaran
+</button>
 
-<div class="judul-mapel" style="background:linear-gradient(135deg,#312e81,#7c3aed);color:white;padding:28px 20px;border-radius:18px;">
-<div style="font-size:50px;">💻</div>
-<h2 style="color:white;">KKA</h2>
-<p>Koding dan Kecerdasan Artifisial — Kelas 5</p>
-<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
+<div class="judul-mapel">
+
+<h2>💻 KKA</h2>
+
+<p>Koding dan Kecerdasan Artifisial</p>
+
 </div>
 
 <div class="bab">
-<h3>🚀 Selamat Datang di Dunia Koding!</h3>
-<p>Koding melatih kita menyusun langkah, menemukan kesalahan, dan membuat solusi.</p>
 
-</div><div class="bab">
-<h3>🧠 Bab 1 — Berpikir Komputasional</h3>
-<p>Berpikir komputasional adalah cara menyelesaikan masalah secara terstruktur dan logis.</p><div class="contoh"><b>Dekomposisi</b> — memecah masalah.<br><b>Pengenalan pola</b> — mencari kesamaan.<br><b>Abstraksi</b> — mengambil informasi penting.<br><b>Algoritma</b> — menyusun langkah.</div>
-<div class="latihan"><b>🎯 Tantangan:</b> Uraikan langkah membuat teh manis menjadi algoritma.</div>
-</div><div class="bab">
-<h3>🧱 Bab 2 — Algoritma dan Urutan</h3>
-<p>Algoritma harus jelas dan berurutan.</p><div class="contoh">Bangun → mandi → berpakaian → sarapan → berangkat sekolah.</div>
-<div class="latihan"><b>🧠 Susun:</b> Buat urutan langkah mencuci tangan.</div>
-</div><div class="bab">
-<h3>🔁 Bab 3 — Pola dan Pengulangan</h3>
-<p>Komputer dapat melakukan perintah berulang. Pola juga dapat ditemukan pada angka, gambar, dan gerakan.</p><div class="contoh">2, 4, 6, 8, ... → bertambah 2.</div>
+<h3>📘 Bab 1 — Berpikir Komputasional</h3>
 
-</div><div class="bab">
-<h3>🤖 Bab 4 — Mengenal Kecerdasan Artifisial</h3>
-<p>AI adalah teknologi yang memungkinkan komputer melakukan tugas tertentu yang membutuhkan kemampuan seperti mengenali pola, memahami bahasa, atau membuat prediksi.</p><div class="contoh">Contoh: pengenalan suara, penerjemah, rekomendasi, pencarian, dan alat bantu belajar.</div>
-<div class="latihan"><b>🔍 Detektif AI:</b> Sebutkan 3 contoh AI dan manfaatnya.</div>
-</div><div class="bab">
-<h3>🛡️ Bab 5 — Menggunakan AI dengan Bijak</h3>
-<ul><li>Jangan memasukkan data pribadi sembarangan.</li><li>Periksa informasi AI.</li><li>Gunakan AI untuk belajar, bukan sekadar menyalin.</li><li>Tetap berpikir kritis.</li><li>Hormati karya orang lain.</li></ul>
-<div class="latihan"><b>💡 Mengapa jawaban AI perlu diperiksa?</b></div>
-</div><div class="bab">
-<h3>🏆 KKA Explorer</h3>
-<p>💻 Berani mencoba • 🧠 Berpikir logis • 🔎 Memeriksa informasi • 🤖 Menggunakan AI secara bertanggung jawab.</p>
+<p>
+Berpikir komputasional adalah cara menyelesaikan masalah
+secara terstruktur dan logis.
+</p>
+
+<ul>
+<li>Dekomposisi</li>
+<li>Pengenalan pola</li>
+<li>Abstraksi</li>
+<li>Algoritma</li>
+</ul>
 
 </div>
+
+<div class="bab">
+
+<h3>📘 Bab 2 — Pengenalan Kecerdasan Artifisial</h3>
+
+<p>
+Mengenal kecerdasan artifisial dan contoh penggunaannya
+dalam kehidupan sehari-hari.
+</p>
+
+</div>
+
 </div>
 
 
@@ -1011,46 +941,47 @@ function kembaliMapel() {
      SENI RUPA
 ===================================================== -->
 
-
-<!-- =====================================================
-     SENI
-===================================================== -->
 <div id="seni" class="materi-halaman">
 
-<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
+<button class="tombol-kembali"
+onclick="kembaliMapel()">
+← Kembali ke Mata Pelajaran
+</button>
 
-<div class="judul-mapel" style="background:linear-gradient(135deg,#9d174d,#ec4899);color:white;padding:28px 20px;border-radius:18px;">
-<div style="font-size:50px;">🎨</div>
-<h2 style="color:white;">Seni Rupa</h2>
+<div class="judul-mapel">
+
+<h2>🎨 Seni Rupa</h2>
+
 <p>Materi Seni Rupa Kelas 5</p>
-<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
+
 </div>
 
 <div class="bab">
-<h3>🌈 Seni Ada di Sekitar Kita!</h3>
-<p>Warna, garis, bentuk, tekstur, dan ruang dapat menjadi bagian dari karya seni.</p>
 
-</div><div class="bab">
-<h3>🎨 Bab 1 — Unsur Seni Rupa</h3>
-<ul><li>• Titik</li><li>〰️ Garis</li><li>🔺 Bentuk</li><li>🌈 Warna</li><li>🪵 Tekstur</li><li>📐 Ruang</li></ul>
-<div class="latihan"><b>🔎 Berburu Unsur Seni:</b> Temukan contoh garis, bentuk, dan warna di kelas.</div>
-</div><div class="bab">
-<h3>✏️ Bab 2 — Menggambar dari Pengamatan</h3>
-<p>Perhatikan objek secara langsung lalu tuangkan ke dalam gambar.</p><ol><li>Amati.</li><li>Tentukan bentuk dasar.</li><li>Buat sketsa.</li><li>Tambahkan detail.</li><li>Berikan warna.</li></ol>
-<div class="latihan"><b>🎯 Misi:</b> Gambar satu benda di kelas dengan memperhatikan bentuk dan proporsinya.</div>
-</div><div class="bab">
-<h3>🖍️ Bab 3 — Warna dan Ekspresi</h3>
-<p>Warna dapat membantu memberikan suasana pada karya.</p><div class="contoh"><b>Hangat:</b> merah, jingga, kuning.<br><b>Sejuk:</b> biru, hijau, ungu.</div>
-<div class="latihan"><b>🎨 Tantangan:</b> Buat gambar “sekolah yang menyenangkan”.</div>
-</div><div class="bab">
-<h3>♻️ Bab 4 — Berkarya dengan Bahan di Sekitar</h3>
-<p>Bahan sederhana dapat dimanfaatkan menjadi karya seni dengan tetap menjaga keselamatan dan kebersihan.</p><div class="contoh">Kertas bekas → kolase.<br>Daun kering → karya tempel.<br>Kardus → karya tiga dimensi sederhana.</div>
-<div class="latihan"><b>🌱 Proyek:</b> Buat karya seni dari bahan bekas yang aman dan bersih.</div>
-</div><div class="bab">
-<h3>🏆 Seniman Cilik SDN Cijember</h3>
-<p>“Tidak ada karya yang langsung sempurna. Terus mencoba, mengamati, dan memperbaiki!”</p>
+<h3>📘 Bab 1 — Unsur Seni Rupa</h3>
+
+<ul>
+<li>Titik</li>
+<li>Garis</li>
+<li>Bentuk</li>
+<li>Warna</li>
+<li>Tekstur</li>
+<li>Ruang</li>
+</ul>
 
 </div>
+
+<div class="bab">
+
+<h3>📘 Bab 2 — Menggambar</h3>
+
+<p>
+Mengembangkan kemampuan menggambar melalui pengamatan
+lingkungan sekitar.
+</p>
+
+</div>
+
 </div>
 
 
@@ -1058,51 +989,154 @@ function kembaliMapel() {
      PJOK
 ===================================================== -->
 
-
-<!-- =====================================================
-     PJOK
-===================================================== -->
 <div id="pjok" class="materi-halaman">
 
-<button class="tombol-kembali" onclick="kembaliMapel()">← Kembali ke Mata Pelajaran</button>
+<button class="tombol-kembali"
+onclick="kembaliMapel()">
+← Kembali ke Mata Pelajaran
+</button>
 
-<div class="judul-mapel" style="background:linear-gradient(135deg,#047857,#10b981);color:white;padding:28px 20px;border-radius:18px;">
-<div style="font-size:50px;">🏃</div>
-<h2 style="color:white;">PJOK</h2>
-<p>Pendidikan Jasmani, Olahraga, dan Kesehatan — Kelas 5</p>
-<small>📚 Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027</small>
+<div class="judul-mapel">
+
+<h2>🏃 PJOK</h2>
+
+<p>Pendidikan Jasmani, Olahraga dan Kesehatan</p>
+
 </div>
 
 <div class="bab">
-<h3>💪 Tubuh Sehat, Belajar Hebat!</h3>
-<p>Aktivitas fisik membantu menjaga kebugaran. Lakukan pemanasan, gunakan teknik yang benar, dan bersikap sportif.</p>
 
-</div><div class="bab">
-<h3>⚽ Bab 1 — Permainan Bola Besar</h3>
-<p>Permainan bola besar melatih gerak dasar, kerja sama, dan sportivitas.</p><div class="contoh">Mengoper • menangkap • menggiring • menendang • mengontrol bola.</div>
-<div class="latihan"><b>🤝 Misi Tim:</b> lakukan permainan sederhana yang menekankan kerja sama.</div>
-</div><div class="bab">
-<h3>🏸 Bab 2 — Permainan Bola Kecil</h3>
-<p>Permainan bola kecil melatih koordinasi mata dan tangan, ketepatan, kelincahan, dan konsentrasi.</p><div class="contoh">Lempar-tangkap • memukul bola • permainan target.</div>
+<h3>📘 Bab 1 — Permainan Bola Besar</h3>
 
-</div><div class="bab">
-<h3>🏃 Bab 3 — Atletik</h3>
-<p>Atletik mencakup berjalan, berlari, melompat, dan melempar.</p><ul><li>Pemanasan.</li><li>Gunakan tempat aman.</li><li>Ikuti instruksi guru.</li><li>Jangan memaksakan diri.</li></ul>
-<div class="latihan"><b>🎯 Tantangan:</b> lakukan latihan lari ringan sesuai arahan guru.</div>
-</div><div class="bab">
-<h3>🤸 Bab 4 — Senam dan Gerak Berirama</h3>
-<p>Gerak berirama membutuhkan koordinasi, keseimbangan, kelenturan, dan keberanian.</p>
-<div class="latihan"><b>🎵 Ayo bergerak:</b> buat rangkaian 4 gerakan sederhana mengikuti hitungan 1–8.</div>
-</div><div class="bab">
-<h3>🥗 Bab 5 — Pola Hidup Sehat</h3>
-<ul><li>🥗 Makan bergizi.</li><li>💧 Minum cukup.</li><li>😴 Istirahat cukup.</li><li>🧼 Menjaga kebersihan.</li><li>🏃 Aktif bergerak.</li><li>🧠 Menjaga kesehatan mental dan emosi.</li></ul>
-<div class="latihan"><b>📅 Tantangan Sehat:</b> pilih satu kebiasaan sehat selama seminggu.</div>
-</div><div class="bab">
-<h3>🏆 Aku Anak Sehat!</h3>
-<p>💪 Aktif • 🥗 Sehat • 🤝 Sportif • 😊 Percaya diri • 🧼 Bersih</p>
+<ul>
+<li>Sepak bola</li>
+<li>Bola voli</li>
+<li>Bola basket</li>
+<li>Teknik dasar permainan</li>
+</ul>
 
 </div>
+
+<div class="bab">
+
+<h3>📘 Bab 2 — Kebugaran Jasmani</h3>
+
+<ul>
+<li>Kekuatan</li>
+<li>Kelenturan</li>
+<li>Kecepatan</li>
+<li>Daya tahan</li>
+<li>Keseimbangan</li>
+</ul>
+
 </div>
-    
+
+<div class="bab">
+
+<h3>📘 Bab 3 — Hidup Sehat</h3>
+
+<p>
+Menjaga kesehatan tubuh melalui pola makan sehat,
+olahraga teratur, istirahat cukup, dan kebersihan diri.
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+/*
+===========================================================
+FUNGSI MEMBUKA MATERI
+===========================================================
+*/
+
+function bukaMateri(id){
+
+    // sembunyikan halaman 9 mapel
+
+    document.getElementById(
+        "halamanMapel"
+    ).style.display = "none";
+
+
+    // sembunyikan semua materi
+
+    const semua =
+        document.querySelectorAll(
+            ".materi-halaman"
+        );
+
+    semua.forEach(function(item){
+
+        item.classList.remove("aktif");
+
+    });
+
+
+    // tampilkan materi yang dipilih
+
+    const halaman =
+        document.getElementById(id);
+
+
+    if(halaman){
+
+        halaman.classList.add("aktif");
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    }
+
+}
+
+
+/*
+===========================================================
+KEMBALI KE 9 MAPEL
+===========================================================
+*/
+
+function kembaliMapel(){
+
+    const semua =
+        document.querySelectorAll(
+            ".materi-halaman"
+        );
+
+
+    semua.forEach(function(item){
+
+        item.classList.remove("aktif");
+
+    });
+
+
+    document.getElementById(
+        "halamanMapel"
+    ).style.display = "block";
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
 
 </script>
+
+</body>
+</html>
