@@ -130,14 +130,20 @@ onerror="this.style.display='none'"
 
 
 <!-- =====================================================
-     MENU PORTAL
+     NAMA GURU
 ===================================================== -->
 
-<h2 class="judul-menu" style="font-size: 14px;">
+<h2 class="judul-menu" style="font-size:14px;">
+
     Gr. Asep Jamhur, S.Pd., M.M.
+
 </h2>
 
 
+
+<!-- =====================================================
+     MENU PORTAL
+===================================================== -->
 
 <div class="menu-grid">
 
@@ -150,8 +156,13 @@ onerror="this.style.display='none'"
 class="menu-item"
 href="datasiswa.html"
 >
+
 👨‍🎓
-<span>Data Siswa</span>
+
+<span>
+Data Siswa
+</span>
+
 </a>
 
 
@@ -164,8 +175,13 @@ href="datasiswa.html"
 class="menu-item"
 href="nilai.html"
 >
+
 🏆
-<span>Nilai</span>
+
+<span>
+Nilai
+</span>
+
 </a>
 
 
@@ -178,8 +194,13 @@ href="nilai.html"
 class="menu-item"
 href="materi.html"
 >
+
 📚
-<span>Materi</span>
+
+<span>
+Materi
+</span>
+
 </a>
 
 
@@ -192,8 +213,13 @@ href="materi.html"
 class="menu-item"
 href="tugas.html"
 >
+
 📝
-<span>Tugas</span>
+
+<span>
+Tugas
+</span>
+
 </a>
 
 
@@ -206,8 +232,13 @@ href="tugas.html"
 class="menu-item"
 href="jadwal.html"
 >
+
 📅
-<span>Jadwal</span>
+
+<span>
+Jadwal
+</span>
+
 </a>
 
 
@@ -220,8 +251,13 @@ href="jadwal.html"
 class="menu-item"
 href="pengumuman.html"
 >
+
 📢
-<span>Pengumuman</span>
+
+<span>
+Pengumuman
+</span>
+
 </a>
 
 
@@ -234,8 +270,13 @@ href="pengumuman.html"
 class="menu-item"
 href="galeri.html"
 >
+
 🖼️
-<span>Galeri</span>
+
+<span>
+Galeri
+</span>
+
 </a>
 
 
@@ -248,8 +289,13 @@ href="galeri.html"
 class="menu-item"
 href="absensi.html"
 >
+
 📊
-<span>Absensi</span>
+
+<span>
+Absensi
+</span>
+
 </a>
 
 
@@ -265,8 +311,13 @@ href="rekap-absensi.html"
 id="menuRekapAbsensi"
 style="display:none;"
 >
+
 📈
-<span>Rekap Absensi</span>
+
+<span>
+Rekap Absensi
+</span>
+
 </a>
 
 
@@ -282,8 +333,13 @@ href="perkembangan.html"
 id="menuPerkembangan"
 style="display:none;"
 >
+
 📋
-<span>Perkembangan Siswa</span>
+
+<span>
+Perkembangan Siswa
+</span>
+
 </a>
 
 
@@ -306,40 +362,69 @@ style="display:none;"
 class="active"
 href="index.html"
 >
+
 🏠
-<span>Home</span>
+
+<span>
+Home
+</span>
+
 </a>
+
 
 
 <a
 href="materi.html"
 >
+
 📚
-<span>Materi</span>
+
+<span>
+Materi
+</span>
+
 </a>
+
 
 
 <a
 href="nilai.html"
 >
+
 🏆
-<span>Nilai</span>
+
+<span>
+Nilai
+</span>
+
 </a>
+
 
 
 <a
 href="pengumuman.html"
 >
+
 📢
-<span>Info</span>
+
+<span>
+Info
+</span>
+
 </a>
+
 
 
 <a
 href="galeri.html"
 >
+
 🖼️
-<span>Galeri</span>
+
+<span>
+Galeri
+</span>
+
 </a>
 
 
@@ -368,42 +453,61 @@ document.getElementById("namaGuru");
 
 
 /* =====================================================
+   MENU REKAP ABSENSI
+===================================================== */
+
+const menuRekapAbsensi =
+document.getElementById("menuRekapAbsensi");
+
+
+
+/* =====================================================
+   MENU PERKEMBANGAN SISWA
+===================================================== */
+
+const menuPerkembangan =
+document.getElementById("menuPerkembangan");
+
+
+
+/* =====================================================
    GURU
 ===================================================== */
 
 if(role === "guru"){
+
+
+    /* ---------------------------------------------
+       NAMA GURU
+    --------------------------------------------- */
 
     namaPengguna.textContent =
         localStorage.getItem("namaGuru")
         || "Gr. Asep Jamhur, S.Pd., M.M.";
 
 
+
     /* ---------------------------------------------
        TAMPILKAN REKAP ABSENSI
     --------------------------------------------- */
 
-    const menuRekap =
-        document.getElementById("menuRekapAbsensi");
+    if(menuRekapAbsensi){
 
-
-    if(menuRekap){
-
-        menuRekap.style.display = "flex";
+        menuRekapAbsensi.style.display =
+            "flex";
 
     }
+
 
 
     /* ---------------------------------------------
        TAMPILKAN PERKEMBANGAN SISWA
     --------------------------------------------- */
 
-    const menuPerkembangan =
-        document.getElementById("menuPerkembangan");
-
-
     if(menuPerkembangan){
 
-        menuPerkembangan.style.display = "flex";
+        menuPerkembangan.style.display =
+            "flex";
 
     }
 
@@ -417,37 +521,38 @@ if(role === "guru"){
 
 else if(role === "siswa"){
 
+
+    /* ---------------------------------------------
+       NAMA SISWA
+    --------------------------------------------- */
+
     namaPengguna.textContent =
         localStorage.getItem("namaSiswa")
         || "Siswa";
 
 
+
     /* ---------------------------------------------
-       PASTIKAN REKAP ABSENSI TERSEMBUNYI
+       SEMBUNYIKAN REKAP ABSENSI
     --------------------------------------------- */
 
-    const menuRekap =
-        document.getElementById("menuRekapAbsensi");
+    if(menuRekapAbsensi){
 
-
-    if(menuRekap){
-
-        menuRekap.style.display = "none";
+        menuRekapAbsensi.style.display =
+            "none";
 
     }
 
 
+
     /* ---------------------------------------------
-       PERKEMBANGAN GURU TERSEMBUNYI DARI SISWA
+       SEMBUNYIKAN PERKEMBANGAN SISWA
     --------------------------------------------- */
-
-    const menuPerkembangan =
-        document.getElementById("menuPerkembangan");
-
 
     if(menuPerkembangan){
 
-        menuPerkembangan.style.display = "none";
+        menuPerkembangan.style.display =
+            "none";
 
     }
 
@@ -461,8 +566,27 @@ else if(role === "siswa"){
 
 else{
 
+
     namaPengguna.textContent =
         "Pengguna";
+
+
+
+    if(menuRekapAbsensi){
+
+        menuRekapAbsensi.style.display =
+            "none";
+
+    }
+
+
+
+    if(menuPerkembangan){
+
+        menuPerkembangan.style.display =
+            "none";
+
+    }
 
 }
 
@@ -474,7 +598,9 @@ else{
 
 function updateJam(){
 
-    const d = new Date();
+    const d =
+        new Date();
+
 
     const jam =
         document.getElementById("jam");
@@ -492,7 +618,10 @@ function updateJam(){
 
 updateJam();
 
-setInterval(updateJam,1000);
+setInterval(
+    updateJam,
+    1000
+);
 
 
 
@@ -506,14 +635,17 @@ document.querySelector(".search-box");
 
 if(searchBox){
 
+
     searchBox.addEventListener(
         "input",
         function(){
+
 
             const keyword =
                 this.value
                 .toLowerCase()
                 .trim();
+
 
 
             const menus =
@@ -522,22 +654,22 @@ if(searchBox){
                 );
 
 
+
             menus.forEach(function(menu){
+
 
                 const text =
                     menu.textContent
                     .toLowerCase();
 
 
-                if(
-                    keyword === ""
-                    ||
-                    text.includes(keyword)
-                ){
 
-                    /* --------------------------------
-                       REKAP TETAP KHUSUS GURU
-                    -------------------------------- */
+                /* --------------------------------
+                   KOSONG
+                -------------------------------- */
+
+                if(keyword === ""){
+
 
                     if(
                         menu.id ===
@@ -551,9 +683,66 @@ if(searchBox){
 
                     }
 
-                    /* --------------------------------
-                       PERKEMBANGAN TETAP KHUSUS GURU
-                    -------------------------------- */
+                    else if(
+                        menu.id ===
+                        "menuPerkembangan"
+                        &&
+                        role !== "guru"
+                    ){
+
+                        menu.style.display =
+                            "none";
+
+                    }
+
+                    else{
+
+                        /*
+                         * Kembalikan tampilan menu
+                         * sesuai role.
+                         */
+
+                        menu.style.display =
+                            "flex";
+
+                    }
+
+                    return;
+
+                }
+
+
+
+                /* --------------------------------
+                   ADA PENCARIAN
+                -------------------------------- */
+
+                if(
+                    text.includes(keyword)
+                ){
+
+
+                    /* -----------------------------
+                       REKAP KHUSUS GURU
+                    ----------------------------- */
+
+                    if(
+                        menu.id ===
+                        "menuRekapAbsensi"
+                        &&
+                        role !== "guru"
+                    ){
+
+                        menu.style.display =
+                            "none";
+
+                    }
+
+
+
+                    /* -----------------------------
+                       PERKEMBANGAN KHUSUS GURU
+                    ----------------------------- */
 
                     else if(
                         menu.id ===
@@ -566,6 +755,8 @@ if(searchBox){
                             "none";
 
                     }
+
+
 
                     else{
 
