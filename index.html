@@ -142,7 +142,9 @@ onerror="this.style.display='none'"
 <div class="menu-grid">
 
 
-<!-- DATA SISWA -->
+<!-- =====================================================
+     DATA SISWA
+===================================================== -->
 
 <a
 class="menu-item"
@@ -154,7 +156,9 @@ href="datasiswa.html"
 
 
 
-<!-- NILAI -->
+<!-- =====================================================
+     NILAI
+===================================================== -->
 
 <a
 class="menu-item"
@@ -166,7 +170,9 @@ href="nilai.html"
 
 
 
-<!-- MATERI -->
+<!-- =====================================================
+     MATERI
+===================================================== -->
 
 <a
 class="menu-item"
@@ -178,7 +184,9 @@ href="materi.html"
 
 
 
-<!-- TUGAS -->
+<!-- =====================================================
+     TUGAS
+===================================================== -->
 
 <a
 class="menu-item"
@@ -190,7 +198,9 @@ href="tugas.html"
 
 
 
-<!-- JADWAL -->
+<!-- =====================================================
+     JADWAL
+===================================================== -->
 
 <a
 class="menu-item"
@@ -202,7 +212,9 @@ href="jadwal.html"
 
 
 
-<!-- PENGUMUMAN -->
+<!-- =====================================================
+     PENGUMUMAN
+===================================================== -->
 
 <a
 class="menu-item"
@@ -214,7 +226,9 @@ href="pengumuman.html"
 
 
 
-<!-- GALERI -->
+<!-- =====================================================
+     GALERI
+===================================================== -->
 
 <a
 class="menu-item"
@@ -226,7 +240,9 @@ href="galeri.html"
 
 
 
-<!-- ABSENSI -->
+<!-- =====================================================
+     ABSENSI
+===================================================== -->
 
 <a
 class="menu-item"
@@ -251,6 +267,23 @@ style="display:none;"
 >
 📈
 <span>Rekap Absensi</span>
+</a>
+
+
+
+<!-- =====================================================
+     PERKEMBANGAN SISWA
+     KHUSUS GURU
+===================================================== -->
+
+<a
+class="menu-item"
+href="perkembangan.html"
+id="menuPerkembangan"
+style="display:none;"
+>
+📋
+<span>Perkembangan Siswa</span>
 </a>
 
 
@@ -324,12 +357,14 @@ const role =
 localStorage.getItem("role");
 
 
+
 /* =====================================================
    NAMA PENGGUNA
 ===================================================== */
 
 const namaPengguna =
 document.getElementById("namaGuru");
+
 
 
 /* =====================================================
@@ -357,7 +392,23 @@ if(role === "guru"){
 
     }
 
+
+    /* ---------------------------------------------
+       TAMPILKAN PERKEMBANGAN SISWA
+    --------------------------------------------- */
+
+    const menuPerkembangan =
+        document.getElementById("menuPerkembangan");
+
+
+    if(menuPerkembangan){
+
+        menuPerkembangan.style.display = "flex";
+
+    }
+
 }
+
 
 
 /* =====================================================
@@ -385,7 +436,23 @@ else if(role === "siswa"){
 
     }
 
+
+    /* ---------------------------------------------
+       PERKEMBANGAN GURU TERSEMBUNYI DARI SISWA
+    --------------------------------------------- */
+
+    const menuPerkembangan =
+        document.getElementById("menuPerkembangan");
+
+
+    if(menuPerkembangan){
+
+        menuPerkembangan.style.display = "none";
+
+    }
+
 }
+
 
 
 /* =====================================================
@@ -475,6 +542,22 @@ if(searchBox){
                     if(
                         menu.id ===
                         "menuRekapAbsensi"
+                        &&
+                        role !== "guru"
+                    ){
+
+                        menu.style.display =
+                            "none";
+
+                    }
+
+                    /* --------------------------------
+                       PERKEMBANGAN TETAP KHUSUS GURU
+                    -------------------------------- */
+
+                    else if(
+                        menu.id ===
+                        "menuPerkembangan"
                         &&
                         role !== "guru"
                     ){
