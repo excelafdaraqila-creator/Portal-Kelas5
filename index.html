@@ -16,6 +16,35 @@ rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 >
 
+<style>
+
+/* =====================================================
+   TAMBAHAN KHUSUS MENU PERKEMBANGAN
+===================================================== */
+
+.menu-item.menu-perkembangan {
+    position: relative;
+}
+
+.menu-item.menu-perkembangan .badge-guru {
+    display: none;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    font-size: 9px;
+    padding: 3px 6px;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+}
+
+.menu-item.menu-perkembangan.guru .badge-guru {
+    display: block;
+}
+
+</style>
+
 </head>
 
 
@@ -28,7 +57,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
    CEK LOGIN
 ===================================================== */
 
-if(localStorage.getItem("login") !== "true"){
+const statusLogin =
+    localStorage.getItem("login");
+
+
+if(statusLogin !== "true"){
 
     location.href = "login.html";
 
@@ -41,7 +74,15 @@ if(localStorage.getItem("login") !== "true"){
 
 function logout(){
 
-    localStorage.clear();
+    localStorage.removeItem("login");
+    localStorage.removeItem("role");
+
+    /*
+       Jangan hapus data login lain
+       seperti NISN dan nama siswa
+       agar sistem tetap aman dan tidak
+       mengganggu data akun.
+    */
 
     location.href = "login.html";
 
@@ -74,7 +115,7 @@ function logout(){
 <div class="header-right">
 
 
-<!-- NAMA PENGGUNA DISEMBUNYIKAN -->
+<!-- NAMA PENGGUNA -->
 
 <span
     id="namaGuru"
@@ -96,6 +137,7 @@ placeholder="🔍 Cari menu..."
 <button
 class="logout-btn"
 onclick="logout()"
+title="Keluar"
 >
 
 <i class="fa-solid fa-right-from-bracket"></i>
@@ -121,22 +163,22 @@ class="banner-img"
 onerror="this.style.display='none'"
 >
 
-<div class="overlay">
-
-</div>
+<div class="overlay"></div>
 
 </div>
 
 
 
 <!-- =====================================================
-     NAMA GURU
+     JUDUL
 ===================================================== -->
 
-<h2 class="judul-menu" style="font-size:14px;">
-
-    Gr. Asep Jamhur, S.Pd., M.M.
-
+<h2
+class="judul-menu"
+style="font-size:14px;"
+id="judulPengguna"
+>
+Gr. Asep Jamhur, S.Pd., M.M.
 </h2>
 
 
@@ -159,9 +201,7 @@ href="datasiswa.html"
 
 👨‍🎓
 
-<span>
-Data Siswa
-</span>
+<span>Data Siswa</span>
 
 </a>
 
@@ -178,9 +218,7 @@ href="nilai.html"
 
 🏆
 
-<span>
-Nilai
-</span>
+<span>Nilai</span>
 
 </a>
 
@@ -197,9 +235,7 @@ href="materi.html"
 
 📚
 
-<span>
-Materi
-</span>
+<span>Materi</span>
 
 </a>
 
@@ -216,9 +252,7 @@ href="tugas.html"
 
 📝
 
-<span>
-Tugas
-</span>
+<span>Tugas</span>
 
 </a>
 
@@ -235,9 +269,7 @@ href="jadwal.html"
 
 📅
 
-<span>
-Jadwal
-</span>
+<span>Jadwal</span>
 
 </a>
 
@@ -254,9 +286,7 @@ href="pengumuman.html"
 
 📢
 
-<span>
-Pengumuman
-</span>
+<span>Pengumuman</span>
 
 </a>
 
@@ -273,9 +303,7 @@ href="galeri.html"
 
 🖼️
 
-<span>
-Galeri
-</span>
+<span>Galeri</span>
 
 </a>
 
@@ -292,8 +320,37 @@ href="absensi.html"
 
 📊
 
-<span>
-Absensi
+<span>Absensi</span>
+
+</a>
+
+
+
+<!-- =====================================================
+     PERKEMBANGAN SISWA
+     
+     GURU:
+     Bisa melihat perkembangan semua siswa.
+
+     SISWA:
+     Akan otomatis melihat perkembangan
+     dirinya sendiri berdasarkan NISN.
+===================================================== -->
+
+<a
+class="menu-item menu-perkembangan"
+href="perkembangan.html"
+id="menuPerkembangan"
+>
+
+📈
+
+<span>Perkembangan Siswa</span>
+
+<span
+class="badge-guru"
+>
+GURU
 </span>
 
 </a>
@@ -312,33 +369,9 @@ id="menuRekapAbsensi"
 style="display:none;"
 >
 
-📈
-
-<span>
-Rekap Absensi
-</span>
-
-</a>
-
-
-
-<!-- =====================================================
-     PERKEMBANGAN SISWA
-     KHUSUS GURU
-===================================================== -->
-
-<a
-class="menu-item"
-href="perkembangan.html"
-id="menuPerkembangan"
-style="display:none;"
->
-
 📋
 
-<span>
-Perkembangan Siswa
-</span>
+<span>Rekap Absensi</span>
 
 </a>
 
@@ -365,9 +398,7 @@ href="index.html"
 
 🏠
 
-<span>
-Home
-</span>
+<span>Home</span>
 
 </a>
 
@@ -379,9 +410,7 @@ href="materi.html"
 
 📚
 
-<span>
-Materi
-</span>
+<span>Materi</span>
 
 </a>
 
@@ -393,9 +422,7 @@ href="nilai.html"
 
 🏆
 
-<span>
-Nilai
-</span>
+<span>Nilai</span>
 
 </a>
 
@@ -407,9 +434,7 @@ href="pengumuman.html"
 
 📢
 
-<span>
-Info
-</span>
+<span>Info</span>
 
 </a>
 
@@ -421,9 +446,7 @@ href="galeri.html"
 
 🖼️
 
-<span>
-Galeri
-</span>
+<span>Galeri</span>
 
 </a>
 
@@ -439,56 +462,95 @@ Galeri
 ===================================================== */
 
 const role =
-localStorage.getItem("role");
+(
+    localStorage.getItem("role")
+    || ""
+)
+.trim()
+.toLowerCase();
 
 
 
 /* =====================================================
-   NAMA PENGGUNA
+   AMBIL ELEMEN
 ===================================================== */
 
 const namaPengguna =
-document.getElementById("namaGuru");
+document.getElementById(
+    "namaGuru"
+);
 
 
+const judulPengguna =
+document.getElementById(
+    "judulPengguna"
+);
 
-/* =====================================================
-   MENU REKAP ABSENSI
-===================================================== */
 
 const menuRekapAbsensi =
-document.getElementById("menuRekapAbsensi");
+document.getElementById(
+    "menuRekapAbsensi"
+);
 
-
-
-/* =====================================================
-   MENU PERKEMBANGAN SISWA
-===================================================== */
 
 const menuPerkembangan =
-document.getElementById("menuPerkembangan");
+document.getElementById(
+    "menuPerkembangan"
+);
 
 
 
 /* =====================================================
-   GURU
+   DATA LOGIN SISWA
+===================================================== */
+
+const namaSiswa =
+localStorage.getItem(
+    "namaSiswa"
+)
+|| "";
+
+
+const nisnSiswa =
+localStorage.getItem(
+    "nisn"
+)
+|| "";
+
+
+
+/* =====================================================
+   DATA LOGIN GURU
+===================================================== */
+
+const namaGuru =
+localStorage.getItem(
+    "namaGuru"
+)
+|| "Gr. Asep Jamhur, S.Pd., M.M.";
+
+
+
+/* =====================================================
+   MODE GURU
 ===================================================== */
 
 if(role === "guru"){
-
 
     /* ---------------------------------------------
        NAMA GURU
     --------------------------------------------- */
 
     namaPengguna.textContent =
-        localStorage.getItem("namaGuru")
-        || "Gr. Asep Jamhur, S.Pd., M.M.";
+        namaGuru;
 
+
+    judulPengguna.textContent =
+        namaGuru;
 
 
     /* ---------------------------------------------
-       TAMPILKAN REKAP ABSENSI
+       REKAP ABSENSI TAMPIL
     --------------------------------------------- */
 
     if(menuRekapAbsensi){
@@ -499,15 +561,19 @@ if(role === "guru"){
     }
 
 
-
     /* ---------------------------------------------
-       TAMPILKAN PERKEMBANGAN SISWA
+       PERKEMBANGAN TAMPIL
     --------------------------------------------- */
 
     if(menuPerkembangan){
 
         menuPerkembangan.style.display =
             "flex";
+
+
+        menuPerkembangan.classList.add(
+            "guru"
+        );
 
     }
 
@@ -516,24 +582,39 @@ if(role === "guru"){
 
 
 /* =====================================================
-   SISWA
+   MODE SISWA
 ===================================================== */
 
-else if(role === "siswa"){
-
+else if(
+    role === "siswa"
+    ||
+    role === "student"
+    ||
+    role === "murid"
+){
 
     /* ---------------------------------------------
        NAMA SISWA
     --------------------------------------------- */
 
+    const namaTampil =
+        namaSiswa
+        ||
+        "Siswa";
+
+
     namaPengguna.textContent =
-        localStorage.getItem("namaSiswa")
-        || "Siswa";
+        namaTampil;
+
+
+    judulPengguna.textContent =
+        "👨‍🎓 " +
+        namaTampil;
 
 
 
     /* ---------------------------------------------
-       SEMBUNYIKAN REKAP ABSENSI
+       REKAP ABSENSI DISEMBUNYIKAN
     --------------------------------------------- */
 
     if(menuRekapAbsensi){
@@ -546,13 +627,36 @@ else if(role === "siswa"){
 
 
     /* ---------------------------------------------
-       SEMBUNYIKAN PERKEMBANGAN SISWA
+       PERKEMBANGAN SISWA TETAP TAMPIL
     --------------------------------------------- */
 
     if(menuPerkembangan){
 
         menuPerkembangan.style.display =
-            "none";
+            "flex";
+
+    }
+
+
+
+    /*
+       Simpan NISN untuk digunakan
+       perkembangan.html
+
+       perkembangan.js akan membaca:
+
+       localStorage.getItem("nisn")
+
+       kemudian otomatis mengambil
+       data perkembangan berdasarkan NISN.
+    */
+
+    if(nisnSiswa){
+
+        localStorage.setItem(
+            "nisn",
+            nisnSiswa
+        );
 
     }
 
@@ -566,11 +670,10 @@ else if(role === "siswa"){
 
 else{
 
-
-    namaPengguna.textContent =
-        "Pengguna";
-
-
+    /*
+       Jika role tidak dikenali,
+       jangan tampilkan menu khusus guru.
+    */
 
     if(menuRekapAbsensi){
 
@@ -580,7 +683,6 @@ else{
     }
 
 
-
     if(menuPerkembangan){
 
         menuPerkembangan.style.display =
@@ -588,40 +690,11 @@ else{
 
     }
 
-}
 
-
-
-/* =====================================================
-   JAM
-===================================================== */
-
-function updateJam(){
-
-    const d =
-        new Date();
-
-
-    const jam =
-        document.getElementById("jam");
-
-
-    if(jam){
-
-        jam.textContent =
-            d.toLocaleTimeString("id-ID");
-
-    }
+    judulPengguna.textContent =
+        "Pengguna";
 
 }
-
-
-updateJam();
-
-setInterval(
-    updateJam,
-    1000
-);
 
 
 
@@ -630,22 +703,21 @@ setInterval(
 ===================================================== */
 
 const searchBox =
-document.querySelector(".search-box");
+document.querySelector(
+    ".search-box"
+);
 
 
 if(searchBox){
-
 
     searchBox.addEventListener(
         "input",
         function(){
 
-
             const keyword =
                 this.value
                 .toLowerCase()
                 .trim();
-
 
 
             const menus =
@@ -654,132 +726,136 @@ if(searchBox){
                 );
 
 
+            menus.forEach(
+                function(menu){
 
-            menus.forEach(function(menu){
-
-
-                const text =
-                    menu.textContent
-                    .toLowerCase();
-
+                    const text =
+                        menu.textContent
+                        .toLowerCase();
 
 
-                /* --------------------------------
-                   KOSONG
-                -------------------------------- */
-
-                if(keyword === ""){
-
+                    /*
+                       MENU REKAP ABSENSI
+                       TETAP KHUSUS GURU
+                    */
 
                     if(
                         menu.id ===
                         "menuRekapAbsensi"
-                        &&
-                        role !== "guru"
                     ){
 
-                        menu.style.display =
-                            "none";
+                        if(
+                            role !== "guru"
+                        ){
+
+                            menu.style.display =
+                                "none";
+
+                            return;
+
+                        }
 
                     }
 
-                    else if(
+
+                    /*
+                       MENU PERKEMBANGAN
+                       BOLEH DILIHAT GURU
+                       DAN SISWA
+                    */
+
+                    if(
                         menu.id ===
                         "menuPerkembangan"
-                        &&
-                        role !== "guru"
                     ){
 
-                        menu.style.display =
-                            "none";
+                        if(
+                            role !== "guru"
+                            &&
+                            role !== "siswa"
+                            &&
+                            role !== "student"
+                            &&
+                            role !== "murid"
+                        ){
+
+                            menu.style.display =
+                                "none";
+
+                            return;
+
+                        }
 
                     }
 
-                    else{
 
-                        /*
-                         * Kembalikan tampilan menu
-                         * sesuai role.
-                         */
+                    /*
+                       FILTER PENCARIAN
+                    */
+
+                    if(
+                        keyword === ""
+                        ||
+                        text.includes(keyword)
+                    ){
 
                         menu.style.display =
                             "flex";
 
                     }
 
-                    return;
-
-                }
-
-
-
-                /* --------------------------------
-                   ADA PENCARIAN
-                -------------------------------- */
-
-                if(
-                    text.includes(keyword)
-                ){
-
-
-                    /* -----------------------------
-                       REKAP KHUSUS GURU
-                    ----------------------------- */
-
-                    if(
-                        menu.id ===
-                        "menuRekapAbsensi"
-                        &&
-                        role !== "guru"
-                    ){
-
-                        menu.style.display =
-                            "none";
-
-                    }
-
-
-
-                    /* -----------------------------
-                       PERKEMBANGAN KHUSUS GURU
-                    ----------------------------- */
-
-                    else if(
-                        menu.id ===
-                        "menuPerkembangan"
-                        &&
-                        role !== "guru"
-                    ){
-
-                        menu.style.display =
-                            "none";
-
-                    }
-
-
-
                     else{
 
                         menu.style.display =
-                            "flex";
+                            "none";
 
                     }
 
                 }
-
-                else{
-
-                    menu.style.display =
-                        "none";
-
-                }
-
-            });
+            );
 
         }
     );
 
 }
+
+
+
+/* =====================================================
+   LOG INFORMASI
+===================================================== */
+
+console.log(
+    "======================================"
+);
+
+console.log(
+    "PORTAL DIGITAL KELAS 5 SDN CIJEMBER"
+);
+
+console.log(
+    "ROLE:",
+    role
+);
+
+console.log(
+    "NAMA SISWA:",
+    namaSiswa
+);
+
+console.log(
+    "NISN SISWA:",
+    nisnSiswa
+);
+
+console.log(
+    "MENU PERKEMBANGAN:",
+    menuPerkembangan
+);
+
+console.log(
+    "======================================"
+);
 
 </script>
 
