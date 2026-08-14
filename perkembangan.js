@@ -1304,15 +1304,82 @@ function isiCetak(data) {
 
 function cetakPerkembangan() {
 
-    const nama =
-        document
-            .getElementById(
-                "cetakNama"
-            )
-            .textContent;
+    /* =====================================================
+       AMBIL DATA SISWA DARI HALAMAN
+    ===================================================== */
+
+    const pilihSiswa =
+        document.getElementById("pilihSiswa");
+
+    const nisnInput =
+        document.getElementById("nisnSiswa");
+
+    const namaInput =
+        document.getElementById("namaSiswa");
 
 
-    if (!nama) {
+    /* =====================================================
+       AMBIL NILAI YANG SEDANG TAMPIL
+       Tidak harus sudah disimpan ke Spreadsheet
+    ===================================================== */
+
+    let nama = "";
+
+    let nisn = "";
+
+
+    if (namaInput) {
+
+        nama =
+            String(
+                namaInput.value || ""
+            ).trim();
+
+    }
+
+
+    if (nisnInput) {
+
+        nisn =
+            String(
+                nisnInput.value || ""
+            ).trim();
+
+    }
+
+
+    /* =====================================================
+       JIKA INPUT NAMA BELUM TERISI,
+       COBA AMBIL DARI SELECT SISWA
+    ===================================================== */
+
+    if (!nama && pilihSiswa) {
+
+        const option =
+            pilihSiswa.options[
+                pilihSiswa.selectedIndex
+            ];
+
+        if (
+            option &&
+            option.value
+        ) {
+
+            nama =
+                String(
+                    option.textContent || ""
+                ).trim();
+
+        }
+
+    }
+
+
+    /* =====================================================
+       CEK DATA SISWA
+    ===================================================== */
+
+    if (!nama && !nisn) {
 
         alert(
             "Data siswa belum dipilih."
@@ -1323,29 +1390,261 @@ function cetakPerkembangan() {
     }
 
 
-    // Pastikan data terbaru masuk
-    // ke area cetak
+    /* =====================================================
+       TAMPILKAN IDENTITAS KE AREA CETAK
+    ===================================================== */
 
-    const data =
-        kumpulkanDataForm();
+    const cetakNama =
+        document.getElementById(
+            "cetakNama"
+        );
+
+    const cetakNisn =
+        document.getElementById(
+            "cetakNisn"
+        );
 
 
-    isiCetak(
-        data
-    );
+    if (cetakNama) {
+
+        cetakNama.textContent =
+            nama || "-";
+
+    }
 
 
-    setTimeout(
-        function () {
+    if (cetakNisn) {
 
-            window.print();
+        cetakNisn.textContent =
+            nisn || "-";
 
-        },
-        300
-    );
+    }
+
+
+    /* =====================================================
+       SALIN CATATAN KE AREA CETAK
+    ===================================================== */
+
+    const kelebihan =
+        document.getElementById(
+            "kelebihan"
+        );
+
+    const perluDikembangkan =
+        document.getElementById(
+            "perluDikembangkan"
+        );
+
+    const saranTindakLanjut =
+        document.getElementById(
+            "saranTindakLanjut"
+        );
+
+    const catatanGuru =
+        document.getElementById(
+            "catatanGuru"
+        );
+
+
+    const cetakKelebihan =
+        document.getElementById(
+            "cetakKelebihan"
+        );
+
+    const cetakPerlu =
+        document.getElementById(
+            "cetakPerluDikembangkan"
+        );
+
+    const cetakSaran =
+        document.getElementById(
+            "cetakSaran"
+        );
+
+    const cetakCatatan =
+        document.getElementById(
+            "cetakCatatan"
+        );
+
+
+    if (cetakKelebihan) {
+
+        cetakKelebihan.textContent =
+            kelebihan
+                ? kelebihan.value
+                : "";
+
+    }
+
+
+    if (cetakPerlu) {
+
+        cetakPerlu.textContent =
+            perluDikembangkan
+                ? perluDikembangkan.value
+                : "";
+
+    }
+
+
+    if (cetakSaran) {
+
+        cetakSaran.textContent =
+            saranTindakLanjut
+                ? saranTindakLanjut.value
+                : "";
+
+    }
+
+
+    if (cetakCatatan) {
+
+        cetakCatatan.textContent =
+            catatanGuru
+                ? catatanGuru.value
+                : "";
+
+    }
+
+
+    /* =====================================================
+       SIAPKAN TABEL PENILAIAN UNTUK CETAK
+    ===================================================== */
+
+    const tabelAspek =
+        document.getElementById(
+            "tabelAspek"
+        );
+
+    const tabelCetak =
+        document.getElementById(
+            "tabelCetakAspek"
+        );
+
+
+    if (
+        tabelAspek &&
+        tabelCetak
+    ) {
+
+        tabelCetak.innerHTML = "";
+
+
+        const rows =
+            tabelAspek.querySelectorAll(
+                "tr"
+            );
+
+
+        rows.forEach(function(row) {
+
+            const cells =
+                row.querySelectorAll(
+                    "td"
+                );
+
+
+            if (
+                cells.length < 4
+            ) {
+
+                return;
+
+            }
+
+
+            const nomor =
+                cells[0].textContent.trim();
+
+            const aspek =
+                cells[1].textContent.trim();
+
+            const indikator =
+                cells[2].textContent.trim();
+
+
+            const select =
+                cells[3].querySelector(
+                    "select"
+                );
+
+
+            let skor = "";
+
+
+            if (select) {
+
+                skor =
+                    String(
+                        select.value || ""
+                    ).trim();
+
+            }
+
+
+            /* ---------------------------------------------
+               BUAT BARIS CETAK
+            --------------------------------------------- */
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            tr.innerHTML = `
+
+                <td class="center">
+                    ${nomor}
+                </td>
+
+                <td>
+                    ${aspek}
+                </td>
+
+                <td>
+                    ${indikator}
+                </td>
+
+                <td class="center">
+                    ${skor === "4" ? "✓" : ""}
+                </td>
+
+                <td class="center">
+                    ${skor === "3" ? "✓" : ""}
+                </td>
+
+                <td class="center">
+                    ${skor === "2" ? "✓" : ""}
+                </td>
+
+                <td class="center">
+                    ${skor === "1" ? "✓" : ""}
+                </td>
+
+            `;
+
+
+            tabelCetak.appendChild(
+                tr
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       CETAK
+    ===================================================== */
+
+    setTimeout(function() {
+
+        window.print();
+
+    }, 150);
 
 }
-
 
 // ============================================================
 // KUMPULKAN FORM UNTUK CETAK
