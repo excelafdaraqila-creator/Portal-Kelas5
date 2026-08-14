@@ -3,11 +3,6 @@
 // PORTAL DIGITAL KELAS 5 SDN CIJEMBER
 // ============================================================
 
-
-// ============================================================
-// API GOOGLE APPS SCRIPT
-// ============================================================
-
 const API_URL =
 "https://script.google.com/macros/s/AKfycbxNtenvfcjjFNTCtpi2B-d7cLHMfZYk0-z8W36YvoULqOc6w5r6QZGzchJ2KQfCK9Gv/exec";
 
@@ -131,30 +126,24 @@ const aspek = [
 // ============================================================
 
 let role = "";
-
 let siswaData = [];
-
+let semuaPerkembangan = [];
 let dataPerkembanganSaatIni = null;
 
 
 // ============================================================
-// SAAT HALAMAN SIAP
+// HALAMAN SIAP
 // ============================================================
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-        console.log(
-            "PERKEMBANGAN.JS AKTIF"
-        );
+    console.log("PERKEMBANGAN.JS AKTIF");
 
-        buatTabelAspek();
+    buatTabelAspek();
 
-        tentukanRole();
+    tentukanRole();
 
-    }
-);
+});
 
 
 // ============================================================
@@ -164,23 +153,13 @@ document.addEventListener(
 function tentukanRole() {
 
     role =
-        (
-            localStorage.getItem("role") ||
-            ""
-        )
+        (localStorage.getItem("role") || "")
         .trim()
         .toLowerCase();
 
+    console.log("ROLE:", role);
 
-    console.log(
-        "ROLE:",
-        role
-    );
-
-
-    if (
-        role === "guru"
-    ) {
+    if (role === "guru") {
 
         modeGuru();
 
@@ -214,25 +193,18 @@ function tentukanRole() {
 async function modeGuru() {
 
     const select =
-        document.getElementById(
-            "pilihSiswa"
-        );
+        document.getElementById("pilihSiswa");
 
+    if (!select) return;
 
-    if (!select) {
-        return;
+    select.classList.remove("hidden");
+
+    const namaInput =
+        document.getElementById("namaSiswa");
+
+    if (namaInput) {
+        namaInput.classList.add("hidden");
     }
-
-
-    select.classList.remove(
-        "hidden"
-    );
-
-
-    document
-        .getElementById("namaSiswa")
-        .classList.add("hidden");
-
 
     try {
 
@@ -240,16 +212,18 @@ async function modeGuru() {
 
         await ambilSemuaPerkembangan();
 
-        select.addEventListener(
-            "change",
-            function () {
+        select.addEventListener("change", function () {
 
-                pilihSiswaGuru(
-                    this.value
-                );
+            pilihSiswaGuru(this.value);
 
-            }
-        );
+        });
+
+        // Jika sudah ada siswa terpilih
+        if (select.value) {
+
+            pilihSiswaGuru(select.value);
+
+        }
 
     }
 
@@ -277,10 +251,8 @@ async function ambilDaftarSiswa() {
         "?action=siswa&nocache=" +
         Date.now();
 
-
     const response =
         await fetch(url);
-
 
     if (!response.ok) {
 
@@ -290,10 +262,8 @@ async function ambilDaftarSiswa() {
 
     }
 
-
     const data =
         await response.json();
-
 
     if (!Array.isArray(data)) {
 
@@ -303,45 +273,48 @@ async function ambilDaftarSiswa() {
 
     }
 
-
     siswaData = data;
 
-
     const select =
-        document.getElementById(
-            "pilihSiswa"
-        );
+        document.getElementById("pilihSiswa");
+
+    select.innerHTML = "";
+
+    const optionAwal =
+        document.createElement("option");
+
+    optionAwal.value = "";
+
+    optionAwal.textContent =
+        "-- Pilih Siswa --";
+
+    select.appendChild(optionAwal);
 
 
-    select.innerHTML =
-        `<option value="">
-            -- Pilih Siswa --
-        </option>`;
+    data.forEach(function (siswa) {
 
+        const nisn =
+            siswa.NISN ||
+            siswa.nisn ||
+            "";
 
-    data.forEach(
-        function (siswa) {
+        const nama =
+            siswa.NAMA ||
+            siswa.nama ||
+            "-";
 
-            const option =
-                document.createElement(
-                    "option"
-                );
+        const option =
+            document.createElement("option");
 
+        option.value =
+            String(nisn);
 
-            option.value =
-                siswa.NISN || siswa.nisn || "";
+        option.textContent =
+            nama;
 
+        select.appendChild(option);
 
-            option.textContent =
-                siswa.NAMA || siswa.nama || "-";
-
-
-            select.appendChild(
-                option
-            );
-
-        }
-    );
+    });
 
 }
 
@@ -357,10 +330,8 @@ async function ambilSemuaPerkembangan() {
         "?action=perkembangan&nocache=" +
         Date.now();
 
-
     const response =
         await fetch(url);
-
 
     if (!response.ok) {
 
@@ -370,10 +341,8 @@ async function ambilSemuaPerkembangan() {
 
     }
 
-
     const data =
         await response.json();
-
 
     if (!Array.isArray(data)) {
 
@@ -383,8 +352,7 @@ async function ambilSemuaPerkembangan() {
 
     }
 
-
-    window.semuaPerkembangan =
+    semuaPerkembangan =
         data;
 
 }
@@ -396,6 +364,9 @@ async function ambilSemuaPerkembangan() {
 
 function pilihSiswaGuru(nisn) {
 
+    nisn =
+        String(nisn || "").trim();
+
     if (!nisn) {
 
         kosongkanForm();
@@ -406,23 +377,26 @@ function pilihSiswaGuru(nisn) {
 
 
     const siswa =
-        siswaData.find(
-            function (item) {
+        siswaData.find(function (item) {
 
-                return String(
-                    item.NISN ||
-                    item.nisn ||
-                    ""
-                ).trim()
-                ===
-                String(nisn).trim();
+            return String(
+                item.NISN ||
+                item.nisn ||
+                ""
+            ).trim() === nisn;
 
-            }
-        );
+        });
 
 
     if (!siswa) {
+
+        console.warn(
+            "Siswa tidak ditemukan:",
+            nisn
+        );
+
         return;
+
     }
 
 
@@ -439,30 +413,35 @@ function pilihSiswaGuru(nisn) {
 
 
     const perkembangan =
-        (
-            window.semuaPerkembangan ||
-            []
-        ).find(
-            function (item) {
+        semuaPerkembangan.find(function (item) {
 
-                return String(
-                    item.nisn || ""
-                ).trim()
-                ===
-                String(nisn).trim();
+            return String(
+                item.nisn ||
+                item.NISN ||
+                ""
+            ).trim() === nisn;
 
-            }
-        );
+        });
 
 
     if (perkembangan) {
 
-        isiForm(
-            perkembangan
-        );
+        const dataGabungan = {
+
+            ...perkembangan,
+
+            nama: nama,
+
+            nisn: nisn
+
+        };
 
         dataPerkembanganSaatIni =
-            perkembangan;
+            dataGabungan;
+
+        isiForm(
+            dataGabungan
+        );
 
         tampilkanPesan(
             "📋 Data perkembangan siswa ditemukan dan dimuat."
@@ -473,6 +452,14 @@ function pilihSiswaGuru(nisn) {
     else {
 
         kosongkanPenilaian();
+
+        isiCetak({
+
+            nama: nama,
+
+            nisn: nisn
+
+        });
 
         tampilkanPesan(
             "ℹ️ Belum ada perkembangan untuk siswa ini. Silakan isi penilaian."
@@ -490,38 +477,33 @@ function pilihSiswaGuru(nisn) {
 async function modeSiswa() {
 
     const nisn =
-        localStorage.getItem(
-            "nisn"
-        ) || "";
-
+        localStorage.getItem("nisn") || "";
 
     const nama =
-        localStorage.getItem(
-            "namaSiswa"
-        ) || "";
+        localStorage.getItem("namaSiswa") || "";
 
 
-    document
-        .getElementById("pilihSiswa")
-        .classList.add(
-            "hidden"
-        );
+    const pilihSiswa =
+        document.getElementById("pilihSiswa");
+
+    if (pilihSiswa) {
+
+        pilihSiswa.classList.add("hidden");
+
+    }
 
 
     const inputNama =
-        document.getElementById(
-            "namaSiswa"
-        );
+        document.getElementById("namaSiswa");
 
+    if (inputNama) {
 
-    inputNama
-        .classList.remove(
-            "hidden"
-        );
+        inputNama.classList.remove("hidden");
 
+        inputNama.value =
+            nama;
 
-    inputNama.value =
-        nama;
+    }
 
 
     document
@@ -530,44 +512,36 @@ async function modeSiswa() {
         nisn;
 
 
-    // Siswa tidak boleh mengedit
-    // perkembangan
+    const btnSimpan =
+        document.getElementById("btnSimpan");
+
+    if (btnSimpan) {
+
+        btnSimpan.classList.add("hidden");
+
+    }
+
 
     document
-        .getElementById("btnSimpan")
-        .classList.add(
-            "hidden"
-        );
+        .querySelectorAll("#tabelAspek select")
+        .forEach(function (select) {
 
+            select.disabled = true;
 
-    document
-        .querySelectorAll(
-            "#tabelAspek select"
-        )
-        .forEach(
-            function (select) {
-
-                select.disabled =
-                    true;
-
-            }
-        );
+        });
 
 
     document
         .getElementById("kelebihan")
         .readOnly = true;
 
-
     document
         .getElementById("perluDikembangkan")
         .readOnly = true;
 
-
     document
         .getElementById("saranTindakLanjut")
         .readOnly = true;
-
 
     document
         .getElementById("catatanGuru")
@@ -585,9 +559,7 @@ async function modeSiswa() {
     }
 
 
-    await ambilPerkembanganSiswa(
-        nisn
-    );
+    await ambilPerkembanganSiswa(nisn);
 
 }
 
@@ -608,10 +580,8 @@ async function ambilPerkembanganSiswa(nisn) {
             "&nocache=" +
             Date.now();
 
-
         const response =
             await fetch(url);
-
 
         if (!response.ok) {
 
@@ -621,10 +591,8 @@ async function ambilPerkembanganSiswa(nisn) {
 
         }
 
-
         const data =
             await response.json();
-
 
         if (
             !Array.isArray(data) ||
@@ -641,15 +609,12 @@ async function ambilPerkembanganSiswa(nisn) {
 
         }
 
-
         dataPerkembanganSaatIni =
             data[0];
-
 
         isiForm(
             data[0]
         );
-
 
         tampilkanPesan(
             "✅ Data perkembangan berhasil dimuat."
@@ -677,151 +642,111 @@ async function ambilPerkembanganSiswa(nisn) {
 function buatTabelAspek() {
 
     const tbody =
-        document.getElementById(
-            "tabelAspek"
-        );
-
+        document.getElementById("tabelAspek");
 
     const tbodyCetak =
-        document.getElementById(
-            "tabelCetakAspek"
-        );
+        document.getElementById("tabelCetakAspek");
 
-
-    if (!tbody) {
-        return;
-    }
-
+    if (!tbody || !tbodyCetak) return;
 
     tbody.innerHTML = "";
-
     tbodyCetak.innerHTML = "";
 
 
-    aspek.forEach(
-        function (item, index) {
+    aspek.forEach(function (item, index) {
 
-            // =========================
-            // FORM GURU / SISWA
-            // =========================
+        // ====================================================
+        // TABEL INPUT
+        // ====================================================
 
-            const tr =
-                document.createElement(
-                    "tr"
-                );
+        const tr =
+            document.createElement("tr");
 
+        tr.innerHTML = `
 
-            tr.innerHTML = `
+            <td>
+                ${index + 1}
+            </td>
 
-                <td>
-                    ${index + 1}
-                </td>
+            <td class="aspek">
+                ${item.nama}
+            </td>
 
-                <td class="aspek">
-                    ${item.nama}
-                </td>
+            <td class="indikator">
+                ${item.indikator}
+            </td>
 
-                <td class="indikator">
-                    ${item.indikator}
-                </td>
+            <td class="nilai">
 
-                <td class="nilai">
+                <select id="nilai_${item.key}">
 
-                    <select
-                        id="nilai_${item.key}"
-                    >
+                    <option value="">-</option>
 
-                        <option value="">
-                            -
-                        </option>
+                    <option value="4">4</option>
 
-                        <option value="4">
-                            4
-                        </option>
+                    <option value="3">3</option>
 
-                        <option value="3">
-                            3
-                        </option>
+                    <option value="2">2</option>
 
-                        <option value="2">
-                            2
-                        </option>
+                    <option value="1">1</option>
 
-                        <option value="1">
-                            1
-                        </option>
+                </select>
 
-                    </select>
+            </td>
 
-                </td>
+        `;
 
-            `;
+        tbody.appendChild(tr);
 
 
-            tbody.appendChild(
-                tr
-            );
+        // ====================================================
+        // TABEL CETAK
+        // ====================================================
 
+        const trCetak =
+            document.createElement("tr");
 
-            // =========================
-            // TABEL CETAK
-            // =========================
+        trCetak.innerHTML = `
 
-            const trCetak =
-                document.createElement(
-                    "tr"
-                );
+            <td class="center">
+                ${index + 1}
+            </td>
 
+            <td>
+                <strong>${item.nama}</strong>
+            </td>
 
-            trCetak.innerHTML = `
+            <td>
+                ${item.indikator}
+            </td>
 
-                <td class="center">
-                    ${index + 1}
-                </td>
+            <td
+                class="center"
+                id="cetak_${item.key}_4">
+            </td>
 
-                <td>
-                    <strong>
-                        ${item.nama}
-                    </strong>
-                </td>
+            <td
+                class="center"
+                id="cetak_${item.key}_3">
+            </td>
 
-                <td>
-                    ${item.indikator}
-                </td>
+            <td
+                class="center"
+                id="cetak_${item.key}_2">
+            </td>
 
-                <td
-                    class="center"
-                    id="cetak_${item.key}_4"
-                >
-                </td>
+            <td
+                class="center"
+                id="cetak_${item.key}_1">
+            </td>
 
-                <td
-                    class="center"
-                    id="cetak_${item.key}_3"
-                >
-                </td>
+        `;
 
-                <td
-                    class="center"
-                    id="cetak_${item.key}_2"
-                >
-                </td>
+        tbodyCetak.appendChild(
+            trCetak
+        );
 
-                <td
-                    class="center"
-                    id="cetak_${item.key}_1"
-                >
-                </td>
-
-            `;
-
-
-            tbodyCetak.appendChild(
-                trCetak
-            );
-
-        }
-    );
+    });
 
 }
 
@@ -832,25 +757,21 @@ function buatTabelAspek() {
 
 function isiForm(data) {
 
-    aspek.forEach(
-        function (item) {
+    aspek.forEach(function (item) {
 
-            const select =
-                document.getElementById(
-                    "nilai_" +
-                    item.key
-                );
+        const select =
+            document.getElementById(
+                "nilai_" + item.key
+            );
 
+        if (select) {
 
-            if (select) {
-
-                select.value =
-                    data[item.key] || "";
-
-            }
+            select.value =
+                data[item.key] || "";
 
         }
-    );
+
+    });
 
 
     document
@@ -858,18 +779,15 @@ function isiForm(data) {
         .value =
         data.kelebihan || "";
 
-
     document
         .getElementById("perluDikembangkan")
         .value =
         data.perluDikembangkan || "";
 
-
     document
         .getElementById("saranTindakLanjut")
         .value =
         data.saranTindakLanjut || "";
-
 
     document
         .getElementById("catatanGuru")
@@ -877,9 +795,7 @@ function isiForm(data) {
         data.catatanGuru || "";
 
 
-    isiCetak(
-        data
-    );
+    isiCetak(data);
 
 }
 
@@ -894,7 +810,6 @@ function kosongkanForm() {
         .getElementById("nisnSiswa")
         .value = "";
 
-
     kosongkanPenilaian();
 
 }
@@ -906,41 +821,33 @@ function kosongkanForm() {
 
 function kosongkanPenilaian() {
 
-    aspek.forEach(
-        function (item) {
+    aspek.forEach(function (item) {
 
-            const select =
-                document.getElementById(
-                    "nilai_" +
-                    item.key
-                );
+        const select =
+            document.getElementById(
+                "nilai_" + item.key
+            );
 
+        if (select) {
 
-            if (select) {
-
-                select.value =
-                    "";
-
-            }
+            select.value = "";
 
         }
-    );
+
+    });
 
 
     document
         .getElementById("kelebihan")
         .value = "";
 
-
     document
         .getElementById("perluDikembangkan")
         .value = "";
 
-
     document
         .getElementById("saranTindakLanjut")
         .value = "";
-
 
     document
         .getElementById("catatanGuru")
@@ -953,7 +860,7 @@ function kosongkanPenilaian() {
 
 
 // ============================================================
-// SIMPAN
+// SIMPAN DATA
 // ============================================================
 
 async function simpanData() {
@@ -969,25 +876,61 @@ async function simpanData() {
     }
 
 
+    const pilihSiswa =
+        document.getElementById("pilihSiswa");
+
     const nisn =
         document
             .getElementById("nisnSiswa")
-            .value.trim();
+            .value
+            .trim();
 
 
-    const select =
-        document.getElementById(
-            "pilihSiswa"
-        );
+    let nama = "";
 
 
-    const nama =
-        select.options[
-            select.selectedIndex
-        ]?.text || "";
+    if (
+        pilihSiswa &&
+        pilihSiswa.selectedIndex >= 0
+    ) {
+
+        nama =
+            pilihSiswa
+                .options[
+                    pilihSiswa.selectedIndex
+                ]
+                ?.textContent
+                ?.trim() || "";
+
+    }
 
 
-    if (!nisn) {
+    if (!nama) {
+
+        const siswa =
+            siswaData.find(function (item) {
+
+                return String(
+                    item.NISN ||
+                    item.nisn ||
+                    ""
+                ).trim() === nisn;
+
+            });
+
+        if (siswa) {
+
+            nama =
+                siswa.NAMA ||
+                siswa.nama ||
+                "";
+
+        }
+
+    }
+
+
+    if (!nisn || !nama) {
 
         alert(
             "Silakan pilih siswa terlebih dahulu."
@@ -998,10 +941,6 @@ async function simpanData() {
     }
 
 
-    // ========================================================
-    // KUMPULKAN NILAI
-    // ========================================================
-
     const data = {
 
         nisn: nisn,
@@ -1011,72 +950,63 @@ async function simpanData() {
     };
 
 
-    for (
-        let i = 0;
-        i < aspek.length;
-        i++
-    ) {
+    // ========================================================
+    // NILAI
+    // ========================================================
 
-        const item =
-            aspek[i];
+    for (let i = 0; i < aspek.length; i++) {
 
+        const item = aspek[i];
 
         const selectNilai =
             document.getElementById(
-                "nilai_" +
-                item.key
+                "nilai_" + item.key
             );
 
-
         data[item.key] =
-            selectNilai.value;
+            selectNilai
+                ? selectNilai.value
+                : "";
 
     }
 
 
+    // ========================================================
+    // CATATAN
+    // ========================================================
+
     data.kelebihan =
         document
             .getElementById("kelebihan")
-            .value.trim();
-
+            .value
+            .trim();
 
     data.perluDikembangkan =
         document
-            .getElementById(
-                "perluDikembangkan"
-            )
-            .value.trim();
-
+            .getElementById("perluDikembangkan")
+            .value
+            .trim();
 
     data.saranTindakLanjut =
         document
-            .getElementById(
-                "saranTindakLanjut"
-            )
-            .value.trim();
-
+            .getElementById("saranTindakLanjut")
+            .value
+            .trim();
 
     data.catatanGuru =
         document
-            .getElementById(
-                "catatanGuru"
-            )
-            .value.trim();
+            .getElementById("catatanGuru")
+            .value
+            .trim();
 
 
     // ========================================================
     // CEK NILAI
     // ========================================================
 
-    for (
-        let i = 0;
-        i < aspek.length;
-        i++
-    ) {
+    for (let i = 0; i < aspek.length; i++) {
 
-        const item =
-            aspek[i];
-
+        const item = aspek[i];
 
         if (!data[item.key]) {
 
@@ -1094,10 +1024,7 @@ async function simpanData() {
 
 
     const btn =
-        document.getElementById(
-            "btnSimpan"
-        );
-
+        document.getElementById("btnSimpan");
 
     btn.disabled = true;
 
@@ -1120,8 +1047,10 @@ async function simpanData() {
                     method: "POST",
 
                     headers: {
+
                         "Content-Type":
                             "text/plain;charset=utf-8"
+
                     },
 
                     body: JSON.stringify({
@@ -1148,43 +1077,54 @@ async function simpanData() {
         );
 
 
-        if (
-            !hasil.status
-        ) {
+        if (!hasil.status) {
 
             throw new Error(
                 hasil.pesan ||
+                hasil.message ||
                 "Gagal menyimpan."
             );
 
         }
 
 
-        tampilkanPesan(
-            "✅ " +
-            hasil.pesan
-        );
-
-
-        await ambilSemuaPerkembangan();
-
-
         dataPerkembanganSaatIni =
             data;
 
 
-        isiCetak(
-            data
+        isiCetak(data);
+
+
+        tampilkanPesan(
+            "✅ " +
+            (
+                hasil.pesan ||
+                "Perkembangan siswa berhasil disimpan."
+            )
         );
+
+
+        // Ambil ulang data
+        try {
+
+            await ambilSemuaPerkembangan();
+
+        }
+
+        catch (e) {
+
+            console.warn(
+                "Data tersimpan tetapi refresh data gagal.",
+                e
+            );
+
+        }
 
     }
 
     catch (error) {
 
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         tampilkanPesan(
             "❌ Gagal menyimpan: " +
@@ -1195,8 +1135,7 @@ async function simpanData() {
 
     finally {
 
-        btn.disabled =
-            false;
+        btn.disabled = false;
 
         btn.textContent =
             "💾 Simpan Perkembangan";
@@ -1207,153 +1146,45 @@ async function simpanData() {
 
 
 // ============================================================
-// ISI DATA CETAK
+// KUMPULKAN DATA YANG SEDANG TAMPIL
 // ============================================================
 
-function isiCetak(data) {
+function kumpulkanDataForm() {
 
-    document
-        .getElementById("cetakNama")
-        .textContent =
-        data.nama || "";
+    const data = {
 
+        nama: "",
 
-    document
-        .getElementById("cetakNisn")
-        .textContent =
-        data.nisn || "";
+        nisn: "",
 
+        kelebihan: "",
 
-    aspek.forEach(
-        function (item) {
+        perluDikembangkan: "",
 
-            const nilai =
-                String(
-                    data[item.key] || ""
-                );
+        saranTindakLanjut: "",
+
+        catatanGuru: ""
+
+    };
 
 
-            for (
-                let skor = 1;
-                skor <= 4;
-                skor++
-            ) {
-
-                const cell =
-                    document.getElementById(
-                        "cetak_" +
-                        item.key +
-                        "_" +
-                        skor
-                    );
-
-
-                if (cell) {
-
-                    cell.textContent =
-                        nilai ===
-                        String(skor)
-                            ? "✓"
-                            : "";
-
-                }
-
-            }
-
-        }
-    );
-
-
-    document
-        .getElementById(
-            "cetakKelebihan"
-        )
-        .textContent =
-        data.kelebihan || "";
-
-
-    document
-        .getElementById(
-            "cetakPerluDikembangkan"
-        )
-        .textContent =
-        data.perluDikembangkan || "";
-
-
-    document
-        .getElementById(
-            "cetakSaran"
-        )
-        .textContent =
-        data.saranTindakLanjut || "";
-
-
-    document
-        .getElementById(
-            "cetakCatatan"
-        )
-        .textContent =
-        data.catatanGuru || "";
-
-}
-
-
-// ============================================================
-// CETAK F4
-// ============================================================
-
-function cetakPerkembangan() {
-
-    /* =====================================================
-       AMBIL DATA SISWA DARI HALAMAN
-    ===================================================== */
+    // ========================================================
+    // NAMA
+    // ========================================================
 
     const pilihSiswa =
         document.getElementById("pilihSiswa");
-
-    const nisnInput =
-        document.getElementById("nisnSiswa");
 
     const namaInput =
         document.getElementById("namaSiswa");
 
 
-    /* =====================================================
-       AMBIL NILAI YANG SEDANG TAMPIL
-       Tidak harus sudah disimpan ke Spreadsheet
-    ===================================================== */
-
-    let nama = "";
-
-    let nisn = "";
-
-
-    if (namaInput) {
-
-        nama =
-            String(
-                namaInput.value || ""
-            ).trim();
-
-    }
-
-
-    if (nisnInput) {
-
-        nisn =
-            String(
-                nisnInput.value || ""
-            ).trim();
-
-    }
-
-
-    /* =====================================================
-       JIKA INPUT NAMA BELUM TERISI,
-       COBA AMBIL DARI SELECT SISWA
-    ===================================================== */
-
-    if (!nama && pilihSiswa) {
+    // Prioritas select untuk GURU
+    if (
+        pilihSiswa &&
+        !pilihSiswa.classList.contains("hidden") &&
+        pilihSiswa.selectedIndex >= 0
+    ) {
 
         const option =
             pilihSiswa.options[
@@ -1365,24 +1196,236 @@ function cetakPerkembangan() {
             option.value
         ) {
 
-            nama =
-                String(
-                    option.textContent || ""
-                ).trim();
+            data.nama =
+                option.textContent.trim();
 
         }
 
     }
 
 
-    /* =====================================================
-       CEK DATA SISWA
-    ===================================================== */
+    // Jika mode siswa
+    if (!data.nama && namaInput) {
 
-    if (!nama && !nisn) {
+        data.nama =
+            namaInput.value.trim();
+
+    }
+
+
+    // Jika masih kosong, ambil dari data siswa
+    if (!data.nama) {
+
+        const nisnSementara =
+            document
+                .getElementById("nisnSiswa")
+                .value
+                .trim();
+
+        const siswa =
+            siswaData.find(function (item) {
+
+                return String(
+                    item.NISN ||
+                    item.nisn ||
+                    ""
+                ).trim() ===
+                nisnSementara;
+
+            });
+
+        if (siswa) {
+
+            data.nama =
+                siswa.NAMA ||
+                siswa.nama ||
+                "";
+
+        }
+
+    }
+
+
+    // ========================================================
+    // NISN
+    // ========================================================
+
+    data.nisn =
+        document
+            .getElementById("nisnSiswa")
+            .value
+            .trim();
+
+
+    // ========================================================
+    // CATATAN
+    // ========================================================
+
+    data.kelebihan =
+        document
+            .getElementById("kelebihan")
+            .value
+            .trim();
+
+    data.perluDikembangkan =
+        document
+            .getElementById("perluDikembangkan")
+            .value
+            .trim();
+
+    data.saranTindakLanjut =
+        document
+            .getElementById("saranTindakLanjut")
+            .value
+            .trim();
+
+    data.catatanGuru =
+        document
+            .getElementById("catatanGuru")
+            .value
+            .trim();
+
+
+    // ========================================================
+    // NILAI
+    // ========================================================
+
+    aspek.forEach(function (item) {
+
+        const select =
+            document.getElementById(
+                "nilai_" + item.key
+            );
+
+        data[item.key] =
+            select
+                ? select.value
+                : "";
+
+    });
+
+
+    return data;
+
+}
+
+
+// ============================================================
+// ISI AREA CETAK
+// ============================================================
+
+function isiCetak(data) {
+
+    data = data || {};
+
+
+    document
+        .getElementById("cetakNama")
+        .textContent =
+        data.nama || "-";
+
+
+    document
+        .getElementById("cetakNisn")
+        .textContent =
+        data.nisn || "-";
+
+
+    aspek.forEach(function (item) {
+
+        const nilai =
+            String(
+                data[item.key] || ""
+            );
+
+
+        for (let skor = 1; skor <= 4; skor++) {
+
+            const cell =
+                document.getElementById(
+                    "cetak_" +
+                    item.key +
+                    "_" +
+                    skor
+                );
+
+            if (cell) {
+
+                cell.textContent =
+                    nilai === String(skor)
+                        ? "✓"
+                        : "";
+
+            }
+
+        }
+
+    });
+
+
+    document
+        .getElementById("cetakKelebihan")
+        .textContent =
+        data.kelebihan || "";
+
+
+    document
+        .getElementById("cetakPerluDikembangkan")
+        .textContent =
+        data.perluDikembangkan || "";
+
+
+    document
+        .getElementById("cetakSaran")
+        .textContent =
+        data.saranTindakLanjut || "";
+
+
+    document
+        .getElementById("cetakCatatan")
+        .textContent =
+        data.catatanGuru || "";
+
+}
+
+
+// ============================================================
+// CETAK F4
+// ============================================================
+// PENTING:
+// CETAK TIDAK MEMERLUKAN DATA SUDAH DISIMPAN.
+// Yang dicetak adalah DATA YANG SEDANG TAMPIL DI FORM.
+// ============================================================
+
+function cetakPerkembangan() {
+
+    console.log(
+        "Mempersiapkan cetak..."
+    );
+
+
+    // ========================================================
+    // AMBIL DATA LANGSUNG DARI FORM
+    // ========================================================
+
+    const data =
+        kumpulkanDataForm();
+
+
+    console.log(
+        "DATA CETAK:",
+        data
+    );
+
+
+    // ========================================================
+    // VALIDASI SISWA
+    // ========================================================
+
+    if (!data.nama) {
 
         alert(
-            "Data siswa belum dipilih."
+            "Nama siswa belum ditemukan. Silakan pilih siswa terlebih dahulu."
         );
 
         return;
@@ -1390,131 +1433,28 @@ function cetakPerkembangan() {
     }
 
 
-    /* =====================================================
-       TAMPILKAN IDENTITAS KE AREA CETAK
-    ===================================================== */
+    if (!data.nisn) {
 
-    const cetakNama =
-        document.getElementById(
-            "cetakNama"
+        alert(
+            "NISN siswa belum ditemukan."
         );
 
-    const cetakNisn =
-        document.getElementById(
-            "cetakNisn"
-        );
-
-
-    if (cetakNama) {
-
-        cetakNama.textContent =
-            nama || "-";
+        return;
 
     }
 
 
-    if (cetakNisn) {
+    // ========================================================
+    // MASUKKAN KE AREA CETAK
+    // ========================================================
 
-        cetakNisn.textContent =
-            nisn || "-";
-
-    }
-
-
-    /* =====================================================
-       SALIN CATATAN KE AREA CETAK
-    ===================================================== */
-
-    const kelebihan =
-        document.getElementById(
-            "kelebihan"
-        );
-
-    const perluDikembangkan =
-        document.getElementById(
-            "perluDikembangkan"
-        );
-
-    const saranTindakLanjut =
-        document.getElementById(
-            "saranTindakLanjut"
-        );
-
-    const catatanGuru =
-        document.getElementById(
-            "catatanGuru"
-        );
+    isiCetak(data);
 
 
-    const cetakKelebihan =
-        document.getElementById(
-            "cetakKelebihan"
-        );
-
-    const cetakPerlu =
-        document.getElementById(
-            "cetakPerluDikembangkan"
-        );
-
-    const cetakSaran =
-        document.getElementById(
-            "cetakSaran"
-        );
-
-    const cetakCatatan =
-        document.getElementById(
-            "cetakCatatan"
-        );
-
-
-    if (cetakKelebihan) {
-
-        cetakKelebihan.textContent =
-            kelebihan
-                ? kelebihan.value
-                : "";
-
-    }
-
-
-    if (cetakPerlu) {
-
-        cetakPerlu.textContent =
-            perluDikembangkan
-                ? perluDikembangkan.value
-                : "";
-
-    }
-
-
-    if (cetakSaran) {
-
-        cetakSaran.textContent =
-            saranTindakLanjut
-                ? saranTindakLanjut.value
-                : "";
-
-    }
-
-
-    if (cetakCatatan) {
-
-        cetakCatatan.textContent =
-            catatanGuru
-                ? catatanGuru.value
-                : "";
-
-    }
-
-
-    /* =====================================================
-       SIAPKAN TABEL PENILAIAN UNTUK CETAK
-    ===================================================== */
-
-    const tabelAspek =
-        document.getElementById(
-            "tabelAspek"
-        );
+    // ========================================================
+    // BUAT ULANG TABEL CETAK
+    // BERDASARKAN NILAI YANG SEDANG DIPILIH
+    // ========================================================
 
     const tabelCetak =
         document.getElementById(
@@ -1522,88 +1462,43 @@ function cetakPerkembangan() {
         );
 
 
-    if (
-        tabelAspek &&
-        tabelCetak
-    ) {
+    if (tabelCetak) {
 
         tabelCetak.innerHTML = "";
 
 
-        const rows =
-            tabelAspek.querySelectorAll(
-                "tr"
-            );
-
-
-        rows.forEach(function(row) {
-
-            const cells =
-                row.querySelectorAll(
-                    "td"
-                );
-
-
-            if (
-                cells.length < 4
-            ) {
-
-                return;
-
-            }
-
-
-            const nomor =
-                cells[0].textContent.trim();
-
-            const aspek =
-                cells[1].textContent.trim();
-
-            const indikator =
-                cells[2].textContent.trim();
-
+        aspek.forEach(function (item, index) {
 
             const select =
-                cells[3].querySelector(
-                    "select"
+                document.getElementById(
+                    "nilai_" + item.key
                 );
 
 
-            let skor = "";
+            const skor =
+                select
+                    ? String(select.value || "")
+                    : "";
 
-
-            if (select) {
-
-                skor =
-                    String(
-                        select.value || ""
-                    ).trim();
-
-            }
-
-
-            /* ---------------------------------------------
-               BUAT BARIS CETAK
-            --------------------------------------------- */
 
             const tr =
-                document.createElement(
-                    "tr"
-                );
+                document.createElement("tr");
 
 
             tr.innerHTML = `
 
                 <td class="center">
-                    ${nomor}
+                    ${index + 1}
                 </td>
 
                 <td>
-                    ${aspek}
+                    <strong>
+                        ${item.nama}
+                    </strong>
                 </td>
 
                 <td>
-                    ${indikator}
+                    ${item.indikator}
                 </td>
 
                 <td class="center">
@@ -1625,108 +1520,22 @@ function cetakPerkembangan() {
             `;
 
 
-            tabelCetak.appendChild(
-                tr
-            );
+            tabelCetak.appendChild(tr);
 
         });
 
     }
 
 
-    /* =====================================================
-       CETAK
-    ===================================================== */
+    // ========================================================
+    // CETAK
+    // ========================================================
 
-    setTimeout(function() {
+    setTimeout(function () {
 
         window.print();
 
-    }, 150);
-
-}
-
-// ============================================================
-// KUMPULKAN FORM UNTUK CETAK
-// ============================================================
-
-function kumpulkanDataForm() {
-
-    const data = {
-
-        nama:
-            document
-                .getElementById(
-                    "namaSiswa"
-                )
-                .value ||
-            document
-                .getElementById(
-                    "pilihSiswa"
-                )
-                .options[
-                    document
-                        .getElementById(
-                            "pilihSiswa"
-                        )
-                        .selectedIndex
-                ]?.text ||
-            "",
-
-        nisn:
-            document
-                .getElementById(
-                    "nisnSiswa"
-                )
-                .value,
-
-        kelebihan:
-            document
-                .getElementById(
-                    "kelebihan"
-                )
-                .value,
-
-        perluDikembangkan:
-            document
-                .getElementById(
-                    "perluDikembangkan"
-                )
-                .value,
-
-        saranTindakLanjut:
-            document
-                .getElementById(
-                    "saranTindakLanjut"
-                )
-                .value,
-
-        catatanGuru:
-            document
-                .getElementById(
-                    "catatanGuru"
-                )
-                .value
-
-    };
-
-
-    aspek.forEach(
-        function (item) {
-
-            data[item.key] =
-                document
-                    .getElementById(
-                        "nilai_" +
-                        item.key
-                    )
-                    .value;
-
-        }
-    );
-
-
-    return data;
+    }, 200);
 
 }
 
@@ -1735,15 +1544,10 @@ function kumpulkanDataForm() {
 // PESAN
 // ============================================================
 
-function tampilkanPesan(
-    teks
-) {
+function tampilkanPesan(teks) {
 
     const pesan =
-        document.getElementById(
-            "pesan"
-        );
-
+        document.getElementById("pesan");
 
     if (pesan) {
 
