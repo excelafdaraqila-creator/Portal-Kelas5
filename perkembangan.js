@@ -1,6 +1,11 @@
 // ============================================================
-// PERKEMBANGAN.JS
+// PERKEMBANGAN.JS - VERSI FINAL
 // PORTAL DIGITAL KELAS 5 SDN CIJEMBER
+// ============================================================
+
+
+// ============================================================
+// API GOOGLE APPS SCRIPT
 // ============================================================
 
 const API_URL =
@@ -8,7 +13,7 @@ const API_URL =
 
 
 // ============================================================
-// DATA ASPEK
+// DATA ASPEK PENILAIAN
 // ============================================================
 
 const aspek = [
@@ -122,12 +127,15 @@ const aspek = [
 
 
 // ============================================================
-// VARIABEL
+// VARIABEL GLOBAL
 // ============================================================
 
 let role = "";
+
 let siswaData = [];
+
 let semuaPerkembangan = [];
+
 let dataPerkembanganSaatIni = null;
 
 
@@ -137,7 +145,9 @@ let dataPerkembanganSaatIni = null;
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    console.log("PERKEMBANGAN.JS AKTIF");
+    console.log("=================================");
+    console.log("PERKEMBANGAN.JS FINAL AKTIF");
+    console.log("=================================");
 
     buatTabelAspek();
 
@@ -153,11 +163,15 @@ document.addEventListener("DOMContentLoaded", function () {
 function tentukanRole() {
 
     role =
-        (localStorage.getItem("role") || "")
+        String(
+            localStorage.getItem("role") || ""
+        )
         .trim()
         .toLowerCase();
 
+
     console.log("ROLE:", role);
+
 
     if (role === "guru") {
 
@@ -195,9 +209,13 @@ async function modeGuru() {
     const select =
         document.getElementById("pilihSiswa");
 
-    if (!select) return;
+    if (!select) {
+        return;
+    }
+
 
     select.classList.remove("hidden");
+
 
     const namaInput =
         document.getElementById("namaSiswa");
@@ -206,30 +224,45 @@ async function modeGuru() {
         namaInput.classList.add("hidden");
     }
 
+
     try {
+
+        tampilkanPesan(
+            "⏳ Memuat data siswa..."
+        );
+
 
         await ambilDaftarSiswa();
 
+
         await ambilSemuaPerkembangan();
 
-        select.addEventListener("change", function () {
 
-            pilihSiswaGuru(this.value);
+        select.addEventListener(
+            "change",
+            function () {
 
-        });
+                pilihSiswaGuru(
+                    this.value
+                );
 
-        // Jika sudah ada siswa terpilih
-        if (select.value) {
+            }
+        );
 
-            pilihSiswaGuru(select.value);
 
-        }
+        tampilkanPesan(
+            "✅ Data siswa siap digunakan."
+        );
 
     }
 
     catch (error) {
 
-        console.error(error);
+        console.error(
+            "ERROR MODE GURU:",
+            error
+        );
+
 
         tampilkanPesan(
             "❌ Gagal mengambil data siswa."
@@ -251,19 +284,23 @@ async function ambilDaftarSiswa() {
         "?action=siswa&nocache=" +
         Date.now();
 
+
     const response =
         await fetch(url);
+
 
     if (!response.ok) {
 
         throw new Error(
-            "Gagal mengambil siswa."
+            "Gagal mengambil data siswa."
         );
 
     }
 
+
     const data =
         await response.json();
+
 
     if (!Array.isArray(data)) {
 
@@ -273,54 +310,66 @@ async function ambilDaftarSiswa() {
 
     }
 
+
     siswaData = data;
 
+
     const select =
-        document.getElementById("pilihSiswa");
-
-    select.innerHTML = "";
-
-    const optionAwal =
-        document.createElement("option");
-
-    optionAwal.value = "";
-
-    optionAwal.textContent =
-        "-- Pilih Siswa --";
-
-    select.appendChild(optionAwal);
+        document.getElementById(
+            "pilihSiswa"
+        );
 
 
-    data.forEach(function (siswa) {
+    if (!select) {
+        return;
+    }
 
-        const nisn =
-            siswa.NISN ||
-            siswa.nisn ||
-            "";
 
-        const nama =
-            siswa.NAMA ||
-            siswa.nama ||
-            "-";
+    select.innerHTML =
+        '<option value="">-- Pilih Siswa --</option>';
 
-        const option =
-            document.createElement("option");
 
-        option.value =
-            String(nisn);
+    data.forEach(
+        function (siswa) {
 
-        option.textContent =
-            nama;
+            const nisn =
+                siswa.NISN ??
+                siswa.nisn ??
+                "";
 
-        select.appendChild(option);
 
-    });
+            const nama =
+                siswa.NAMA ??
+                siswa.nama ??
+                "-";
+
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                String(nisn).trim();
+
+
+            option.textContent =
+                String(nama).trim();
+
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
 
 }
 
 
 // ============================================================
-// AMBIL SEMUA PERKEMBANGAN
+// AMBIL SEMUA DATA PERKEMBANGAN
 // ============================================================
 
 async function ambilSemuaPerkembangan() {
@@ -330,8 +379,10 @@ async function ambilSemuaPerkembangan() {
         "?action=perkembangan&nocache=" +
         Date.now();
 
+
     const response =
         await fetch(url);
+
 
     if (!response.ok) {
 
@@ -341,8 +392,10 @@ async function ambilSemuaPerkembangan() {
 
     }
 
+
     const data =
         await response.json();
+
 
     if (!Array.isArray(data)) {
 
@@ -352,8 +405,19 @@ async function ambilSemuaPerkembangan() {
 
     }
 
+
     semuaPerkembangan =
         data;
+
+
+    window.semuaPerkembangan =
+        data;
+
+
+    console.log(
+        "JUMLAH DATA PERKEMBANGAN:",
+        data.length
+    );
 
 }
 
@@ -367,6 +431,7 @@ function pilihSiswaGuru(nisn) {
     nisn =
         String(nisn || "").trim();
 
+
     if (!nisn) {
 
         kosongkanForm();
@@ -377,15 +442,20 @@ function pilihSiswaGuru(nisn) {
 
 
     const siswa =
-        siswaData.find(function (item) {
+        siswaData.find(
+            function (item) {
 
-            return String(
-                item.NISN ||
-                item.nisn ||
-                ""
-            ).trim() === nisn;
+                const nomor =
+                    item.NISN ??
+                    item.nisn ??
+                    "";
 
-        });
+
+                return String(nomor)
+                    .trim() === nisn;
+
+            }
+        );
 
 
     if (!siswa) {
@@ -401,47 +471,69 @@ function pilihSiswaGuru(nisn) {
 
 
     const nama =
-        siswa.NAMA ||
-        siswa.nama ||
+        siswa.NAMA ??
+        siswa.nama ??
         "";
 
 
-    document
-        .getElementById("nisnSiswa")
-        .value =
-        nisn;
+    // --------------------------------------------------------
+    // TAMPILKAN NISN
+    // --------------------------------------------------------
 
+    const inputNisn =
+        document.getElementById(
+            "nisnSiswa"
+        );
+
+
+    if (inputNisn) {
+
+        inputNisn.value =
+            nisn;
+
+    }
+
+
+    // --------------------------------------------------------
+    // CARI PERKEMBANGAN YANG SUDAH TERSIMPAN
+    // --------------------------------------------------------
 
     const perkembangan =
-        semuaPerkembangan.find(function (item) {
+        semuaPerkembangan.find(
+            function (item) {
 
-            return String(
-                item.nisn ||
-                item.NISN ||
-                ""
-            ).trim() === nisn;
+                const nomor =
+                    item.nisn ??
+                    item.NISN ??
+                    "";
 
-        });
+
+                return String(nomor)
+                    .trim() === nisn;
+
+            }
+        );
 
 
     if (perkembangan) {
 
-        const dataGabungan = {
-
-            ...perkembangan,
-
-            nama: nama,
-
-            nisn: nisn
-
-        };
-
         dataPerkembanganSaatIni =
-            dataGabungan;
+            perkembangan;
+
+
+        // Pastikan nama tersedia
+        if (!perkembangan.nama) {
+
+            perkembangan.nama =
+                nama;
+
+        }
+
 
         isiForm(
-            dataGabungan
+            perkembangan
         );
+
 
         tampilkanPesan(
             "📋 Data perkembangan siswa ditemukan dan dimuat."
@@ -451,15 +543,24 @@ function pilihSiswaGuru(nisn) {
 
     else {
 
+        dataPerkembanganSaatIni = {
+
+            nisn: nisn,
+
+            nama: nama
+
+        };
+
+
         kosongkanPenilaian();
 
-        isiCetak({
 
-            nama: nama,
+        // Tetap isi identitas cetak
+        isiIdentitasCetak(
+            nama,
+            nisn
+        );
 
-            nisn: nisn
-
-        });
 
         tampilkanPesan(
             "ℹ️ Belum ada perkembangan untuk siswa ini. Silakan isi penilaian."
@@ -477,28 +578,44 @@ function pilihSiswaGuru(nisn) {
 async function modeSiswa() {
 
     const nisn =
-        localStorage.getItem("nisn") || "";
+        String(
+            localStorage.getItem("nisn") || ""
+        ).trim();
+
 
     const nama =
-        localStorage.getItem("namaSiswa") || "";
+        localStorage.getItem(
+            "namaSiswa"
+        ) || "";
 
 
-    const pilihSiswa =
-        document.getElementById("pilihSiswa");
+    const pilih =
+        document.getElementById(
+            "pilihSiswa"
+        );
 
-    if (pilihSiswa) {
 
-        pilihSiswa.classList.add("hidden");
+    if (pilih) {
+
+        pilih.classList.add(
+            "hidden"
+        );
 
     }
 
 
     const inputNama =
-        document.getElementById("namaSiswa");
+        document.getElementById(
+            "namaSiswa"
+        );
+
 
     if (inputNama) {
 
-        inputNama.classList.remove("hidden");
+        inputNama.classList.remove(
+            "hidden"
+        );
+
 
         inputNama.value =
             nama;
@@ -506,46 +623,75 @@ async function modeSiswa() {
     }
 
 
-    document
-        .getElementById("nisnSiswa")
-        .value =
-        nisn;
+    const inputNisn =
+        document.getElementById(
+            "nisnSiswa"
+        );
 
+
+    if (inputNisn) {
+
+        inputNisn.value =
+            nisn;
+
+    }
+
+
+    // --------------------------------------------------------
+    // SISWA TIDAK BOLEH EDIT
+    // --------------------------------------------------------
 
     const btnSimpan =
-        document.getElementById("btnSimpan");
+        document.getElementById(
+            "btnSimpan"
+        );
+
 
     if (btnSimpan) {
 
-        btnSimpan.classList.add("hidden");
+        btnSimpan.classList.add(
+            "hidden"
+        );
 
     }
 
 
     document
-        .querySelectorAll("#tabelAspek select")
-        .forEach(function (select) {
+        .querySelectorAll(
+            "#tabelAspek select"
+        )
+        .forEach(
+            function (select) {
 
-            select.disabled = true;
+                select.disabled =
+                    true;
 
-        });
+            }
+        );
 
 
-    document
-        .getElementById("kelebihan")
-        .readOnly = true;
+    [
+        "kelebihan",
+        "perluDikembangkan",
+        "saranTindakLanjut",
+        "catatanGuru"
+    ]
+    .forEach(
+        function (id) {
 
-    document
-        .getElementById("perluDikembangkan")
-        .readOnly = true;
+            const element =
+                document.getElementById(id);
 
-    document
-        .getElementById("saranTindakLanjut")
-        .readOnly = true;
 
-    document
-        .getElementById("catatanGuru")
-        .readOnly = true;
+            if (element) {
+
+                element.readOnly =
+                    true;
+
+            }
+
+        }
+    );
 
 
     if (!nisn) {
@@ -559,7 +705,9 @@ async function modeSiswa() {
     }
 
 
-    await ambilPerkembanganSiswa(nisn);
+    await ambilPerkembanganSiswa(
+        nisn
+    );
 
 }
 
@@ -568,7 +716,9 @@ async function modeSiswa() {
 // AMBIL PERKEMBANGAN SISWA
 // ============================================================
 
-async function ambilPerkembanganSiswa(nisn) {
+async function ambilPerkembanganSiswa(
+    nisn
+) {
 
     try {
 
@@ -580,8 +730,10 @@ async function ambilPerkembanganSiswa(nisn) {
             "&nocache=" +
             Date.now();
 
+
         const response =
             await fetch(url);
+
 
         if (!response.ok) {
 
@@ -591,8 +743,10 @@ async function ambilPerkembanganSiswa(nisn) {
 
         }
 
+
         const data =
             await response.json();
+
 
         if (
             !Array.isArray(data) ||
@@ -601,20 +755,25 @@ async function ambilPerkembanganSiswa(nisn) {
 
             kosongkanPenilaian();
 
+
             tampilkanPesan(
                 "📭 Belum ada data perkembangan Anda."
             );
+
 
             return;
 
         }
 
+
         dataPerkembanganSaatIni =
             data[0];
+
 
         isiForm(
             data[0]
         );
+
 
         tampilkanPesan(
             "✅ Data perkembangan berhasil dimuat."
@@ -624,7 +783,11 @@ async function ambilPerkembanganSiswa(nisn) {
 
     catch (error) {
 
-        console.error(error);
+        console.error(
+            "ERROR AMBIL PERKEMBANGAN:",
+            error
+        );
+
 
         tampilkanPesan(
             "❌ Gagal mengambil perkembangan."
@@ -642,160 +805,301 @@ async function ambilPerkembanganSiswa(nisn) {
 function buatTabelAspek() {
 
     const tbody =
-        document.getElementById("tabelAspek");
-
-    const tbodyCetak =
-        document.getElementById("tabelCetakAspek");
-
-    if (!tbody || !tbodyCetak) return;
-
-    tbody.innerHTML = "";
-    tbodyCetak.innerHTML = "";
-
-
-    aspek.forEach(function (item, index) {
-
-        // ====================================================
-        // TABEL INPUT
-        // ====================================================
-
-        const tr =
-            document.createElement("tr");
-
-        tr.innerHTML = `
-
-            <td>
-                ${index + 1}
-            </td>
-
-            <td class="aspek">
-                ${item.nama}
-            </td>
-
-            <td class="indikator">
-                ${item.indikator}
-            </td>
-
-            <td class="nilai">
-
-                <select id="nilai_${item.key}">
-
-                    <option value="">-</option>
-
-                    <option value="4">4</option>
-
-                    <option value="3">3</option>
-
-                    <option value="2">2</option>
-
-                    <option value="1">1</option>
-
-                </select>
-
-            </td>
-
-        `;
-
-        tbody.appendChild(tr);
-
-
-        // ====================================================
-        // TABEL CETAK
-        // ====================================================
-
-        const trCetak =
-            document.createElement("tr");
-
-        trCetak.innerHTML = `
-
-            <td class="center">
-                ${index + 1}
-            </td>
-
-            <td>
-                <strong>${item.nama}</strong>
-            </td>
-
-            <td>
-                ${item.indikator}
-            </td>
-
-            <td
-                class="center"
-                id="cetak_${item.key}_4">
-            </td>
-
-            <td
-                class="center"
-                id="cetak_${item.key}_3">
-            </td>
-
-            <td
-                class="center"
-                id="cetak_${item.key}_2">
-            </td>
-
-            <td
-                class="center"
-                id="cetak_${item.key}_1">
-            </td>
-
-        `;
-
-        tbodyCetak.appendChild(
-            trCetak
+        document.getElementById(
+            "tabelAspek"
         );
 
-    });
+
+    const tbodyCetak =
+        document.getElementById(
+            "tabelCetakAspek"
+        );
+
+
+    if (!tbody) {
+        return;
+    }
+
+
+    tbody.innerHTML =
+        "";
+
+
+    if (tbodyCetak) {
+
+        tbodyCetak.innerHTML =
+            "";
+
+    }
+
+
+    aspek.forEach(
+        function (item, index) {
+
+            // =================================================
+            // TABEL FORM
+            // =================================================
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            tr.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td class="aspek">
+                    ${item.nama}
+                </td>
+
+                <td class="indikator">
+                    ${item.indikator}
+                </td>
+
+                <td class="nilai">
+
+                    <select
+                        id="nilai_${item.key}"
+                    >
+
+                        <option value="">
+                            -
+                        </option>
+
+                        <option value="4">
+                            4
+                        </option>
+
+                        <option value="3">
+                            3
+                        </option>
+
+                        <option value="2">
+                            2
+                        </option>
+
+                        <option value="1">
+                            1
+                        </option>
+
+                    </select>
+
+                </td>
+
+            `;
+
+
+            tbody.appendChild(
+                tr
+            );
+
+
+            // =================================================
+            // TABEL CETAK
+            // =================================================
+
+            if (tbodyCetak) {
+
+                const trCetak =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                trCetak.innerHTML = `
+
+                    <td class="center">
+                        ${index + 1}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${item.nama}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${item.indikator}
+                    </td>
+
+                    <td
+                        class="center"
+                        id="cetak_${item.key}_4"
+                    ></td>
+
+                    <td
+                        class="center"
+                        id="cetak_${item.key}_3"
+                    ></td>
+
+                    <td
+                        class="center"
+                        id="cetak_${item.key}_2"
+                    ></td>
+
+                    <td
+                        class="center"
+                        id="cetak_${item.key}_1"
+                    ></td>
+
+                `;
+
+
+                tbodyCetak.appendChild(
+                    trCetak
+                );
+
+            }
+
+        }
+    );
 
 }
 
 
 // ============================================================
-// ISI FORM
+// ISI FORM DARI DATA TERSIMPAN
 // ============================================================
 
 function isiForm(data) {
 
-    aspek.forEach(function (item) {
+    if (!data) {
+        return;
+    }
 
-        const select =
-            document.getElementById(
-                "nilai_" + item.key
-            );
 
-        if (select) {
+    // --------------------------------------------------------
+    // IDENTITAS
+    // --------------------------------------------------------
 
-            select.value =
-                data[item.key] || "";
+    const nisn =
+        data.nisn ??
+        data.NISN ??
+        "";
+
+
+    const nama =
+        data.nama ??
+        data.NAMA ??
+        "";
+
+
+    const inputNisn =
+        document.getElementById(
+            "nisnSiswa"
+        );
+
+
+    if (inputNisn) {
+
+        inputNisn.value =
+            nisn;
+
+    }
+
+
+    isiIdentitasCetak(
+        nama,
+        nisn
+    );
+
+
+    // --------------------------------------------------------
+    // NILAI 15 ASPEK
+    // --------------------------------------------------------
+
+    aspek.forEach(
+        function (item) {
+
+            const select =
+                document.getElementById(
+                    "nilai_" +
+                    item.key
+                );
+
+
+            if (select) {
+
+                select.value =
+                    data[item.key] ?? "";
+
+            }
 
         }
-
-    });
-
-
-    document
-        .getElementById("kelebihan")
-        .value =
-        data.kelebihan || "";
-
-    document
-        .getElementById("perluDikembangkan")
-        .value =
-        data.perluDikembangkan || "";
-
-    document
-        .getElementById("saranTindakLanjut")
-        .value =
-        data.saranTindakLanjut || "";
-
-    document
-        .getElementById("catatanGuru")
-        .value =
-        data.catatanGuru || "";
+    );
 
 
-    isiCetak(data);
+    // --------------------------------------------------------
+    // CATATAN
+    // --------------------------------------------------------
+
+    const kelebihan =
+        document.getElementById(
+            "kelebihan"
+        );
+
+
+    if (kelebihan) {
+
+        kelebihan.value =
+            data.kelebihan ?? "";
+
+    }
+
+
+    const perlu =
+        document.getElementById(
+            "perluDikembangkan"
+        );
+
+
+    if (perlu) {
+
+        perlu.value =
+            data.perluDikembangkan ?? "";
+
+    }
+
+
+    const saran =
+        document.getElementById(
+            "saranTindakLanjut"
+        );
+
+
+    if (saran) {
+
+        saran.value =
+            data.saranTindakLanjut ?? "";
+
+    }
+
+
+    const catatan =
+        document.getElementById(
+            "catatanGuru"
+        );
+
+
+    if (catatan) {
+
+        catatan.value =
+            data.catatanGuru ?? "";
+
+    }
+
+
+    // --------------------------------------------------------
+    // UPDATE CETAK
+    // --------------------------------------------------------
+
+    isiCetak(
+        data
+    );
 
 }
 
@@ -806,9 +1110,19 @@ function isiForm(data) {
 
 function kosongkanForm() {
 
-    document
-        .getElementById("nisnSiswa")
-        .value = "";
+    const nisn =
+        document.getElementById(
+            "nisnSiswa"
+        );
+
+
+    if (nisn) {
+
+        nisn.value =
+            "";
+
+    }
+
 
     kosongkanPenilaian();
 
@@ -821,40 +1135,221 @@ function kosongkanForm() {
 
 function kosongkanPenilaian() {
 
-    aspek.forEach(function (item) {
+    aspek.forEach(
+        function (item) {
 
-        const select =
-            document.getElementById(
-                "nilai_" + item.key
-            );
+            const select =
+                document.getElementById(
+                    "nilai_" +
+                    item.key
+                );
 
-        if (select) {
 
-            select.value = "";
+            if (select) {
+
+                select.value =
+                    "";
+
+            }
 
         }
+    );
 
-    });
+
+    [
+        "kelebihan",
+        "perluDikembangkan",
+        "saranTindakLanjut",
+        "catatanGuru"
+    ]
+    .forEach(
+        function (id) {
+
+            const element =
+                document.getElementById(
+                    id
+                );
 
 
-    document
-        .getElementById("kelebihan")
-        .value = "";
+            if (element) {
 
-    document
-        .getElementById("perluDikembangkan")
-        .value = "";
+                element.value =
+                    "";
 
-    document
-        .getElementById("saranTindakLanjut")
-        .value = "";
+            }
 
-    document
-        .getElementById("catatanGuru")
-        .value = "";
+        }
+    );
 
 
     isiCetak({});
+
+}
+
+
+// ============================================================
+// KUMPULKAN DATA FORM
+// ============================================================
+
+function kumpulkanDataForm() {
+
+    const data = {
+
+        nisn:
+            document
+                .getElementById(
+                    "nisnSiswa"
+                )
+                ?.value
+                .trim() || "",
+
+
+        nama:
+            ambilNamaSiswa() || "",
+
+
+        kelebihan:
+            document
+                .getElementById(
+                    "kelebihan"
+                )
+                ?.value
+                .trim() || "",
+
+
+        perluDikembangkan:
+            document
+                .getElementById(
+                    "perluDikembangkan"
+                )
+                ?.value
+                .trim() || "",
+
+
+        saranTindakLanjut:
+            document
+                .getElementById(
+                    "saranTindakLanjut"
+                )
+                ?.value
+                .trim() || "",
+
+
+        catatanGuru:
+            document
+                .getElementById(
+                    "catatanGuru"
+                )
+                ?.value
+                .trim() || ""
+
+    };
+
+
+    aspek.forEach(
+        function (item) {
+
+            const select =
+                document.getElementById(
+                    "nilai_" +
+                    item.key
+                );
+
+
+            data[item.key] =
+                select
+                    ? String(
+                        select.value || ""
+                    ).trim()
+                    : "";
+
+        }
+    );
+
+
+    return data;
+
+}
+
+
+// ============================================================
+// AMBIL NAMA SISWA
+// ============================================================
+
+function ambilNamaSiswa() {
+
+    const pilih =
+        document.getElementById(
+            "pilihSiswa"
+        );
+
+
+    // --------------------------------------------------------
+    // MODE GURU
+    // --------------------------------------------------------
+
+    if (
+        pilih &&
+        !pilih.classList.contains("hidden") &&
+        pilih.value
+    ) {
+
+        const option =
+            pilih.options[
+                pilih.selectedIndex
+            ];
+
+
+        if (option) {
+
+            return String(
+                option.textContent || ""
+            ).trim();
+
+        }
+
+    }
+
+
+    // --------------------------------------------------------
+    // MODE SISWA
+    // --------------------------------------------------------
+
+    const namaInput =
+        document.getElementById(
+            "namaSiswa"
+        );
+
+
+    if (
+        namaInput &&
+        namaInput.value
+    ) {
+
+        return String(
+            namaInput.value
+        ).trim();
+
+    }
+
+
+    // --------------------------------------------------------
+    // DATA SEBELUMNYA
+    // --------------------------------------------------------
+
+    if (
+        dataPerkembanganSaatIni &&
+        dataPerkembanganSaatIni.nama
+    ) {
+
+        return String(
+            dataPerkembanganSaatIni.nama
+        ).trim();
+
+    }
+
+
+    return "";
 
 }
 
@@ -876,61 +1371,15 @@ async function simpanData() {
     }
 
 
-    const pilihSiswa =
-        document.getElementById("pilihSiswa");
-
-    const nisn =
-        document
-            .getElementById("nisnSiswa")
-            .value
-            .trim();
+    const data =
+        kumpulkanDataForm();
 
 
-    let nama = "";
+    // ========================================================
+    // CEK SISWA
+    // ========================================================
 
-
-    if (
-        pilihSiswa &&
-        pilihSiswa.selectedIndex >= 0
-    ) {
-
-        nama =
-            pilihSiswa
-                .options[
-                    pilihSiswa.selectedIndex
-                ]
-                ?.textContent
-                ?.trim() || "";
-
-    }
-
-
-    if (!nama) {
-
-        const siswa =
-            siswaData.find(function (item) {
-
-                return String(
-                    item.NISN ||
-                    item.nisn ||
-                    ""
-                ).trim() === nisn;
-
-            });
-
-        if (siswa) {
-
-            nama =
-                siswa.NAMA ||
-                siswa.nama ||
-                "";
-
-        }
-
-    }
-
-
-    if (!nisn || !nama) {
+    if (!data.nisn) {
 
         alert(
             "Silakan pilih siswa terlebih dahulu."
@@ -941,79 +1390,37 @@ async function simpanData() {
     }
 
 
-    const data = {
+    if (!data.nama) {
 
-        nisn: nisn,
+        alert(
+            "Nama siswa belum ditemukan."
+        );
 
-        nama: nama
-
-    };
-
-
-    // ========================================================
-    // NILAI
-    // ========================================================
-
-    for (let i = 0; i < aspek.length; i++) {
-
-        const item = aspek[i];
-
-        const selectNilai =
-            document.getElementById(
-                "nilai_" + item.key
-            );
-
-        data[item.key] =
-            selectNilai
-                ? selectNilai.value
-                : "";
+        return;
 
     }
 
 
     // ========================================================
-    // CATATAN
+    // CEK 15 PENILAIAN
     // ========================================================
 
-    data.kelebihan =
-        document
-            .getElementById("kelebihan")
-            .value
-            .trim();
+    for (
+        let i = 0;
+        i < aspek.length;
+        i++
+    ) {
 
-    data.perluDikembangkan =
-        document
-            .getElementById("perluDikembangkan")
-            .value
-            .trim();
+        const item =
+            aspek[i];
 
-    data.saranTindakLanjut =
-        document
-            .getElementById("saranTindakLanjut")
-            .value
-            .trim();
-
-    data.catatanGuru =
-        document
-            .getElementById("catatanGuru")
-            .value
-            .trim();
-
-
-    // ========================================================
-    // CEK NILAI
-    // ========================================================
-
-    for (let i = 0; i < aspek.length; i++) {
-
-        const item = aspek[i];
 
         if (!data[item.key]) {
 
             alert(
-                "Penilaian \"" +
+                'Penilaian "' +
                 item.nama +
-                "\" belum diisi."
+                '" belum diisi.'
             );
 
             return;
@@ -1023,13 +1430,25 @@ async function simpanData() {
     }
 
 
+    // ========================================================
+    // TOMBOL
+    // ========================================================
+
     const btn =
-        document.getElementById("btnSimpan");
+        document.getElementById(
+            "btnSimpan"
+        );
 
-    btn.disabled = true;
 
-    btn.textContent =
-        "⏳ Menyimpan...";
+    if (btn) {
+
+        btn.disabled =
+            true;
+
+        btn.textContent =
+            "⏳ Menyimpan...";
+
+    }
 
 
     tampilkanPesan(
@@ -1038,6 +1457,10 @@ async function simpanData() {
 
 
     try {
+
+        // ====================================================
+        // KIRIM KE GOOGLE APPS SCRIPT
+        // ====================================================
 
         const response =
             await fetch(
@@ -1053,18 +1476,28 @@ async function simpanData() {
 
                     },
 
-                    body: JSON.stringify({
+                    body:
+                        JSON.stringify({
 
-                        action:
-                            "simpanPerkembangan",
+                            action:
+                                "simpanPerkembangan",
 
-                        data:
-                            data
+                            data:
+                                data
 
-                    })
+                        })
 
                 }
             );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Server tidak merespons dengan benar."
+            );
+
+        }
 
 
         const hasil =
@@ -1077,57 +1510,98 @@ async function simpanData() {
         );
 
 
-        if (!hasil.status) {
+        // ====================================================
+        // CEK HASIL
+        // ====================================================
+
+        if (
+            !hasil ||
+            hasil.status !== true
+        ) {
 
             throw new Error(
-                hasil.pesan ||
-                hasil.message ||
-                "Gagal menyimpan."
+                hasil?.pesan ||
+                hasil?.message ||
+                "Data gagal disimpan."
             );
 
         }
 
 
+        // ====================================================
+        // SIMPAN DATA TERAKHIR DI MEMORY
+        // ====================================================
+
         dataPerkembanganSaatIni =
-            data;
+            {
+                ...data
+            };
 
 
-        isiCetak(data);
+        // ====================================================
+        // UPDATE AREA CETAK
+        // ====================================================
 
-
-        tampilkanPesan(
-            "✅ " +
-            (
-                hasil.pesan ||
-                "Perkembangan siswa berhasil disimpan."
-            )
+        isiCetak(
+            data
         );
 
 
-        // Ambil ulang data
+        // ====================================================
+        // AMBIL ULANG DATA DARI SERVER
+        // ====================================================
+
         try {
 
             await ambilSemuaPerkembangan();
 
         }
 
-        catch (e) {
+        catch (refreshError) {
 
             console.warn(
-                "Data tersimpan tetapi refresh data gagal.",
-                e
+                "Data berhasil disimpan, tetapi refresh data gagal:",
+                refreshError
             );
 
         }
+
+
+        // ====================================================
+        // PESAN BERHASIL
+        // ====================================================
+
+        tampilkanPesan(
+            "✅ Perkembangan siswa berhasil disimpan. Sekarang Anda dapat mencetak."
+        );
+
+
+        // ====================================================
+        // ALERT SINGKAT
+        // ====================================================
+
+        alert(
+            "✅ Data perkembangan berhasil disimpan.\n\nSilakan klik tombol Cetak F4."
+        );
 
     }
 
     catch (error) {
 
-        console.error(error);
+        console.error(
+            "ERROR SIMPAN:",
+            error
+        );
+
 
         tampilkanPesan(
             "❌ Gagal menyimpan: " +
+            error.message
+        );
+
+
+        alert(
+            "❌ Data belum berhasil disimpan.\n\n" +
             error.message
         );
 
@@ -1135,10 +1609,15 @@ async function simpanData() {
 
     finally {
 
-        btn.disabled = false;
+        if (btn) {
 
-        btn.textContent =
-            "💾 Simpan Perkembangan";
+            btn.disabled =
+                false;
+
+            btn.textContent =
+                "💾 Simpan Perkembangan";
+
+        }
 
     }
 
@@ -1146,166 +1625,40 @@ async function simpanData() {
 
 
 // ============================================================
-// KUMPULKAN DATA YANG SEDANG TAMPIL
+// ISI IDENTITAS CETAK
 // ============================================================
 
-function kumpulkanDataForm() {
+function isiIdentitasCetak(
+    nama,
+    nisn
+) {
 
-    const data = {
-
-        nama: "",
-
-        nisn: "",
-
-        kelebihan: "",
-
-        perluDikembangkan: "",
-
-        saranTindakLanjut: "",
-
-        catatanGuru: ""
-
-    };
+    const cetakNama =
+        document.getElementById(
+            "cetakNama"
+        );
 
 
-    // ========================================================
-    // NAMA
-    // ========================================================
-
-    const pilihSiswa =
-        document.getElementById("pilihSiswa");
-
-    const namaInput =
-        document.getElementById("namaSiswa");
+    const cetakNisn =
+        document.getElementById(
+            "cetakNisn"
+        );
 
 
-    // Prioritas select untuk GURU
-    if (
-        pilihSiswa &&
-        !pilihSiswa.classList.contains("hidden") &&
-        pilihSiswa.selectedIndex >= 0
-    ) {
+    if (cetakNama) {
 
-        const option =
-            pilihSiswa.options[
-                pilihSiswa.selectedIndex
-            ];
-
-        if (
-            option &&
-            option.value
-        ) {
-
-            data.nama =
-                option.textContent.trim();
-
-        }
+        cetakNama.textContent =
+            nama || "-";
 
     }
 
 
-    // Jika mode siswa
-    if (!data.nama && namaInput) {
+    if (cetakNisn) {
 
-        data.nama =
-            namaInput.value.trim();
-
-    }
-
-
-    // Jika masih kosong, ambil dari data siswa
-    if (!data.nama) {
-
-        const nisnSementara =
-            document
-                .getElementById("nisnSiswa")
-                .value
-                .trim();
-
-        const siswa =
-            siswaData.find(function (item) {
-
-                return String(
-                    item.NISN ||
-                    item.nisn ||
-                    ""
-                ).trim() ===
-                nisnSementara;
-
-            });
-
-        if (siswa) {
-
-            data.nama =
-                siswa.NAMA ||
-                siswa.nama ||
-                "";
-
-        }
+        cetakNisn.textContent =
+            nisn || "-";
 
     }
-
-
-    // ========================================================
-    // NISN
-    // ========================================================
-
-    data.nisn =
-        document
-            .getElementById("nisnSiswa")
-            .value
-            .trim();
-
-
-    // ========================================================
-    // CATATAN
-    // ========================================================
-
-    data.kelebihan =
-        document
-            .getElementById("kelebihan")
-            .value
-            .trim();
-
-    data.perluDikembangkan =
-        document
-            .getElementById("perluDikembangkan")
-            .value
-            .trim();
-
-    data.saranTindakLanjut =
-        document
-            .getElementById("saranTindakLanjut")
-            .value
-            .trim();
-
-    data.catatanGuru =
-        document
-            .getElementById("catatanGuru")
-            .value
-            .trim();
-
-
-    // ========================================================
-    // NILAI
-    // ========================================================
-
-    aspek.forEach(function (item) {
-
-        const select =
-            document.getElementById(
-                "nilai_" + item.key
-            );
-
-        data[item.key] =
-            select
-                ? select.value
-                : "";
-
-    });
-
-
-    return data;
 
 }
 
@@ -1316,96 +1669,162 @@ function kumpulkanDataForm() {
 
 function isiCetak(data) {
 
-    data = data || {};
+    if (!data) {
+        data = {};
+    }
 
 
-    document
-        .getElementById("cetakNama")
-        .textContent =
-        data.nama || "-";
+    const nama =
+        data.nama ??
+        data.NAMA ??
+        ambilNamaSiswa() ??
+        "";
 
 
-    document
-        .getElementById("cetakNisn")
-        .textContent =
-        data.nisn || "-";
+    const nisn =
+        data.nisn ??
+        data.NISN ??
+        document
+            .getElementById("nisnSiswa")
+            ?.value ??
+        "";
 
 
-    aspek.forEach(function (item) {
-
-        const nilai =
-            String(
-                data[item.key] || ""
-            );
+    isiIdentitasCetak(
+        nama,
+        nisn
+    );
 
 
-        for (let skor = 1; skor <= 4; skor++) {
+    // ========================================================
+    // CEK 15 SKOR
+    // ========================================================
 
-            const cell =
-                document.getElementById(
-                    "cetak_" +
-                    item.key +
-                    "_" +
-                    skor
-                );
+    aspek.forEach(
+        function (item) {
 
-            if (cell) {
+            const nilai =
+                String(
+                    data[item.key] ?? ""
+                ).trim();
 
-                cell.textContent =
-                    nilai === String(skor)
-                        ? "✓"
-                        : "";
+
+            for (
+                let skor = 1;
+                skor <= 4;
+                skor++
+            ) {
+
+                const cell =
+                    document.getElementById(
+                        "cetak_" +
+                        item.key +
+                        "_" +
+                        skor
+                    );
+
+
+                if (cell) {
+
+                    cell.textContent =
+                        nilai ===
+                        String(skor)
+                            ? "✓"
+                            : "";
+
+                }
 
             }
 
         }
-
-    });
-
-
-    document
-        .getElementById("cetakKelebihan")
-        .textContent =
-        data.kelebihan || "";
+    );
 
 
-    document
-        .getElementById("cetakPerluDikembangkan")
-        .textContent =
-        data.perluDikembangkan || "";
+    // ========================================================
+    // CATATAN
+    // ========================================================
+
+    const cetakKelebihan =
+        document.getElementById(
+            "cetakKelebihan"
+        );
 
 
-    document
-        .getElementById("cetakSaran")
-        .textContent =
-        data.saranTindakLanjut || "";
+    if (cetakKelebihan) {
+
+        cetakKelebihan.textContent =
+            data.kelebihan ?? "";
+
+    }
 
 
-    document
-        .getElementById("cetakCatatan")
-        .textContent =
-        data.catatanGuru || "";
+    const cetakPerlu =
+        document.getElementById(
+            "cetakPerluDikembangkan"
+        );
+
+
+    if (cetakPerlu) {
+
+        cetakPerlu.textContent =
+            data.perluDikembangkan ?? "";
+
+    }
+
+
+    const cetakSaran =
+        document.getElementById(
+            "cetakSaran"
+        );
+
+
+    if (cetakSaran) {
+
+        cetakSaran.textContent =
+            data.saranTindakLanjut ?? "";
+
+    }
+
+
+    const cetakCatatan =
+        document.getElementById(
+            "cetakCatatan"
+        );
+
+
+    if (cetakCatatan) {
+
+        cetakCatatan.textContent =
+            data.catatanGuru ?? "";
+
+    }
 
 }
 
 
 // ============================================================
-// CETAK F4
-// ============================================================
-// PENTING:
-// CETAK TIDAK MEMERLUKAN DATA SUDAH DISIMPAN.
-// Yang dicetak adalah DATA YANG SEDANG TAMPIL DI FORM.
+// CETAK PERKEMBANGAN
 // ============================================================
 
 function cetakPerkembangan() {
 
     console.log(
-        "Mempersiapkan cetak..."
+        "================================="
+    );
+
+    console.log(
+        "PROSES CETAK PERKEMBANGAN"
+    );
+
+    console.log(
+        "================================="
     );
 
 
     // ========================================================
-    // AMBIL DATA LANGSUNG DARI FORM
+    // PENTING:
+    // CETAK MENGAMBIL DATA YANG SEDANG TAMPIL
+    // TIDAK PERLU REQUEST KE SERVER LAGI
     // ========================================================
 
     const data =
@@ -1419,24 +1838,13 @@ function cetakPerkembangan() {
 
 
     // ========================================================
-    // VALIDASI SISWA
+    // CEK SISWA
     // ========================================================
 
-    if (!data.nama) {
+    if (!data.nisn && !data.nama) {
 
         alert(
-            "Nama siswa belum ditemukan. Silakan pilih siswa terlebih dahulu."
-        );
-
-        return;
-
-    }
-
-
-    if (!data.nisn) {
-
-        alert(
-            "NISN siswa belum ditemukan."
+            "Data siswa belum dipilih."
         );
 
         return;
@@ -1445,97 +1853,71 @@ function cetakPerkembangan() {
 
 
     // ========================================================
-    // MASUKKAN KE AREA CETAK
+    // CEK 15 NILAI
     // ========================================================
 
-    isiCetak(data);
+    const belumDiisi = [];
 
 
-    // ========================================================
-    // BUAT ULANG TABEL CETAK
-    // BERDASARKAN NILAI YANG SEDANG DIPILIH
-    // ========================================================
+    aspek.forEach(
+        function (item) {
 
-    const tabelCetak =
-        document.getElementById(
-            "tabelCetakAspek"
-        );
+            if (!data[item.key]) {
 
-
-    if (tabelCetak) {
-
-        tabelCetak.innerHTML = "";
-
-
-        aspek.forEach(function (item, index) {
-
-            const select =
-                document.getElementById(
-                    "nilai_" + item.key
+                belumDiisi.push(
+                    item.nama
                 );
 
+            }
 
-            const skor =
-                select
-                    ? String(select.value || "")
-                    : "";
-
-
-            const tr =
-                document.createElement("tr");
+        }
+    );
 
 
-            tr.innerHTML = `
+    // ========================================================
+    // JIKA MASIH ADA NILAI KOSONG
+    // ========================================================
 
-                <td class="center">
-                    ${index + 1}
-                </td>
+    if (belumDiisi.length > 0) {
 
-                <td>
-                    <strong>
-                        ${item.nama}
-                    </strong>
-                </td>
-
-                <td>
-                    ${item.indikator}
-                </td>
-
-                <td class="center">
-                    ${skor === "4" ? "✓" : ""}
-                </td>
-
-                <td class="center">
-                    ${skor === "3" ? "✓" : ""}
-                </td>
-
-                <td class="center">
-                    ${skor === "2" ? "✓" : ""}
-                </td>
-
-                <td class="center">
-                    ${skor === "1" ? "✓" : ""}
-                </td>
-
-            `;
+        const lanjut =
+            confirm(
+                "Masih ada penilaian yang belum diisi:\n\n" +
+                belumDiisi.join("\n") +
+                "\n\nTetap cetak?"
+            );
 
 
-            tabelCetak.appendChild(tr);
+        if (!lanjut) {
 
-        });
+            return;
+
+        }
 
     }
+
+
+    // ========================================================
+    // MASUKKAN DATA KE AREA CETAK
+    // ========================================================
+
+    isiCetak(
+        data
+    );
 
 
     // ========================================================
     // CETAK
     // ========================================================
 
-    setTimeout(function () {
+    setTimeout(
+        function () {
 
-        window.print();
+            window.print();
 
-    }, 200);
+        },
+        200
+    );
 
 }
 
@@ -1544,10 +1926,15 @@ function cetakPerkembangan() {
 // PESAN
 // ============================================================
 
-function tampilkanPesan(teks) {
+function tampilkanPesan(
+    teks
+) {
 
     const pesan =
-        document.getElementById("pesan");
+        document.getElementById(
+            "pesan"
+        );
+
 
     if (pesan) {
 
@@ -1560,9 +1947,9 @@ function tampilkanPesan(teks) {
 
 
 // ============================================================
-// SELESAI
+// DEBUG
 // ============================================================
 
 console.log(
-    "✅ perkembangan.js berhasil dimuat."
+    "✅ perkembangan.js FINAL berhasil dimuat."
 );
