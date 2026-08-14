@@ -1,1 +1,839 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Perkembangan Siswa - Kelas 5 SDN Cijember</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef4f9;
+    color: #222;
+}
+
+.header {
+    background: linear-gradient(135deg, #1976d2, #42a5f5);
+    color: white;
+    padding: 22px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 25px;
+}
+
+.header p {
+    margin: 7px 0 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 25px auto;
+    padding: 0 15px 40px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 18px rgba(0,0,0,.08);
+}
+
+.judul-card {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 18px;
+    color: #1565c0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+input[readonly] {
+    background: #f1f5f9;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+th {
+    background: #dcecf9;
+    text-align: center;
+}
+
+td:first-child {
+    text-align: center;
+    width: 45px;
+}
+
+.aspek {
+    font-weight: bold;
+    width: 190px;
+}
+
+.indikator {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.nilai {
+    text-align: center;
+    width: 100px;
+}
+
+.nilai select {
+    width: 80px;
+    padding: 8px;
+}
+
+.btn-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+button {
+    border: none;
+    border-radius: 9px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.btn-simpan {
+    background: #16a34a;
+    color: white;
+}
+
+.btn-cetak {
+    background: #2563eb;
+    color: white;
+}
+
+.btn-kembali {
+    background: #64748b;
+    color: white;
+}
+
+.btn-hapus {
+    background: #dc2626;
+    color: white;
+}
+
+button:hover {
+    opacity: .9;
+}
+
+#pesan {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.info-siswa {
+    background: #e8f4ff;
+    border-left: 5px solid #1976d2;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.info-siswa strong {
+    color: #1565c0;
+}
+
+.loading {
+    text-align: center;
+    padding: 30px;
+    font-size: 17px;
+}
+
+/* =========================================================
+   CETAK F4
+   ========================================================= */
+
+.area-cetak {
+    display: none;
+}
+
+@media print {
+
+    @page {
+        size: F4 portrait;
+        margin: 10mm;
+    }
+
+    body {
+        background: white;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    .area-cetak,
+    .area-cetak * {
+        visibility: visible;
+    }
+
+    .area-cetak {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: white;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .print-title {
+        text-align: center;
+        margin-bottom: 8px;
+    }
+
+    .print-title h1 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    .print-title h2 {
+        margin: 3px 0;
+        font-size: 14px;
+    }
+
+    .print-title p {
+        margin: 2px;
+        font-size: 11px;
+    }
+
+    .data-identitas {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 7px;
+    }
+
+    .data-identitas td {
+        border: 1px solid #777;
+        padding: 5px;
+        font-size: 10px;
+    }
+
+    .data-identitas .label {
+        width: 100px;
+        background: #e7f2fa;
+        font-weight: bold;
+    }
+
+    .tabel-cetak {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 8.5px;
+    }
+
+    .tabel-cetak th,
+    .tabel-cetak td {
+        border: 1px solid #555;
+        padding: 4px;
+    }
+
+    .tabel-cetak th {
+        background: #dcecf9 !important;
+        text-align: center;
+    }
+
+    .tabel-cetak .center {
+        text-align: center;
+    }
+
+    .tabel-catatan {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 6px;
+        font-size: 9px;
+    }
+
+    .tabel-catatan td {
+        border: 1px solid #777;
+        padding: 6px;
+        height: 35px;
+    }
+
+    .tabel-catatan .label {
+        width: 180px;
+        background: #e7f2fa;
+        font-weight: bold;
+    }
+
+    .keterangan {
+        font-size: 8.5px;
+        margin-top: 5px;
+    }
+
+    .ttd {
+        width: 100%;
+        margin-top: 18px;
+        border-collapse: collapse;
+        font-size: 9px;
+    }
+
+    .ttd td {
+        border: none;
+        text-align: center;
+        vertical-align: top;
+        width: 33.33%;
+    }
+
+    .ruang-ttd {
+        height: 55px;
+    }
+
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .header h1 {
+        font-size: 21px;
+    }
+
+    .container {
+        padding: 0 10px 30px;
+    }
+
+    .card {
+        padding: 14px;
+        border-radius: 12px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 850px;
+    }
+
+    .btn-area {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="header no-print">
+
+    <h1>📈 Perkembangan Siswa</h1>
+
+    <p>
+        Kelas 5 SDN Cijember • Tahun Pelajaran 2026/2027
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- =====================================================
+         INFO SISWA
+    ====================================================== -->
+
+    <div class="card">
+
+        <div class="judul-card">
+            👤 Data Siswa
+        </div>
+
+        <div class="grid">
+
+            <div class="form-group">
+
+                <label>Nama Siswa</label>
+
+                <select id="pilihSiswa">
+                    <option value="">
+                        Memuat data siswa...
+                    </option>
+                </select>
+
+                <input
+                    type="text"
+                    id="namaSiswa"
+                    class="hidden"
+                    readonly
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>NISN</label>
+
+                <input
+                    type="text"
+                    id="nisnSiswa"
+                    readonly
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FORM PERKEMBANGAN
+    ====================================================== -->
+
+    <div class="card">
+
+        <div class="judul-card">
+            📊 Penilaian Perkembangan
+        </div>
+
+        <div class="info-siswa">
+
+            Berikan penilaian berdasarkan pengamatan guru.
+
+            <br>
+
+            <strong>
+                4 = Sangat Baik
+                &nbsp; | &nbsp;
+                3 = Baik
+                &nbsp; | &nbsp;
+                2 = Mulai Berkembang
+                &nbsp; | &nbsp;
+                1 = Perlu Bimbingan
+            </strong>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>No</th>
+
+                        <th>Aspek</th>
+
+                        <th>Indikator Pengamatan</th>
+
+                        <th>Skor</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tabelAspek">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CATATAN GURU
+    ====================================================== -->
+
+    <div class="card">
+
+        <div class="judul-card">
+            📝 Catatan Perkembangan
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Kelebihan / Hal yang Sudah Berkembang
+            </label>
+
+            <textarea
+                id="kelebihan"
+                placeholder="Tuliskan kelebihan siswa..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Hal yang Perlu Dikembangkan
+            </label>
+
+            <textarea
+                id="perluDikembangkan"
+                placeholder="Tuliskan hal yang perlu dikembangkan..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Saran Tindak Lanjut di Sekolah & Rumah
+            </label>
+
+            <textarea
+                id="saranTindakLanjut"
+                placeholder="Tuliskan saran tindak lanjut..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Catatan Komunikasi dengan Orang Tua
+            </label>
+
+            <textarea
+                id="catatanGuru"
+                placeholder="Tuliskan catatan komunikasi..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="btn-area no-print">
+
+            <button
+                class="btn-simpan"
+                id="btnSimpan"
+                onclick="simpanData()"
+            >
+                💾 Simpan Perkembangan
+            </button>
+
+
+            <button
+                class="btn-cetak"
+                onclick="cetakPerkembangan()"
+            >
+                🖨️ Cetak F4
+            </button>
+
+
+            <button
+                class="btn-kembali"
+                onclick="history.back()"
+            >
+                ↩️ Kembali
+            </button>
+
+        </div>
+
+
+        <div id="pesan"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     AREA KHUSUS CETAK
+========================================================= -->
+
+<div class="area-cetak">
+
+    <div class="print-title">
+
+        <h1>PROFIL PERKEMBANGAN SISWA</h1>
+
+        <h2>
+            KELAS 5 SDN CIJEMBER • TAHUN PELAJARAN 2026/2027
+        </h2>
+
+    </div>
+
+
+    <table class="data-identitas">
+
+        <tr>
+
+            <td class="label">
+                Nama Siswa
+            </td>
+
+            <td id="cetakNama">
+                -
+            </td>
+
+            <td class="label">
+                NISN
+            </td>
+
+            <td id="cetakNisn">
+                -
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="label">
+                Wali Kelas
+            </td>
+
+            <td>
+                Asep Jamhur, S.Pd., M.M.
+            </td>
+
+            <td class="label">
+                Tahun Pelajaran
+            </td>
+
+            <td>
+                2026/2027
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <div style="font-size:9px;margin-bottom:5px;">
+
+        Petunjuk: Beri tanda centang (✓) pada tingkat yang paling sesuai
+        berdasarkan pengamatan guru. Penilaian digunakan untuk melihat
+        perkembangan siswa, bukan untuk memberi label.
+
+    </div>
+
+
+    <table class="tabel-cetak">
+
+        <thead>
+
+            <tr>
+
+                <th rowspan="2">No</th>
+
+                <th rowspan="2">Aspek</th>
+
+                <th rowspan="2">
+                    Indikator Pengamatan
+                </th>
+
+                <th>4</th>
+                <th>3</th>
+                <th>2</th>
+                <th>1</th>
+
+            </tr>
+
+            <tr>
+
+                <th>Sangat Baik</th>
+                <th>Baik</th>
+                <th>Mulai Berkembang</th>
+                <th>Perlu Bimbingan</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="tabelCetakAspek">
+
+        </tbody>
+
+    </table>
+
+
+    <table class="tabel-catatan">
+
+        <tr>
+
+            <td class="label">
+                Kelebihan / hal yang sudah berkembang
+            </td>
+
+            <td id="cetakKelebihan"></td>
+
+        </tr>
+
+        <tr>
+
+            <td class="label">
+                Hal yang perlu dikembangkan
+            </td>
+
+            <td id="cetakPerluDikembangkan"></td>
+
+        </tr>
+
+        <tr>
+
+            <td class="label">
+                Saran tindak lanjut di sekolah & rumah
+            </td>
+
+            <td id="cetakSaran"></td>
+
+        </tr>
+
+        <tr>
+
+            <td class="label">
+                Catatan komunikasi dengan orang tua
+            </td>
+
+            <td id="cetakCatatan"></td>
+
+        </tr>
+
+    </table>
+
+
+    <div class="keterangan">
+
+        Keterangan skor:
+        4 = Sangat Baik •
+        3 = Baik •
+        2 = Mulai Berkembang •
+        1 = Perlu Bimbingan
+
+    </div>
+
+
+    <table class="ttd">
+
+        <tr>
+
+            <td>
+                Orang Tua/Wali
+                <div class="ruang-ttd"></div>
+                (________________________)
+            </td>
+
+
+            <td>
+                Wali Kelas
+                <div class="ruang-ttd"></div>
+
+                <strong>
+                    Asep Jamhur, S.Pd., M.M.
+                </strong>
+
+                <br>
+
+                NIP. 198304112023211013
+
+            </td>
+
+
+            <td>
+                Mengetahui,<br>
+                Kepala Sekolah
+
+                <div class="ruang-ttd"></div>
+
+                <strong>
+                    Nurjaman, S.Pd., M.Pd.
+                </strong>
+
+                <br>
+
+                NIP. 198507302022211015
+
+            </td>
+
+        </tr>
+
+    </table>
+
+</div>
+
+
+<script src="perkembangan.js"></script>
+
+</body>
+</html>
